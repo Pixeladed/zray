@@ -1,0 +1,20 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "format": "prettier -w .",
+    "postinstall": "lerna bootstrap",
+    "pkg:add": "lerna add",
+    "pkg:list": "lerna list --all",
+    "pkg:run": "lerna run",
+    "build": "lerna run build --stream",
+    "test": "lerna run test --stream"
+  },
+  "devDependencies": {
+    "lerna": "^5.1.8",
+    "prettier": "^2.7.1"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
