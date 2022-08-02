@@ -19,18 +19,20 @@ export const LandingPage: NextPage = () => {
 
       <Header />
       <main>
-        <div className={styles.hero}>
-          {/* <h1 className={styles.heroTitle}>Global search for all your tools</h1> */}
-          <h1 className={styles.heroTitle}>Lorem ipsum dolor amet</h1>
+        <section className={styles.hero}>
+          <h1 className={styles.heroTitle}>Global search for all your tools</h1>
           <p className={styles.heroLead}>
-            Lorem ipsum dolor sidor amet. Lorem ipsum dolor sidor amet.
+            Find anything across all of your apps and tools
           </p>
-          <img
-            src="https://via.placeholder.com/800x400"
-            alt="Z-Ray product screenshot"
-            className={styles.heroImage}
-          />
-        </div>
+          <div className={styles.heroImage}>
+            <img
+              src="https://via.placeholder.com/800x400"
+              alt="Z-Ray product screenshot"
+              width={800}
+              height={400}
+            />
+          </div>
+        </section>
       </main>
     </div>
   );
