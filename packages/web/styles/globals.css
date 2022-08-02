@@ -1,9 +1,21 @@
-html,
+:root {
+  --base: 8px; 
+
+  --color-foreground: #222222;
+  --color-background: #fefefe;
+  --color-border: #dddddd;
+}
+
+html {
+  background-color: var(--color-background);
+}
+
 body {
   padding: 0;
   margin: 0;
   font-family: Space Grotesk, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  color: var(--color-foreground);
 }
 
 a {
@@ -16,11 +28,9 @@ a {
 }
 
 @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
+  :root {
+    --color-foreground: #fefefe;
+    --color-background: #222222;
+    --color-border: #555555;
   }
 }

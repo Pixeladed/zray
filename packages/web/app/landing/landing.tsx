@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { Header } from '../../base/header/header';
 
 export const LandingPage: NextPage = () => {
   return (
@@ -15,6 +16,7 @@ export const LandingPage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Header />
       <main>hi</main>
     </div>
   );
