@@ -1,14 +1,14 @@
-<svg viewBox="0 0 439 509" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M430.352 426.685L0 445.396V-3.66666L430.352 426.685Z" fill="url(#paint0_linear_2_7)" />
-    <ellipse cx="219.429" cy="444.546" rx="219.429" ry="63.7874" fill="url(#paint1_radial_2_7)" />
+<svg width="436" height="509" viewBox="0 0 436 509" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M427.27 427.27L0 445.847V0L427.27 427.27Z" fill="url(#paint0_linear_2_7)" />
+    <ellipse cx="217.857" cy="445.003" rx="217.857" ry="63.3306" fill="url(#paint1_radial_2_7)" />
     <defs>
-        <linearGradient id="paint0_linear_2_7" x1="110.565" y1="360.347" x2="9.18303e-06" y2="-3.66666"
+        <linearGradient id="paint0_linear_2_7" x1="109.773" y1="361.406" x2="1.15914e-05" y2="-3.52075e-06"
             gradientUnits="userSpaceOnUse">
             <stop stop-color="#3D73FF" />
             <stop offset="1" stop-color="#DA1EB0" />
         </linearGradient>
         <radialGradient id="paint1_radial_2_7" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
-            gradientTransform="translate(219.429 444.546) rotate(90) scale(63.7874 219.429)">
+            gradientTransform="translate(217.857 445.003) rotate(90) scale(63.3306 217.857)">
             <stop stop-color="#3DA2FF" />
             <stop offset="1" stop-color="#3D73FF" />
         </radialGradient>
