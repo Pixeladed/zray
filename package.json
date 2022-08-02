@@ -4,9 +4,10 @@
   "scripts": {
     "format": "prettier -w .",
     "postinstall": "lerna bootstrap",
-    "pkg:add": "lerna add",
-    "pkg:list": "lerna list --all",
-    "pkg:run": "lerna run",
+    "dep": "lerna add",
+    "packages": "lerna list --all",
+    "exec": "lerna run",
+    "dev": "lerna run dev --stream --parallel",
     "build": "lerna run build --stream",
     "test": "lerna run test --stream"
   },
