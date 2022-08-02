@@ -1,9 +1,10 @@
 :root {
-  --base: 8px; 
+  --base: 8px;
 
   --color-foreground: #222222;
   --color-background: #fefefe;
   --color-border: #dddddd;
+  --color-primary: #3d73ff;
 }
 
 html {
@@ -13,8 +14,9 @@ html {
 body {
   padding: 0;
   margin: 0;
-  font-family: Space Grotesk, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Space Grotesk, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
   color: var(--color-foreground);
 }
 
