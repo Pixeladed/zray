@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Header } from '../../base/header/header';
+import styles from './landing.module.css';
 
 export const LandingPage: NextPage = () => {
   return (
@@ -17,7 +18,11 @@ export const LandingPage: NextPage = () => {
       </Head>
 
       <Header />
-      <main>hi</main>
+      <main>
+        <div className={styles.hero}>
+          <h1 className={styles.heroTitle}>Global search for all your tools</h1>
+        </div>
+      </main>
     </div>
   );
 };

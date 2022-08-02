@@ -1,0 +1,11 @@
+.hero {
+    padding: calc(var(--base) * 6) calc(var(--base) * 6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heroTitle {
+    margin-bottom: calc(var(--base) * 1);
+    font-size: 3em;
+}
