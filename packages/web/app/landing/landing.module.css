@@ -21,13 +21,15 @@
 .heroImage {
   border-radius: var(--base) var(--base) 0 0;
   box-shadow: 0 0 calc(var(--base) * 2) var(--color-border);
+  max-width: 80%;
+  object-fit: cover;
 }
 
 .featureGroup {
   display: flex;
   flex-direction: row;
   gap: calc(var(--base) * 6);
-  padding: calc(var(--base) * 32) calc(var(--base) * 12);
+  padding: calc(var(--base) * 32) calc(var(--base) * 6);
 }
 
 .feature {
@@ -37,18 +39,16 @@
   flex-direction: column;
   border-radius: calc(var(--base) * 0.5);
   border: 1px solid black;
-  padding: calc(var(--base) * 6) calc(var(--base) * 4);
+  padding: calc(var(--base) * 4);
 }
 
 .featureTitle {
   margin: 0 0 calc(var(--base) * 1.5) 0;
-  text-align: center;
   font-size: 2em;
 }
 
 .featureLead {
   font-size: 1.1em;
-  text-align: center;
   margin: 0 auto calc(var(--base) * 6) auto;
 }
 
@@ -56,4 +56,28 @@
   width: 100%;
   height: 100%;
   border-radius: calc(var(--base) * 0.5);
+}
+
+@media screen and (max-width: 800px) {
+  .featureGroup {
+    flex-direction: column;
+  }
+
+  .hero {
+    padding: calc(var(--base) * 2) calc(var(--base) * 2) 0 calc(var(--base) * 2);
+  }
+
+  .heroImage {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .feature {
+    padding: calc(var(--base) * 2);
+  }
+
+  .featureGroup {
+    padding: calc(var(--base) * 12) calc(var(--base) * 2);
+  }
 }
