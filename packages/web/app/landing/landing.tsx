@@ -32,22 +32,35 @@ export const LandingPage: NextPage = () => {
             className={styles.heroImage}
           />
         </section>
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>
-            See through everything, all at once
-          </h2>
-          <p className={styles.sectionLead}>
-            That&apos;s why we call it Z-Ray, giving you full visibility over
-            all your work, instantly.
-          </p>
-        </section>
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Your data is your data</h2>
-          <p className={styles.sectionLead}>
-            Z-Ray runs everything locally on your device, your account
-            credentials are never sent to us and we don&apos;t store your data
-            on our servers.
-          </p>
+        <section className={styles.featureGroup}>
+          <div className={styles.feature}>
+            <h2 className={styles.featureTitle}>See everything, all at once</h2>
+            <p className={styles.featureLead}>
+              Never lose that document, message or email that you sent ever
+              again. Search multiple accounts instantly.
+            </p>
+            <img
+              src="https://via.placeholder.com/400x200"
+              alt="Z-Ray product screenshot"
+              width={400}
+              height={200}
+              className={styles.featureImage}
+            />
+          </div>
+          <div className={styles.feature}>
+            <h2 className={styles.featureTitle}>Your data is your data</h2>
+            <p className={styles.featureLead}>
+              Z-Ray runs everything locally on your device, your account
+              credentials or your data are never sent to our servers.
+            </p>
+            <img
+              src="https://via.placeholder.com/400x200"
+              alt="Z-Ray product screenshot"
+              width={400}
+              height={200}
+              className={styles.featureImage}
+            />
+          </div>
         </section>
       </main>
     </div>

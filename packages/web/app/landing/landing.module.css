@@ -23,22 +23,37 @@
   box-shadow: 0 0 calc(var(--base) * 2) var(--color-border);
 }
 
-.section {
-  padding: calc(var(--base) * 24) calc(var(--base) * 6);
+.featureGroup {
+  display: flex;
+  flex-direction: row;
+  gap: calc(var(--base) * 6);
+  padding: calc(var(--base) * 32) calc(var(--base) * 12);
+}
+
+.feature {
+  flex: 1;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  border-radius: calc(var(--base) * 0.5);
+  border: 1px solid black;
+  padding: calc(var(--base) * 6) calc(var(--base) * 4);
 }
 
-.sectionTitle {
+.featureTitle {
   margin: 0 0 calc(var(--base) * 1.5) 0;
   text-align: center;
   font-size: 2em;
 }
 
-.sectionLead {
-  font-size: 1.25em;
+.featureLead {
+  font-size: 1.1em;
   text-align: center;
-  width: 50%;
-  margin: auto;
+  margin: 0 auto calc(var(--base) * 6) auto;
+}
+
+.featureImage {
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--base) * 0.5);
 }
