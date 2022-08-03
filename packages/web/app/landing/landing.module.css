@@ -4,7 +4,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border-bottom: 1px solid var(--color-foreground);
 }
 
 .heroTitle {
@@ -22,4 +21,24 @@
 .heroImage {
   border-radius: var(--base) var(--base) 0 0;
   box-shadow: 0 0 calc(var(--base) * 2) var(--color-border);
+}
+
+.section {
+  padding: calc(var(--base) * 24) calc(var(--base) * 6);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.sectionTitle {
+  margin: 0 0 calc(var(--base) * 1.5) 0;
+  text-align: center;
+  font-size: 2em;
+}
+
+.sectionLead {
+  font-size: 1.25em;
+  text-align: center;
+  width: 50%;
+  margin: auto;
 }
