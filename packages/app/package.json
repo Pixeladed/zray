@@ -1,0 +1,23 @@
+{
+  "name": "@highbeam/app",
+  "version": "0.1.0",
+  "private": true,
+  "main": "build/entry.js",
+  "scripts": {
+    "start": "electron .",
+    "prestart": "yarn build",
+    "build": "tsc src/entry.ts --outDir build"
+  },
+  "dependencies": {
+    "classnames": "^2.3.1",
+    "electron": "^20.0.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.0.6",
+    "@types/react": "18.0.15",
+    "@types/react-dom": "18.0.6",
+    "typescript": "4.7.4"
+  }
+}
