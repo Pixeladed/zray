@@ -10,8 +10,12 @@ const createWindow = () => {
 
 let win: BrowserWindow | undefined;
 app.on('activate', () => {
-  win = createWindow();
+  if (win) {
+    win.show();
+  } else {
+    win = createWindow();
+  }
 });
 app.on('browser-window-blur', () => {
-  win?.close();
+  win?.hide();
 });
