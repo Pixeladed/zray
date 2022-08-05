@@ -24,7 +24,7 @@
     "build:app": "tsc native/entry.ts --outDir build",
     "build:app:dev": "tsc native/entry.dev.ts --outDir build",
     "dev": "yarn start:web & yarn build:app:dev && electron build/entry.dev.js",
-    "start": "yarn build:web && yarn build:app && build/entry.js"
+    "start": "yarn build:web && yarn build:app && electron build/entry.js"
   },
   "eslintConfig": {
     "extends": [
