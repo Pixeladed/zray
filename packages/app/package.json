@@ -21,10 +21,10 @@
     "build:web": "react-scripts build",
     "test:web": "react-scripts test",
     "eject:web": "react-scripts eject",
-    "build:app": "tsc native/entry.ts --outDir build",
-    "build:app:dev": "tsc native/entry.dev.ts --outDir build",
-    "dev": "yarn start:web & yarn build:app:dev && electron build/entry.dev.js",
-    "start": "yarn build:web && yarn build:app && electron build/entry.js"
+    "build:app": "tsc src/native/entry.ts --outDir build",
+    "start:app": "electron build/entry.js",
+    "dev": "yarn start:web & yarn build:app && yarn start:app",
+    "start": "yarn build:web && yarn build:app && yarn start:app"
   },
   "eslintConfig": {
     "extends": [
