@@ -1,7 +1,7 @@
 import { BrowserWindow } from 'electron';
 
 export class WindowController {
-  private instance?: BrowserWindow;
+  instance?: BrowserWindow;
 
   constructor(private readonly source: WindowSource) {}
 
