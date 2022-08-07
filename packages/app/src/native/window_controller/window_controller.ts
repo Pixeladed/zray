@@ -6,7 +6,8 @@ export class WindowController {
   constructor(private readonly source: WindowSource) {}
 
   createWindow = () => {
-    const win = new BrowserWindow({ frame: false });
+    const win = new BrowserWindow({ frame: false, show: false });
+    win.once('ready-to-show', () => win.show());
 
     switch (this.source.type) {
       case 'bundled':
