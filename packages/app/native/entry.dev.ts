@@ -19,3 +19,6 @@ app.on('activate', () => {
 app.on('browser-window-blur', () => {
   win?.hide();
 });
+app.on('ready', () => {
+  createWindow();
+});
