@@ -25,6 +25,32 @@
   object-fit: cover;
 }
 
+.marquee {
+  list-style: none;
+  display: flex;
+  gap: calc(var(--base) * 2);
+}
+
+.marqueeItem {
+  display: inline-block;
+  animation: marquee-horizontal 2s linear infinite;
+}
+
+.integration {
+  background: lightblue;
+  display: flex;
+  gap: calc(var(--base));
+}
+
+.integrationIcon {
+  border-radius: 100%;
+}
+
+.integrationName {
+  font-weight: normal;
+  font-size: 1em;
+}
+
 .featureGroup {
   display: flex;
   flex-direction: row;

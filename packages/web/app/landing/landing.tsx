@@ -32,6 +32,22 @@ export const LandingPage: NextPage = () => {
             className={styles.heroImage}
           />
         </section>
+        <ul className={styles.marquee}>
+          {integrations.map((integration, index) => (
+            <li key={index} className={styles.marqueeItem}>
+              <div className={styles.integration}>
+                <img
+                  src={integration.icon}
+                  alt={integration.name}
+                  width={64}
+                  height={64}
+                  className={styles.integrationIcon}
+                />
+                <h4 className={styles.integrationName}>{integration.name}</h4>
+              </div>
+            </li>
+          ))}
+        </ul>
         <section className={styles.featureGroup}>
           <div className={styles.feature}>
             <h2 className={styles.featureTitle}>See everything, all at once</h2>
@@ -66,3 +82,14 @@ export const LandingPage: NextPage = () => {
     </div>
   );
 };
+
+const integrations = [
+  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
+  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
+  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
+  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
+  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
+  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
+  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
+  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
+];
