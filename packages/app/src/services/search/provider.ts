@@ -4,6 +4,7 @@
  */
 export interface Provider {
   id: string;
+  name: string;
   search(query: string, options: { page: number }): Promise<SearchResult[]>;
   authenticate(): Promise<OperationResult>;
 }
