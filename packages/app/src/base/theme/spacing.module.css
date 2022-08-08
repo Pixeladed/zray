@@ -1,0 +1,11 @@
+@value baseline: 8px;
+
+@value spacexxxSmall: calc(baseline * 0.5);
+@value spacexxSmall: calc(baseline * 1);
+@value spacexSmall: calc(baseline * 1.5);
+@value spaceSmall: calc(baseline * 2);
+@value spaceMedium: calc(baseline * 3);
+@value spaceLarge: calc(baseline * 4);
+@value spacexLarge: calc(baseline * 6);
+@value spacexxLarge: calc(baseline * 8);
+@value spacexxxLarge: calc(baseline * 12);

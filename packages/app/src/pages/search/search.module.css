@@ -1,0 +1,15 @@
+@value spaceSmall, spaceMedium from "../../base/theme/spacing.module.css";
+
+.page {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.input {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: spaceSmall spaceMedium;
+  font-size: 1.25em;
+}
