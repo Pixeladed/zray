@@ -3,13 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './global.css';
 import { SearchPage } from './pages/search/search';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Routes as RouterRoutes, Route } from 'react-router-dom';
+import { Routes } from './routes';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <SearchPage />
+    <BrowserRouter>
+      <RouterRoutes>
+        <Route path={Routes.search()} element={<SearchPage />} />
+      </RouterRoutes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
