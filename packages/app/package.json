@@ -22,7 +22,7 @@
     "build:web": "react-scripts build",
     "test:web": "react-scripts test",
     "eject:web": "react-scripts eject",
-    "build:app": "tsc src/native/entry.ts --outDir build",
+    "build:app": "swc src/native/entry.ts -o build/native/entry.js",
     "start:app": "electron build/native/entry.js",
     "start:app:watch": "nodemon -e json,js,ts --watch ./src/native --exec \"yarn start:app\"",
     "prestart:app": "yarn build:app",
@@ -48,6 +48,8 @@
     ]
   },
   "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.224",
     "electron": "^20.0.1",
     "nodemon": "^2.0.19"
   }
