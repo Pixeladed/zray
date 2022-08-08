@@ -1,7 +1,13 @@
-export interface Provider {
+export interface Provider extends ProviderInfo {
   search(query: string, options: { page: number }): Promise<SearchResult[]>;
   authenticate(): Promise<OperationResult>;
   connect(): Promise<OperationResult>;
+}
+
+export interface ProviderInfo {
+  id: string;
+  name: string;
+  icon?: string;
 }
 
 export type SearchResult = {
