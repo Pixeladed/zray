@@ -15,7 +15,7 @@ export interface Provider {
  */
 export interface Integration {
   name: string;
-  icon?: string;
+  icon: string;
   connect(): Promise<OperationResult<Provider>>;
 }
 

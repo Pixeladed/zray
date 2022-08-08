@@ -1,15 +1,40 @@
-@value spaceSmall, spaceMedium from "../../base/theme/spacing.module.css";
+@value baseline, spacexSmall, spaceSmall, spaceMedium, spaceLarge from "../../base/theme/spacing.module.css";
+@value colorBorder from "../../base/theme/color.module.css";
 
 .page {
   display: flex;
   width: 100%;
   height: 100%;
+  flex-direction: column;
 }
 
 .input {
   width: 100%;
-  height: 100%;
+  height: calc(baseline * 8);
   border: 0;
   padding: spaceSmall spaceMedium;
   font-size: 1.25em;
+  border-bottom: 1px solid colorBorder;
+}
+
+.integrations {
+  padding: spaceSmall spaceMedium;
+  margin: 0;
+  display: flex;
+  gap: spacexSmall;
+}
+
+.integration {
+  list-style: none;
+  width: spaceLarge;
+  height: spaceLarge;
+  border-radius: baseline;
+  border: 1px solid colorBorder;
+  display: inline-block;
+  background: colorBorder;
+}
+
+.integrationIcon {
+  overflow: hidden;
+  object-fit: contain;
 }
