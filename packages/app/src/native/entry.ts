@@ -11,4 +11,4 @@ const windowController = new WindowController(source);
 
 app.on('activate', windowController.handleActivate);
 app.on('browser-window-blur', windowController.handleBlur);
-app.on('ready', windowController.createWindow);
+app.on('ready', windowController.handleReady);

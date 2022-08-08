@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './global.css';
 import { SearchPage } from './pages/search/search';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes as RouterRoutes, Route } from 'react-router-dom';
+import { Routes as RouterRoutes, Route, HashRouter } from 'react-router-dom';
 import { Routes } from './routes';
 
 const root = ReactDOM.createRoot(
@@ -11,11 +11,12 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <RouterRoutes>
         <Route path={Routes.search()} element={<SearchPage />} />
+        <Route path="*" element={<>{document.location.href}</>} />
       </RouterRoutes>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
 

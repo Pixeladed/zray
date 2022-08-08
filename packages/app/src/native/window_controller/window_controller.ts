@@ -1,39 +1,46 @@
 import { BrowserWindow } from 'electron';
+import { Routes } from '../../routes';
 
 export class WindowController {
-  instance?: BrowserWindow;
+  searchWindow?: BrowserWindow;
 
   constructor(private readonly source: WindowSource) {}
 
-  createWindow = () => {
-    const win = new BrowserWindow({ frame: false, show: false });
+  createSearchWindow = () => {
+    const win = new BrowserWindow({ frame: false, show: false, opacity: 0.75 });
     win.once('ready-to-show', () => win.show());
 
+    const path = Routes.search();
     switch (this.source.type) {
       case 'bundled':
-        win.loadFile(this.source.path);
+        win.loadFile(Routes.href(this.source.path, path));
         break;
       case 'server':
-        win.loadURL(this.source.url);
+        win.loadURL(Routes.href(this.source.url, path));
         break;
       default:
         throw new Error(`Unknown source type ${this.source}`);
     }
 
-    this.instance = win;
-    return this.instance;
+    this.searchWindow = win;
+    return this.searchWindow;
   };
 
   handleActivate = () => {
-    if (this.instance) {
-      this.instance.show();
+    if (this.searchWindow) {
+      this.searchWindow.show();
     } else {
-      this.createWindow();
+      this.createSearchWindow();
     }
   };
 
   handleBlur = () => {
-    this.instance?.hide();
+    this.searchWindow?.hide();
+  };
+
+  handleReady = () => {
+    // TODO: maybe open an onboarding window etc
+    this.createSearchWindow();
   };
 }
 
