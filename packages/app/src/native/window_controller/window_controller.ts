@@ -7,7 +7,13 @@ export class WindowController {
   constructor(private readonly source: WindowSource) {}
 
   createSearchWindow = () => {
-    const win = new BrowserWindow({ frame: false, show: false, opacity: 0.75 });
+    const win = new BrowserWindow({
+      frame: false,
+      show: false,
+      opacity: 0.9,
+      width: 800,
+      height: 80,
+    });
     win.once('ready-to-show', () => win.show());
 
     const path = Routes.search();
