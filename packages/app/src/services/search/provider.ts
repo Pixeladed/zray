@@ -1,3 +1,5 @@
+import { MintedPath } from '../../base/path';
+
 /**
  * A provider is an instance of an integration that is capable of taking in a query
  * and return a list of search results for said query. e.g. xyz@email.com provider for the Email integration
@@ -15,7 +17,7 @@ export interface Provider {
  */
 export interface Integration {
   name: string;
-  icon: string;
+  icon: MintedPath;
   connect(): Promise<OperationResult<Provider>>;
 }
 
@@ -25,11 +27,12 @@ export type SearchResult = {
   url: string;
 };
 
-export type OperationResult<T = undefined> = {
-  data: T;
-  success: boolean;
-  cancelled: boolean;
-};
+export type OperationResult<T = undefined> =
+  | {
+      data: T;
+      success: true;
+    }
+  | { success: false; cancelled: boolean };
 
 export class UnauthenticatedProviderError extends Error {
   name = 'UnauthenticatedProviderError';
