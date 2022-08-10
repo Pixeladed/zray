@@ -12,7 +12,7 @@ export class WindowController {
       show: false,
       opacity: 0.9,
       width: 800,
-      height: 80,
+      height: 200,
     });
     win.once('ready-to-show', () => win.show());
 

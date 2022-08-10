@@ -17,24 +17,15 @@
   border-bottom: 1px solid colorBorder;
 }
 
-.integrations {
-  padding: spaceSmall spaceMedium;
-  margin: 0;
+.empty {
   display: flex;
-  gap: spacexSmall;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: spaceMedium;
 }
 
-.integration {
-  list-style: none;
-  width: spaceLarge;
-  height: spaceLarge;
-  border-radius: baseline;
-  border: 1px solid colorBorder;
-  display: inline-block;
-  background: colorBorder;
-}
-
-.integrationIcon {
-  overflow: hidden;
-  object-fit: contain;
+.emptyLead {
+  margin-bottom: spaceSmall;
+  text-align: center;
 }
