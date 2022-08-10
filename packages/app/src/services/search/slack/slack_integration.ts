@@ -1,11 +1,12 @@
-import { PathGenerator } from '../../../base/path';
+import { Path, PathGenerator } from '../../../base/path';
 import { Integration, OperationResult, Provider } from '../provider';
 
-export class SlackIntegration implements Integration {
-  constructor(private readonly getResourcesPath: PathGenerator) {}
+const ICON_PATH = Path.resource('/public/integrations/slack/slack.svg');
 
-  name = 'Slack';
-  icon = this.getResourcesPath('/public/integrations/slack/slack.svg');
+export class SlackIntegration extends Integration {
+  constructor() {
+    super('Slack', ICON_PATH);
+  }
 
   connect = async (): Promise<OperationResult<Provider>> => {
     return { success: false, cancelled: false };
