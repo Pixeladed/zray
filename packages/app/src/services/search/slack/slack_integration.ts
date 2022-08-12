@@ -1,4 +1,4 @@
-import { Path, PathGenerator } from '../../../base/path';
+import { Path } from '../../../base/path';
 import { Integration, OperationResult, Provider } from '../provider';
 
 const ICON_PATH = Path.resource('/public/integrations/slack/slack.svg');
