@@ -1,10 +1,10 @@
-@value spacexxxSmall, spacexSmall, spaceSmall from "../theme/spacing.module.css";
-@value colorPrimary, colorBackground from "../theme/color.module.css";
+@value spacexxSmall, spaceSmall from "../theme/spacing.module.css";
+@value colorForeground, colorBackground from "../theme/color.module.css";
 
 .button {
-    border: none;
-    padding: spacexSmall spaceSmall;
-    border-radius: spacexxxSmall;
-    background: colorPrimary;
-    color: colorBackground;
+  border: none;
+  padding: spacexxSmall spaceSmall;
+  border-radius: spacexxSmall;
+  background: colorForeground;
+  color: colorBackground;
 }
