@@ -7,8 +7,7 @@ export function SearchPage() {
       <input placeholder="What are you looking for?" className={styles.input} />
       <div className={styles.empty}>
         <p className={styles.emptyLead}>
-          Looks like you don&apos;t have any tools connected at the moment, add
-          one to get started
+          Looks like you don&apos;t have any tools connected
         </p>
         <Button>Connect a tool</Button>
       </div>

@@ -7,4 +7,5 @@
   border-radius: spacexxSmall;
   background: colorForeground;
   color: colorBackground;
+  cursor: pointer;
 }
