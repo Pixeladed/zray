@@ -1,5 +1,6 @@
 export class Routes {
   static search = () => '/search';
+  static addIntegration = () => '/add-integration';
 
   static href = (source: string, path: string) => {
     const base = source.endsWith('/')

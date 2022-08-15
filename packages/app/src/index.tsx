@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './global.css';
-import { SearchPage } from './pages/search/search';
 import reportWebVitals from './reportWebVitals';
 import { Routes as RouterRoutes, Route, HashRouter } from 'react-router-dom';
 import { Routes } from './routes';
+import { SearchPage } from './pages/search/search';
+import { AddIntegrationPage } from './pages/add_integration/add_integration';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,6 +15,10 @@ root.render(
     <HashRouter>
       <RouterRoutes>
         <Route path={Routes.search()} element={<SearchPage />} />
+        <Route
+          path={Routes.addIntegration()}
+          element={<AddIntegrationPage />}
+        />
         <Route path="*" element={<>{document.location.href}</>} />
       </RouterRoutes>
     </HashRouter>
