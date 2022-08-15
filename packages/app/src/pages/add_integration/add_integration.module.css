@@ -1,0 +1,26 @@
+@value spacexxSmall, spacexSmall, spaceLarge from '../../base/theme/spacing.module.css';
+@value colorBorder from '../../base/theme/color.module.css';
+
+.integrationList {
+    display: flex;
+    gap: spacexSmall;
+}
+
+.integration {
+    display: flex;
+    flex-direction: column;
+    gap: spacexSmall;
+    align-items: center;
+    padding: spacexxSmall spacexSmall;
+    border-radius: spacexxSmall;
+    border: 1px solid colorBorder;
+}
+
+.integrationIcon {
+    width: spaceLarge;
+    height: spaceLarge;
+}
+
+.integrationLabel {
+    margin: 0;
+}
