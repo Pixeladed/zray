@@ -15,7 +15,7 @@ export class WindowController {
     });
     win.once('ready-to-show', () => win.show());
 
-    const path = Routes.search();
+    const path = Routes.addIntegration();
     switch (this.source.type) {
       case 'bundled':
         win.loadFile(Routes.href(this.source.path, path));

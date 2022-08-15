@@ -4,12 +4,19 @@ import './global.css';
 import reportWebVitals from './reportWebVitals';
 import { Routes as RouterRoutes, Route, HashRouter } from 'react-router-dom';
 import { Routes } from './routes';
-import { SearchPage } from './pages/search/search';
-import { AddIntegrationPage } from './pages/add_integration/add_integration';
+import { createSearchPage } from './pages/search/create';
+import { createAddIntegrationPage } from './pages/add_integration/create';
+import { IntegrationService } from './services/integration/integration_service';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const integrationService = new IntegrationService();
+
+const { SearchPage } = createSearchPage();
+const { AddIntegrationPage } = createAddIntegrationPage({ integrationService });
+
 root.render(
   <React.StrictMode>
     <HashRouter>

@@ -1,4 +1,4 @@
-import { MintedPath } from '../../base/path';
+import { IntegrationInfo } from './integration';
 
 /**
  * A provider is an instance of an integration that is capable of taking in a query
@@ -22,21 +22,6 @@ export type ProviderInfo = {
   id: string;
   name: string;
   integration: IntegrationInfo;
-};
-
-/**
- * An integration is a type of connector that can be configured to create a new provider
- * an integration itself cannot provide searching capabilities
- */
-export abstract class Integration implements IntegrationInfo {
-  constructor(readonly name: string, readonly icon: MintedPath) {}
-
-  abstract connect(): Promise<OperationResult<Provider>>;
-}
-
-export type IntegrationInfo = {
-  name: string;
-  icon: MintedPath;
 };
 
 export type SearchResult = {

@@ -1,7 +1,8 @@
 import { Path } from '../../../base/path';
-import { Integration, OperationResult, Provider } from '../provider';
+import { OperationResult, Provider } from '../provider';
+import { Integration } from '../integration';
 
-const ICON_PATH = Path.resource('/public/integrations/slack/slack.svg');
+const ICON_PATH = Path.resource('/integrations/slack/slack.svg');
 
 export class SlackIntegration extends Integration {
   constructor() {
