@@ -13,7 +13,7 @@
     "build:web": "react-scripts build",
     "test:web": "react-scripts test",
     "eject:web": "react-scripts eject",
-    "build:app": "swc src/native/entry.ts -o build/native/entry.js",
+    "build:app": "swc src -d build",
     "start:app": "electron build/native/entry.js",
     "start:app:watch": "nodemon -e json,js,ts --watch ./src/native --exec \"yarn start:app\"",
     "prestart:app": "yarn build:app",

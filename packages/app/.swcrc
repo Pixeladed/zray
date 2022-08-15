@@ -1,5 +1,6 @@
 {
     "$schema": "https://json.schemastore.org/swcrc",
+    "exclude": "pages/.*",
     "module": {
       "type": "commonjs"
     },

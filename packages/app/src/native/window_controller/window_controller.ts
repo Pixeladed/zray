@@ -10,7 +10,6 @@ export class WindowController {
     const win = new BrowserWindow({
       frame: false,
       show: false,
-      opacity: 0.9,
       width: 800,
       height: 200,
     });
