@@ -1,6 +1,12 @@
 {
     "$schema": "https://json.schemastore.org/swcrc",
-    "exclude": "pages/.*",
+    "exclude": [
+      "pages/.*",
+      "index.tsx",
+      "react-app-env.d.ts",
+      "reportWebVitals.ts",
+      "setupTests.ts"
+    ],
     "module": {
       "type": "commonjs"
     },
