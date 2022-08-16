@@ -1,20 +1,13 @@
-import { BrowserWindow } from 'electron';
-import { WindowSource } from '../../native/window_controller/window_controller';
-
 export class NavigationService {
-  constructor(
-    private readonly isElectron: () => boolean,
-    private readonly source: WindowSource,
-    private readonly window: Window
-  ) {}
+  constructor(private readonly window: Window) {}
 
   openNewPage = (url: string) => {
-    if (this.isElectron()) {
-      const win = new BrowserWindow();
-      win.loadURL(url);
-    } else {
-      this.window.open(url);
+    const proxy = this.window.open(url, '_blank');
+    if (!proxy) {
+      throw new Error(`Could not open new ${url}`);
     }
+
+    return proxy as WindowProxy;
   };
 
   currentHref = () => {
