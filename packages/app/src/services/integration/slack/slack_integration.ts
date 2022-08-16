@@ -21,7 +21,10 @@ export class SlackIntegration extends Integration {
   connect = async (): Promise<OperationResult<Provider>> => {
     const url = this.createOAuthUrl();
     const proxy = this.navigationService.openNewPage(url);
-    const bridge = new BrowserBridge(this.context, proxy.location.origin);
+    const bridge = new BrowserBridge({
+      receiveOn: this.context,
+      sendTo: proxy,
+    });
     const operation = new ManualPromise<OperationResult<Provider>>();
 
     let connected = false;

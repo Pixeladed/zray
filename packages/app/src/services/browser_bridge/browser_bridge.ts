@@ -1,25 +1,25 @@
-import { Assert } from '../../base/assert';
-
 export class BrowserBridge<T> {
-  constructor(
-    private readonly context: Pick<Window, 'postMessage' | 'addEventListener'>,
-    private readonly targetOrigin: string
-  ) {}
+  private readonly receiveOnContext: Pick<Window, 'addEventListener'>;
+  private readonly sendToContext: Pick<Window, 'postMessage'>;
+
+  constructor({
+    receiveOn,
+    sendTo,
+  }: {
+    receiveOn: Pick<Window, 'addEventListener'>;
+    sendTo: Pick<Window, 'postMessage'>;
+  }) {
+    this.receiveOnContext = receiveOn;
+    this.sendToContext = sendTo;
+  }
 
   send(msg: T) {
-    this.context.postMessage(msg, this.targetOrigin);
+    this.sendToContext.postMessage(msg);
   }
 
   onReceive(callback: MessageCallback<T>) {
-    const listener = (event: MessageEvent<T>) => {
-      Assert.that(
-        event.origin === this.targetOrigin,
-        `Expected message to originate from ${this.targetOrigin}`
-      );
-      callback(event.data);
-    };
-
-    this.context.addEventListener('message', listener);
+    const listener = (event: MessageEvent<T>) => callback(event.data);
+    this.receiveOnContext.addEventListener('message', listener);
   }
 }
 
