@@ -7,12 +7,14 @@ import { Routes } from './routes';
 import { createSearchPage } from './pages/search/create';
 import { createAddIntegrationPage } from './pages/add_integration/create';
 import { IntegrationService } from './services/integration/integration_service';
+import { NavigationService } from './services/navigation/navigation_service';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 const integrationService = new IntegrationService();
+const navigationService = new NavigationService(window);
 
 const { SearchPage } = createSearchPage();
 const { AddIntegrationPage } = createAddIntegrationPage({ integrationService });
@@ -26,7 +28,7 @@ root.render(
           path={Routes.addIntegration()}
           element={<AddIntegrationPage />}
         />
-        <Route path="*" element={<>{document.location.href}</>} />
+        <Route path="*" element={<>{navigationService.currentHref()}</>} />
       </RouterRoutes>
     </HashRouter>
   </React.StrictMode>
