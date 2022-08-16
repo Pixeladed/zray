@@ -1,4 +1,4 @@
-export class BrowserBridge<T> {
+export class WindowBridge<T> {
   private readonly receiveOnContext: Pick<Window, 'addEventListener'>;
   private readonly sendToContext: Pick<Window, 'postMessage'>;
 

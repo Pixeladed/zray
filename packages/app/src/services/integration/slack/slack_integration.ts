@@ -4,7 +4,7 @@ import { Integration } from '../integration';
 import { URL } from 'url';
 import { NavigationService } from '../../navigation/navigation_service';
 import { Routes } from '../../../routes';
-import { BrowserBridge } from '../../browser_bridge/browser_bridge';
+import { WindowBridge } from '../../window_bridge/window_bridge';
 import { ManualPromise } from '../../../base/manual_promise';
 
 const ICON_PATH = Path.resource('/integrations/slack/slack.svg');
@@ -21,7 +21,7 @@ export class SlackIntegration extends Integration {
   connect = async (): Promise<OperationResult<Provider>> => {
     const url = this.createOAuthUrl();
     const proxy = this.navigationService.openNewPage(url);
-    const bridge = new BrowserBridge({
+    const bridge = new WindowBridge({
       receiveOn: this.context,
       sendTo: proxy,
     });
