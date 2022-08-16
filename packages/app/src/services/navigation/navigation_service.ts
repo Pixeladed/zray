@@ -1,6 +1,5 @@
 import { BrowserWindow } from 'electron';
 import { WindowSource } from '../../native/window_controller/window_controller';
-import { Routes } from '../../routes';
 
 export class NavigationService {
   constructor(
@@ -16,5 +15,9 @@ export class NavigationService {
     } else {
       this.window.open(url);
     }
+  };
+
+  currentHref = () => {
+    return this.window.location.href;
   };
 }
