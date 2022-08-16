@@ -1,4 +1,5 @@
 import { Integration } from '../../services/integration/integration';
+import { TappableArea } from '../../base/button/button';
 import styles from './add_integration.module.css';
 
 export const AddIntegrationPage = ({
@@ -10,14 +11,16 @@ export const AddIntegrationPage = ({
     <div>
       <div className={styles.integrationList}>
         {integrations.map(integration => (
-          <div key={integration.name} className={styles.integration}>
-            <img
-              src={integration.icon}
-              alt={integration.name}
-              className={styles.integrationIcon}
-            />
-            <p className={styles.integrationLabel}>{integration.name}</p>
-          </div>
+          <TappableArea onClick={integration.connect} key={integration.name}>
+            <div className={styles.integration}>
+              <img
+                src={integration.icon}
+                alt={integration.name}
+                className={styles.integrationIcon}
+              />
+              <p className={styles.integrationLabel}>{integration.name}</p>
+            </div>
+          </TappableArea>
         ))}
       </div>
     </div>

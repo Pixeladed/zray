@@ -12,3 +12,16 @@ export const Button = ({ onClick, children }: ButtonProps) => {
     </button>
   );
 };
+
+export const TappableArea = ({
+  children,
+  onClick,
+}: React.PropsWithChildren<{
+  onClick?(): void;
+}>) => {
+  return (
+    <button className={styles.tappableArea} onClick={onClick}>
+      {children}
+    </button>
+  );
+};

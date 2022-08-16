@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@prisma/client": "^4.2.1",
+    "classnames": "^2.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0"

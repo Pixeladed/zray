@@ -9,3 +9,10 @@
   color: colorBackground;
   cursor: pointer;
 }
+
+.tappableArea {
+  border: 0;
+  padding: 0;
+  background: unset;
+  cursor: pointer;
+}
