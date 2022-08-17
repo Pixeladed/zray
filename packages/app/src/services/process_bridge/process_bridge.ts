@@ -1,15 +1,14 @@
 import { IpcMain, IpcRenderer, WebContents } from 'electron';
+import { PingMessage, PongMessage } from './messages';
 import {
   MainMessageInvoker,
   MessageCallback,
   MessageCallbackRegistrar,
   MessageConstructor,
   MessageData,
-  PingMessage,
-  PongMessage,
   ProcessBridgeMessage,
   RendererMessageInvoker,
-} from './process_bridge_messages';
+} from './message_utils';
 
 export class ProcessBridge {
   constructor(

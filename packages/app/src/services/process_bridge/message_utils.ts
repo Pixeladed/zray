@@ -30,11 +30,3 @@ export type MainMessageInvoker<T extends ProcessBridgeMessage<any>> = (
 export type MessageCallbackRegistrar<T extends ProcessBridgeMessage<any>> = (
   cb: MessageCallback<T>
 ) => void;
-
-export class PingMessage extends ProcessBridgeMessage<undefined> {
-  name = 'ping';
-}
-
-export class PongMessage extends ProcessBridgeMessage<undefined> {
-  name = 'pong';
-}
