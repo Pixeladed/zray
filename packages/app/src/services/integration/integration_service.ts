@@ -1,7 +1,7 @@
-import { SlackIntegration } from './slack/slack_integration';
+import { Integration } from './integration';
 
 export class IntegrationService {
-  private integrations = [new SlackIntegration()];
+  constructor(private readonly integrations: Integration[]) {}
 
   // this could be dynamic in the future
   findIntegrations = () => {

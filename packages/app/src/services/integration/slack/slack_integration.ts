@@ -1,7 +1,6 @@
 import { Path } from '../../../base/path';
 import { OperationResult, Provider } from '../provider';
 import { Integration } from '../integration';
-import { URL } from 'url';
 import { NavigationService } from '../../navigation/navigation_service';
 import { Routes } from '../../../routes';
 import { WindowBridge } from '../../window_bridge/window_bridge';

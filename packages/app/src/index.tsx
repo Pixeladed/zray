@@ -7,13 +7,16 @@ import { createSearchPage } from './pages/search/create';
 import { createAddIntegrationPage } from './pages/add_integration/create';
 import { IntegrationService } from './services/integration/integration_service';
 import { NavigationService } from './services/navigation/navigation_service';
+import { createIntegrations } from './services/integration/create';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+const context = window;
 
-const integrationService = new IntegrationService();
-const navigationService = new NavigationService(window);
+const navigationService = new NavigationService(context);
+const integrations = createIntegrations({ navigationService, context });
+const integrationService = new IntegrationService(Object.values(integrations));
 
 const { SearchPage } = createSearchPage();
 const { AddIntegrationPage } = createAddIntegrationPage({ integrationService });
