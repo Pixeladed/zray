@@ -1,8 +1,8 @@
-import { BrowserWindow, WebContents } from 'electron';
+import { WebContents } from 'electron';
 import {
-  SlackOAuthMainBridge,
-  StartSlackOAuthMessage,
-} from '../../../native/views/slack_oauth/api';
+  SettingsMainBridge,
+  SettingsStartSlackOAuthMessage,
+} from '../../../native/views/settings/api';
 import { SlackOAuthView } from '../../../native/views/slack_oauth/slack_oauth_view';
 import { MainMessageCallback } from '../../process_bridge/message_utils';
 
@@ -12,10 +12,10 @@ import { MainMessageCallback } from '../../process_bridge/message_utils';
  */
 export class SlackIntegrationProvider {
   constructor(
-    private readonly bridge: Pick<SlackOAuthMainBridge, 'slackOAuthComplete'>
+    private readonly bridge: Pick<SettingsMainBridge, 'slackOAuthComplete'>
   ) {}
 
-  startOAuth: MainMessageCallback<StartSlackOAuthMessage> = (
+  startOAuth: MainMessageCallback<SettingsStartSlackOAuthMessage> = (
     sender: WebContents,
     { oAuthUrl, redirectUrl }
   ) => {

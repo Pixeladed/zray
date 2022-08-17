@@ -3,7 +3,6 @@ import {
   SlackOAuthMainBridge,
   SlackOAuthCompleteMessage,
   SlackOAuthRendererBridge,
-  StartSlackOAuthMessage,
 } from './api';
 
 export class SlackOAuthBridge extends ProcessBridge<
@@ -15,13 +14,11 @@ export class SlackOAuthBridge extends ProcessBridge<
       onSlackOAuthComplete: this.rendererCallbackRegistrar(
         SlackOAuthCompleteMessage
       ),
-      startSlackOAuth: this.rendererMessageInvoker(StartSlackOAuthMessage),
     };
   };
 
   mainBridgeConfig = (): SlackOAuthMainBridge => {
     return {
-      onStartSlackOAuth: this.mainCallbackRegistrar(StartSlackOAuthMessage),
       slackOAuthComplete: this.mainMessageInvoker(SlackOAuthCompleteMessage),
     };
   };

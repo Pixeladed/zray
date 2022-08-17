@@ -15,10 +15,9 @@ export class SettingsStartSlackOAuthMessage extends ProcessBridgeMessage<{
   name = 'settings:slack:oauth:start';
 }
 
-export class SettingsSlackOAuthCompleteMessage extends ProcessBridgeMessage<{
-  oAuthUrl: string;
-  redirectUrl: string;
-}> {
+export class SettingsSlackOAuthCompleteMessage extends ProcessBridgeMessage<
+  { success: false; cancelled: boolean } | { success: true; data: {} }
+> {
   name = 'settings:slack:oauth:start';
 }
 
