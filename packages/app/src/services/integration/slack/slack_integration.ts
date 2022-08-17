@@ -22,7 +22,7 @@ export class SlackIntegration extends Integration {
     const url = this.createOAuthUrl(redirectUrl);
     const operation = new ManualPromise<OperationResult<Provider>>();
 
-    this.bridge.startSlackOAuth({ oAuthUrl: url });
+    this.bridge.startSlackOAuth({ oAuthUrl: url, redirectUrl });
 
     // The code below needs to be executed in the main process
     // -------------------------------

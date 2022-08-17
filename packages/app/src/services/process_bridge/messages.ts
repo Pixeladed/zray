@@ -10,6 +10,7 @@ export class PongMessage extends ProcessBridgeMessage<{}> {
 
 export class StartSlackOAuthMessage extends ProcessBridgeMessage<{
   oAuthUrl: string;
+  redirectUrl: string;
 }> {
   name = 'slack:oauth:start';
 }
