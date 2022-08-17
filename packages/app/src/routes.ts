@@ -1,7 +1,10 @@
 export class Routes {
   static search = () => '/search';
-  static addIntegration = () => '/integrations/add';
-  static slackIntegrationCallback = () => '/integrations/slack/callback';
+  static settings = () => '/settings';
+  static integrations = () => `${Routes.settings()}/integrations`;
+  static addIntegration = () => `${Routes.integrations()}/add`;
+  static slackIntegrationCallback = () =>
+    `${Routes.integrations()}/slack/callback`;
 
   static href = (source: string, path: string) => {
     const base = source.endsWith('/')
