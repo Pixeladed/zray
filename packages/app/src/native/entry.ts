@@ -1,14 +1,13 @@
 import { app } from 'electron';
-import {
-  WindowController,
-  WindowSource,
-} from './window_controller/window_controller';
+import { SearchView } from './views/search/search_view';
+import { WindowSource } from './views/view';
 
-const source: WindowSource = app.isPackaged
+const baseSource: WindowSource = app.isPackaged
   ? { type: 'bundled', path: 'index.html' }
   : { type: 'server', url: 'http://localhost:3000' };
-const windowController = new WindowController(source);
 
-app.on('activate', windowController.handleActivate);
-app.on('browser-window-blur', windowController.handleBlur);
-app.on('ready', windowController.handleReady);
+const searchView = new SearchView(baseSource);
+
+app.on('activate', searchView.handleActivate);
+app.on('browser-window-blur', searchView.handleBlur);
+app.on('ready', searchView.handleReady);
