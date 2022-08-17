@@ -1,7 +1,6 @@
 import { BrowserWindow, WebContents } from 'electron';
-import { MainBridge } from '../../process_bridge/api';
-import { StartSlackOAuthMessage } from '../../process_bridge/messages';
 import { MainMessageCallback } from '../../process_bridge/message_utils';
+import { SlackMainBridge, StartSlackOAuthMessage } from './slack_bridge';
 
 /**
  * The slack integration provider runs in the main process to provide
@@ -9,7 +8,7 @@ import { MainMessageCallback } from '../../process_bridge/message_utils';
  */
 export class SlackIntegrationProvider {
   constructor(
-    private readonly bridge: Pick<MainBridge, 'slackOAuthComplete'>
+    private readonly bridge: Pick<SlackMainBridge, 'slackOAuthComplete'>
   ) {}
 
   startOAuth: MainMessageCallback<StartSlackOAuthMessage> = (

@@ -1,7 +1,9 @@
-import { Assert } from '../../base/assert';
+export const getRendererBridge = <T>(context: Window, namespace: string): T => {
+  if (namespace in context) {
+    return context[namespace as keyof typeof context] as T;
+  }
 
-export const getRendererBridge = (context: Window) => {
-  const bridge = context.RendererBridge;
-  Assert.that(!!bridge, 'RendererBridge does not exist in context');
-  return bridge;
+  throw new Error(
+    `ProcessBridge in namespace ${namespace} does not exist in context`
+  );
 };

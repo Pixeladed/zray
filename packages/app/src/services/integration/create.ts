@@ -1,17 +1,16 @@
 import { NavigationService } from '../navigation/navigation_service';
-import { RendererBridge } from '../process_bridge/api';
 import { createSlackIntegration } from './slack/create';
 
 export const createIntegrations = ({
   navigationService,
-  rendererBridge,
+  context,
 }: {
   navigationService: NavigationService;
-  rendererBridge: RendererBridge;
+  context: Window;
 }) => {
   const { slackIntegration } = createSlackIntegration({
     navigationService,
-    rendererBridge,
+    context,
   });
 
   return { slackIntegration };

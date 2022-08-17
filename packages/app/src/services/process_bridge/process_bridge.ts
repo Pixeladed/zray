@@ -1,54 +1,36 @@
-import { IpcMain, IpcRenderer, WebContents } from 'electron';
-import { RendererBridge, MainBridge } from './api';
-import {
-  PingMessage,
-  PongMessage,
-  SlackOAuthCompleteMessage,
-  StartSlackOAuthMessage,
-} from './messages';
+import { ContextBridge, IpcMain, IpcRenderer, WebContents } from 'electron';
 import {
   RendererMessageCallback,
   MessageConstructor,
   MessageData,
   ProcessBridgeMessage,
   MainMessageCallback,
+  RendererMessageInvoker,
+  MainMessageInvoker,
+  RendererCallbackRegistrar,
+  MainCallbackRegistrar,
 } from './message_utils';
 
-declare global {
-  interface Window {
-    RendererBridge: RendererBridge;
-  }
-}
-
-export class ProcessBridge {
+/**
+ * Base bridge class allowing you to create a communication bridge
+ * between the main electron process and a browser process
+ */
+export abstract class ProcessBridge<R extends RendererApi, M extends MainApi> {
   constructor(
-    private readonly ipcMain: IpcMain,
-    private readonly ipcRenderer: IpcRenderer
+    protected readonly ipcRenderer: Pick<IpcRenderer, 'invoke' | 'on'>,
+    protected readonly ipcMain: Pick<IpcMain, 'handle'>,
+    protected readonly contextBridge: Pick<ContextBridge, 'exposeInMainWorld'>
   ) {}
 
-  rendererBridgeConfig = (): RendererBridge => {
-    return {
-      onPong: this.rendererCallbackRegistrar(PongMessage),
-      ping: this.rendererMessageInvoker(PingMessage),
+  abstract rendererBridgeConfig: () => R;
+  abstract mainBridgeConfig: () => M;
 
-      startSlackOAuth: this.rendererMessageInvoker(StartSlackOAuthMessage),
-      onSlackOAuthComplete: this.rendererCallbackRegistrar(
-        SlackOAuthCompleteMessage
-      ),
-    };
+  exposeRendererApi = (namespace: string) => {
+    const config = this.rendererBridgeConfig();
+    this.contextBridge.exposeInMainWorld(namespace, config);
   };
 
-  mainBridgeConfig = (): MainBridge => {
-    return {
-      onPing: this.mainCallbackRegistrar(PingMessage),
-      pong: this.mainMessageInvoker(PongMessage),
-
-      onStartSlackOAuth: this.mainCallbackRegistrar(StartSlackOAuthMessage),
-      slackOAuthComplete: this.mainMessageInvoker(SlackOAuthCompleteMessage),
-    };
-  };
-
-  private rendererCallbackRegistrar =
+  protected rendererCallbackRegistrar =
     <T extends ProcessBridgeMessage<any>>(msgCtor: MessageConstructor<T>) =>
     (cb: RendererMessageCallback<T>) => {
       this.ipcRenderer.on(msgCtor.name, (event, data) => {
@@ -56,13 +38,13 @@ export class ProcessBridge {
       });
     };
 
-  private rendererMessageInvoker =
+  protected rendererMessageInvoker =
     <T extends ProcessBridgeMessage<any>>(msgCtor: MessageConstructor<T>) =>
     (data: MessageData<T>) => {
       this.ipcRenderer.invoke(msgCtor.name, data);
     };
 
-  private mainCallbackRegistrar =
+  protected mainCallbackRegistrar =
     <T extends ProcessBridgeMessage<any>>(msgCtor: MessageConstructor<T>) =>
     (cb: MainMessageCallback<T>) => {
       this.ipcMain.handle(msgCtor.type, (event, data) => {
@@ -70,9 +52,16 @@ export class ProcessBridge {
       });
     };
 
-  private mainMessageInvoker =
+  protected mainMessageInvoker =
     <T extends ProcessBridgeMessage<any>>(msgCtor: MessageConstructor<T>) =>
     (target: WebContents, data: MessageData<T>) => {
       target.send(msgCtor.type, data);
     };
 }
+
+export type RendererApi = {
+  [key: string]: RendererMessageInvoker<any> | RendererCallbackRegistrar<any>;
+};
+export type MainApi = {
+  [key: string]: MainMessageInvoker<any> | MainCallbackRegistrar<any>;
+};

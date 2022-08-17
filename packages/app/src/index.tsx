@@ -8,15 +8,13 @@ import { createAddIntegrationPage } from './pages/add_integration/create';
 import { IntegrationService } from './services/integration/integration_service';
 import { NavigationService } from './services/navigation/navigation_service';
 import { createIntegrations } from './services/integration/create';
-import { getRendererBridge } from './services/process_bridge/renderer';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 const context = window;
-const rendererBridge = getRendererBridge(context);
 const navigationService = new NavigationService(context);
-const integrations = createIntegrations({ navigationService, rendererBridge });
+const integrations = createIntegrations({ navigationService, context });
 const integrationService = new IntegrationService(Object.values(integrations));
 
 const { SearchPage } = createSearchPage();
