@@ -40,7 +40,7 @@ export class WindowController {
   };
 
   handleBlur = () => {
-    this.searchWindow?.hide();
+    // this.searchWindow?.hide();
   };
 
   handleReady = () => {

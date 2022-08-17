@@ -15,7 +15,7 @@ const root = ReactDOM.createRoot(
 const context = window;
 
 const navigationService = new NavigationService(context);
-const integrations = createIntegrations({ navigationService, context });
+const integrations = createIntegrations({ navigationService });
 const integrationService = new IntegrationService(Object.values(integrations));
 
 const { SearchPage } = createSearchPage();

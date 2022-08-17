@@ -10,7 +10,7 @@
     "react-router-dom": "^6.3.0"
   },
   "scripts": {
-    "start:web": "react-scripts start",
+    "start:web": "HTTPS=true react-scripts start",
     "build:web": "react-scripts build",
     "test:web": "react-scripts test",
     "eject:web": "react-scripts eject",
