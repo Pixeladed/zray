@@ -1,14 +1,18 @@
+import path from 'path';
 import { Routes } from '../../../routes';
 import { View, WindowSource } from '../view';
 
 export class SearchView extends View {
   constructor(baseSource: WindowSource) {
-    const path = Routes.search();
-    super(View.extendWindowSource(baseSource, path), {
-      frame: false,
-      width: 800,
-      height: 200,
-    });
+    super(
+      View.extendWindowSource(baseSource, Routes.search()),
+      {
+        frame: false,
+        width: 800,
+        height: 200,
+      },
+      path.join(__dirname, 'preload.js')
+    );
   }
 
   handleActivate = () => {
@@ -21,6 +25,7 @@ export class SearchView extends View {
 
   handleBlur = () => {
     // this.browserWindow?.hide();
+    this.browserWindow?.setOpacity(0.5);
   };
 
   handleReady = () => {

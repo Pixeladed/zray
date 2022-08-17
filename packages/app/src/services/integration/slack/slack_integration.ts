@@ -7,7 +7,6 @@ import { ManualPromise } from '../../../base/manual_promise';
 import { SlackRendererBridge } from './slack_bridge';
 
 const ICON_PATH = Path.resource('/integrations/slack/slack.svg');
-export const SLACK_BRIDGE_NAMESPACE = 'SlackProcessBridge';
 
 export class SlackIntegration extends Integration {
   constructor(
