@@ -4,7 +4,7 @@ import { Integration } from '../integration';
 import { NavigationService } from '../../navigation/navigation_service';
 import { Routes } from '../../../routes';
 import { ManualPromise } from '../../../base/manual_promise';
-import { SlackRendererBridge } from './slack_bridge';
+import { SettingsRendererBridge } from '../../../native/views/settings/api';
 
 const ICON_PATH = Path.resource('/integrations/slack/slack.svg');
 
@@ -12,7 +12,7 @@ export class SlackIntegration extends Integration {
   constructor(
     private readonly navigationService: NavigationService,
     private readonly clientId: string,
-    private readonly bridge: Pick<SlackRendererBridge, 'startSlackOAuth'>
+    private readonly bridge: Pick<SettingsRendererBridge, 'startSlackOAuth'>
   ) {
     super('Slack', ICON_PATH);
   }

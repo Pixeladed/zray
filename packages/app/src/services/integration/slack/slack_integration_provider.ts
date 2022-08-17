@@ -1,6 +1,10 @@
 import { BrowserWindow, WebContents } from 'electron';
+import {
+  SlackOAuthMainBridge,
+  StartSlackOAuthMessage,
+} from '../../../native/views/slack_oauth/api';
+import { SlackOAuthView } from '../../../native/views/slack_oauth/slack_oauth_view';
 import { MainMessageCallback } from '../../process_bridge/message_utils';
-import { SlackMainBridge, StartSlackOAuthMessage } from './slack_bridge';
 
 /**
  * The slack integration provider runs in the main process to provide
@@ -8,7 +12,7 @@ import { SlackMainBridge, StartSlackOAuthMessage } from './slack_bridge';
  */
 export class SlackIntegrationProvider {
   constructor(
-    private readonly bridge: Pick<SlackMainBridge, 'slackOAuthComplete'>
+    private readonly bridge: Pick<SlackOAuthMainBridge, 'slackOAuthComplete'>
   ) {}
 
   startOAuth: MainMessageCallback<StartSlackOAuthMessage> = (
@@ -16,16 +20,10 @@ export class SlackIntegrationProvider {
     { oAuthUrl, redirectUrl }
   ) => {
     let connected = false;
-    const win = new BrowserWindow({
-      alwaysOnTop: true,
-      webPreferences: {
-        nodeIntegration: false,
-        contextIsolation: true,
-      },
-    });
-    win.loadURL(oAuthUrl);
+    const view = new SlackOAuthView(oAuthUrl);
+    view.open();
 
-    win.webContents.on('will-navigate', (event, newUrl) => {
+    view.browserWindow?.webContents.on('will-navigate', (event, newUrl) => {
       if (!this.isSameOriginAndPath(redirectUrl, newUrl)) {
         this.bridge.slackOAuthComplete(sender, {
           success: false,
@@ -45,10 +43,10 @@ export class SlackIntegrationProvider {
         data: {},
       });
 
-      win.close();
+      view.browserWindow?.close();
     });
 
-    win.on('close', () => {
+    view.browserWindow?.on('close', () => {
       if (connected) {
         return;
       }
