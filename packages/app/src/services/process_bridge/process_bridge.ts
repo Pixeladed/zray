@@ -1,13 +1,11 @@
 import { IpcMain, IpcRenderer, WebContents } from 'electron';
+import { RendererApi, MainApi } from './api';
 import { PingMessage, PongMessage } from './messages';
 import {
-  MainMessageInvoker,
   MessageCallback,
-  MessageCallbackRegistrar,
   MessageConstructor,
   MessageData,
   ProcessBridgeMessage,
-  RendererMessageInvoker,
 } from './message_utils';
 
 export class ProcessBridge {
@@ -58,13 +56,3 @@ export class ProcessBridge {
       target.send(msgCtor.type, data);
     };
 }
-
-export type MainApi = {
-  onPing: MessageCallbackRegistrar<PingMessage>;
-  pong: MainMessageInvoker<PongMessage>;
-};
-
-export type RendererApi = {
-  ping: RendererMessageInvoker<PingMessage>;
-  onPong: MessageCallbackRegistrar<PongMessage>;
-};

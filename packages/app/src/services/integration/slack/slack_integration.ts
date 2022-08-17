@@ -4,55 +4,58 @@ import { Integration } from '../integration';
 import { NavigationService } from '../../navigation/navigation_service';
 import { Routes } from '../../../routes';
 import { ManualPromise } from '../../../base/manual_promise';
-import { BrowserWindow } from 'electron';
+import type { RendererApi } from '../../process_bridge/api';
 
 const ICON_PATH = Path.resource('/integrations/slack/slack.svg');
 
 export class SlackIntegration extends Integration {
   constructor(
     private readonly navigationService: NavigationService,
-    private readonly clientId: string
+    private readonly clientId: string,
+    private readonly bridge: Pick<RendererApi, 'startSlackOAuth'>
   ) {
     super('Slack', ICON_PATH);
   }
 
   connect = async (): Promise<OperationResult<Provider>> => {
-    let connected = false;
     const redirectUrl = this.createRedirectUrl();
     const url = this.createOAuthUrl(redirectUrl);
     const operation = new ManualPromise<OperationResult<Provider>>();
-    const win = new BrowserWindow({
-      alwaysOnTop: true,
-      webPreferences: {
-        nodeIntegration: false,
-        contextIsolation: true,
-      },
-    });
-    win.loadURL(url);
 
-    win.webContents.on('will-navigate', (event, newUrl) => {
-      if (!this.isSameOriginAndPath(redirectUrl, newUrl)) {
-        operation.resolve({ success: false, cancelled: false });
-        return;
-      }
+    this.bridge.startSlackOAuth({ oAuthUrl: url });
 
-      const url = new URL(newUrl);
-      const code = url.searchParams.get('code');
-      const state = url.searchParams.get('state');
+    // The code below needs to be executed in the main process
+    // -------------------------------
+    // const win = new BrowserWindow({
+    //   alwaysOnTop: true,
+    //   webPreferences: {
+    //     nodeIntegration: false,
+    //     contextIsolation: true,
+    //   },
+    // });
+    // win.loadURL(url);
 
-      alert(`Code: ${code}, state: ${state}`);
+    // win.webContents.on('will-navigate', (event, newUrl) => {
+    //   if (!this.isSameOriginAndPath(redirectUrl, newUrl)) {
+    //     operation.resolve({ success: false, cancelled: false });
+    //     return;
+    //   }
 
-      connected = true;
-      win.close();
-    });
+    //   const url = new URL(newUrl);
+    //   const code = url.searchParams.get('code');
+    //   const state = url.searchParams.get('state');
 
-    win.on('close', () => {
-      if (!connected) {
-        operation.resolve({ success: false, cancelled: true });
-      }
-    });
+    //   alert(`Code: ${code}, state: ${state}`);
 
-    // TODO: communicate via bridge and report on connection
+    //   connected = true;
+    //   win.close();
+    // });
+
+    // win.on('close', () => {
+    //   if (!connected) {
+    //     operation.resolve({ success: false, cancelled: true });
+    //   }
+    // });
 
     try {
       return await operation;
