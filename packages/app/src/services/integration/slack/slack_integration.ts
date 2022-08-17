@@ -44,7 +44,7 @@ export class SlackIntegration extends Integration {
   };
 
   private createOAuthUrl = () => {
-    const url = new URL('https://slack.com/oauth/authorize');
+    const url = new URL('https://slack.com/oauth/v2/authorize');
     url.searchParams.set('client_id', this.clientId);
     url.searchParams.set('scope', 'search:read');
     url.searchParams.set('redirect_uri', this.createRedirectUrl());
@@ -55,6 +55,7 @@ export class SlackIntegration extends Integration {
     const url = new URL(this.navigationService.currentHref());
     url.pathname = Routes.slackIntegrationCallback();
     url.search = '';
+    url.hash = '';
     return url.toString();
   };
 }

@@ -1,7 +1,7 @@
 import { NavigationService } from '../../navigation/navigation_service';
 import { SlackIntegration } from './slack_integration';
 
-const SLACK_CLIENT_ID = '9ac02d565963241906d2c4277297bbd9';
+const SLACK_CLIENT_ID = '3955281996480.3924969983590';
 
 export const createSlackIntegration = ({
   navigationService,
