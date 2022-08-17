@@ -4,7 +4,7 @@ import { Integration } from '../integration';
 import { NavigationService } from '../../navigation/navigation_service';
 import { Routes } from '../../../routes';
 import { ManualPromise } from '../../../base/manual_promise';
-import type { RendererApi } from '../../process_bridge/api';
+import type { RendererBridge } from '../../process_bridge/api';
 
 const ICON_PATH = Path.resource('/integrations/slack/slack.svg');
 
@@ -12,7 +12,7 @@ export class SlackIntegration extends Integration {
   constructor(
     private readonly navigationService: NavigationService,
     private readonly clientId: string,
-    private readonly bridge: Pick<RendererApi, 'startSlackOAuth'>
+    private readonly bridge: Pick<RendererBridge, 'startSlackOAuth'>
   ) {
     super('Slack', ICON_PATH);
   }
@@ -23,39 +23,6 @@ export class SlackIntegration extends Integration {
     const operation = new ManualPromise<OperationResult<Provider>>();
 
     this.bridge.startSlackOAuth({ oAuthUrl: url, redirectUrl });
-
-    // The code below needs to be executed in the main process
-    // -------------------------------
-    // const win = new BrowserWindow({
-    //   alwaysOnTop: true,
-    //   webPreferences: {
-    //     nodeIntegration: false,
-    //     contextIsolation: true,
-    //   },
-    // });
-    // win.loadURL(url);
-
-    // win.webContents.on('will-navigate', (event, newUrl) => {
-    //   if (!this.isSameOriginAndPath(redirectUrl, newUrl)) {
-    //     operation.resolve({ success: false, cancelled: false });
-    //     return;
-    //   }
-
-    //   const url = new URL(newUrl);
-    //   const code = url.searchParams.get('code');
-    //   const state = url.searchParams.get('state');
-
-    //   alert(`Code: ${code}, state: ${state}`);
-
-    //   connected = true;
-    //   win.close();
-    // });
-
-    // win.on('close', () => {
-    //   if (!connected) {
-    //     operation.resolve({ success: false, cancelled: true });
-    //   }
-    // });
 
     try {
       return await operation;
@@ -78,13 +45,6 @@ export class SlackIntegration extends Integration {
     url.search = '';
     url.hash = '';
     return url.toString();
-  };
-
-  private isSameOriginAndPath = (urlA: string, urlB: string) => {
-    const a = new URL(urlA);
-    const b = new URL(urlB);
-
-    return a.origin === b.origin && a.pathname === b.pathname;
   };
 }
 

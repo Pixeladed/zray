@@ -14,7 +14,12 @@ export type MessageData<T> = T extends ProcessBridgeMessage<infer D>
   ? D
   : never;
 
-export type MessageCallback<T extends ProcessBridgeMessage<any>> = (
+export type RendererMessageCallback<T extends ProcessBridgeMessage<any>> = (
+  data: MessageData<T>
+) => void;
+
+export type MainMessageCallback<T extends ProcessBridgeMessage<any>> = (
+  sender: WebContents,
   data: MessageData<T>
 ) => void;
 
@@ -27,6 +32,10 @@ export type MainMessageInvoker<T extends ProcessBridgeMessage<any>> = (
   data: MessageData<T>
 ) => void;
 
-export type MessageCallbackRegistrar<T extends ProcessBridgeMessage<any>> = (
-  cb: MessageCallback<T>
+export type RendererCallbackRegistrar<T extends ProcessBridgeMessage<any>> = (
+  cb: RendererMessageCallback<T>
+) => void;
+
+export type MainCallbackRegistrar<T extends ProcessBridgeMessage<any>> = (
+  cb: MainMessageCallback<T>
 ) => void;

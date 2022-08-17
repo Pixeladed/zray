@@ -1,12 +1,24 @@
 import { IpcMain, IpcRenderer, WebContents } from 'electron';
-import { RendererApi, MainApi } from './api';
-import { PingMessage, PongMessage } from './messages';
+import { RendererBridge, MainBridge } from './api';
 import {
-  MessageCallback,
+  PingMessage,
+  PongMessage,
+  SlackOAuthCompleteMessage,
+  StartSlackOAuthMessage,
+} from './messages';
+import {
+  RendererMessageCallback,
   MessageConstructor,
   MessageData,
   ProcessBridgeMessage,
+  MainMessageCallback,
 } from './message_utils';
+
+declare global {
+  interface Window {
+    RendererBridge: RendererBridge;
+  }
+}
 
 export class ProcessBridge {
   constructor(
@@ -14,23 +26,31 @@ export class ProcessBridge {
     private readonly ipcRenderer: IpcRenderer
   ) {}
 
-  getRendererApi = (): RendererApi => {
+  rendererBridgeConfig = (): RendererBridge => {
     return {
       onPong: this.rendererCallbackRegistrar(PongMessage),
       ping: this.rendererMessageInvoker(PingMessage),
+
+      startSlackOAuth: this.rendererMessageInvoker(StartSlackOAuthMessage),
+      onSlackOAuthComplete: this.rendererCallbackRegistrar(
+        SlackOAuthCompleteMessage
+      ),
     };
   };
 
-  getMainApi = (): MainApi => {
+  mainBridgeConfig = (): MainBridge => {
     return {
       onPing: this.mainCallbackRegistrar(PingMessage),
       pong: this.mainMessageInvoker(PongMessage),
+
+      onStartSlackOAuth: this.mainCallbackRegistrar(StartSlackOAuthMessage),
+      slackOAuthComplete: this.mainMessageInvoker(SlackOAuthCompleteMessage),
     };
   };
 
   private rendererCallbackRegistrar =
     <T extends ProcessBridgeMessage<any>>(msgCtor: MessageConstructor<T>) =>
-    (cb: MessageCallback<T>) => {
+    (cb: RendererMessageCallback<T>) => {
       this.ipcRenderer.on(msgCtor.name, (event, data) => {
         cb(data);
       });
@@ -44,9 +64,9 @@ export class ProcessBridge {
 
   private mainCallbackRegistrar =
     <T extends ProcessBridgeMessage<any>>(msgCtor: MessageConstructor<T>) =>
-    (cb: MessageCallback<T>) => {
+    (cb: MainMessageCallback<T>) => {
       this.ipcMain.handle(msgCtor.type, (event, data) => {
-        cb(data);
+        cb(event.sender, data);
       });
     };
 

@@ -1,21 +1,30 @@
 import type {
   PingMessage,
   PongMessage,
+  SlackOAuthCompleteMessage,
   StartSlackOAuthMessage,
 } from './messages';
 import type {
   MainMessageInvoker,
-  MessageCallbackRegistrar,
+  MainCallbackRegistrar,
+  RendererCallbackRegistrar,
   RendererMessageInvoker,
 } from './message_utils';
 
-export type MainApi = {
-  onPing: MessageCallbackRegistrar<PingMessage>;
+export type MainBridge = {
+  // dummy
+  onPing: MainCallbackRegistrar<PingMessage>;
   pong: MainMessageInvoker<PongMessage>;
+
+  onStartSlackOAuth: MainCallbackRegistrar<StartSlackOAuthMessage>;
+  slackOAuthComplete: MainMessageInvoker<SlackOAuthCompleteMessage>;
 };
 
-export type RendererApi = {
+export type RendererBridge = {
+  // dummy
   ping: RendererMessageInvoker<PingMessage>;
+  onPong: RendererCallbackRegistrar<PongMessage>;
+
   startSlackOAuth: RendererMessageInvoker<StartSlackOAuthMessage>;
-  onPong: MessageCallbackRegistrar<PongMessage>;
+  onSlackOAuthComplete: RendererCallbackRegistrar<SlackOAuthCompleteMessage>;
 };
