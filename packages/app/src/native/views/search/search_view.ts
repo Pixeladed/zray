@@ -23,6 +23,10 @@ export class SearchView extends View {
     }
   };
 
+  handleFocus = () => {
+    this.browserWindow?.setOpacity(1);
+  };
+
   handleBlur = () => {
     // this.browserWindow?.hide();
     this.browserWindow?.setOpacity(0.5);

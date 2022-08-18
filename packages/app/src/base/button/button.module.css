@@ -4,9 +4,15 @@
 .button {
   border: none;
   padding: spacexxSmall spaceSmall;
-  box-shadow: inset 0 0 spacexxxSmall colorForeground;
+  box-shadow: inset 0 0 0 2px colorForeground;
   background: colorPrimary;
   cursor: pointer;
+  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.button:hover:not(:active) {
+  transform: translateY(calc(-1 * calc(1em / 8)));
+  box-shadow: inset 0 0 0 2px colorForeground, 0 calc(1em / 8) 0 0 colorForeground;
 }
 
 .tappableArea {

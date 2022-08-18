@@ -10,4 +10,5 @@ const searchView = new SearchView(baseSource);
 
 app.on('activate', searchView.handleActivate);
 app.on('browser-window-blur', searchView.handleBlur);
+app.on('browser-window-focus', searchView.handleFocus);
 app.on('ready', searchView.handleReady);
