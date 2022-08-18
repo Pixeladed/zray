@@ -10,7 +10,7 @@
     "react-router-dom": "^6.3.0"
   },
   "scripts": {
-    "start:web": "HTTPS=true react-scripts start",
+    "start:web": "react-scripts start",
     "build:web": "react-scripts build",
     "test:web": "react-scripts test",
     "eject:web": "react-scripts eject",
@@ -18,7 +18,7 @@
     "start:app": "electron build/native/entry.js",
     "start:app:watch": "nodemon -e json,js,ts --watch ./src/native --exec \"yarn start:app\"",
     "prestart:app": "yarn build:app",
-    "dev": "yarn start:web & yarn start:app:watch",
+    "dev": "BROWSER=none yarn start:web & yarn start:app:watch",
     "start": "yarn build:web && yarn start:app",
     "prisma": "prisma"
   },
