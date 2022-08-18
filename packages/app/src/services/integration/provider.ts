@@ -30,7 +30,7 @@ export type SearchResult = {
   url: string;
 };
 
-export type OperationResult<T = undefined> =
+export type OperationResult<T = {}> =
   | {
       data: T;
       success: true;

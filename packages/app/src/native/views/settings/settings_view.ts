@@ -2,10 +2,10 @@ import path from 'path';
 import { Routes } from '../../../routes';
 import { View, WindowSource } from '../view';
 
-export class SettingsView extends View {
-  constructor(baseSource: WindowSource, route: string = Routes.settings()) {
+export class SearchView extends View {
+  constructor(baseSource: WindowSource) {
     super(
-      View.extendWindowSource(baseSource, route),
+      View.extendWindowSource(baseSource, Routes.addIntegration()),
       {},
       path.join(__dirname, 'preload.js')
     );

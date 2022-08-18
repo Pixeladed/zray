@@ -1,22 +1,11 @@
-import { SettingsRendererBridge } from '../../../native/views/settings/api';
-import { NavigationService } from '../../navigation/navigation_service';
-import { getRendererBridge } from '../../process_bridge/renderer';
+import { OperationResult } from '../provider';
 import { SlackIntegration } from './slack_integration';
 
-const SLACK_CLIENT_ID = '3955281996480.3924969983590';
-
 export const createSlackIntegration = ({
-  navigationService,
-  context,
+  connect,
 }: {
-  navigationService: NavigationService;
-  context: Window;
+  connect: () => Promise<void>;
 }) => {
-  const rendererBridge = getRendererBridge<SettingsRendererBridge>(context);
-  const slackIntegration = new SlackIntegration(
-    navigationService,
-    SLACK_CLIENT_ID,
-    rendererBridge
-  );
+  const slackIntegration = new SlackIntegration(connect);
   return { slackIntegration };
 };

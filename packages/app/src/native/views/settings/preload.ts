@@ -1,6 +1,17 @@
-import { contextBridge, ipcMain, ipcRenderer } from 'electron';
-import { SETTINGS_BRIDGE_NAMESPACE } from './api';
-import { SettingsBridge } from './settings_bridge';
+import { contextBridge, ipcRenderer } from 'electron';
 
-const bridge = new SettingsBridge(ipcRenderer, ipcMain, contextBridge);
-bridge.exposeRendererApi(SETTINGS_BRIDGE_NAMESPACE);
+export const SETTINGS_BRIDGE_NAME = 'SETTINGS_CONTEXT_BRIDGE';
+
+export const Messages = {
+  connectSlack: 'settings:slack:connect',
+};
+
+const settingsBridge: SettingsBridge = {
+  connectSlack: () => ipcRenderer.invoke(Messages.connectSlack),
+};
+
+contextBridge.exposeInMainWorld(SETTINGS_BRIDGE_NAME, settingsBridge);
+
+export type SettingsBridge = {
+  connectSlack: () => void;
+};

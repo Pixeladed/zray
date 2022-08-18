@@ -4,15 +4,11 @@ import { View, WindowSource } from '../view';
 
 export class SearchView extends View {
   constructor(baseSource: WindowSource) {
-    super(
-      View.extendWindowSource(baseSource, Routes.search()),
-      {
-        frame: false,
-        width: 800,
-        height: 200,
-      },
-      path.join(__dirname, 'preload.js')
-    );
+    super(View.extendWindowSource(baseSource, Routes.search()), {
+      frame: false,
+      width: 800,
+      height: 200,
+    });
   }
 
   handleActivate = () => {
