@@ -1,7 +1,4 @@
-import {
-  SettingsRendererBridge,
-  SETTINGS_BRIDGE_NAMESPACE,
-} from '../../../native/views/settings/api';
+import { SettingsRendererBridge } from '../../../native/views/settings/api';
 import { NavigationService } from '../../navigation/navigation_service';
 import { getRendererBridge } from '../../process_bridge/renderer';
 import { SlackIntegration } from './slack_integration';
@@ -15,7 +12,7 @@ export const createSlackIntegration = ({
   navigationService: NavigationService;
   context: Window;
 }) => {
-  const rendererBridge = getRendererBridge(context, SETTINGS_BRIDGE_NAMESPACE);
+  const rendererBridge = getRendererBridge<SettingsRendererBridge>(context);
   const slackIntegration = new SlackIntegration(
     navigationService,
     SLACK_CLIENT_ID,
