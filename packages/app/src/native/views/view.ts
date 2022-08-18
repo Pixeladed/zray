@@ -5,7 +5,7 @@ import { Routes } from '../../routes';
  * A view is a web page run in a separate window.
  * E.g. Search Bar View, Settings View, OAuth View
  */
-export class View {
+export abstract class View {
   browserWindow?: BrowserWindow;
 
   static extendWindowSource = (source: WindowSource, path: string) => {

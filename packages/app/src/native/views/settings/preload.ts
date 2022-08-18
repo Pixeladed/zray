@@ -1,16 +1,18 @@
 import { contextBridge, ipcRenderer } from 'electron';
 
-export const SETTINGS_BRIDGE_NAME = 'SETTINGS_CONTEXT_BRIDGE';
+const SETTINGS_BRIDGE_NAME = 'SETTINGS_CONTEXT_BRIDGE';
 
-export const Messages = {
+export const SettingsMessages = {
   connectSlack: 'settings:slack:connect',
 };
 
-const settingsBridge: SettingsBridge = {
-  connectSlack: () => ipcRenderer.invoke(Messages.connectSlack),
+const bridge: SettingsBridge = {
+  connectSlack: () => ipcRenderer.invoke(SettingsMessages.connectSlack),
 };
 
-contextBridge.exposeInMainWorld(SETTINGS_BRIDGE_NAME, settingsBridge);
+if (contextBridge) {
+  contextBridge.exposeInMainWorld(SETTINGS_BRIDGE_NAME, bridge);
+}
 
 export type SettingsBridge = {
   connectSlack: () => void;

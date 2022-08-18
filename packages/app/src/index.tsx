@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 const context = window;
 const navigationService = new NavigationService(context);
 
-const { SearchPage } = createSearchPage();
+const { SearchPage } = createSearchPage(context);
 const { AddIntegrationPage } = createAddIntegrationPage(context);
 
 root.render(
