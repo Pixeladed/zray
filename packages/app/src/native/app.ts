@@ -13,6 +13,10 @@ export class App {
       this.searchView || new SearchView(this.source, this.openSettings);
     this.searchView = searchView;
 
+    searchView.browserWindow.on('close', () => {
+      this.searchView = undefined;
+    });
+
     if (searchView.browserWindow) {
       searchView.browserWindow.show();
     } else {
@@ -34,6 +38,9 @@ export class App {
     } else {
       this.settingsView = new SettingsView(this.source);
       this.settingsView?.open();
+      this.settingsView.browserWindow?.on('close', () => {
+        this.settingsView = undefined;
+      });
     }
   };
 }
