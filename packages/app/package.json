@@ -18,7 +18,7 @@
     "start:app": "electron build/native/entry.js",
     "start:app:watch": "nodemon -e json,js,ts --watch ./src/native --exec \"yarn start:app\"",
     "prestart:app": "yarn build:app",
-    "dev": "BROWSER=none yarn start:web & yarn start:app:watch",
+    "dev": "cross-env BROWSER=none yarn start:web & yarn start:app:watch",
     "start": "yarn build:web && yarn start:app",
     "prisma": "prisma"
   },
@@ -50,6 +50,7 @@
     "@types/node": "^16.11.47",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "cross-env": "^7.0.3",
     "electron": "^20.0.1",
     "nodemon": "^2.0.19",
     "prisma": "^4.2.1",
