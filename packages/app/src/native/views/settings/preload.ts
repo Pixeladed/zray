@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron';
 
-const SETTINGS_BRIDGE_NAME = 'SETTINGS_CONTEXT_BRIDGE';
+const SETTINGS_BRIDGE_NAME = 'settingsBridge';
 
 export const SettingsMessages = {
   connectSlack: 'settings:slack:connect',

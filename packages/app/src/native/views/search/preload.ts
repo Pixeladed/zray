@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron';
 
-const SEARCH_BRIDGE_NAME = 'SEARCH_CONTEXT_BRIDGE';
+const SEARCH_BRIDGE_NAME = 'searchBridge';
 
 export const SearchMessages = {
   openSettings: 'search:settings:open',
