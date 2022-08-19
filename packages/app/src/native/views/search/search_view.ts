@@ -1,12 +1,14 @@
 import { ipcMain } from 'electron';
 import path from 'path';
 import { Routes } from '../../../routes';
-import { SettingsView } from '../settings/settings_view';
 import { View, WindowSource } from '../view';
 import { SearchMessages } from './preload';
 
 export class SearchView extends View {
-  constructor(baseSource: WindowSource) {
+  constructor(
+    baseSource: WindowSource,
+    private readonly openSettings: () => void
+  ) {
     super(
       View.extendWindowSource(baseSource, Routes.search()),
       {
@@ -17,30 +19,6 @@ export class SearchView extends View {
       path.join(__dirname, 'preload.js')
     );
 
-    ipcMain.handle(SearchMessages.openSettings, () => {
-      const settingsView = new SettingsView(baseSource);
-      settingsView.open();
-    });
+    ipcMain.handle(SearchMessages.openSettings, this.openSettings);
   }
-
-  handleActivate = () => {
-    if (this.browserWindow) {
-      this.browserWindow.show();
-    } else {
-      this.open();
-    }
-  };
-
-  handleFocus = () => {
-    this.browserWindow?.setOpacity(1);
-  };
-
-  handleBlur = () => {
-    // this.browserWindow?.hide();
-    this.browserWindow?.setOpacity(0.5);
-  };
-
-  handleReady = () => {
-    // TODO: maybe open an onboarding window etc
-  };
 }

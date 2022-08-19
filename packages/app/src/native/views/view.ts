@@ -6,7 +6,7 @@ import { Routes } from '../../routes';
  * E.g. Search Bar View, Settings View, OAuth View
  */
 export abstract class View {
-  browserWindow?: BrowserWindow;
+  browserWindow: BrowserWindow;
 
   static extendWindowSource = (source: WindowSource, path: string) => {
     const result = { ...source };
@@ -27,9 +27,7 @@ export abstract class View {
     private readonly source: WindowSource,
     private readonly options: BrowserWindowConstructorOptions = {},
     private readonly preloadPath?: string
-  ) {}
-
-  open = () => {
+  ) {
     const win = new BrowserWindow({
       ...this.options,
       show: false,
@@ -38,17 +36,20 @@ export abstract class View {
       },
     });
     this.browserWindow = win;
+  }
+
+  open = () => {
     switch (this.source.type) {
       case 'bundled':
-        win.loadFile(this.source.path);
+        this.browserWindow.loadFile(this.source.path);
         break;
       case 'server':
-        win.loadURL(this.source.url);
+        this.browserWindow.loadURL(this.source.url);
         break;
       default:
         throw new Error(`Unknown source type ${this.source}`);
     }
-    win.on('ready-to-show', () => win.show());
+    this.browserWindow.on('ready-to-show', () => this.browserWindow.show());
   };
 }
 
