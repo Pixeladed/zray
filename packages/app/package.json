@@ -18,8 +18,9 @@
     "start:app": "electron build/native/entry.js",
     "start:app:watch": "nodemon -e json,js,ts --watch ./src/native --exec \"yarn start:app\"",
     "prestart:app": "yarn build:app",
-    "dev": "cross-env BROWSER=none yarn start:web & yarn start:app:watch",
-    "start": "yarn build:web && yarn start:app",
+    "dev": "cross-env BROWSER=none npm-run-all --parallel start:web start:app:watch",
+    "start": "npm-run-all build:web start:app",
+    "build": "npm-run-all build:web build:app",
     "prisma": "prisma"
   },
   "eslintConfig": {
@@ -53,6 +54,7 @@
     "cross-env": "^7.0.3",
     "electron": "^20.0.1",
     "nodemon": "^2.0.19",
+    "npm-run-all": "^4.1.5",
     "prisma": "^4.2.1",
     "react-scripts": "5.0.1",
     "typescript": "^4.7.4",
