@@ -1,5 +1,5 @@
-import { ipcMain } from 'electron';
 import path from 'path';
+import { HandlerRegistrar } from '../../../base/bridge';
 import { Routes } from '../../../routes';
 import { View, WindowSource } from '../view';
 import { SearchMessages } from './preload';
@@ -7,6 +7,7 @@ import { SearchMessages } from './preload';
 export class SearchView extends View {
   constructor(
     baseSource: WindowSource,
+    registerHandler: HandlerRegistrar,
     private readonly openSettings: () => void
   ) {
     super(
@@ -19,6 +20,6 @@ export class SearchView extends View {
       path.join(__dirname, 'preload.js')
     );
 
-    ipcMain.handle(SearchMessages.openSettings, this.openSettings);
+    registerHandler(SearchMessages.openSettings, this.openSettings);
   }
 }

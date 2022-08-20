@@ -1,11 +1,11 @@
-import { ipcMain } from 'electron';
 import path from 'path';
+import { HandlerRegistrar } from '../../../base/bridge';
 import { Routes } from '../../../routes';
 import { View, WindowSource } from '../view';
 import { SettingsMessages } from './preload';
 
 export class SettingsView extends View {
-  constructor(baseSource: WindowSource) {
+  constructor(baseSource: WindowSource, registerHandler: HandlerRegistrar) {
     super(
       View.extendWindowSource(baseSource, Routes.settings()),
       {
@@ -14,7 +14,7 @@ export class SettingsView extends View {
       path.join(__dirname, 'preload.js')
     );
 
-    ipcMain.handle(SettingsMessages.connectSlack, () => {
+    registerHandler(SettingsMessages.connectSlack, () => {
       console.log('connecting slack....');
     });
   }
