@@ -30,7 +30,6 @@ export abstract class View {
   ) {
     const win = new BrowserWindow({
       ...this.options,
-      show: false,
       webPreferences: {
         preload: this.preloadPath,
       },

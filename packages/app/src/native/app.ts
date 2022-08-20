@@ -16,12 +16,7 @@ export class App {
     searchView.browserWindow.on('close', () => {
       this.searchView = undefined;
     });
-
-    if (searchView.browserWindow) {
-      searchView.browserWindow.show();
-    } else {
-      searchView.open();
-    }
+    searchView.open();
   };
 
   handleFocus = () => {
