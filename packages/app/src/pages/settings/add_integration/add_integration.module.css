@@ -1,5 +1,5 @@
-@value spacexxSmall, spacexSmall, spaceLarge from '../../base/theme/spacing.module.css';
-@value colorBorder from '../../base/theme/color.module.css';
+@value spacexxSmall, spacexSmall, spaceLarge from '../../../base/theme/spacing.module.css';
+@value colorBorder from '../../../base/theme/color.module.css';
 
 .integrationList {
     display: flex;

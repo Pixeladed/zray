@@ -1,5 +1,5 @@
-import { Integration } from '../../services/integration/integration';
-import { TappableArea } from '../../base/button/button';
+import { Integration } from '../../../services/integration/integration';
+import { TappableArea } from '../../../base/button/button';
 import styles from './add_integration.module.css';
 
 export const AddIntegrationPage = ({

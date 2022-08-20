@@ -7,12 +7,14 @@ import { SettingsMessages } from './preload';
 export class SettingsView extends View {
   constructor(baseSource: WindowSource) {
     super(
-      View.extendWindowSource(baseSource, Routes.addIntegration()),
-      {},
+      View.extendWindowSource(baseSource, Routes.settings()),
+      {
+        titleBarStyle: 'hidden',
+      },
       path.join(__dirname, 'preload.js')
     );
 
-    ipcMain.on(SettingsMessages.connectSlack, () => {
+    ipcMain.handle(SettingsMessages.connectSlack, () => {
       console.log('connecting slack....');
     });
   }
