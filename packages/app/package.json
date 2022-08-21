@@ -19,7 +19,7 @@
     "build:app": "swc src -d build --copy-files && spack",
     "start:app": "electron build/native/entry.js",
     "start:app:watch": "nodemon -e json,js,ts,json --watch ./src/native --exec \"yarn start:app\"",
-    "prestart:app": "npm-run-all --parallel build:app",
+    "prestart:app": "yarn build:app",
     "dev": "cross-env BROWSER=none npm-run-all --parallel start:web start:app:watch",
     "start": "npm-run-all build:web start:app",
     "build": "npm-run-all --parallel build:web build:app",
