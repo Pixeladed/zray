@@ -1,8 +1,8 @@
-import { config } from '../../base/config';
+import { Config } from '../../base/config';
 import { SlackService } from './slack_service';
 
-export const createSlackService = () => {
-  const slackService = new SlackService(config.slack);
+export const createSlackService = (config: Config['slack']) => {
+  const slackService = new SlackService(config);
 
   return { slackService };
 };
