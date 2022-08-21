@@ -1,10 +1,7 @@
 import { contextBridge, ipcRenderer } from 'electron';
+import SearchMessages from './messages.json';
 
 const SEARCH_BRIDGE_NAME = 'searchBridge';
-
-export const SearchMessages = {
-  openSettings: 'search:settings:open',
-};
 
 const bridge: SearchBridge = {
   openSettings: () => ipcRenderer.invoke(SearchMessages.openSettings),

@@ -2,7 +2,7 @@ import path from 'path';
 import { HandlerRegistrar } from '../../../base/bridge';
 import { Routes } from '../../../routes';
 import { View, WindowSource } from '../view';
-import { SearchMessages } from './preload';
+import SearchMessages from './messages.json';
 
 export class SearchView extends View {
   constructor(
