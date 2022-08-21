@@ -13,7 +13,7 @@ export class SlackNativeService {
     const view = new SlackOAuthView(oAuthUrl);
     view.open();
 
-    view.browserWindow?.webContents.on('will-navigate', (event, newUrl) => {
+    view.browserWindow?.webContents.on('will-redirect', (event, newUrl) => {
       if (!this.isSameOriginAndPath(redirectUrl, newUrl)) {
         return;
       }
