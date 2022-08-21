@@ -10,6 +10,7 @@ export class SlackService {
     this.installProvider = new InstallProvider({
       clientId: config.clientId,
       clientSecret: config.clientId,
+      stateSecret: config.stateSecret,
     });
   }
 
@@ -29,17 +30,19 @@ export class SlackService {
     return res.redirect(installUrl);
   };
 
-  exchangeToken: NextApiHandler = async (req, res) => {
+  exchangeCode: NextApiHandler = async (req, res) => {
     const code = req.body.code;
     const client = new WebClient();
-    const oauthResponse = await client.oauth.access({
+    const oauthResponse = await client.oauth.v2.access({
       client_id: this.config.clientId,
       client_secret: this.config.clientSecret,
       code,
     });
 
     if (oauthResponse.ok) {
-      return res.json({ accessToken: oauthResponse.access_token! });
+      return res.send({
+        accessToken: oauthResponse.authed_user?.access_token!,
+      });
     } else {
       throw new Error('Unable to authorize Slack');
     }

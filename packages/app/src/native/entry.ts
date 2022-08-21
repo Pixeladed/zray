@@ -1,4 +1,6 @@
 import { app, ipcMain } from 'electron';
+import { config } from '../base/config';
+import { Network } from '../base/network';
 import { Messages } from '../interface/bridge';
 import { App } from './app';
 import { createHandlerReigstrar } from './base/bridge_handler';
@@ -7,10 +9,11 @@ import { WindowSource } from './views/view';
 
 const baseSource: WindowSource = app.isPackaged
   ? { type: 'bundled', path: 'index.html' }
-  : { type: 'server', url: 'http://localhost:3000' };
+  : { type: 'server', url: 'http://localhost:8080' };
 
 const registerHandler = createHandlerReigstrar(ipcMain);
-const { slackNativeService } = createSlackNativeService();
+const network = new Network(config.apiOrigin);
+const { slackNativeService } = createSlackNativeService(network);
 const instance = new App(baseSource);
 
 registerHandler(Messages.navigation.openSettings, instance.openSettings);

@@ -1,30 +1,39 @@
 import { Routes } from '../../../routes';
 import { SlackOAuthView } from '../../views/slack_oauth/slack_oauth_view';
+import { Network } from '../../../base/network';
 
 export class SlackNativeService {
   constructor(
-    private readonly clientId: string,
-    private readonly redirectOrigin: string
+    private readonly redirectOrigin: string,
+    private readonly network: Network
   ) {}
 
   startOAuth = async () => {
     const redirectUrl = this.createRedirectUrl();
-    const oAuthUrl = this.createOAuthUrl(redirectUrl);
-    const view = new SlackOAuthView(oAuthUrl);
+    const oAuthUrl = this.network.url('slack/oauth');
+    oAuthUrl.searchParams.set('redirectUrl', redirectUrl);
+    const view = new SlackOAuthView(oAuthUrl.toString());
     view.open();
 
-    view.browserWindow?.webContents.on('will-redirect', (event, newUrl) => {
-      if (!this.isSameOriginAndPath(redirectUrl, newUrl)) {
-        return;
+    view.browserWindow?.webContents.on(
+      'will-redirect',
+      async (event, newUrl) => {
+        if (!this.isSameOriginAndPath(redirectUrl, newUrl)) {
+          return;
+        }
+
+        event.preventDefault();
+        view.browserWindow?.close();
+
+        const url = new URL(newUrl);
+        const code = url.searchParams.get('code');
+
+        const res = await this.network.post<{
+          accessToken: string;
+        }>('slack/exchangeCode', { code });
+        console.log('accessToken', res);
       }
-
-      const url = new URL(newUrl);
-      const code = url.searchParams.get('code');
-      const state = url.searchParams.get('state');
-
-      console.log(`Code: ${code}, state: ${state}`);
-      view.browserWindow?.close();
-    });
+    );
 
     view.browserWindow?.on('close', () => {});
   };
@@ -34,14 +43,6 @@ export class SlackNativeService {
     const b = new URL(urlB);
 
     return a.origin === b.origin && a.pathname === b.pathname;
-  };
-
-  private createOAuthUrl = (redirectUrl: string) => {
-    const url = new URL('https://slack.com/oauth/v2/authorize');
-    url.searchParams.set('client_id', this.clientId);
-    url.searchParams.set('user_scope', 'search:read');
-    url.searchParams.set('redirect_uri', redirectUrl);
-    return url.toString();
   };
 
   private createRedirectUrl = () => {
