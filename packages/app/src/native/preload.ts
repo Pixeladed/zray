@@ -3,7 +3,7 @@ import SearchMessages from './messages.json';
 
 const SEARCH_BRIDGE_NAME = 'searchBridge';
 
-const bridge: SearchBridge = {
+const bridge = {
   openSettings: () => ipcRenderer.invoke(SearchMessages.openSettings),
 };
 

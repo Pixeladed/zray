@@ -1,4 +1,5 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
+import path from 'path';
 import { Routes } from '../../routes';
 
 /**
@@ -25,13 +26,12 @@ export abstract class View {
 
   constructor(
     private readonly source: WindowSource,
-    private readonly options: BrowserWindowConstructorOptions = {},
-    private readonly preloadPath?: string
+    private readonly options: BrowserWindowConstructorOptions = {}
   ) {
     const win = new BrowserWindow({
       ...this.options,
       webPreferences: {
-        preload: this.preloadPath,
+        preload: path.join(__dirname, '../preload.js'),
       },
     });
     this.browserWindow = win;

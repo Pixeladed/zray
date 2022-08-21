@@ -1,5 +1,5 @@
 import { getBridge } from '../../../base/bridge';
-import { SearchBridge } from '../../../native/views/search/preload';
+import { SearchBridge } from '../../../native/preload';
 import { SearchPage } from './search';
 
 const SEARCH_BRIDGE_NAME = 'searchBridge';
