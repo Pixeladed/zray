@@ -1,4 +1,4 @@
-import { MintedPath } from '../../base/path';
+import { MintedPath } from '../../../base/path';
 
 /**
  * An integration is a type of connector that can be configured to create a new provider

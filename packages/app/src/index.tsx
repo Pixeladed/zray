@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './global.css';
 import { Routes as RouterRoutes, Route, HashRouter } from 'react-router-dom';
 import { Routes } from './routes';
-import { createSearchPage } from './pages/search/create';
-import { createSettingsPage } from './pages/settings/create';
-import { NavigationService } from './services/navigation/navigation_service';
+import { createSearchPage } from './web/pages/search/create';
+import { createSettingsPage } from './web/pages/settings/create';
+import { NavigationService } from './web/services/navigation/navigation_service';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

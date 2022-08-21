@@ -1,19 +1,21 @@
 {
-    "$schema": "https://json.schemastore.org/swcrc",
-    "exclude": [
-      "pages/.*",
-      "index.tsx",
-      "react-app-env.d.ts",
-      "reportWebVitals.ts",
-      "setupTests.ts"
-    ],
-    "module": {
-      "type": "commonjs"
-    },
-    "jsc": {
-        "target": "es2020",
-        "parser": {
-            "syntax": "typescript"
-        }
+  "$schema": "https://json.schemastore.org/swcrc",
+  "exclude": [
+    "web/*",
+    "index.tsx",
+    "react-app-env.d.ts",
+    "reportWebVitals.ts",
+    "setupTests.ts",
+    "favicon.ico",
+    "global.css"
+  ],
+  "module": {
+    "type": "commonjs"
+  },
+  "jsc": {
+    "target": "es2020",
+    "parser": {
+      "syntax": "typescript"
     }
   }
+}

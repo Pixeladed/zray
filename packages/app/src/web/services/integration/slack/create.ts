@@ -1,4 +1,3 @@
-import { OperationResult } from '../provider';
 import { SlackIntegration } from './slack_integration';
 
 export const createSlackIntegration = ({

@@ -1,6 +1,5 @@
 import { ManualPromise } from '../../../base/manual_promise';
 import { Routes } from '../../../routes';
-import { OperationResult } from '../../../services/integration/provider';
 import { SlackOAuthView } from '../../views/slack_oauth/slack_oauth_view';
 
 export class SlackNativeService {
@@ -14,7 +13,7 @@ export class SlackNativeService {
     const oAuthUrl = this.createOAuthUrl(redirectUrl);
 
     let connected = false;
-    const operation = new ManualPromise<OperationResult>();
+    const operation = new ManualPromise();
     const view = new SlackOAuthView(oAuthUrl);
     view.open();
 
