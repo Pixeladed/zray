@@ -1,6 +1,6 @@
 import { app, ipcMain } from 'electron';
-import { createHandlerReigstrar } from '../base/bridge';
 import { App } from './app';
+import { createHandlerReigstrar } from './base/bridge_handler';
 import { WindowSource } from './views/view';
 
 const baseSource: WindowSource = app.isPackaged

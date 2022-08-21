@@ -1,16 +1,16 @@
 import { contextBridge, ipcRenderer } from 'electron';
-import SearchMessages from './messages.json';
+import {
+  Bridge,
+  BRIDGE_NAMESPACE,
+  NavigationMessages,
+  SlackMessages,
+} from '../interface/bridge';
 
-const SEARCH_BRIDGE_NAME = 'searchBridge';
-
-const bridge = {
-  openSettings: () => ipcRenderer.invoke(SearchMessages.openSettings),
+const bridge: Bridge = {
+  openSettings: () => ipcRenderer.invoke(NavigationMessages.openSettings),
+  connectSlack: () => ipcRenderer.invoke(SlackMessages.connect),
 };
 
 if (contextBridge) {
-  contextBridge.exposeInMainWorld(SEARCH_BRIDGE_NAME, bridge);
+  contextBridge.exposeInMainWorld(BRIDGE_NAMESPACE, bridge);
 }
-
-export type SearchBridge = {
-  openSettings: () => void;
-};

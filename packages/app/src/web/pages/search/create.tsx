@@ -1,15 +1,8 @@
-import { getBridge } from '../../../base/bridge';
-import { SearchBridge } from '../../../native/preload';
+import { withBridge } from '../../base/bridge';
 import { SearchPage } from './search';
 
-const SEARCH_BRIDGE_NAME = 'searchBridge';
-const getSearchBridge = (context: Window) =>
-  getBridge<SearchBridge>(context, SEARCH_BRIDGE_NAME);
-
 export const createSearchPage = (context: Window) => {
-  const openSettings = () => {
-    getSearchBridge(context).openSettings();
-  };
+  const openSettings = withBridge(context, bridge => bridge.openSettings);
 
   const SearchPageImpl = () => {
     return <SearchPage onConnectTool={openSettings} />;

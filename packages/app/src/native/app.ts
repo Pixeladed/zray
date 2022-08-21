@@ -1,4 +1,5 @@
-import { HandlerRegistrar } from '../base/bridge';
+import { NavigationMessages } from '../interface/bridge';
+import { HandlerRegistrar } from './base/bridge_handler';
 import { SearchView } from './views/search/search_view';
 import { SettingsView } from './views/settings/settings_view';
 import { WindowSource } from './views/view';
@@ -10,12 +11,12 @@ export class App {
   constructor(
     private readonly source: WindowSource,
     private readonly registerHandler: HandlerRegistrar
-  ) {}
+  ) {
+    registerHandler(NavigationMessages.openSettings, this.openSettings);
+  }
 
   handleActivate = () => {
-    const searchView =
-      this.searchView ||
-      new SearchView(this.source, this.registerHandler, this.openSettings);
+    const searchView = this.searchView || new SearchView(this.source);
     this.searchView = searchView;
 
     searchView.browserWindow.on('close', () => {
@@ -36,7 +37,7 @@ export class App {
     if (this.settingsView) {
       this.settingsView.browserWindow.focus();
     } else {
-      this.settingsView = new SettingsView(this.source, this.registerHandler);
+      this.settingsView = new SettingsView(this.source);
       this.settingsView?.open();
       this.settingsView.browserWindow?.on('close', () => {
         this.settingsView = undefined;
