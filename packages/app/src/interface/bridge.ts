@@ -5,10 +5,11 @@ export type Bridge = {
   connectSlack: () => void;
 };
 
-export const NavigationMessages = {
-  openSettings: 'nav:settings:open',
-};
-
-export const SlackMessages = {
-  connect: 'slack:connect',
+export const Messages = {
+  navigation: {
+    openSettings: 'nav:settings:open',
+  },
+  slack: {
+    connect: 'slack:connect',
+  },
 };

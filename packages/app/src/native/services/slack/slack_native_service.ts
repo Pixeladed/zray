@@ -1,4 +1,3 @@
-import { ManualPromise } from '../../../base/manual_promise';
 import { Routes } from '../../../routes';
 import { SlackOAuthView } from '../../views/slack_oauth/slack_oauth_view';
 
@@ -11,15 +10,11 @@ export class SlackNativeService {
   startOAuth = async () => {
     const redirectUrl = this.createRedirectUrl();
     const oAuthUrl = this.createOAuthUrl(redirectUrl);
-
-    let connected = false;
-    const operation = new ManualPromise();
     const view = new SlackOAuthView(oAuthUrl);
     view.open();
 
     view.browserWindow?.webContents.on('will-navigate', (event, newUrl) => {
       if (!this.isSameOriginAndPath(redirectUrl, newUrl)) {
-        operation.resolve({ success: false, cancelled: false });
         return;
       }
 
@@ -28,23 +23,10 @@ export class SlackNativeService {
       const state = url.searchParams.get('state');
 
       console.log(`Code: ${code}, state: ${state}`);
-      connected = true;
-      operation.resolve({ success: true, data: {} });
       view.browserWindow?.close();
     });
 
-    view.browserWindow?.on('close', () => {
-      if (connected) {
-        return;
-      }
-
-      operation.resolve({
-        success: false,
-        cancelled: true,
-      });
-    });
-
-    return operation;
+    view.browserWindow?.on('close', () => {});
   };
 
   private isSameOriginAndPath = (urlA: string, urlB: string) => {

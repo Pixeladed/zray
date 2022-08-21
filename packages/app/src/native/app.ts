@@ -1,5 +1,3 @@
-import { NavigationMessages } from '../interface/bridge';
-import { HandlerRegistrar } from './base/bridge_handler';
 import { SearchView } from './views/search/search_view';
 import { SettingsView } from './views/settings/settings_view';
 import { WindowSource } from './views/view';
@@ -8,12 +6,7 @@ export class App {
   private searchView?: SearchView;
   private settingsView?: SettingsView;
 
-  constructor(
-    private readonly source: WindowSource,
-    private readonly registerHandler: HandlerRegistrar
-  ) {
-    registerHandler(NavigationMessages.openSettings, this.openSettings);
-  }
+  constructor(private readonly source: WindowSource) {}
 
   handleActivate = () => {
     const searchView = this.searchView || new SearchView(this.source);
