@@ -1,3 +1,5 @@
+import { OpenSettingsParam } from '../interface/bridge';
+import { Handler } from './base/bridge_handler';
 import { SearchView } from './views/search/search_view';
 import { SettingsView } from './views/settings/settings_view';
 import { WindowSource } from './views/view';
@@ -26,7 +28,7 @@ export class App {
     this.searchView?.browserWindow.setOpacity(0.5);
   };
 
-  openSettings = () => {
+  openSettings: Handler<OpenSettingsParam> = () => {
     if (this.settingsView) {
       this.settingsView.browserWindow.focus();
     } else {

@@ -1,11 +1,15 @@
 import { IpcMain, IpcMainInvokeEvent } from 'electron';
+import { BridgeMessage, MessageParam } from '../../interface/bridge';
 
-export type Handler = (event: IpcMainInvokeEvent, ...args: any[]) => void;
-export type HandlerRegistrar = (channel: string, handler: Handler) => void;
+export type Handler<T> = (event: IpcMainInvokeEvent, arg: T) => void;
+export type HandlerRegistrar = <T extends BridgeMessage>(
+  channel: T,
+  handler: Handler<MessageParam[T]>
+) => void;
 
 export const createHandlerReigstrar =
   (ipcMain: Pick<IpcMain, 'handle' | 'removeHandler'>): HandlerRegistrar =>
-  (channel: string, handler: Handler) => {
+  <T extends BridgeMessage>(channel: T, handler: Handler<MessageParam[T]>) => {
     ipcMain.removeHandler(channel);
     ipcMain.handle(channel, handler);
   };

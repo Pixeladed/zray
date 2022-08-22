@@ -5,8 +5,8 @@ export class SlackOAuthView extends View {
     super(
       { type: 'server', url },
       {
-        width: 300,
-        height: 400,
+        width: 500,
+        height: 700,
       }
     );
   }

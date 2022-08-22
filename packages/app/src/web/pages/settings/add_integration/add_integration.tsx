@@ -1,18 +1,24 @@
 import { TappableArea } from '@highbeam/components';
-import { Integration } from '../../../services/integration/integration';
+import { IntegrationName } from '../../../../interface/bridge';
+import { IntegrationInfo } from '../../../services/integrations';
 import styles from './add_integration.module.css';
 
 export const AddIntegrationPage = ({
   integrations,
+  onConnect,
 }: {
-  integrations: readonly Integration[];
+  integrations: readonly IntegrationInfo[];
+  onConnect: (name: IntegrationName) => void;
 }) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Connect a tool</h2>
       <div className={styles.integrationList}>
         {integrations.map(integration => (
-          <TappableArea onClick={integration.connect} key={integration.name}>
+          <TappableArea
+            onClick={() => onConnect(integration.name)}
+            key={integration.name}
+          >
             <div className={styles.integration}>
               <img
                 src={integration.icon}

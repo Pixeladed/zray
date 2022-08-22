@@ -1,15 +1,20 @@
 export const BRIDGE_NAMESPACE = 'contextBridge';
 
 export type Bridge = {
-  openSettings: () => void;
-  connectSlack: () => void;
+  invoke: <T extends keyof MessageParam>(
+    message: T,
+    params: MessageParam[T]
+  ) => void;
 };
 
-export const Messages = {
-  navigation: {
-    openSettings: 'nav:settings:open',
-  },
-  slack: {
-    connect: 'slack:connect',
-  },
+export type MessageParam = {
+  'settings:open': OpenSettingsParam;
+  'integration:connect': ConnectIntegrationParam;
 };
+
+export type OpenSettingsParam = {};
+
+export type IntegrationName = 'slack';
+export type ConnectIntegrationParam = { name: IntegrationName };
+
+export type BridgeMessage = keyof MessageParam;

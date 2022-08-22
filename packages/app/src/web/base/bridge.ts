@@ -14,7 +14,7 @@ export const withBridge = <T extends (...params: any[]) => any>(
   const result = (...params: unknown[]) => {
     const bridge = getBridge(context);
     const impl = factory(bridge);
-    return impl(params);
+    return impl(...params);
   };
   return result as T;
 };
