@@ -1,4 +1,4 @@
-import { Assert } from '../../base/assert';
+import { Assert } from '@highbeam/utils';
 import { Bridge, BRIDGE_NAMESPACE } from '../../interface/bridge';
 
 export const getBridge = (context: Window): Bridge => {

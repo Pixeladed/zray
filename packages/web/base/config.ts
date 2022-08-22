@@ -1,4 +1,4 @@
-import { Assert } from './assert';
+import { Assert } from '@highbeam/utils';
 
 export const config = {
   slack: {

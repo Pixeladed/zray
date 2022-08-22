@@ -1,4 +1,4 @@
-import { Assert } from './assert';
+import { Assert } from '@highbeam/utils';
 import { Distinct } from './ts_utils';
 
 export class Path {
