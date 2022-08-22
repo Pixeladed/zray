@@ -1,11 +1,13 @@
 import { Routes } from '../../../routes';
 import { SlackOAuthView } from '../../views/slack_oauth/slack_oauth_view';
 import { Slack } from '@highbeam/interface';
+import { SlackNativeStore } from './slack_native_service_store';
 
 export class SlackNativeService {
   constructor(
     private readonly redirectOrigin: string,
-    private readonly slackClient: Slack.SlackClient
+    private readonly slackClient: Slack.SlackClient,
+    private readonly store: SlackNativeStore
   ) {}
 
   startOAuth = async () => {
@@ -29,7 +31,7 @@ export class SlackNativeService {
         const code = url.searchParams.get('code');
 
         const res = await this.slackClient.call('exchangeCode', { code });
-        console.log('accessToken', res);
+        this.store.setProfile(res);
       }
     );
 

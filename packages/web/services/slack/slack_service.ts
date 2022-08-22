@@ -53,11 +53,11 @@ export class SlackService {
         oauthResponse.authed_user?.id,
         'expected user id to exist'
       );
-      const organisationName = Assert.exists(
+      const teamName = Assert.exists(
         oauthResponse.team?.name,
         'expected organisation name to exist'
       );
-      const organisationId = Assert.exists(
+      const teamId = Assert.exists(
         oauthResponse.team?.id,
         'expected organisation id to exist'
       );
@@ -65,8 +65,8 @@ export class SlackService {
       return res.send({
         accessToken,
         userId,
-        organisationName,
-        organisationId,
+        teamName,
+        teamId,
       });
     } else {
       throw new Error('Unable to authorize Slack');
