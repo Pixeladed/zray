@@ -1,13 +1,18 @@
 import Store from 'electron-store';
 
 export class SlackNativeStore {
-  private store = new Store<SlackNativeStoreLayout>({
-    migrations: {
-      '0.0.1': migrate => {
-        migrate.set('profilesById', {});
+  private store: Store<SlackNativeStoreLayout>;
+
+  constructor(name: string) {
+    this.store = new Store<SlackNativeStoreLayout>({
+      name,
+      migrations: {
+        '0.0.1': migrate => {
+          migrate.set('profilesById', {});
+        },
       },
-    },
-  });
+    });
+  }
 
   setProfile = (profile: SlackProfile) => {
     const id = this.getProfileId(profile);
