@@ -1,0 +1,15 @@
+{
+  "name": "@highbeam/interface",
+  "version": "0.1.0",
+  "private": true,
+  "main": "build/index.js",
+  "dependencies": {},
+  "scripts": {
+    "build": "swc src -d build && tsc",
+    "postinstall": "yarn build"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "typescript": "^4.7.4"
+  }
+}

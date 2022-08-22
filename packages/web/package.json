@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@highbeam/interface": "^0.1.0",
     "@slack/oauth": "^2.5.4",
     "@slack/web-api": "^6.7.2",
     "classnames": "^2.3.1",
