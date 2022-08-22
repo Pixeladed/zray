@@ -7,8 +7,7 @@ export const SettingsPage = ({
   AddIntegrationsPage: React.ComponentType;
 }) => {
   return (
-    <div className={styles.container}>
-      <div className={styles.titleBar}></div>
+    <div>
       <div>
         <AddIntegrationsPage />
       </div>

@@ -1,7 +1,0 @@
-.container {}
-
-.titleBar {
-    /* this could be passed from native using mainWindow.getSize()[1] - mainWindow.getContentSize()[1] */
-    height: 28px;
-    -webkit-app-region: drag;
-}

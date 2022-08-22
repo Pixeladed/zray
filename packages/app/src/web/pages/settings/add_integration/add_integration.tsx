@@ -8,7 +8,8 @@ export const AddIntegrationPage = ({
   integrations: readonly Integration[];
 }) => {
   return (
-    <div>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Connect a tool</h2>
       <div className={styles.integrationList}>
         {integrations.map(integration => (
           <TappableArea onClick={integration.connect} key={integration.name}>
