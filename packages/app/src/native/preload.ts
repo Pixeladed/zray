@@ -6,6 +6,8 @@ import {
   BRIDGE_NAMESPACE,
   MessageParam,
 } from '../interface/bridge';
+import { IntegrationInfo } from '../web/services/integrations';
+import { integrations } from './entry';
 
 const createInvoker =
   <T extends BridgeMessage>(message: T) =>
@@ -22,7 +24,14 @@ const invokers: InvokerMap = allowlist.reduce((map, msg) => {
   return map;
 }, {} as InvokerMap);
 
-const bridge: Bridge = { invoke: (message, param) => invokers[message](param) };
+const integrationsInfo: IntegrationInfo[] = integrations.map(
+  ({ icon, name, id }) => ({ icon, name, id })
+);
+
+const bridge: Bridge = {
+  invoke: (message, param) => invokers[message](param),
+  integrations: integrationsInfo,
+};
 
 if (contextBridge) {
   contextBridge.exposeInMainWorld(BRIDGE_NAMESPACE, bridge);

@@ -1,3 +1,4 @@
+import { MintedPath } from '../../../base/path';
 import { ConnectIntegrationParam } from '../../../interface/bridge';
 import { Handler } from '../../base/bridge_handler';
 
@@ -17,5 +18,7 @@ export class IntegrationNativeService {
 
 export interface NativeIntegration {
   id: string;
+  name: string;
+  icon: MintedPath;
   connect(): void;
 }

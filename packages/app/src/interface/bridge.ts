@@ -1,3 +1,5 @@
+import { IntegrationInfo } from '../web/services/integrations';
+
 export const BRIDGE_NAMESPACE = 'contextBridge';
 
 export type Bridge = {
@@ -5,6 +7,8 @@ export type Bridge = {
     message: T,
     params: MessageParam[T]
   ) => void;
+
+  integrations: readonly IntegrationInfo[];
 };
 
 export type MessageParam = {

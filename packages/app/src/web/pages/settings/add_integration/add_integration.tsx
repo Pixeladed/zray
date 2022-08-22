@@ -1,14 +1,17 @@
 import { TappableArea } from '@highbeam/components';
+import { useMemo } from 'react';
 import { IntegrationInfo } from '../../../services/integrations';
 import styles from './add_integration.module.css';
 
 export const AddIntegrationPage = ({
-  integrations,
+  getIntegrations,
   onConnect,
 }: {
-  integrations: readonly IntegrationInfo[];
+  getIntegrations: () => readonly IntegrationInfo[];
   onConnect: (name: string) => void;
 }) => {
+  const integrations = useMemo(getIntegrations, [getIntegrations]);
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Connect a tool</h2>

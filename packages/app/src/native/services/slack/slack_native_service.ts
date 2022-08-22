@@ -3,6 +3,7 @@ import { SlackOAuthView } from '../../views/slack_oauth/slack_oauth_view';
 import { Slack } from '@highbeam/interface';
 import { SlackNativeStore } from './slack_native_service_store';
 import { NativeIntegration } from '../integration/integration_native_service';
+import { Path } from '../../../base/path';
 
 export class SlackNativeService implements NativeIntegration {
   constructor(
@@ -12,6 +13,8 @@ export class SlackNativeService implements NativeIntegration {
   ) {}
 
   id = 'com.builtin.slack';
+  name = 'Slack';
+  icon = Path.resource('/integrations/slack/slack.svg');
 
   connect = async () => {
     const redirectUrl = this.createRedirectUrl();
