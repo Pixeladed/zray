@@ -2,15 +2,18 @@ import { Routes } from '../../../routes';
 import { SlackOAuthView } from '../../views/slack_oauth/slack_oauth_view';
 import { Slack } from '@highbeam/interface';
 import { SlackNativeStore } from './slack_native_service_store';
+import { NativeIntegration } from '../integration/integration_native_service';
 
-export class SlackNativeService {
+export class SlackNativeService implements NativeIntegration {
   constructor(
     private readonly redirectOrigin: string,
     private readonly slackClient: Slack.SlackClient,
     private readonly store: SlackNativeStore
   ) {}
 
-  startOAuth = async () => {
+  id = 'com.builtin.slack';
+
+  connect = async () => {
     const redirectUrl = this.createRedirectUrl();
     const oAuthUrl = this.slackClient.url('oauth');
     oAuthUrl.searchParams.set('redirectUrl', redirectUrl);

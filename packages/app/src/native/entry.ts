@@ -14,7 +14,8 @@ const baseSource: WindowSource = app.isPackaged
 const registerHandler = createHandlerReigstrar(ipcMain);
 const clientFactory = new ClientFactory(config.apiOrigin);
 const { slackNativeService } = createSlackNativeService(clientFactory);
-const integrationService = new IntegrationNativeService(slackNativeService);
+const integrations = [slackNativeService];
+const integrationService = new IntegrationNativeService(integrations);
 const instance = new App(baseSource);
 
 registerHandler('settings:open', instance.openSettings);

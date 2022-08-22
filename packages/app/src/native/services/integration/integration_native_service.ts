@@ -1,16 +1,21 @@
 import { ConnectIntegrationParam } from '../../../interface/bridge';
 import { Handler } from '../../base/bridge_handler';
-import { SlackNativeService } from '../slack/slack_native_service';
 
 export class IntegrationNativeService {
-  constructor(private readonly slackNativeService: SlackNativeService) {}
+  constructor(private readonly integrations: readonly NativeIntegration[]) {}
 
-  connect: Handler<ConnectIntegrationParam> = (event, { name }) => {
-    switch (name) {
-      case 'slack':
-        return this.slackNativeService.startOAuth();
-      default:
-        throw new Error(`Unsupported integration ${name}`);
+  connect: Handler<ConnectIntegrationParam> = (event, param) => {
+    const integration = this.integrations.find(({ id }) => id === param.id);
+
+    if (!integration) {
+      throw new Error(`Unsupported integration ${param.id}`);
     }
+
+    return integration.connect();
   };
+}
+
+export interface NativeIntegration {
+  id: string;
+  connect(): void;
 }

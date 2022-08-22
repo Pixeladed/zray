@@ -14,7 +14,6 @@ export type MessageParam = {
 
 export type OpenSettingsParam = {};
 
-export type IntegrationName = 'slack';
-export type ConnectIntegrationParam = { name: IntegrationName };
+export type ConnectIntegrationParam = { id: string };
 
 export type BridgeMessage = keyof MessageParam;
