@@ -1,7 +1,7 @@
 export const BRIDGE_NAMESPACE = 'contextBridge';
 
 export type Bridge = {
-  invoke: <T extends keyof MessageParam>(
+  invoke: <T extends typeof allowlist[number]>(
     message: T,
     params: MessageParam[T]
   ) => void;
@@ -11,6 +11,11 @@ export type MessageParam = {
   'settings:open': OpenSettingsParam;
   'integration:connect': ConnectIntegrationParam;
 };
+
+export const allowlist: BridgeMessage[] = [
+  'settings:open',
+  'integration:connect',
+];
 
 export type OpenSettingsParam = {};
 

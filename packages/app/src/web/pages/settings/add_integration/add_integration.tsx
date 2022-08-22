@@ -1,5 +1,4 @@
 import { TappableArea } from '@highbeam/components';
-import { IntegrationName } from '../../../../interface/bridge';
 import { IntegrationInfo } from '../../../services/integrations';
 import styles from './add_integration.module.css';
 
@@ -8,7 +7,7 @@ export const AddIntegrationPage = ({
   onConnect,
 }: {
   integrations: readonly IntegrationInfo[];
-  onConnect: (name: IntegrationName) => void;
+  onConnect: (name: string) => void;
 }) => {
   return (
     <div className={styles.container}>
