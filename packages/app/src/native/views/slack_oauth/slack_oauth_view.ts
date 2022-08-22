@@ -7,6 +7,10 @@ export class SlackOAuthView extends View {
       {
         width: 500,
         height: 700,
+        webPreferences: {
+          contextIsolation: true,
+          nodeIntegration: false,
+        },
       }
     );
   }

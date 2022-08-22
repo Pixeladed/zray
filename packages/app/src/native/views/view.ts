@@ -31,6 +31,7 @@ export abstract class View {
     const win = new BrowserWindow({
       ...this.options,
       webPreferences: {
+        ...this.options.webPreferences,
         preload: path.join(__dirname, '../preload.js'),
       },
     });
