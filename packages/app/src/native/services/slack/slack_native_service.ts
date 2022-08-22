@@ -1,17 +1,16 @@
 import { Routes } from '../../../routes';
 import { SlackOAuthView } from '../../views/slack_oauth/slack_oauth_view';
-import { Network } from '../../../base/network';
-import { Services } from '@highbeam/interface';
+import { SlackClient } from '@highbeam/interface';
 
 export class SlackNativeService {
   constructor(
     private readonly redirectOrigin: string,
-    private readonly network: Network
+    private readonly slackClient: SlackClient
   ) {}
 
   startOAuth = async () => {
     const redirectUrl = this.createRedirectUrl();
-    const oAuthUrl = this.network.url('slack/oauth');
+    const oAuthUrl = this.slackClient.url('oauth');
     oAuthUrl.searchParams.set('redirectUrl', redirectUrl);
     const view = new SlackOAuthView(oAuthUrl.toString());
     view.open();
@@ -29,12 +28,7 @@ export class SlackNativeService {
         const url = new URL(newUrl);
         const code = url.searchParams.get('code');
 
-        const body: Services.Slack.ExchangeCodeRequest = { code };
-        const res =
-          await this.network.post<Services.Slack.ExchangeCodeResponse>(
-            'slack/exchangeCode',
-            body
-          );
+        const res = await this.slackClient.call('exchangeCode', { code });
         console.log('accessToken', res);
       }
     );
