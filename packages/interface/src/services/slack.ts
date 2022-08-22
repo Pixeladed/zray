@@ -1,11 +1,6 @@
 import { IClient } from '../client';
 import { Endpoint } from './base';
 
-export interface ISlackService {
-  oauth: Endpoint<OAuthRequest, OAuthResponse>;
-  exchangeCode: Endpoint<ExchangeCodeRequest, ExchangeCodeResponse>;
-}
-
 export interface OAuthRequest {}
 export interface OAuthResponse {}
 
@@ -15,6 +10,11 @@ export interface ExchangeCodeResponse {
   userId: string;
   organisationName: string;
   organisationId: string;
+}
+
+export interface ISlackService {
+  oauth: Endpoint<OAuthRequest, OAuthResponse>;
+  exchangeCode: Endpoint<ExchangeCodeRequest, ExchangeCodeResponse>;
 }
 
 export type SlackClient = IClient<ISlackService>;

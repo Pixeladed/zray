@@ -1,5 +1,5 @@
 import { ISlackService } from './slack';
-export * from './slack';
+export * as Slack from './slack';
 
 export type Services = 'slack';
 export type IServices = ISlackService;

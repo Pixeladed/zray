@@ -1,11 +1,11 @@
 import { Routes } from '../../../routes';
 import { SlackOAuthView } from '../../views/slack_oauth/slack_oauth_view';
-import { SlackClient } from '@highbeam/interface';
+import { Slack } from '@highbeam/interface';
 
 export class SlackNativeService {
   constructor(
     private readonly redirectOrigin: string,
-    private readonly slackClient: SlackClient
+    private readonly slackClient: Slack.SlackClient
   ) {}
 
   startOAuth = async () => {

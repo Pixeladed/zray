@@ -1,9 +1,9 @@
 import { InstallProvider } from '@slack/oauth';
 import { WebClient } from '@slack/web-api';
 import { NextApiHandler } from 'next';
-import { Services } from '@highbeam/interface';
 import { Config } from '../../base/config';
 import { Assert } from '../../base/assert';
+import { Slack } from '@highbeam/interface';
 
 export class SlackService {
   private installProvider: InstallProvider;
@@ -32,7 +32,7 @@ export class SlackService {
     return res.redirect(installUrl);
   };
 
-  exchangeCode: NextApiHandler<Services.Slack.ExchangeCodeResponse> = async (
+  exchangeCode: NextApiHandler<Slack.ExchangeCodeResponse> = async (
     req,
     res
   ) => {
@@ -46,11 +46,21 @@ export class SlackService {
 
     if (oauthResponse.ok) {
       const accessToken = Assert.exists(
-        oauthResponse.authed_user?.access_token
+        oauthResponse.authed_user?.access_token,
+        'expected  access token to exist'
       );
-      const userId = Assert.exists(oauthResponse.authed_user?.id);
-      const organisationName = Assert.exists(oauthResponse.enterprise?.name);
-      const organisationId = Assert.exists(oauthResponse.enterprise?.id);
+      const userId = Assert.exists(
+        oauthResponse.authed_user?.id,
+        'expected user id to exist'
+      );
+      const organisationName = Assert.exists(
+        oauthResponse.team?.name,
+        'expected organisation name to exist'
+      );
+      const organisationId = Assert.exists(
+        oauthResponse.team?.id,
+        'expected organisation id to exist'
+      );
 
       return res.send({
         accessToken,

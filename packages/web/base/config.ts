@@ -1,8 +1,19 @@
+import { Assert } from './assert';
+
 export const config = {
   slack: {
-    clientId: process.env.SLACK_CLIENT_ID || '',
-    clientSecret: process.env.SLACK_CLIENT_SECRET || '',
-    stateSecret: process.env.SLACK_STATE_SECRET || '',
+    clientId: Assert.exists(
+      process.env.SLACK_CLIENT_ID,
+      'expected SLACK_CLIENT_ID to exist'
+    ),
+    clientSecret: Assert.exists(
+      process.env.SLACK_CLIENT_SECRET,
+      'expected SLACK_CLIENT_SECRET to exist'
+    ),
+    stateSecret: Assert.exists(
+      process.env.SLACK_STATE_SECRET,
+      'expected SLACK_STATE_SECRET to exist'
+    ),
   },
 };
 

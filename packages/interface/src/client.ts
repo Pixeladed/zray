@@ -30,7 +30,7 @@ export class Client<T extends IServices> {
       throw new Error('symbol method names are not supported');
     }
 
-    url.pathname = `/${this.serviceName}/${methodName as string}`;
+    url.pathname = `/api/${this.serviceName}/${methodName as string}`;
     return url;
   };
 }
