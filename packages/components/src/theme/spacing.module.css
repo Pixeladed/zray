@@ -11,14 +11,14 @@
 @value spacexxxLarge: calc(baseline * 12);
 
 :root {
-    --baseline: 8px;
-    --spacexxxSmall: calc(baseline * 0.5);
-    --spacexxSmall: calc(baseline * 1);
-    --spacexSmall: calc(baseline * 1.5);
-    --spaceSmall: calc(baseline * 2);
-    --spaceMedium: calc(baseline * 3);
-    --spaceLarge: calc(baseline * 4);
-    --spacexLarge: calc(baseline * 6);
-    --spacexxLarge: calc(baseline * 8);
-    --spacexxxLarge: calc(baseline * 12);
+    --baseline: baseline;
+    --spacexxxSmall: spacexxxSmall;
+    --spacexxSmall: spacexxSmall;
+    --spacexSmall: spacexSmall;
+    --spaceSmall: spaceSmall;
+    --spaceMedium: spaceMedium;
+    --spaceLarge: spaceLarge;
+    --spacexLarge: spacexLarge;
+    --spacexxLarge: spacexxLarge;
+    --spacexxxLarge: spacexxxLarge;
 }

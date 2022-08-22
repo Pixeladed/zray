@@ -4,8 +4,8 @@
 @value colorPrimary: #F9DC5C;
 
 :root {
-    --colorBackground: #fefefe;
-    --colorForeground: #222222;
-    --colorBorder: #dedede;
-    --colorPrimary: #F9DC5C;
+    --colorBackground: colorBackground;
+    --colorForeground: colorForeground;
+    --colorBorder: colorBorder;
+    --colorPrimary: colorPrimary;
 }
