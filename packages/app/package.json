@@ -19,7 +19,7 @@
     "eject:web": "react-scripts eject",
     "build:app": "swc src -d build --copy-files && spack",
     "start:app": "electron build/native/entry.js",
-    "start:app:watch": "nodemon -e json,js,ts --watch ./src/native --exec \"yarn start:app\"",
+    "start:app:watch": "nodemon -e json,js,ts --watch ./src/native --watch ../interface/build --exec \"yarn start:app\"",
     "prestart:app": "yarn build:app",
     "dev": "cross-env BROWSER=none npm-run-all --parallel start:web start:app:watch",
     "start": "npm-run-all build:web start:app",
