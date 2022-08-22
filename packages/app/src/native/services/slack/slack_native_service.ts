@@ -1,6 +1,7 @@
 import { Routes } from '../../../routes';
 import { SlackOAuthView } from '../../views/slack_oauth/slack_oauth_view';
 import { Network } from '../../../base/network';
+import { Services } from '@highbeam/interface';
 
 export class SlackNativeService {
   constructor(
@@ -28,9 +29,12 @@ export class SlackNativeService {
         const url = new URL(newUrl);
         const code = url.searchParams.get('code');
 
-        const res = await this.network.post<{
-          accessToken: string;
-        }>('slack/exchangeCode', { code });
+        const body: Services.Slack.ExchangeCodeRequest = { code };
+        const res =
+          await this.network.post<Services.Slack.ExchangeCodeResponse>(
+            'slack/exchangeCode',
+            body
+          );
         console.log('accessToken', res);
       }
     );

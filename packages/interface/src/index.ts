@@ -1,1 +1,1 @@
-export * as SlackService from './services/slack';
+export * as Services from './services';
