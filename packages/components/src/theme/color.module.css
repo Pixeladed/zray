@@ -1,0 +1,11 @@
+@value colorBackground: #fefefe;
+@value colorForeground: #222222;
+@value colorBorder: #dedede;
+@value colorPrimary: #F9DC5C;
+
+:root {
+    --colorBackground: #fefefe;
+    --colorForeground: #222222;
+    --colorBorder: #dedede;
+    --colorPrimary: #F9DC5C;
+}

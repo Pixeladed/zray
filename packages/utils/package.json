@@ -3,14 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "main": "build/index.js",
-  "dependencies": {
-    "cross-fetch": "^3.1.5"
-  },
+  "dependencies": {},
   "scripts": {
     "build": "npm-run-all --parallel build:source build:declaration",
     "build:source": "swc src -d build",
     "build:declaration": "tsc",
-    "postinstall": "yarn build",
     "dev": "nodemon -e ts --watch ./src --exec \"yarn build\""
   },
   "devDependencies": {

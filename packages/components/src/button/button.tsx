@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { PropsWithChildren } from 'react';
 import styles from './button.module.css';
 

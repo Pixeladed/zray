@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Button } from '../button/button';
+import { Button } from '@highbeam/components';
 import styles from './header.module.css';
 
 export const Header = () => {

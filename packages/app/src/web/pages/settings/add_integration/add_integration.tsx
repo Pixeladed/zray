@@ -1,4 +1,4 @@
-import { TappableArea } from '../../../base/button/button';
+import { TappableArea } from '@highbeam/components';
 import { Integration } from '../../../services/integration/integration';
 import styles from './add_integration.module.css';
 

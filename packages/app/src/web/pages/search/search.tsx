@@ -1,4 +1,4 @@
-import { Button } from '../../base/button/button';
+import { Button } from '@highbeam/components';
 import styles from './search.module.css';
 
 export function SearchPage({ onConnectTool }: { onConnectTool: () => void }) {

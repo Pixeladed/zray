@@ -1,24 +1,21 @@
-@value spacexxSmall, spacexSmall, spaceLarge from '../../../base/theme/spacing.module.css';
-@value colorBorder from '../../../base/theme/color.module.css';
-
 .integrationList {
     display: flex;
-    gap: spacexSmall;
+    gap: var(--spacexSmall);
 }
 
 .integration {
     display: flex;
     flex-direction: column;
-    gap: spacexSmall;
+    gap: var(--spacexSmall);
     align-items: center;
-    padding: spacexxSmall spacexSmall;
-    border-radius: spacexxSmall;
-    border: 1px solid colorBorder;
+    padding: var(--spacexxSmall) var(--spacexSmall);
+    border-radius: var(--spacexxSmall);
+    border: 1px solid var(--colorBorder);
 }
 
 .integrationIcon {
-    width: spaceLarge;
-    height: spaceLarge;
+    width: var(--spaceLarge);
+    height: var(--spaceLarge);
 }
 
 .integrationLabel {

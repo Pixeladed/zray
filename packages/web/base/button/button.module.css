@@ -1,9 +1,0 @@
-.button {
-  border: 0;
-  padding: calc(var(--base) * 1) calc(var(--base) * 1.5);
-  color: var(--color-background);
-  border-radius: calc(var(--base) / 2);
-  background-color: var(--color-primary);
-  font-weight: 500;
-  cursor: pointer;
-}

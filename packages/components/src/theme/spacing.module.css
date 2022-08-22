@@ -1,0 +1,24 @@
+@value baseline: 8px;
+
+@value spacexxxSmall: calc(baseline * 0.5);
+@value spacexxSmall: calc(baseline * 1);
+@value spacexSmall: calc(baseline * 1.5);
+@value spaceSmall: calc(baseline * 2);
+@value spaceMedium: calc(baseline * 3);
+@value spaceLarge: calc(baseline * 4);
+@value spacexLarge: calc(baseline * 6);
+@value spacexxLarge: calc(baseline * 8);
+@value spacexxxLarge: calc(baseline * 12);
+
+:root {
+    --baseline: 8px;
+    --spacexxxSmall: calc(baseline * 0.5);
+    --spacexxSmall: calc(baseline * 1);
+    --spacexSmall: calc(baseline * 1.5);
+    --spaceSmall: calc(baseline * 2);
+    --spaceMedium: calc(baseline * 3);
+    --spaceLarge: calc(baseline * 4);
+    --spacexLarge: calc(baseline * 6);
+    --spacexxLarge: calc(baseline * 8);
+    --spacexxxLarge: calc(baseline * 12);
+}

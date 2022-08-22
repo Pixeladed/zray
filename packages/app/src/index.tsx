@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './global.css';
+import '@highbeam/components/build/style.css';
 import { Routes as RouterRoutes, Route, HashRouter } from 'react-router-dom';
 import { Routes } from './routes';
 import { createSearchPage } from './web/pages/search/create';

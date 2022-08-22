@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@highbeam/components": "^0.1.0",
     "@highbeam/interface": "^0.1.0",
     "@highbeam/utils": "^0.1.0",
     "@prisma/client": "^4.2.1",

@@ -1,21 +1,22 @@
 {
-  "name": "@highbeam/interface",
+  "name": "@highbeam/components",
   "version": "0.1.0",
   "private": true,
   "main": "build/index.js",
-  "dependencies": {
-    "cross-fetch": "^3.1.5"
-  },
+  "dependencies": {},
   "scripts": {
     "build": "npm-run-all --parallel build:source build:declaration",
-    "build:source": "swc src -d build",
+    "build:source": "vite build",
     "build:declaration": "tsc",
-    "dev": "nodemon -e ts --watch ./src --exec \"yarn build\""
+    "dev": "nodemon -e ts,tsx,css --watch ./src --exec \"yarn build\""
   },
   "devDependencies": {
-    "@swc/cli": "^0.1.57",
     "nodemon": "^2.0.19",
     "npm-run-all": "^4.1.5",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "vite": "^3.0.9"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
   }
 }
