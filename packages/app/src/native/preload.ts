@@ -7,7 +7,7 @@ import {
   MessageParam,
 } from '../interface/bridge';
 import { IntegrationInfo } from '../web/services/integrations';
-import { integrations } from './entry';
+import { integrations } from './services';
 
 const createInvoker =
   <T extends BridgeMessage>(message: T) =>
