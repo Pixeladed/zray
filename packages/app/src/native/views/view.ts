@@ -1,5 +1,5 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
-import path from 'path';
+// import path from 'path';
 import { Routes } from '../../routes';
 
 /**
@@ -32,7 +32,7 @@ export abstract class View {
       ...this.options,
       webPreferences: {
         ...this.options.webPreferences,
-        preload: path.join(__dirname, '../preload.js'),
+        preload: __dirname + '/../preload.js',
       },
     });
     this.browserWindow = win;
