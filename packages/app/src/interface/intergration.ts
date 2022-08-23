@@ -6,8 +6,11 @@ export type IntegrationInfo = {
   icon: MintedPath;
 };
 
-export type IntegrationProfile = {
+export type IntegrationProfile = ProfileInfo & {
+  integrationId: string;
+};
+
+export type ProfileInfo = {
   id: string;
   name: string;
-  integrationId: IntegrationInfo['id'];
 };

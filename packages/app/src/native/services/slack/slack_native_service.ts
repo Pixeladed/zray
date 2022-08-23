@@ -4,6 +4,7 @@ import { Slack } from '@highbeam/interface';
 import { SlackNativeStore } from './slack_native_service_store';
 import { NativeIntegration } from '../integration/integration_native_service';
 import { SlackNativeIntegration } from './slack_native_integration';
+import { ProfileInfo } from '../../../interface/intergration';
 
 export class SlackNativeService
   extends SlackNativeIntegration
@@ -43,6 +44,14 @@ export class SlackNativeService
     );
 
     view.browserWindow?.on('close', () => {});
+  };
+
+  listProfiles = (): ProfileInfo[] => {
+    const profiles = this.store.findProfiles();
+    return profiles.map(profile => ({
+      id: this.store.getProfileId(profile),
+      name: profile.teamName,
+    }));
   };
 
   private isSameOriginAndPath = (urlA: string, urlB: string) => {

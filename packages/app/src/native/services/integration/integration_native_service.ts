@@ -1,5 +1,9 @@
 import { ConnectIntegrationParam } from '../../../interface/bridge';
-import { IntegrationInfo } from '../../../interface/intergration';
+import {
+  IntegrationInfo,
+  IntegrationProfile,
+  ProfileInfo,
+} from '../../../interface/intergration';
 import { Handler } from '../../base/bridge_handler';
 
 export class IntegrationNativeService {
@@ -19,8 +23,21 @@ export class IntegrationNativeService {
   };
 
   list = () => this.integrationInfos;
+
+  listProfiles = () => {
+    const profiles: IntegrationProfile[] = [];
+    this.integrations.forEach(integration => {
+      const integrationProfiles = integration.listProfiles();
+      integrationProfiles.forEach(profile => {
+        profiles.push({ ...profile, integrationId: integration.id });
+      });
+    });
+    return profiles;
+  };
 }
 
-export interface NativeIntegration extends IntegrationInfo {
+export interface NativeIntegration {
+  id: string;
   connect(): void;
+  listProfiles: () => readonly ProfileInfo[];
 }
