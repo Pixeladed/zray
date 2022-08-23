@@ -2,12 +2,12 @@ import { Routes } from '../../../routes';
 import { SlackOAuthView } from '../../views/slack_oauth/slack_oauth_view';
 import { Slack } from '@highbeam/interface';
 import { SlackNativeStore } from './slack_native_service_store';
-import { NativeIntegrationProvider } from '../integration/integration_native_service';
+import { NativeIntegration } from '../integration/integration_native_service';
 import { SlackNativeIntegration } from './slack_native_integration';
 
 export class SlackNativeService
   extends SlackNativeIntegration
-  implements NativeIntegrationProvider
+  implements NativeIntegration
 {
   constructor(
     private readonly redirectOrigin: string,

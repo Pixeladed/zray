@@ -1,4 +1,5 @@
 import Store from 'electron-store';
+import { IntegrationProfile } from '../../../interface/intergration';
 
 export class SlackNativeStore {
   private store: Store<SlackNativeStoreLayout>;
@@ -14,10 +15,10 @@ export class SlackNativeStore {
     });
   }
 
-  setProfile = (profile: SlackProfile) => {
+  setProfile = (profile: Omit<SlackProfile, 'id' | 'name'>) => {
     const id = this.getProfileId(profile);
     const profilesById = this.store.get('profilesById');
-    profilesById[id] = profile;
+    profilesById[id] = { ...profile, id, name: profile.teamName };
     this.store.set('profilesById', profilesById);
   };
 
@@ -47,7 +48,7 @@ type SlackNativeStoreLayout = {
   profilesById: { [key: string]: SlackProfile };
 };
 
-export type SlackProfile = {
+export type SlackProfile = IntegrationProfile & {
   userId: string;
   accessToken: string;
   teamName: string;

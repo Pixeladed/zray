@@ -1,5 +1,5 @@
 import { OpenSettingsParam } from '../interface/bridge';
-import { IntegrationInfo } from '../web/services/integrations';
+import { IntegrationInfo } from '../interface/intergration';
 import { Handler } from './base/bridge_handler';
 import { SearchView } from './views/search/search_view';
 import { SettingsView } from './views/settings/settings_view';

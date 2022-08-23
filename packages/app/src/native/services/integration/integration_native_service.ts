@@ -1,11 +1,9 @@
-import { MintedPath } from '../../../base/path';
 import { ConnectIntegrationParam } from '../../../interface/bridge';
+import { IntegrationInfo } from '../../../interface/intergration';
 import { Handler } from '../../base/bridge_handler';
 
 export class IntegrationNativeService {
-  constructor(
-    private readonly integrations: readonly NativeIntegrationProvider[]
-  ) {}
+  constructor(private readonly integrations: readonly NativeIntegration[]) {}
 
   connect: Handler<ConnectIntegrationParam> = (event, param) => {
     const integration = this.integrations.find(({ id }) => id === param.id);
@@ -18,12 +16,6 @@ export class IntegrationNativeService {
   };
 }
 
-export interface NativeIntegration {
-  id: string;
-  name: string;
-  icon: MintedPath;
-}
-
-export interface NativeIntegrationProvider extends NativeIntegration {
+export interface NativeIntegration extends IntegrationInfo {
   connect(): void;
 }

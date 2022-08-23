@@ -1,5 +1,5 @@
 import { IpcRendererEvent } from 'electron';
-import { IntegrationInfo } from '../web/services/integrations';
+import { IntegrationInfo } from './intergration';
 
 export const BRIDGE_NAMESPACE = 'contextBridge';
 
