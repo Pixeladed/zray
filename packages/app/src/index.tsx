@@ -19,7 +19,6 @@ const integrationStore = new IntegrationStore();
 const bridge = getBridge(context);
 
 bridge.on('integration:setAvailable', (event, data) => {
-  console.log('received event', event, data);
   integrationStore.setIntegrations(data.integrations);
 });
 
