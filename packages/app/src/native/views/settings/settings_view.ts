@@ -1,5 +1,5 @@
+import { IntegrationInfo } from '../../../interface/intergration';
 import { Routes } from '../../../routes';
-import { IntegrationInfo } from '../../../web/services/integrations';
 import { sendThroughBridge } from '../../base/bridge_handler';
 import { View, WindowSource } from '../view';
 
