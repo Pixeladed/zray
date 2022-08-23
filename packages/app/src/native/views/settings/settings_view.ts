@@ -7,9 +7,7 @@ export class SettingsView extends View {
       width: 600,
       height: 400,
       titleBarStyle: 'hidden',
-      titleBarOverlay: {
-        height: 48,
-      },
+      titleBarOverlay: true,
     });
   }
 }

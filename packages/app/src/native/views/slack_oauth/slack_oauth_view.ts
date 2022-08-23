@@ -7,6 +7,7 @@ export class SlackOAuthView extends View {
       {
         width: 500,
         height: 700,
+        title: 'Connecting to Slack',
         webPreferences: {
           contextIsolation: true,
           nodeIntegration: false,

@@ -8,7 +8,7 @@ export const AddIntegrationPage = ({
   onConnect,
 }: {
   getIntegrations: () => readonly IntegrationInfo[];
-  onConnect: (name: string) => void;
+  onConnect: (id: string) => void;
 }) => {
   const integrations = useMemo(getIntegrations, [getIntegrations]);
 
@@ -18,7 +18,7 @@ export const AddIntegrationPage = ({
       <div className={styles.integrationList}>
         {integrations.map(integration => (
           <TappableArea
-            onClick={() => onConnect(integration.name)}
+            onClick={() => onConnect(integration.id)}
             key={integration.name}
           >
             <div className={styles.integration}>

@@ -1,0 +1,9 @@
+.titleBar {
+    height: env(titlebar-area-height, 40px);
+    top: env(titlebar-area-y, 0);
+    -webkit-app-region: drag;
+    border-bottom: 1px solid var(--colorBorder);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
