@@ -1,3 +1,4 @@
+import { autorun } from 'mobx';
 import { Routes } from '../../../routes';
 import { IntegrationNativeService } from '../../services/integration/integration_native_service';
 import { View, WindowSource } from '../view';
@@ -15,10 +16,12 @@ export class SearchView extends View {
 
     const target = this.browserWindow.webContents;
     target.once('dom-ready', () => {
-      const profiles = this.integrationNativeService.listProfiles();
+      autorun(() => {
+        const profiles = this.integrationNativeService.profiles.get();
+        this.send('integration:setProfiles', { profiles });
+      });
       const integrations = this.integrationNativeService.list();
       this.send('integration:setAvailable', { integrations });
-      this.send('integration:setProfiles', { profiles });
     });
   }
 }

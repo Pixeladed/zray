@@ -1,7 +1,14 @@
 import Store from 'electron-store';
+import { computed, makeAutoObservable } from 'mobx';
+import { ProfileInfo } from '../../../interface/intergration';
 
 export class SlackNativeStore {
   private store: Store<SlackNativeStoreLayout>;
+  private profilesById = new Map<string, ProfileInfo>();
+
+  profiles = computed<ProfileInfo[]>(() =>
+    Array.from(this.profilesById.values())
+  );
 
   constructor(name: string) {
     this.store = new Store<SlackNativeStoreLayout>({
@@ -12,6 +19,14 @@ export class SlackNativeStore {
         },
       },
     });
+    makeAutoObservable(this);
+    const profilesById = this.store.get('profilesById');
+    this.profilesById = new Map(
+      Object.entries(profilesById).map(([key, val]) => [
+        key,
+        this.asProfileInfo(val),
+      ])
+    );
   }
 
   setProfile = (profile: SlackProfile) => {
@@ -19,6 +34,7 @@ export class SlackNativeStore {
     const profilesById = this.store.get('profilesById');
     profilesById[id] = profile;
     this.store.set('profilesById', profilesById);
+    this.profilesById.set(id, this.asProfileInfo(profile));
   };
 
   removeProfile = (profile: Pick<SlackProfile, 'teamId' | 'userId'>) => {
@@ -26,6 +42,7 @@ export class SlackNativeStore {
     const profilesById = this.store.get('profilesById');
     delete profilesById[id];
     this.store.set('profilesById', profilesById);
+    this.profilesById.delete(id);
   };
 
   getProfile = (id: string): SlackProfile | undefined => {
@@ -38,8 +55,15 @@ export class SlackNativeStore {
     return Object.values(profilesById);
   };
 
-  getProfileId = (profile: Pick<SlackProfile, 'teamId' | 'userId'>) => {
+  private getProfileId = (profile: Pick<SlackProfile, 'teamId' | 'userId'>) => {
     return `${profile.userId}@${profile.teamId}`;
+  };
+
+  private asProfileInfo = (profile: SlackProfile): ProfileInfo => {
+    return {
+      id: this.getProfileId(profile),
+      name: profile.teamId,
+    };
   };
 }
 
