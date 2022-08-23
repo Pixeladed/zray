@@ -1,8 +1,10 @@
+import { ClientFactory } from '@highbeam/interface';
 import { app, ipcMain } from 'electron';
+import { config } from '../base/config';
 import { App } from './app';
 import { createHandlerReigstrar } from './base/bridge_handler';
-import { integrations } from './services';
 import { IntegrationNativeService } from './services/integration/integration_native_service';
+import { createSlackNativeService } from './services/slack/create';
 import { WindowSource } from './views/view';
 
 const baseSource: WindowSource = app.isPackaged
@@ -10,6 +12,9 @@ const baseSource: WindowSource = app.isPackaged
   : { type: 'server', url: 'http://localhost:8080' };
 
 const registerHandler = createHandlerReigstrar(ipcMain);
+export const clientFactory = new ClientFactory(config.apiOrigin);
+const { slackNativeService } = createSlackNativeService(clientFactory);
+const integrations = [slackNativeService];
 const integrationService = new IntegrationNativeService(integrations);
 const instance = new App(baseSource);
 

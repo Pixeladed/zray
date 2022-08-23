@@ -1,9 +1,7 @@
-import { Assert } from '@highbeam/utils';
 import { Distinct } from './ts_utils';
 
 export class Path {
   static resource: PathGenerator = path => {
-    Assert.that(path.startsWith('/'));
     return `${path}` as MintedPath;
   };
 }

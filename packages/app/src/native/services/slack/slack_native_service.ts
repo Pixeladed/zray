@@ -2,19 +2,20 @@ import { Routes } from '../../../routes';
 import { SlackOAuthView } from '../../views/slack_oauth/slack_oauth_view';
 import { Slack } from '@highbeam/interface';
 import { SlackNativeStore } from './slack_native_service_store';
-import { NativeIntegration } from '../integration/integration_native_service';
-import { Path } from '../../../base/path';
+import { NativeIntegrationProvider } from '../integration/integration_native_service';
+import { SlackNativeIntegration } from './slack_native_integration';
 
-export class SlackNativeService implements NativeIntegration {
+export class SlackNativeService
+  extends SlackNativeIntegration
+  implements NativeIntegrationProvider
+{
   constructor(
     private readonly redirectOrigin: string,
     private readonly slackClient: Slack.SlackClient,
     private readonly store: SlackNativeStore
-  ) {}
-
-  id = 'com.builtin.slack';
-  name = 'Slack';
-  icon = Path.resource('/integrations/slack/slack.svg');
+  ) {
+    super();
+  }
 
   connect = async () => {
     const redirectUrl = this.createRedirectUrl();
