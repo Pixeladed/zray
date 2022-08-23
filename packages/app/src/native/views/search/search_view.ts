@@ -1,5 +1,5 @@
 import { Routes } from '../../../routes';
-import { sendThroughBridge } from '../../base/bridge_handler';
+import { sendToRenderer } from '../../base/bridge_handler';
 import { IntegrationNativeService } from '../../services/integration/integration_native_service';
 import { View, WindowSource } from '../view';
 
@@ -18,8 +18,8 @@ export class SearchView extends View {
     target.once('dom-ready', () => {
       const profiles = this.integrationNativeService.listProfiles();
       const integrations = this.integrationNativeService.list();
-      sendThroughBridge(target, 'integration:setAvailable', { integrations });
-      sendThroughBridge(target, 'integration:setProfiles', { profiles });
+      sendToRenderer(target, 'integration:setAvailable', { integrations });
+      sendToRenderer(target, 'integration:setProfiles', { profiles });
     });
   }
 }

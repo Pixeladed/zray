@@ -14,7 +14,7 @@ export const createHandlerReigstrar =
     ipcMain.handle(channel, handler);
   };
 
-export const sendThroughBridge = <T extends typeof events[number]>(
+export const sendToRenderer = <T extends typeof events[number]>(
   target: WebContents,
   message: T,
   param: MessageParam[T]

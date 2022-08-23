@@ -1,6 +1,6 @@
 import { IntegrationInfo } from '../../../interface/intergration';
 import { Routes } from '../../../routes';
-import { sendThroughBridge } from '../../base/bridge_handler';
+import { sendToRenderer } from '../../base/bridge_handler';
 import { View, WindowSource } from '../view';
 
 export class SettingsView extends View {
@@ -17,7 +17,7 @@ export class SettingsView extends View {
 
     const target = this.browserWindow.webContents;
     target.once('dom-ready', () => {
-      sendThroughBridge(target, 'integration:setAvailable', { integrations });
+      sendToRenderer(target, 'integration:setAvailable', { integrations });
     });
   }
 }

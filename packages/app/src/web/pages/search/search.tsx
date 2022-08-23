@@ -21,8 +21,6 @@ export function SearchPage({
         <p className={styles.emptyLead}>
           Looks like you don&apos;t have any tools connected
         </p>
-        {JSON.stringify(integrations, null, 2)}
-        {JSON.stringify(profiles, null, 2)}
         <Button onClick={onConnectTool}>Connect a tool</Button>
       </div>
     </div>
