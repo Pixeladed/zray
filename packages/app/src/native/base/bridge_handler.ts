@@ -1,4 +1,4 @@
-import { IpcMain, IpcMainInvokeEvent, WebContents } from 'electron';
+import { BrowserWindow, IpcMain, IpcMainInvokeEvent } from 'electron';
 import { BridgeMessage, events, MessageParam } from '../../interface/bridge';
 
 export type Handler<T> = (event: IpcMainInvokeEvent, arg: T) => void;
@@ -15,9 +15,9 @@ export const createHandlerReigstrar =
   };
 
 export const sendToRenderer = <T extends typeof events[number]>(
-  target: WebContents,
+  browserWindow: BrowserWindow,
   message: T,
   param: MessageParam[T]
 ) => {
-  target.send(message, param);
+  browserWindow.webContents.send(message, param);
 };

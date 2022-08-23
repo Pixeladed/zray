@@ -1,5 +1,4 @@
 import { Routes } from '../../../routes';
-import { sendToRenderer } from '../../base/bridge_handler';
 import { IntegrationNativeService } from '../../services/integration/integration_native_service';
 import { View, WindowSource } from '../view';
 
@@ -18,8 +17,8 @@ export class SearchView extends View {
     target.once('dom-ready', () => {
       const profiles = this.integrationNativeService.listProfiles();
       const integrations = this.integrationNativeService.list();
-      sendToRenderer(target, 'integration:setAvailable', { integrations });
-      sendToRenderer(target, 'integration:setProfiles', { profiles });
+      this.send('integration:setAvailable', { integrations });
+      this.send('integration:setProfiles', { profiles });
     });
   }
 }

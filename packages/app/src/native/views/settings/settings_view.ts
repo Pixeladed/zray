@@ -1,6 +1,5 @@
 import { IntegrationInfo } from '../../../interface/intergration';
 import { Routes } from '../../../routes';
-import { sendToRenderer } from '../../base/bridge_handler';
 import { View, WindowSource } from '../view';
 
 export class SettingsView extends View {
@@ -17,7 +16,7 @@ export class SettingsView extends View {
 
     const target = this.browserWindow.webContents;
     target.once('dom-ready', () => {
-      sendToRenderer(target, 'integration:setAvailable', { integrations });
+      this.send('integration:setAvailable', { integrations });
     });
   }
 }
