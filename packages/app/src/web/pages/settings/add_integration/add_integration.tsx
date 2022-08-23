@@ -13,8 +13,10 @@ export const AddIntegrationPage = ({
   const integrations = useMemo(getIntegrations, [getIntegrations]);
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>Connect a tool</h2>
+    <div>
+      <div className={styles.titleContainer}>
+        <h2 className={styles.title}>Connect a tool</h2>
+      </div>
       <div className={styles.integrationList}>
         {integrations.map(integration => (
           <TappableArea

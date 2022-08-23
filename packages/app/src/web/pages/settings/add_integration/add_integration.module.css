@@ -1,14 +1,17 @@
-.container {
+.titleContainer {
+    border-bottom: 1px solid var(--colorBorder);
     padding: var(--spaceSmall);
+    background: var(--colorBackground);
 }
 
 .title {
-    margin: 0 0 var(--spaceSmall) 0;
+    margin: 0 0  0;
 }
 
 .integrationList {
     display: flex;
     gap: var(--spacexSmall);
+    padding: var(--spaceSmall);
 }
 
 .integration {
