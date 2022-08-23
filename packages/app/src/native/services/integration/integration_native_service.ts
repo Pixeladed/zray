@@ -21,9 +21,7 @@ export class IntegrationNativeService {
     return integration.connect();
   };
 
-  list = (): IntegrationInfo[] => {
-    return this.integrationInfos.map(info => ({ ...info }));
-  };
+  list = () => this.integrationInfos;
 
   profiles = computed(() =>
     this.integrations.flatMap(integration => {
