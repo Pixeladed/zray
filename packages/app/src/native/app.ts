@@ -1,6 +1,6 @@
 import { OpenSettingsParam } from '../interface/bridge';
-import { IntegrationInfo } from '../interface/intergration';
 import { Handler } from './base/bridge_handler';
+import { IntegrationNativeService } from './services/integration/integration_native_service';
 import { SearchView } from './views/search/search_view';
 import { SettingsView } from './views/settings/settings_view';
 import { WindowSource } from './views/view';
@@ -11,7 +11,7 @@ export class App {
 
   constructor(
     private readonly source: WindowSource,
-    private readonly integrations: readonly IntegrationInfo[]
+    private readonly integrationNativeService: IntegrationNativeService
   ) {}
 
   handleActivate = () => {
@@ -36,7 +36,10 @@ export class App {
     if (this.settingsView) {
       this.settingsView.browserWindow.focus();
     } else {
-      this.settingsView = new SettingsView(this.source, this.integrations);
+      this.settingsView = new SettingsView(
+        this.source,
+        this.integrationNativeService.list()
+      );
       this.settingsView?.open();
       this.settingsView.browserWindow?.on('close', () => {
         this.settingsView = undefined;
