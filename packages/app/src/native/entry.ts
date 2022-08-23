@@ -3,6 +3,7 @@ import { app, ipcMain } from 'electron';
 import { config } from '../base/config';
 import { App } from './app';
 import { createHandlerReigstrar } from './base/bridge_handler';
+import { integrationInfos } from './integrations';
 import { IntegrationNativeService } from './services/integration/integration_native_service';
 import { createSlackNativeService } from './services/slack/create';
 import { WindowSource } from './views/view';
@@ -16,7 +17,7 @@ export const clientFactory = new ClientFactory(config.apiOrigin);
 const { slackNativeService } = createSlackNativeService(clientFactory);
 const integrations = [slackNativeService];
 const integrationService = new IntegrationNativeService(integrations);
-const instance = new App(baseSource);
+const instance = new App(baseSource, integrationInfos);
 
 registerHandler('settings:open', instance.openSettings);
 registerHandler('integration:connect', integrationService.connect);

@@ -1,5 +1,5 @@
-import { IpcMain, IpcMainInvokeEvent } from 'electron';
-import { BridgeMessage, MessageParam } from '../../interface/bridge';
+import { IpcMain, IpcMainInvokeEvent, WebContents } from 'electron';
+import { BridgeMessage, events, MessageParam } from '../../interface/bridge';
 
 export type Handler<T> = (event: IpcMainInvokeEvent, arg: T) => void;
 export type HandlerRegistrar = <T extends BridgeMessage>(
@@ -13,3 +13,11 @@ export const createHandlerReigstrar =
     ipcMain.removeHandler(channel);
     ipcMain.handle(channel, handler);
   };
+
+export const sendThroughBridge = <T extends typeof events[number]>(
+  target: WebContents,
+  message: T,
+  param: MessageParam[T]
+) => {
+  target.send(message, param);
+};

@@ -1,3 +1,4 @@
+import { IpcRendererEvent } from 'electron';
 import { IntegrationInfo } from '../web/services/integrations';
 
 export const BRIDGE_NAMESPACE = 'contextBridge';
@@ -8,12 +9,16 @@ export type Bridge = {
     params: MessageParam[T]
   ) => void;
 
-  integrations: readonly IntegrationInfo[];
+  on: <T extends typeof events[number]>(
+    message: T,
+    cb: (event: IpcRendererEvent, param: MessageParam[T]) => void
+  ) => void;
 };
 
 export type MessageParam = {
   'settings:open': OpenSettingsParam;
   'integration:connect': ConnectIntegrationParam;
+  'integration:setAvailable': SetAvailableIntegrationsParam;
 };
 
 export const allowlist: BridgeMessage[] = [
@@ -21,8 +26,14 @@ export const allowlist: BridgeMessage[] = [
   'integration:connect',
 ];
 
+export const events: BridgeMessage[] = ['integration:setAvailable'];
+
 export type OpenSettingsParam = {};
 
 export type ConnectIntegrationParam = { id: string };
+
+export type SetAvailableIntegrationsParam = {
+  integrations: readonly IntegrationInfo[];
+};
 
 export type BridgeMessage = keyof MessageParam;

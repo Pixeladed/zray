@@ -6,8 +6,6 @@ import {
   BRIDGE_NAMESPACE,
   MessageParam,
 } from '../interface/bridge';
-import { IntegrationInfo } from '../web/services/integrations';
-import { integrations } from './integrations';
 
 const createInvoker =
   <T extends BridgeMessage>(message: T) =>
@@ -24,13 +22,12 @@ const invokers: InvokerMap = allowlist.reduce((map, msg) => {
   return map;
 }, {} as InvokerMap);
 
-const integrationsInfo: IntegrationInfo[] = integrations.map(
-  ({ icon, name, id }) => ({ icon, name, id })
-);
-
 const bridge: Bridge = {
   invoke: (message, param) => invokers[message](param),
-  integrations: integrationsInfo,
+  on: (message, callback) => {
+    console.log('adding callback for', message, callback);
+    ipcRenderer.on(message, callback);
+  },
 };
 
 if (contextBridge) {
