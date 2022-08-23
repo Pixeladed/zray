@@ -14,11 +14,16 @@ export const createSearchPage = ({
     context,
     bridge => () => bridge.invoke('settings:open', {})
   );
+  const init = withBridge(
+    context,
+    bridge => () => bridge.invoke('page:init', {})
+  );
 
   const SearchPageImpl = observer(() => {
     return (
       <SearchPage
         onConnectTool={openSettings}
+        init={init}
         integrations={integrationStore.integrations}
         profiles={integrationStore.profiles}
       />

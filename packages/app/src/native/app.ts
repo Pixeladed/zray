@@ -1,5 +1,5 @@
 import { OpenSettingsParam } from '../interface/bridge';
-import { Handler } from './base/bridge_handler';
+import { Handler, HandlerRegistrar } from './base/bridge_handler';
 import { IntegrationNativeService } from './services/integration/integration_native_service';
 import { SearchView } from './views/search/search_view';
 import { SettingsView } from './views/settings/settings_view';
@@ -11,13 +11,18 @@ export class App {
 
   constructor(
     private readonly source: WindowSource,
+    private readonly registerHandler: HandlerRegistrar,
     private readonly integrationNativeService: IntegrationNativeService
   ) {}
 
   handleActivate = () => {
     const searchView =
       this.searchView ||
-      new SearchView(this.source, this.integrationNativeService);
+      new SearchView(
+        this.source,
+        this.registerHandler,
+        this.integrationNativeService
+      );
     this.searchView = searchView;
 
     searchView.browserWindow.on('close', () => {
@@ -40,6 +45,7 @@ export class App {
     } else {
       this.settingsView = new SettingsView(
         this.source,
+        this.registerHandler,
         this.integrationNativeService.list()
       );
       this.settingsView?.open();

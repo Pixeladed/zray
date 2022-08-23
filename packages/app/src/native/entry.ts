@@ -17,7 +17,7 @@ const { slackNativeService } = createSlackNativeService(clientFactory);
 const { integrationNativeService } = createIntegrationNativeService([
   slackNativeService,
 ]);
-const instance = new App(baseSource, integrationNativeService);
+const instance = new App(baseSource, registerHandler, integrationNativeService);
 
 registerHandler('settings:open', instance.openSettings);
 registerHandler('integration:connect', integrationNativeService.connect);

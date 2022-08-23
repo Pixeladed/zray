@@ -14,6 +14,12 @@
   border-bottom: 1px solid var(--colorBorder);
 }
 
+.profilesContainer {
+  padding: var(--spacexxSmall) var(--spaceMedium);
+  font-size: 0.75em;
+  color: var(--colorBorder);
+}
+
 .empty {
   display: flex;
   flex-direction: column;

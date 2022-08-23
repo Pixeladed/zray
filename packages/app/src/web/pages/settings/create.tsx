@@ -1,3 +1,4 @@
+import { withBridge } from '../../base/bridge';
 import { IntegrationStore } from '../../services/integration/integration_store';
 import { createAddIntegrationPage } from './add_integration/create';
 import { SettingsPage } from './settings';
@@ -14,8 +15,13 @@ export const createSettingsPage = ({
     integrationStore,
   });
 
+  const init = withBridge(
+    context,
+    bridge => () => bridge.invoke('page:init', {})
+  );
+
   const SettingsPageImpl = () => (
-    <SettingsPage AddIntegrationsPage={AddIntegrationPage} />
+    <SettingsPage init={init} AddIntegrationsPage={AddIntegrationPage} />
   );
 
   return { SettingsPage: SettingsPageImpl };

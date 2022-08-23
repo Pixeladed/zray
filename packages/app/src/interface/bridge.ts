@@ -20,11 +20,13 @@ export type MessageParam = {
   'integration:connect': ConnectIntegrationParam;
   'integration:setAvailable': SetAvailableIntegrationsParam;
   'integration:setProfiles': SetIntegrationProfilesParam;
+  'page:init': PageInitParam;
 };
 
 export const allowlist: BridgeMessage[] = [
   'settings:open',
   'integration:connect',
+  'page:init',
 ];
 
 export const events: BridgeMessage[] = [
@@ -33,6 +35,8 @@ export const events: BridgeMessage[] = [
 ];
 
 export type OpenSettingsParam = {};
+
+export type PageInitParam = {};
 
 export type ConnectIntegrationParam = { id: string };
 
