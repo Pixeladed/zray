@@ -21,8 +21,11 @@ const bridge = getBridge(context);
 bridge.on('integration:setAvailable', (event, data) => {
   integrationStore.setIntegrations(data.integrations);
 });
+bridge.on('integration:setProfiles', (event, data) => {
+  integrationStore.setProfiles(data.profiles);
+});
 
-const { SearchPage } = createSearchPage(context);
+const { SearchPage } = createSearchPage({ context, integrationStore });
 const { SettingsPage } = createSettingsPage({ context, integrationStore });
 
 root.render(

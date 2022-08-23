@@ -15,7 +15,9 @@ export class App {
   ) {}
 
   handleActivate = () => {
-    const searchView = this.searchView || new SearchView(this.source);
+    const searchView =
+      this.searchView ||
+      new SearchView(this.source, this.integrationNativeService);
     this.searchView = searchView;
 
     searchView.browserWindow.on('close', () => {
