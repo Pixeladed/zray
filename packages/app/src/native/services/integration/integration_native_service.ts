@@ -3,7 +3,11 @@ import {
   ListIntegrationsEndpoint,
   ListProfilesEndpoint,
 } from '../../../interface/bridge/endpoints';
-import { IntegrationInfo, ProfileInfo } from '../../../interface/intergration';
+import {
+  IntegrationInfo,
+  IntegrationProfile,
+  ProfileInfo,
+} from '../../../interface/intergration';
 import { Handler } from '../../base/bridge_handler';
 import { SearchProvider } from '../search/search_native_service';
 
@@ -45,6 +49,6 @@ export class IntegrationNativeService {
 }
 
 export interface NativeIntegration extends IntegrationInfo, SearchProvider {
-  connect(): Promise<ProfileInfo>;
+  connect(): Promise<IntegrationProfile>;
   listProfiles: () => Promise<readonly ProfileInfo[]>;
 }

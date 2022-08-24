@@ -1,17 +1,27 @@
 import { observer } from 'mobx-react';
-import { IntegrationStore } from '../../services/integration/integration_store';
+import { BridgeClient } from '../../base/bridge_client';
+import { createIntegrationService } from '../../services/integration/create';
+import { NavigationService } from '../../services/navigation/navigation_service';
 import { SearchPage } from './search';
 import { SearchController, SearchStore } from './search_controller';
 
 export const createSearchPage = ({
-  context,
-  integrationStore,
+  bridgeClient,
+  navigationService,
 }: {
-  context: Window;
-  integrationStore: IntegrationStore;
+  bridgeClient: BridgeClient;
+  navigationService: NavigationService;
 }) => {
+  const { integrationStore, integrationController } = createIntegrationService({
+    bridgeClient,
+  });
+
   const store = new SearchStore();
-  const controller = new SearchController(store, context);
+  const controller = new SearchController(
+    store,
+    bridgeClient,
+    integrationController
+  );
 
   const SearchPageImpl = observer(() => {
     return (
@@ -19,7 +29,7 @@ export const createSearchPage = ({
         results={store.results}
         loading={store.loading}
         profiles={integrationStore.profiles}
-        onConnectTool={controller.openSettings}
+        onConnectTool={navigationService.openSettings}
         init={controller.init}
         onSearch={controller.search}
       />

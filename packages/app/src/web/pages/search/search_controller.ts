@@ -1,7 +1,8 @@
 import { makeAutoObservable, action } from 'mobx';
-import { nanoid } from 'nanoid';
+import { GlobalSearchEndpoint } from '../../../interface/bridge/endpoints';
 import { SearchResult } from '../../../native/services/search/search_native_service';
-import { requestThroughBridge, withBridge } from '../../base/bridge_client';
+import { BridgeClient } from '../../base/bridge_client';
+import { IntegrationController } from '../../services/integration/integration_controller';
 
 export class SearchStore {
   results: readonly SearchResult[] = [];
@@ -25,31 +26,21 @@ export class SearchStore {
 export class SearchController {
   constructor(
     private readonly store: SearchStore,
-    private readonly context: Window
+    private readonly bridgeClient: BridgeClient,
+    private readonly integrationController: IntegrationController
   ) {}
 
-  openSettings = withBridge(
-    this.context,
-    bridge => () => bridge.invoke('settings:open', {})
-  );
-
-  init = withBridge(
-    this.context,
-    bridge => () => bridge.invoke('page:init', {})
-  );
+  init = async () => {
+    await this.integrationController.loadProfiles();
+  };
 
   search = async (query: string) => {
     this.store.setLoading(true);
     try {
-      const res = await requestThroughBridge({
-        context: this.context,
-        send: 'search:request',
-        receive: 'search:response',
-        data: {
-          id: nanoid(),
-          query,
-        },
-      });
+      const res = await this.bridgeClient.request<GlobalSearchEndpoint>(
+        'search:global',
+        { query }
+      );
       this.store.setResults(res.results);
     } finally {
       this.store.setLoading(false);

@@ -1,5 +1,5 @@
 import { SearchResult } from '../../native/services/search/search_native_service';
-import { IntegrationInfo, ProfileInfo } from '../intergration';
+import { IntegrationInfo, IntegrationProfile } from '../intergration';
 
 export const BRIDGE_NAMESPACE = 'contextBridge';
 
@@ -32,7 +32,7 @@ export type OpenSettingsEndpoint = Endpoint<'settings:open', {}, {}>;
 export type ConnectIntegrationEndpoint = Endpoint<
   'integration:connect',
   { id: string },
-  { profile: ProfileInfo }
+  { profile: IntegrationProfile }
 >;
 
 export type ListIntegrationsEndpoint = Endpoint<
@@ -44,7 +44,7 @@ export type ListIntegrationsEndpoint = Endpoint<
 export type ListProfilesEndpoint = Endpoint<
   'integration:profiles:list',
   {},
-  { profiles: readonly ProfileInfo[] }
+  { profiles: readonly IntegrationProfile[] }
 >;
 
 export type GlobalSearchEndpoint = Endpoint<

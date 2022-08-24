@@ -7,26 +7,16 @@ import { Routes } from './routes';
 import { createSearchPage } from './web/pages/search/create';
 import { createSettingsPage } from './web/pages/settings/create';
 import { NavigationService } from './web/services/navigation/navigation_service';
-import { IntegrationStore } from './web/services/integration/integration_store';
-import { getBridge } from './web/base/bridge_client';
+import { BridgeClient } from './web/base/bridge_client';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 const context = window;
-const navigationService = new NavigationService(context);
-const integrationStore = new IntegrationStore();
-const bridge = getBridge(context);
-
-bridge.on('integration:setAvailable', (event, data) => {
-  integrationStore.setIntegrations(data.integrations);
-});
-bridge.on('integration:setProfiles', (event, data) => {
-  integrationStore.setProfiles(data.profiles);
-});
-
-const { SearchPage } = createSearchPage({ context, integrationStore });
-const { SettingsPage } = createSettingsPage({ context, integrationStore });
+const bridgeClient = new BridgeClient(context);
+const navigationService = new NavigationService(context, bridgeClient);
+const { SearchPage } = createSearchPage({ bridgeClient, navigationService });
+const { SettingsPage } = createSettingsPage({ bridgeClient });
 
 root.render(
   <React.StrictMode>

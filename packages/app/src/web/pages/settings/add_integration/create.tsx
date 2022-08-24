@@ -1,22 +1,21 @@
 import { observer } from 'mobx-react';
-import { withBridge } from '../../../base/bridge_client';
-import { IntegrationStore } from '../../../services/integration/integration_store';
+import { BridgeClient } from '../../../base/bridge_client';
+import { createIntegrationService } from '../../../services/integration/create';
 import { AddIntegrationPage } from './add_integration';
 
 export const createAddIntegrationPage = ({
-  context,
-  integrationStore,
+  bridgeClient,
 }: {
-  context: Window;
-  integrationStore: IntegrationStore;
+  bridgeClient: BridgeClient;
 }) => {
-  const connect = withBridge(context, bridge => (id: string) => {
-    bridge.invoke('integration:connect', { id });
+  const { integrationController, integrationStore } = createIntegrationService({
+    bridgeClient,
   });
 
   const AddIntegrationPageImpl = observer(() => (
     <AddIntegrationPage
-      onConnect={connect}
+      init={integrationController.loadIntegrations}
+      onConnect={integrationController.connect}
       integrations={integrationStore.integrations}
     />
   ));

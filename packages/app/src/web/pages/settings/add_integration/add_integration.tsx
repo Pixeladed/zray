@@ -1,14 +1,19 @@
+import { useEffect } from 'react';
 import { TappableArea } from '@highbeam/components';
 import { IntegrationInfo } from '../../../../interface/intergration';
 import styles from './add_integration.module.css';
 
 export const AddIntegrationPage = ({
+  init,
   integrations,
   onConnect,
 }: {
+  init: () => void;
   integrations: readonly IntegrationInfo[];
   onConnect: (id: string) => void;
 }) => {
+  useEffect(init, [init]);
+
   return (
     <div>
       <div className={styles.titleContainer}>

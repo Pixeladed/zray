@@ -3,7 +3,7 @@ import { SlackOAuthView } from '../../views/slack_oauth/slack_oauth_view';
 import { Slack } from '@highbeam/interface';
 import { SlackNativeStore } from './slack_native_service_store';
 import { NativeIntegration } from '../integration/integration_native_service';
-import { ProfileInfo } from '../../../interface/intergration';
+import { IntegrationProfile } from '../../../interface/intergration';
 import { WebClient } from '@slack/web-api';
 import { Assert, exists } from '@highbeam/utils';
 import { SearchResult } from '../search/search_native_service';
@@ -27,8 +27,8 @@ export class SlackNativeService implements NativeIntegration {
     const view = new SlackOAuthView(oAuthUrl.toString());
     view.open();
 
-    let finish: (profile: ProfileInfo) => void;
-    const promise = new Promise<ProfileInfo>(resolve => {
+    let finish: (profile: IntegrationProfile) => void;
+    const promise = new Promise<IntegrationProfile>(resolve => {
       finish = resolve;
     });
 
@@ -47,7 +47,10 @@ export class SlackNativeService implements NativeIntegration {
 
         const res = await this.slackClient.call('exchangeCode', { code });
         const profile = this.store.setProfile(res);
-        finish(this.store.asProfileInfo(profile));
+        finish({
+          ...this.store.asProfileInfo(profile),
+          integrationId: this.id,
+        });
       }
     );
 
