@@ -32,6 +32,7 @@ export interface SearchResult {
   id: string;
   profileId: string;
   integrationId: string;
+  type: string;
   title: string;
   url: string;
   description?: string;
