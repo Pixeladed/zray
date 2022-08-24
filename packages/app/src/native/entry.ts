@@ -24,11 +24,16 @@ const { integrationNativeService } = createIntegrationNativeService({
 const { searchNativeService } = createSearchNativeService({
   providers: integrations,
 });
-const instance = new App(baseSource, registerHandler, integrationNativeService);
+const instance = new App(
+  baseSource,
+  registerHandler,
+  integrationNativeService,
+  searchNativeService
+);
 
 registerHandler('settings:open', instance.openSettings);
 registerHandler('integration:connect', integrationNativeService.connect);
-registerHandler('search:request', searchNativeService.search);
+registerHandler('search:request', instance.handleSearch);
 
 app.on('activate', instance.handleActivate);
 app.on('ready', instance.handleActivate);

@@ -16,7 +16,7 @@ export function SearchPage({
   init: () => void;
   onSearch: (query: string) => void;
   profiles: readonly IntegrationProfile[];
-  results: SearchResult[];
+  results: readonly SearchResult[];
 }) {
   useEffect(init, [init]);
 
