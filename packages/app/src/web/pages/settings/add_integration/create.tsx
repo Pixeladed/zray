@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import { withBridge } from '../../../base/bridge';
+import { withBridge } from '../../../base/bridge_client';
 import { IntegrationStore } from '../../../services/integration/integration_store';
 import { AddIntegrationPage } from './add_integration';
 

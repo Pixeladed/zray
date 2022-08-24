@@ -1,32 +1,12 @@
+import { Assert } from '@highbeam/utils';
 import { contextBridge, ipcRenderer } from 'electron';
-import {
-  allowlist,
-  Bridge,
-  BridgeMessage,
-  BRIDGE_NAMESPACE,
-  MessageParam,
-} from '../interface/bridge';
-
-const createInvoker =
-  <T extends BridgeMessage>(message: T) =>
-  (param: MessageParam[T]) => {
-    ipcRenderer.invoke(message, param);
-  };
-
-type InvokerMap = {
-  [key in typeof allowlist[number]]: (param: MessageParam[key]) => void;
-};
-
-const invokers: InvokerMap = allowlist.reduce((map, msg) => {
-  map[msg] = createInvoker(msg);
-  return map;
-}, {} as InvokerMap);
+import { Bridge, endpointAllowlist } from '../interface/bridge/bridge';
+import { BRIDGE_NAMESPACE } from '../interface/bridge/endpoints';
 
 const bridge: Bridge = {
-  invoke: (message, param) => invokers[message](param),
-  on: (message, callback) => {
-    console.log('adding callback for', message, callback);
-    ipcRenderer.on(message, callback);
+  request: (name, req) => {
+    Assert.that(endpointAllowlist.includes(name), `${name} is not allowed`);
+    return ipcRenderer.invoke(name, req);
   },
 };
 

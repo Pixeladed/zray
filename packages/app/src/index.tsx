@@ -8,7 +8,7 @@ import { createSearchPage } from './web/pages/search/create';
 import { createSettingsPage } from './web/pages/settings/create';
 import { NavigationService } from './web/services/navigation/navigation_service';
 import { IntegrationStore } from './web/services/integration/integration_store';
-import { getBridge } from './web/base/bridge';
+import { getBridge } from './web/base/bridge_client';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

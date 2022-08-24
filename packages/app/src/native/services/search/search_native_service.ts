@@ -1,5 +1,5 @@
 import { exists } from '@highbeam/utils';
-import { SearchRequestParam } from '../../../interface/bridge';
+import { SearchRequestParam } from '../../../interface/bridge/endpoints';
 import { Handler } from '../../base/bridge_handler';
 import { SearchRanker } from './search_ranker';
 

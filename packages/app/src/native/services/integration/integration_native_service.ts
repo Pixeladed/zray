@@ -1,5 +1,5 @@
 import { computed, IComputedValue, makeAutoObservable } from 'mobx';
-import { ConnectIntegrationParam } from '../../../interface/bridge';
+import { ConnectIntegrationParam } from '../../../interface/bridge/endpoints';
 import { IntegrationInfo, ProfileInfo } from '../../../interface/intergration';
 import { Handler } from '../../base/bridge_handler';
 

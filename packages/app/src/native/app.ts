@@ -1,4 +1,7 @@
-import { OpenSettingsParam, SearchRequestParam } from '../interface/bridge';
+import {
+  OpenSettingsParam,
+  SearchRequestParam,
+} from '../interface/bridge/endpoints';
 import {
   Handler,
   HandlerRegistrar,

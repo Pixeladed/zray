@@ -1,4 +1,4 @@
-import { withBridge } from '../../base/bridge';
+import { withBridge } from '../../base/bridge_client';
 import { IntegrationStore } from '../../services/integration/integration_store';
 import { createAddIntegrationPage } from './add_integration/create';
 import { SettingsPage } from './settings';

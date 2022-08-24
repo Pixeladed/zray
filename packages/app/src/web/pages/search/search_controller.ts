@@ -1,7 +1,7 @@
 import { makeAutoObservable, action } from 'mobx';
 import { nanoid } from 'nanoid';
 import { SearchResult } from '../../../native/services/search/search_native_service';
-import { requestThroughBridge, withBridge } from '../../base/bridge';
+import { requestThroughBridge, withBridge } from '../../base/bridge_client';
 
 export class SearchStore {
   results: readonly SearchResult[] = [];
