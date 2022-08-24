@@ -21,14 +21,21 @@ export type Endpoints =
   | IntegrationEndpoints
   | SearchEndpoints;
 
-export type NavigationEndpoints = OpenSettingsEndpoint;
+export type NavigationEndpoints = OpenSettingsEndpoint | OpenExternalEndpoint;
 export type IntegrationEndpoints =
   | ListIntegrationsEndpoint
   | ListProfilesEndpoint
   | ConnectIntegrationEndpoint;
 export type SearchEndpoints = GlobalSearchEndpoint;
 
-export type OpenSettingsEndpoint = Endpoint<'settings:open', {}, {}>;
+export type OpenSettingsEndpoint = Endpoint<'navigation:settings:open', {}, {}>;
+
+export type OpenExternalEndpoint = Endpoint<
+  'navigation:openExternal',
+  { url: string },
+  {}
+>;
+
 export type ConnectIntegrationEndpoint = Endpoint<
   'integration:connect',
   { id: string },

@@ -8,6 +8,7 @@ import styles from './search.module.css';
 export function SearchPage({
   onConnectTool,
   init,
+  openResult,
   loading,
   onSearch,
   results,
@@ -15,6 +16,7 @@ export function SearchPage({
 }: {
   onConnectTool: () => void;
   init: () => void;
+  openResult: (result: SearchResult) => void;
   loading: boolean;
   onSearch: (query: string) => void;
   profiles: readonly IntegrationProfile[];
@@ -59,29 +61,34 @@ export function SearchPage({
         </div>
       )}
       {results.map(result => (
-        <SearchResultCard key={result.id} result={result} />
+        <SearchResultCard
+          onClick={() => openResult(result)}
+          key={result.id}
+          result={result}
+        />
       ))}
       {loading && <>Loading...</>}
     </div>
   );
 }
 
-const SearchResultCard = ({ result }: { result: SearchResult }) => {
+const SearchResultCard = ({
+  result,
+  onClick,
+}: {
+  result: SearchResult;
+  onClick: () => void;
+}) => {
   return (
-    <a
-      className={styles.resultCardLink}
-      href={result.url}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+    <TappableArea onClick={onClick}>
       <div className={styles.resultCard}>
-        <h4 className={styles.resultCardTitle}>{result.title}</h4>
+        <h3 className={styles.resultCardTitle}>{result.title}</h3>
         {!!result.description && (
           <p className={styles.resultCardDescription}>
             <span>{result.type}</span> &middot; {result.description}
           </p>
         )}
       </div>
-    </a>
+    </TappableArea>
   );
 };

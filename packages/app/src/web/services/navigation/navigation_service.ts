@@ -1,4 +1,7 @@
-import { OpenSettingsEndpoint } from '../../../interface/bridge/endpoints';
+import {
+  OpenExternalEndpoint,
+  OpenSettingsEndpoint,
+} from '../../../interface/bridge/endpoints';
 import { BridgeClient } from '../../base/bridge_client';
 
 export class NavigationService {
@@ -12,6 +15,16 @@ export class NavigationService {
   };
 
   openSettings = async () => {
-    await this.bridgeClient.request<OpenSettingsEndpoint>('settings:open', {});
+    await this.bridgeClient.request<OpenSettingsEndpoint>(
+      'navigation:settings:open',
+      {}
+    );
+  };
+
+  openExternal = async (url: string) => {
+    await this.bridgeClient.request<OpenExternalEndpoint>(
+      'navigation:openExternal',
+      { url }
+    );
   };
 }

@@ -43,16 +43,13 @@
   text-align: center;
 }
 
-.resultCardLink {
-  text-decoration: none;
-}
-
 .resultCard {
   width: 100%;
   padding: var(--spacexxSmall) var(--spaceMedium);
   border-bottom: 1px solid var(--colorBorder);
   color: var(--colorForeground);
   transition: background 0.15s ease-in-out;
+  text-align: left;
 }
 
 .resultCard:hover {

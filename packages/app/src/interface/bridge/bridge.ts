@@ -7,7 +7,8 @@ import {
 } from './endpoints';
 
 export const endpointAllowlist: EndpointName<Endpoints>[] = [
-  'settings:open',
+  'navigation:settings:open',
+  'navigation:openExternal',
   'integration:connect',
   'integration:list',
   'integration:profiles:list',

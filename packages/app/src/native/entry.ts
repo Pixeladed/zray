@@ -1,9 +1,10 @@
 import { ClientFactory } from '@highbeam/interface';
-import { app, ipcMain } from 'electron';
+import { app, ipcMain, shell } from 'electron';
 import { config } from '../base/config';
 import { App } from './app';
 import { createHandlerReigstrar } from './base/bridge_handler';
 import { createIntegrationNativeService } from './services/integration/create';
+import { NavigationNativeService } from './services/navigation/navigation_native_service';
 import { createSearchNativeService } from './services/search/create';
 import { createSlackNativeService } from './services/slack/create';
 import { WindowSource } from './views/view';
@@ -15,6 +16,7 @@ const baseSource: WindowSource = app.isPackaged
 const registerHandler = createHandlerReigstrar(ipcMain);
 export const clientFactory = new ClientFactory(config.apiOrigin);
 const { slackNativeService } = createSlackNativeService(clientFactory);
+const navigationNativeService = new NavigationNativeService(shell);
 
 const integrations = [slackNativeService];
 
@@ -33,7 +35,11 @@ registerHandler(
   integrationNativeService.listProfiles
 );
 
-registerHandler('settings:open', instance.openSettings);
+registerHandler('navigation:settings:open', instance.openSettings);
+registerHandler(
+  'navigation:openExternal',
+  navigationNativeService.openExterenal
+);
 
 registerHandler('search:global', searchNativeService.search);
 

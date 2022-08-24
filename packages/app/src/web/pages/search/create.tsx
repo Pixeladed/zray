@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react';
+import { SearchResult } from '../../../native/services/search/search_native_service';
 import { BridgeClient } from '../../base/bridge_client';
 import { createIntegrationService } from '../../services/integration/create';
 import { NavigationService } from '../../services/navigation/navigation_service';
@@ -23,6 +24,10 @@ export const createSearchPage = ({
     integrationController
   );
 
+  const openResult = (result: SearchResult) => {
+    navigationService.openExternal(result.url);
+  };
+
   const SearchPageImpl = observer(() => {
     return (
       <SearchPage
@@ -31,6 +36,7 @@ export const createSearchPage = ({
         profiles={integrationStore.profiles}
         onConnectTool={navigationService.openSettings}
         init={controller.init}
+        openResult={openResult}
         onSearch={controller.search}
       />
     );
