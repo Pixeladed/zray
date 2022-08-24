@@ -30,6 +30,10 @@ export const createHandlerReigstrar = (
       `Message ${name} is not included in the allowlist`
     );
     ipcMain.removeHandler(name);
-    ipcMain.handle(name, handler);
+    ipcMain.handle(name, async (event, req) => {
+      const result = await handler(event, req);
+      const response = JSON.parse(JSON.stringify(result));
+      return response;
+    });
   };
 };

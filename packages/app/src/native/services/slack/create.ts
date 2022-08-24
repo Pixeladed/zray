@@ -1,5 +1,4 @@
 import { ClientFactory } from '@highbeam/interface';
-import { SlackNativeIntegration } from './slack_native_integration';
 import { SlackNativeService } from './slack_native_service';
 import { SlackNativeStore } from './slack_native_service_store';
 

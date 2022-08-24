@@ -6,7 +6,8 @@ import { BRIDGE_NAMESPACE } from '../interface/bridge/endpoints';
 const bridge: Bridge = {
   request: (name, req) => {
     Assert.that(endpointAllowlist.includes(name), `${name} is not allowed`);
-    return ipcRenderer.invoke(name, req);
+    const payload = JSON.parse(JSON.stringify(req));
+    return ipcRenderer.invoke(name, payload);
   },
 };
 

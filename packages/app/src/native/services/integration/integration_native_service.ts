@@ -22,7 +22,11 @@ export class IntegrationNativeService {
   };
 
   list: Handler<ListIntegrationsEndpoint> = async () => ({
-    integrations: this.integrations,
+    integrations: this.integrations.map(integration => ({
+      id: integration.id,
+      icon: integration.icon,
+      name: integration.name,
+    })),
   });
 
   listProfiles: Handler<ListProfilesEndpoint> = async () => {
