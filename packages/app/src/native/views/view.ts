@@ -57,7 +57,9 @@ export abstract class View {
     message: T,
     param: MessageParam[T]
   ) => {
-    sendToRenderer(this.browserWindow, message, param);
+    // force serialize
+    const data = JSON.parse(JSON.stringify(param));
+    sendToRenderer(this.browserWindow, message, data);
   };
 }
 

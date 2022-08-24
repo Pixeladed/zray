@@ -4,20 +4,21 @@ import { Slack } from '@highbeam/interface';
 import { SlackNativeStore } from './slack_native_service_store';
 import { NativeIntegration } from '../integration/integration_native_service';
 import { SlackNativeIntegration } from './slack_native_integration';
-import { IntegrationInfo, ProfileInfo } from '../../../interface/intergration';
+import { ProfileInfo } from '../../../interface/intergration';
 import { IComputedValue } from 'mobx';
 
-export class SlackNativeService implements NativeIntegration {
-  id: string;
+export class SlackNativeService
+  extends SlackNativeIntegration
+  implements NativeIntegration
+{
   profiles: IComputedValue<ProfileInfo[]>;
 
   constructor(
-    info: IntegrationInfo,
     private readonly redirectOrigin: string,
     private readonly slackClient: Slack.SlackClient,
     private readonly store: SlackNativeStore
   ) {
-    this.id = info.id;
+    super();
     this.profiles = store.profiles;
   }
 

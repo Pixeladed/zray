@@ -10,7 +10,6 @@ export const createSlackNativeService = (clientFactory: ClientFactory) => {
   const slackClient = clientFactory.for('slack');
   const slackNativeStore = new SlackNativeStore(STORE_NAME);
   const slackNativeService = new SlackNativeService(
-    SlackNativeIntegration,
     REDIRECT_ORIGIN,
     slackClient,
     slackNativeStore
