@@ -24,14 +24,15 @@ export type Endpoints =
 export type NavigationEndpoints = OpenSettingsEndpoint;
 export type IntegrationEndpoints =
   | ListIntegrationsEndpoint
-  | ListProfilesEndpoint;
+  | ListProfilesEndpoint
+  | ConnectIntegrationEndpoint;
 export type SearchEndpoints = GlobalSearchEndpoint;
 
 export type OpenSettingsEndpoint = Endpoint<'settings:open', {}, {}>;
 export type ConnectIntegrationEndpoint = Endpoint<
   'integration:connect',
   { id: string },
-  {}
+  { profile: ProfileInfo }
 >;
 
 export type ListIntegrationsEndpoint = Endpoint<

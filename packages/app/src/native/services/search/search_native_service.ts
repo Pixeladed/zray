@@ -1,5 +1,5 @@
 import { exists } from '@highbeam/utils';
-import { SearchRequestParam } from '../../../interface/bridge/endpoints';
+import { GlobalSearchEndpoint } from '../../../interface/bridge/endpoints';
 import { Handler } from '../../base/bridge_handler';
 import { SearchRanker } from './search_ranker';
 
@@ -9,7 +9,7 @@ export class SearchNativeService {
     private readonly ranker: SearchRanker
   ) {}
 
-  search = async (query: string, page?: number) => {
+  search: Handler<GlobalSearchEndpoint> = async (event, { query, page }) => {
     const operations = await Promise.allSettled(
       this.providers.map(provider =>
         provider.search(query, { page: page || 0 })
@@ -20,9 +20,7 @@ export class SearchNativeService {
       .filter(exists);
 
     const rankedResults = this.ranker.rank(providerResults);
-    console.log('ranked results', rankedResults);
-
-    return rankedResults;
+    return { results: rankedResults };
   };
 }
 

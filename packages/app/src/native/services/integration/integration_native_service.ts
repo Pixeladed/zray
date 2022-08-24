@@ -1,40 +1,46 @@
-import { computed, IComputedValue, makeAutoObservable } from 'mobx';
-import { ConnectIntegrationParam } from '../../../interface/bridge/endpoints';
+import {
+  ConnectIntegrationEndpoint,
+  ListIntegrationsEndpoint,
+  ListProfilesEndpoint,
+} from '../../../interface/bridge/endpoints';
 import { IntegrationInfo, ProfileInfo } from '../../../interface/intergration';
 import { Handler } from '../../base/bridge_handler';
+import { SearchProvider } from '../search/search_native_service';
 
 export class IntegrationNativeService {
-  constructor(
-    private readonly integrationInfos: readonly IntegrationInfo[],
-    private readonly integrations: readonly NativeIntegration[]
-  ) {
-    makeAutoObservable(this);
-  }
+  constructor(private readonly integrations: readonly NativeIntegration[]) {}
 
-  connect: Handler<ConnectIntegrationParam> = (event, param) => {
+  connect: Handler<ConnectIntegrationEndpoint> = async (event, param) => {
     const integration = this.integrations.find(({ id }) => id === param.id);
 
     if (!integration) {
       throw new Error(`Unsupported integration ${param.id}`);
     }
 
-    return integration.connect();
+    const profile = await integration.connect();
+    return { profile };
   };
 
-  list = () => this.integrationInfos;
+  list: Handler<ListIntegrationsEndpoint> = async () => ({
+    integrations: this.integrations,
+  });
 
-  profiles = computed(() =>
-    this.integrations.flatMap(integration => {
-      return integration.profiles.get().map(profile => ({
-        ...profile,
-        integrationId: integration.id,
-      }));
-    })
-  );
+  listProfiles: Handler<ListProfilesEndpoint> = async () => {
+    const profiles = await Promise.all(
+      this.integrations.map(async integration => {
+        const integrationProfiles = await integration.listProfiles();
+        return integrationProfiles.map(profile => ({
+          ...profile,
+          integrationId: integration.id,
+        }));
+      })
+    );
+
+    return { profiles: profiles.flat() };
+  };
 }
 
-export interface NativeIntegration {
-  id: string;
-  connect(): void;
-  profiles: IComputedValue<readonly ProfileInfo[]>;
+export interface NativeIntegration extends IntegrationInfo, SearchProvider {
+  connect(): Promise<ProfileInfo>;
+  listProfiles: () => Promise<readonly ProfileInfo[]>;
 }

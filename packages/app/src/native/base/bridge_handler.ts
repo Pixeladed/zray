@@ -21,7 +21,10 @@ export type HandlerRegistrar = <E extends Endpoints>(
 export const createHandlerReigstrar = (
   ipcMain: Pick<IpcMain, 'handle' | 'removeHandler'>
 ): HandlerRegistrar => {
-  return <E extends Endpoints>(name: EndpointName<E>, handler: Handler<E>) => {
+  return <E extends Endpoint<any, any, any>>(
+    name: EndpointName<E>,
+    handler: Handler<E>
+  ) => {
     Assert.that(
       endpointAllowlist.includes(name),
       `Message ${name} is not included in the allowlist`

@@ -8,6 +8,7 @@ import {
 
 export const endpointAllowlist: EndpointName<Endpoints>[] = [
   'settings:open',
+  'integration:connect',
   'integration:list',
   'integration:profiles:list',
   'search:global',

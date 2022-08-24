@@ -5,24 +5,20 @@ import { SlackNativeStore } from './slack_native_service_store';
 import { NativeIntegration } from '../integration/integration_native_service';
 import { SlackNativeIntegration } from './slack_native_integration';
 import { ProfileInfo } from '../../../interface/intergration';
-import { IComputedValue } from 'mobx';
 import { WebClient } from '@slack/web-api';
 import { Assert, exists } from '@highbeam/utils';
-import { SearchProvider, SearchResult } from '../search/search_native_service';
+import { SearchResult } from '../search/search_native_service';
 
 export class SlackNativeService
   extends SlackNativeIntegration
-  implements NativeIntegration, SearchProvider
+  implements NativeIntegration
 {
-  profiles: IComputedValue<ProfileInfo[]>;
-
   constructor(
     private readonly redirectOrigin: string,
     private readonly slackClient: Slack.SlackClient,
     private readonly store: SlackNativeStore
   ) {
     super();
-    this.profiles = store.profiles;
   }
 
   connect = async () => {
@@ -31,6 +27,11 @@ export class SlackNativeService
     oAuthUrl.searchParams.set('redirectUrl', redirectUrl);
     const view = new SlackOAuthView(oAuthUrl.toString());
     view.open();
+
+    let finish: (profile: ProfileInfo) => void;
+    const promise = new Promise<ProfileInfo>(resolve => {
+      finish = resolve;
+    });
 
     view.browserWindow?.webContents.on(
       'will-redirect',
@@ -46,15 +47,18 @@ export class SlackNativeService
         const code = url.searchParams.get('code');
 
         const res = await this.slackClient.call('exchangeCode', { code });
-        this.store.setProfile(res);
+        const profile = this.store.setProfile(res);
+        finish(this.store.asProfileInfo(profile));
       }
     );
 
     view.browserWindow?.on('close', () => {});
+
+    return promise;
   };
 
   search = async (query: string, options: { page: number }) => {
-    const profiles = this.store.profiles.get();
+    const profiles = await this.listProfiles();
     const ops = await Promise.allSettled(
       profiles.map(profile => this.searchInProfile(profile.id, query, options))
     );
@@ -62,6 +66,10 @@ export class SlackNativeService
       .flatMap(op => (op.status === 'fulfilled' ? op.value : undefined))
       .filter(exists);
     return results;
+  };
+
+  listProfiles = async () => {
+    return this.store.findProfiles().map(this.store.asProfileInfo);
   };
 
   private searchInProfile = async (

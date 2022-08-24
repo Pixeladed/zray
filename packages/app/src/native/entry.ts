@@ -31,9 +31,16 @@ const instance = new App(
   searchNativeService
 );
 
-registerHandler('settings:open', instance.openSettings);
 registerHandler('integration:connect', integrationNativeService.connect);
-registerHandler('search:request', instance.handleSearch);
+registerHandler('integration:list', integrationNativeService.list);
+registerHandler(
+  'integration:profiles:list',
+  integrationNativeService.listProfiles
+);
+
+registerHandler('settings:open', instance.openSettings);
+
+registerHandler('search:global', searchNativeService.search);
 
 app.on('activate', instance.handleActivate);
 app.on('ready', instance.handleActivate);
