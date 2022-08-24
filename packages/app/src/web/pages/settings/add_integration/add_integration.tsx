@@ -18,9 +18,6 @@ export const AddIntegrationPage = ({
 
   return (
     <div>
-      <div className={styles.titleContainer}>
-        <h2 className={styles.title}>Connect a tool</h2>
-      </div>
       <div className={styles.integrationList}>
         {integrations.map(integration => (
           <TappableArea

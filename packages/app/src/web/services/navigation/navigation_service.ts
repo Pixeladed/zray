@@ -14,6 +14,12 @@ export class NavigationService {
     return this.context.location.href;
   };
 
+  isPathActive = (path: string) => {
+    const url = new URL(this.currentHref());
+    const pathname = url.hash.substring(1);
+    return pathname.startsWith(path);
+  };
+
   openSettings = async () => {
     await this.bridgeClient.request<OpenSettingsEndpoint>(
       'navigation:settings:open',

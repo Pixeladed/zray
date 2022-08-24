@@ -16,7 +16,10 @@ const context = window;
 const bridgeClient = new BridgeClient(context);
 const navigationService = new NavigationService(context, bridgeClient);
 const { SearchPage } = createSearchPage({ bridgeClient, navigationService });
-const { SettingsPage } = createSettingsPage({ bridgeClient });
+const { SettingsPage } = createSettingsPage({
+  bridgeClient,
+  navigationService,
+});
 
 root.render(
   <React.StrictMode>
@@ -24,7 +27,6 @@ root.render(
       <RouterRoutes>
         <Route path={Routes.search()} element={<SearchPage />} />
         <Route path={Routes.settings()} element={<SettingsPage />} />
-        <Route path="*" element={<>{navigationService.currentHref()}</>} />
       </RouterRoutes>
     </HashRouter>
   </React.StrictMode>

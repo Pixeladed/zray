@@ -16,6 +16,7 @@ export abstract class View {
         break;
       case 'server':
         result.url = Routes.href(result.url, path);
+        console.log('opening', result.url);
         break;
       default:
         throw new Error(`Unknown source type ${source}`);

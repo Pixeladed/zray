@@ -5,5 +5,44 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--colorBackgroundDarker);
+}
+
+.sidebarAndContent {
+    display: flex;
+}
+
+.sidebar {
+    width: calc(var(--baseline) * 24);
+    height: calc(100vh - env(titlebar-area-height));
     background: var(--colorBackground);
+    border-right: 1px solid var(--colorBorder);
+}
+
+.content {
+    flex: 1;
+}
+
+.titleContainer {
+    border-bottom: 1px solid var(--colorBorder);
+    padding: var(--spaceSmall);
+    background: var(--colorBackgroundDarker);
+}
+
+.title {
+    margin: 0;
+    color: var(--colorForeground)
+}
+
+.sidebarLink {
+    display: block;
+    padding: var(--spaceSmall);
+    border-bottom: 1px solid var(--colorBorder);
+    text-decoration: none;
+    color: var(--colorForeground);
+}
+
+.sidebarLink.active {
+    background: var(--colorPrimary);
+    font-weight: 600;
 }
