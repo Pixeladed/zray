@@ -75,12 +75,11 @@ const SearchResultCard = ({ result }: { result: SearchResult }) => {
       rel="noopener noreferrer"
     >
       <div className={styles.resultCard}>
-        <small>
-          {result.integrationId}/{result.profileId}
-        </small>
         <h4 className={styles.resultCardTitle}>{result.title}</h4>
         {!!result.description && (
-          <p className={styles.resultCardDescription}>{result.description}</p>
+          <p className={styles.resultCardDescription}>
+            <span>{result.type}</span> &middot; {result.description}
+          </p>
         )}
       </div>
     </a>
