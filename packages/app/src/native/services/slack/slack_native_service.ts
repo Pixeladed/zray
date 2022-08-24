@@ -6,10 +6,13 @@ import { NativeIntegration } from '../integration/integration_native_service';
 import { SlackNativeIntegration } from './slack_native_integration';
 import { ProfileInfo } from '../../../interface/intergration';
 import { IComputedValue } from 'mobx';
+import { WebClient } from '@slack/web-api';
+import { Assert } from '@highbeam/utils';
+import { SearchProvider, SearchResult } from '../search/search_native_service';
 
 export class SlackNativeService
   extends SlackNativeIntegration
-  implements NativeIntegration
+  implements NativeIntegration, SearchProvider
 {
   profiles: IComputedValue<ProfileInfo[]>;
 
@@ -48,6 +51,50 @@ export class SlackNativeService
     );
 
     view.browserWindow?.on('close', () => {});
+  };
+
+  search = async (
+    commonProfile: ProfileInfo,
+    query: string,
+    options: { page: number }
+  ): Promise<SearchResult[]> => {
+    const { accessToken } = Assert.exists(
+      this.store.getProfile(commonProfile.id),
+      'expected profile to exist'
+    );
+
+    const client = new WebClient(accessToken);
+    const res = await client.search.all({
+      query,
+      sort: 'score',
+      sort_dir: 'desc',
+      count: 100,
+      page: options.page,
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to search slack', {
+        cause: new Error(res.error),
+      });
+    }
+
+    const results: SearchResult[] = [];
+
+    res.messages?.matches?.forEach(msg => {
+      results.push({
+        id: Assert.exists(msg.iid, 'expected message iid to exist'),
+        integrationId: this.id,
+        profileId: commonProfile.id,
+        title: Assert.exists(msg.text, 'expected message text to exist'),
+        url: Assert.exists(
+          msg.permalink,
+          'expected message permalink to exist'
+        ),
+        description: msg.channel?.name,
+      });
+    });
+
+    return results;
   };
 
   private isSameOriginAndPath = (urlA: string, urlB: string) => {
