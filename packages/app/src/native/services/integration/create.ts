@@ -5,9 +5,11 @@ import {
 } from './integration_native_service';
 
 const integrationInfos = [new SlackNativeIntegration()];
-export const createIntegrationNativeService = (
-  integrations: readonly NativeIntegration[]
-) => {
+export const createIntegrationNativeService = ({
+  integrations,
+}: {
+  integrations: readonly NativeIntegration[];
+}) => {
   const integrationNativeService = new IntegrationNativeService(
     integrationInfos,
     integrations
