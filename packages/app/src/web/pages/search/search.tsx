@@ -1,20 +1,15 @@
-import { Button } from '@highbeam/components';
+import { Button, TappableArea } from '@highbeam/components';
 import { useEffect } from 'react';
-import {
-  IntegrationInfo,
-  IntegrationProfile,
-} from '../../../interface/intergration';
+import { IntegrationProfile } from '../../../interface/intergration';
 import styles from './search.module.css';
 
 export function SearchPage({
   onConnectTool,
   init,
-  integrations,
   profiles,
 }: {
   onConnectTool: () => void;
   init: () => void;
-  integrations: readonly IntegrationInfo[];
   profiles: readonly IntegrationProfile[];
 }) {
   useEffect(init, [init]);
@@ -25,8 +20,10 @@ export function SearchPage({
       {!!profiles.length ? (
         <div className={styles.profilesContainer}>
           <p>
-            Searching {profiles.length} connected tools{' '}
-            <Button onClick={onConnectTool}>Add another</Button>
+            Searching {profiles.length} connected tools.{' '}
+            <TappableArea onClick={onConnectTool}>
+              <span className={styles.addMore}>Add another</span>
+            </TappableArea>
           </p>
         </div>
       ) : (

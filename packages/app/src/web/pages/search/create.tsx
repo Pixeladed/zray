@@ -24,7 +24,6 @@ export const createSearchPage = ({
       <SearchPage
         onConnectTool={openSettings}
         init={init}
-        integrations={integrationStore.integrations}
         profiles={integrationStore.profiles}
       />
     );

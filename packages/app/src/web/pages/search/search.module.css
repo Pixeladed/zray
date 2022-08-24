@@ -14,10 +14,19 @@
   border-bottom: 1px solid var(--colorBorder);
 }
 
+.dimText {
+  color: #777;
+}
+
 .profilesContainer {
   padding: var(--spacexxSmall) var(--spaceMedium);
-  font-size: 0.75em;
-  color: var(--colorBorder);
+  font-size: 0.8em;
+  composes: dimText;
+}
+
+.addMore {
+  text-decoration: underline;
+  composes: dimText;
 }
 
 .empty {

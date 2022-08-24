@@ -21,8 +21,6 @@ export class SearchView extends View {
         const profiles = integrationNativeService.profiles.get();
         this.send('integration:setProfiles', { profiles });
       });
-      const integrations = integrationNativeService.list();
-      this.send('integration:setAvailable', { integrations });
     });
   }
 }
