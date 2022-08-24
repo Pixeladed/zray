@@ -8,12 +8,14 @@ import styles from './search.module.css';
 export function SearchPage({
   onConnectTool,
   init,
+  loading,
   onSearch,
   results,
   profiles,
 }: {
   onConnectTool: () => void;
   init: () => void;
+  loading: boolean;
   onSearch: (query: string) => void;
   profiles: readonly IntegrationProfile[];
   results: readonly SearchResult[];
@@ -53,7 +55,7 @@ export function SearchPage({
           <Button onClick={onConnectTool}>Connect a tool</Button>
         </div>
       )}
-      {JSON.stringify(results, null, 2)}
+      {loading ? <>Loading...</> : JSON.stringify(results, null, 2)}
     </div>
   );
 }

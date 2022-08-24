@@ -16,11 +16,12 @@ export const createSearchPage = ({
   const SearchPageImpl = observer(() => {
     return (
       <SearchPage
+        results={store.results}
+        loading={store.loading}
+        profiles={integrationStore.profiles}
         onConnectTool={controller.openSettings}
         init={controller.init}
         onSearch={controller.search}
-        results={store.results}
-        profiles={integrationStore.profiles}
       />
     );
   });

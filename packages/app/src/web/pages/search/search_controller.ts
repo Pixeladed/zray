@@ -38,7 +38,7 @@ export class SearchController {
   );
 
   search = async (query: string) => {
-    this.store.setLoading(false);
+    this.store.setLoading(true);
     try {
       const res = await requestThroughBridge({
         context: this.context,
@@ -51,7 +51,7 @@ export class SearchController {
       });
       this.store.setResults(res.results);
     } finally {
-      this.store.setLoading(true);
+      this.store.setLoading(false);
     }
   };
 }
