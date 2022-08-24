@@ -28,6 +28,7 @@ const instance = new App(baseSource, registerHandler, integrationNativeService);
 
 registerHandler('settings:open', instance.openSettings);
 registerHandler('integration:connect', integrationNativeService.connect);
+registerHandler('search:request', searchNativeService.search);
 
 app.on('activate', instance.handleActivate);
 app.on('ready', instance.handleActivate);

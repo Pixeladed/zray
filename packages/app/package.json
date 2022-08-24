@@ -12,9 +12,11 @@
     "electron-store": "^8.1.0",
     "mobx": "^6.6.1",
     "mobx-react": "^7.5.2",
+    "nanoid": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "use-debounce": "^8.0.3"
   },
   "scripts": {
     "start:web": "cross-env PORT=8080 react-scripts start",

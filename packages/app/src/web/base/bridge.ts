@@ -44,7 +44,11 @@ export const requestThroughBridge = async <
     finish = resolve;
   });
   const bridge = getBridge(context);
-  bridge.on(receive, (event, data) => finish(data));
+  bridge.on(receive, (event, responseData) => {
+    if ('id' in data && 'id' in responseData && data.id === responseData.id) {
+      finish(responseData);
+    }
+  });
   bridge.invoke(send, data);
   return promise;
 };
