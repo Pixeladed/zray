@@ -13,7 +13,7 @@ export class SearchView extends View {
     super(View.extendWindowSource(baseSource, Routes.search()), {
       frame: false,
       width: 800,
-      height: 200,
+      height: 400,
     });
 
     registerHandler('page:init', () => {

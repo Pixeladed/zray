@@ -32,6 +32,7 @@ export class SearchController {
     this.context,
     bridge => () => bridge.invoke('settings:open', {})
   );
+
   init = withBridge(
     this.context,
     bridge => () => bridge.invoke('page:init', {})

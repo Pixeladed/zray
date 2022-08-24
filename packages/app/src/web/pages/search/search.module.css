@@ -12,6 +12,7 @@
   padding: var(--spaceSmall) var(--spaceMedium);
   font-size: 1.25em;
   border-bottom: 1px solid var(--colorBorder);
+  border-top: 1px solid var(--colorBorder);
 }
 
 .dimText {
@@ -19,7 +20,7 @@
 }
 
 .profilesContainer {
-  padding: var(--spacexxSmall) var(--spaceMedium);
+  padding: 0 var(--spaceMedium);
   font-size: 0.8em;
   composes: dimText;
 }
@@ -40,4 +41,28 @@
 .emptyLead {
   margin-bottom: var(--spaceSmall);
   text-align: center;
+}
+
+.resultCardLink {
+  text-decoration: none;
+}
+
+.resultCard {
+  width: 100%;
+  padding: var(--spacexxSmall) var(--spaceMedium);
+  border-bottom: 1px solid var(--colorBorder);
+  color: var(--colorForeground);
+  transition: background 0.15s ease-in-out;
+}
+
+.resultCard:hover {
+  background: var(--colorBorder);
+}
+
+.resultCardTitle {
+  margin: var(--spacexxxSmall) 0 var(--spacexxSmall) 0;
+}
+
+.resultCardDescription {
+  margin: 0;
 }

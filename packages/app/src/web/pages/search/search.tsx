@@ -32,13 +32,7 @@ export function SearchPage({
 
   return (
     <div className={styles.page}>
-      <input
-        placeholder="What are you looking for?"
-        className={styles.input}
-        value={value}
-        onChange={handleChange}
-      />
-      {!!profiles.length ? (
+      {!!profiles.length && (
         <div className={styles.profilesContainer}>
           <p>
             Searching {profiles.length} connected tools.{' '}
@@ -47,7 +41,14 @@ export function SearchPage({
             </TappableArea>
           </p>
         </div>
-      ) : (
+      )}
+      <input
+        placeholder="What are you looking for?"
+        className={styles.input}
+        value={value}
+        onChange={handleChange}
+      />
+      {!profiles.length && (
         <div className={styles.empty}>
           <p className={styles.emptyLead}>
             Looks like you don&apos;t have any tools connected
@@ -55,7 +56,31 @@ export function SearchPage({
           <Button onClick={onConnectTool}>Connect a tool</Button>
         </div>
       )}
-      {loading ? <>Loading...</> : JSON.stringify(results, null, 2)}
+      {results.map(result => (
+        <SearchResultCard key={result.id} result={result} />
+      ))}
+      {loading && <>Loading...</>}
     </div>
   );
 }
+
+const SearchResultCard = ({ result }: { result: SearchResult }) => {
+  return (
+    <a
+      className={styles.resultCardLink}
+      href={result.url}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div className={styles.resultCard}>
+        <small>
+          {result.integrationId}/{result.profileId}
+        </small>
+        <h4 className={styles.resultCardTitle}>{result.title}</h4>
+        {!!result.description && (
+          <p className={styles.resultCardDescription}>{result.description}</p>
+        )}
+      </div>
+    </a>
+  );
+};

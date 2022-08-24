@@ -101,7 +101,7 @@ export class SlackNativeService
           msg.permalink,
           'expected message permalink to exist'
         ),
-        description: msg.channel?.name,
+        description: `#${msg.channel?.name}`,
       });
     });
 
