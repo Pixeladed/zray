@@ -7,7 +7,7 @@ import { SlackNativeIntegration } from './slack_native_integration';
 import { ProfileInfo } from '../../../interface/intergration';
 import { IComputedValue } from 'mobx';
 import { WebClient } from '@slack/web-api';
-import { Assert } from '@highbeam/utils';
+import { Assert, exists } from '@highbeam/utils';
 import { SearchProvider, SearchResult } from '../search/search_native_service';
 
 export class SlackNativeService
@@ -53,13 +53,24 @@ export class SlackNativeService
     view.browserWindow?.on('close', () => {});
   };
 
-  search = async (
-    commonProfile: ProfileInfo,
+  search = async (query: string, options: { page: number }) => {
+    const profiles = this.store.profiles.get();
+    const ops = await Promise.allSettled(
+      profiles.map(profile => this.searchInProfile(profile.id, query, options))
+    );
+    const results = ops
+      .flatMap(op => (op.status === 'fulfilled' ? op.value : undefined))
+      .filter(exists);
+    return results;
+  };
+
+  private searchInProfile = async (
+    profileId: string,
     query: string,
     options: { page: number }
   ): Promise<SearchResult[]> => {
     const { accessToken } = Assert.exists(
-      this.store.getProfile(commonProfile.id),
+      this.store.getProfile(profileId),
       'expected profile to exist'
     );
 
@@ -84,7 +95,7 @@ export class SlackNativeService
       results.push({
         id: Assert.exists(msg.iid, 'expected message iid to exist'),
         integrationId: this.id,
-        profileId: commonProfile.id,
+        profileId,
         title: Assert.exists(msg.text, 'expected message text to exist'),
         url: Assert.exists(
           msg.permalink,
