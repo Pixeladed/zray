@@ -6,7 +6,7 @@ import { NativeIntegration } from '../integration/integration_native_service';
 import { IntegrationProfile } from '../../../interface/intergration';
 import { WebClient } from '@slack/web-api';
 import { Assert, exists } from '@highbeam/utils';
-import { SearchResult } from '../search/search_native_service';
+import { SearchResult } from '../search/search_result';
 import { Path } from '../../../base/path';
 
 export class SlackNativeService implements NativeIntegration {
@@ -106,13 +106,14 @@ export class SlackNativeService implements NativeIntegration {
         id: Assert.exists(msg.iid, 'expected message iid to exist'),
         integrationId: this.id,
         profileId,
-        type: 'Slack message',
-        title: Assert.exists(msg.text, 'expected message text to exist'),
+        type: 'message',
+        text: Assert.exists(msg.text, 'expected message text to exist'),
         url: Assert.exists(
           msg.permalink,
           'expected message permalink to exist'
         ),
-        description: `#${msg.channel?.name}`,
+        author: {},
+        channel: `#${msg.channel?.name}`,
       });
     });
 
@@ -121,13 +122,13 @@ export class SlackNativeService implements NativeIntegration {
         id: Assert.exists(file.id, 'expected file id to exist'),
         integrationId: this.id,
         profileId,
-        type: 'Slack file',
+        type: 'file',
         title: Assert.exists(file.name, 'exepected file name to exist'),
         url: Assert.exists(
           file.url_private,
           'expected file private url to exist'
         ),
-        description: file.pretty_type,
+        fileType: file.pretty_type,
       });
     });
 

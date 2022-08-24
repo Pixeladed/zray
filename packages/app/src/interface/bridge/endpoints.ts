@@ -1,4 +1,4 @@
-import { SearchResult } from '../../native/services/search/search_native_service';
+import { SearchResult } from '../../native/services/search/search_result';
 import { IntegrationInfo, IntegrationProfile } from '../intergration';
 
 export const BRIDGE_NAMESPACE = 'contextBridge';

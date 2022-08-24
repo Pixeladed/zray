@@ -1,4 +1,4 @@
-import { SearchResult } from './search_native_service';
+import { SearchResult } from './search_result';
 
 export class SearchRanker {
   rank = (results: readonly SearchResult[]): readonly SearchResult[] => {

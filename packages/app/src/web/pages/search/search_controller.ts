@@ -1,6 +1,6 @@
 import { makeAutoObservable, action } from 'mobx';
 import { GlobalSearchEndpoint } from '../../../interface/bridge/endpoints';
-import { SearchResult } from '../../../native/services/search/search_native_service';
+import { SearchResult } from '../../../native/services/search/search_result';
 import { BridgeClient } from '../../base/bridge_client';
 import { IntegrationController } from '../../services/integration/integration_controller';
 

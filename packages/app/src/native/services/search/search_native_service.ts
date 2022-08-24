@@ -1,6 +1,7 @@
 import { exists } from '@highbeam/utils';
 import { GlobalSearchEndpoint } from '../../../interface/bridge/endpoints';
 import { Handler } from '../../base/bridge_handler';
+import { SearchResult } from './search_result';
 import { SearchRanker } from './search_ranker';
 
 export class SearchNativeService {
@@ -26,14 +27,4 @@ export class SearchNativeService {
 
 export interface SearchProvider {
   search(query: string, options: { page: number }): Promise<SearchResult[]>;
-}
-
-export interface SearchResult {
-  id: string;
-  profileId: string;
-  integrationId: string;
-  type: string;
-  title: string;
-  url: string;
-  description?: string;
 }

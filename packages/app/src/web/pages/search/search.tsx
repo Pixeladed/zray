@@ -1,7 +1,7 @@
 import { Button, TappableArea } from '@highbeam/components';
 import { useEffect, useState, ChangeEvent } from 'react';
 import { IntegrationProfile } from '../../../interface/intergration';
-import { SearchResult } from '../../../native/services/search/search_native_service';
+import { SearchResult } from '../../../native/services/search/search_result';
 import { useDebouncedCallback } from 'use-debounce';
 import styles from './search.module.css';
 
