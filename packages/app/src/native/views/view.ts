@@ -1,6 +1,5 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
 import { events, MessageParam } from '../../interface/bridge';
-// import path from 'path';
 import { Routes } from '../../routes';
 import { sendToRenderer } from '../base/bridge_handler';
 
