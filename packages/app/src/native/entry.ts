@@ -24,7 +24,7 @@ const { integrationNativeService } = createIntegrationNativeService({
 const { searchNativeService } = createSearchNativeService({
   providers: integrations,
 });
-const instance = new App(baseSource, registerHandler, integrationNativeService);
+const instance = new App(baseSource);
 
 registerHandler('integration:connect', integrationNativeService.connect);
 registerHandler('integration:list', integrationNativeService.list);

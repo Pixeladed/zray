@@ -12,7 +12,9 @@ export const AddIntegrationPage = ({
   integrations: readonly IntegrationInfo[];
   onConnect: (id: string) => void;
 }) => {
-  useEffect(init, [init]);
+  useEffect(() => {
+    init();
+  }, [init]);
 
   return (
     <div>

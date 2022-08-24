@@ -1,6 +1,5 @@
 import { OpenSettingsEndpoint } from '../interface/bridge/endpoints';
-import { Handler, HandlerRegistrar } from './base/bridge_handler';
-import { IntegrationNativeService } from './services/integration/integration_native_service';
+import { Handler } from './base/bridge_handler';
 import { SearchView } from './views/search/search_view';
 import { SettingsView } from './views/settings/settings_view';
 import { WindowSource } from './views/view';
@@ -9,20 +8,10 @@ export class App {
   private searchView?: SearchView;
   private settingsView?: SettingsView;
 
-  constructor(
-    private readonly source: WindowSource,
-    private readonly registerHandler: HandlerRegistrar,
-    private readonly integrationNativeService: IntegrationNativeService
-  ) {}
+  constructor(private readonly source: WindowSource) {}
 
   handleActivate = () => {
-    const searchView =
-      this.searchView ||
-      new SearchView(
-        this.source,
-        this.registerHandler,
-        this.integrationNativeService
-      );
+    const searchView = this.searchView || new SearchView(this.source);
     this.searchView = searchView;
 
     searchView.browserWindow.on('close', () => {

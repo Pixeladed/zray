@@ -1,7 +1,5 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
-import { events, MessageParam } from '../../interface/bridge/endpoints';
 import { Routes } from '../../routes';
-import { sendToRenderer } from '../base/bridge_handler';
 
 /**
  * A view is a web page run in a separate window.
@@ -51,15 +49,6 @@ export abstract class View {
         throw new Error(`Unknown source type ${this.source}`);
     }
     this.browserWindow.on('ready-to-show', () => this.browserWindow.show());
-  };
-
-  send = <T extends typeof events[number]>(
-    message: T,
-    param: MessageParam[T]
-  ) => {
-    // force serialize
-    const data = JSON.parse(JSON.stringify(param));
-    sendToRenderer(this.browserWindow, message, data);
   };
 }
 

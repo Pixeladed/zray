@@ -20,7 +20,9 @@ export function SearchPage({
   profiles: readonly IntegrationProfile[];
   results: readonly SearchResult[];
 }) {
-  useEffect(init, [init]);
+  useEffect(() => {
+    init();
+  }, [init]);
 
   const [value, setValue] = useState('');
   const triggerSearch = useDebouncedCallback(onSearch, 500);
