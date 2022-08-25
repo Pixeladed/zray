@@ -24,7 +24,7 @@
     "eject:web": "react-scripts eject",
     "build:app": "spack",
     "start:app": "electron build/index.js",
-    "start:app:watch": "nodemon -e json,js,ts --watch ./src/native --watch ./node_modules/@highbeam --exec \"yarn start:app\"",
+    "start:app:watch": "nodemon -e json,js,ts --watch ./src/native --watch ./node_modules/@highbeam --exec \"npm-run-all build:app start:app\"",
     "dev": "cross-env BROWSER=none npm-run-all --parallel start:web start:app:watch",
     "build": "npm-run-all build:web build:app",
     "prebundle": "cp package.json build/package.json",
