@@ -24,13 +24,12 @@
     "test:web": "react-scripts test",
     "eject:web": "react-scripts eject",
     "build:app": "spack",
-    "start:app": "electron build/index.js",
+    "start:app": "electron build/native/index.js",
     "start:app:watch": "nodemon -e json,js,ts --watch ./src/native --watch ./node_modules/@highbeam --exec \"npm-run-all build:app start:app\"",
     "start:app:dev": "wait-on http://localhost:8080 && yarn start:app:watch",
     "dev": "cross-env BROWSER=none npm-run-all --parallel start:web start:app:dev",
     "build": "npm-run-all build:web build:app",
-    "prebundle": "ts-node src/tools/bundle_manifest.ts",
-    "bundle": "electron-builder build --project build --win portable"
+    "bundle": "electron-builder build -c.extraMetadata.main=build/native/index.js --win portable"
   },
   "eslintConfig": {
     "extends": [
@@ -76,6 +75,9 @@
     "got": "11.8.5"
   },
   "build": {
-    "extends": null
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ]
   }
 }

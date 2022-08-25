@@ -14,6 +14,6 @@ module.exports = config({
     index: __dirname + '/src/native/entry.ts',
   },
   output: {
-    path: __dirname + '/build',
+    path: __dirname + '/build/native',
   },
 });
