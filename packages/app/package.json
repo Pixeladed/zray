@@ -4,9 +4,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@highbeam/components": "file:../components",
-    "@highbeam/interface": "file:../interface",
-    "@highbeam/utils": "file:../utils",
     "@slack/web-api": "^6.7.2",
     "classnames": "^2.3.1",
     "electron-store": "^8.1.0",
@@ -28,7 +25,7 @@
     "dev": "cross-env BROWSER=none npm-run-all --parallel start:web start:app:watch",
     "build": "npm-run-all build:web build:app",
     "prebundle": "cp package.json build/package.json",
-    "bundle": "electron-packager build --overwrite --out bundle"
+    "bundle": "electron-builder build --project build"
   },
   "eslintConfig": {
     "extends": [
@@ -59,7 +56,8 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "cross-env": "^7.0.3",
-    "electron": "^20.0.1",
+    "electron": "20.0.1",
+    "electron-builder": "^23.3.3",
     "electron-packager": "^16.0.0",
     "nodemon": "^2.0.19",
     "npm-run-all": "^4.1.5",
@@ -69,9 +67,9 @@
   },
   "resolutions": {
     "nth-check": "2.0.1",
-    "got": "11.8.5",
-    "@highbeam/components": "file:../components",
-    "@highbeam/interface": "file:../interface",
-    "@highbeam/utils": "file:../utils"
+    "got": "11.8.5"
+  },
+  "build": {
+    "extends": null
   }
 }
