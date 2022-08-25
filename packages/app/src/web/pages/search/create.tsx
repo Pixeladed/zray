@@ -33,6 +33,7 @@ export const createSearchPage = ({
       <SearchPage
         results={store.results}
         loading={store.loading}
+        integrations={integrationStore.integrations}
         profiles={integrationStore.profiles}
         onConnectTool={navigationService.openSettings}
         init={controller.init}

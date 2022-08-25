@@ -31,7 +31,10 @@ export class SearchController {
   ) {}
 
   init = async () => {
-    await this.integrationController.loadProfiles();
+    await Promise.all([
+      this.integrationController.loadProfiles(),
+      this.integrationController.loadIntegrations(),
+    ]);
   };
 
   search = async (query: string) => {

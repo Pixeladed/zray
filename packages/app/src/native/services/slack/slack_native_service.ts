@@ -112,7 +112,9 @@ export class SlackNativeService implements NativeIntegration {
           msg.permalink,
           'expected message permalink to exist'
         ),
-        author: {},
+        author: {
+          name: msg.username ? `@${msg.username}` : 'Unknown',
+        },
         channel: `#${msg.channel?.name}`,
       });
     });
@@ -128,7 +130,11 @@ export class SlackNativeService implements NativeIntegration {
           file.url_private,
           'expected file private url to exist'
         ),
-        fileType: file.pretty_type,
+        fileType:
+          file.pretty_type ||
+          file.filetype ||
+          file.mimetype ||
+          'Unknown file type',
       });
     });
 

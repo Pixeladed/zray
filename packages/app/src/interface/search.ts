@@ -10,11 +10,11 @@ export type BaseSearchResult = {
 export type FileSearchResult = BaseSearchResult & {
   type: 'file';
   title: string;
-  fileType?: string;
+  fileType: string;
 };
 
 export type SearchResultUser = {
-  name?: string;
+  name: string;
   image?: string;
 };
 
