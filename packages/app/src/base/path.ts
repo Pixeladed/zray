@@ -2,7 +2,7 @@ import { Distinct } from './ts_utils';
 
 export class Path {
   static resource: PathGenerator = path => {
-    return `${path}` as MintedPath;
+    return `.${path}` as MintedPath;
   };
 }
 
