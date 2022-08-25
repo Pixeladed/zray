@@ -50,9 +50,10 @@ export function SearchPage({
 
   return (
     <div className={styles.page}>
+      <div className={styles.titleBar} />
       {!!profiles.length && (
         <div className={styles.profilesContainer}>
-          <p>
+          <p className={styles.profilesDescription}>
             Searching {profiles.length} connected tools.{' '}
             <TappableArea onClick={onConnectTool}>
               <span className={styles.addMore}>Add another</span>
