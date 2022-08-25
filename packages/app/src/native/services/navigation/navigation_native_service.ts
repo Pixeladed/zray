@@ -5,7 +5,7 @@ import { Shell } from 'electron';
 export class NavigationNativeService {
   constructor(private readonly shell: Pick<Shell, 'openExternal'>) {}
 
-  openExterenal: Handler<OpenExternalEndpoint> = async (event, { url }) => {
+  openExterenal: Handler<OpenExternalEndpoint> = async ({ url }) => {
     this.shell.openExternal(url);
     return {};
   };

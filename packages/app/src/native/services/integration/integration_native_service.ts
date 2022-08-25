@@ -14,7 +14,7 @@ import { SearchProvider } from '../search/search_native_service';
 export class IntegrationNativeService {
   constructor(private readonly integrations: readonly NativeIntegration[]) {}
 
-  connect: Handler<ConnectIntegrationEndpoint> = async (event, param) => {
+  connect: Handler<ConnectIntegrationEndpoint> = async param => {
     const integration = this.integrations.find(({ id }) => id === param.id);
 
     if (!integration) {

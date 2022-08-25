@@ -10,7 +10,6 @@ import {
 } from '../../interface/bridge/endpoints';
 
 export type Handler<E extends Endpoint<any, any, any>> = (
-  event: IpcMainInvokeEvent,
   req: EndpointReq<E>
 ) => Promise<EndpointRes<E>>;
 export type HandlerRegistrar = <E extends Endpoints>(
@@ -31,7 +30,7 @@ export const createHandlerReigstrar = (
     );
     ipcMain.removeHandler(name);
     ipcMain.handle(name, async (event, req) => {
-      const result = await handler(event, req);
+      const result = await handler(req);
       const response = JSON.parse(JSON.stringify(result));
       return response;
     });
