@@ -1,13 +1,13 @@
 import { ClientFactory } from '@highbeam/interface';
 import { app, ipcMain, shell } from 'electron';
-import { config } from '../base/config';
-import { App } from './app';
-import { createHandlerReigstrar } from './base/bridge_handler';
-import { createIntegrationNativeService } from './services/integration/create';
-import { NavigationNativeService } from './services/navigation/navigation_native_service';
-import { createSearchNativeService } from './services/search/create';
-import { createSlackNativeService } from './services/slack/create';
-import { WindowSource } from './views/view';
+import { config } from './base/config';
+import { App } from './native/app';
+import { createHandlerReigstrar } from './native/base/bridge_handler';
+import { createIntegrationNativeService } from './native/services/integration/create';
+import { NavigationNativeService } from './native/services/navigation/navigation_native_service';
+import { createSearchNativeService } from './native/services/search/create';
+import { createSlackNativeService } from './native/services/slack/create';
+import { WindowSource } from './native/views/view';
 
 const baseSource: WindowSource = app.isPackaged
   ? { type: 'bundled', path: 'index.html' }

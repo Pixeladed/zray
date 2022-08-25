@@ -1,5 +1,6 @@
 {
   "name": "@highbeam/app",
+  "productName": "Highbeam",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,7 +9,6 @@
     "@highbeam/utils": "^0.1.0",
     "@slack/web-api": "^6.7.2",
     "classnames": "^2.3.1",
-    "electron": "^20.0.1",
     "electron-store": "^8.1.0",
     "mobx": "^6.6.1",
     "mobx-react": "^7.5.2",
@@ -23,12 +23,14 @@
     "test:web": "react-scripts test",
     "eject:web": "react-scripts eject",
     "build:app": "swc src -d build --copy-files && spack",
-    "start:app": "electron build/native/entry.js",
-    "start:app:watch": "nodemon -e json,js,ts --watch ./src/native --watch ./node_modules/@highbeam --exec \"yarn start:app\"",
+    "postbuild:app": "cp package.json build/package.json && mv build/native.js build/index.js",
+    "start:app": "electron build/index.js",
+    "start:app:watch": "nodemon -e json,js,ts --watch ./src/native --watch ./src/native.ts --watch ./node_modules/@highbeam --exec \"yarn start:app\"",
     "prestart:app": "yarn build:app",
     "dev": "cross-env BROWSER=none npm-run-all --parallel start:web start:app:watch",
-    "start": "npm-run-all build:web start:app",
-    "build": "npm-run-all --parallel build:web build:app"
+    "build": "npm-run-all build:web build:app",
+    "bundle": "electron-packager build --out bundle",
+    "prebundle": "yarn build"
   },
   "eslintConfig": {
     "extends": [
@@ -59,6 +61,8 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "cross-env": "^7.0.3",
+    "electron": "^20.0.1",
+    "electron-packager": "^16.0.0",
     "nodemon": "^2.0.19",
     "npm-run-all": "^4.1.5",
     "react-scripts": "5.0.1",
