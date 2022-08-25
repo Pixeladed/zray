@@ -10,7 +10,7 @@ import { createSlackNativeService } from './services/slack/create';
 import { WindowSource } from './views/view';
 
 const baseSource: WindowSource = app.isPackaged
-  ? { type: 'bundled', path: 'index.html' }
+  ? { type: 'bundled', path: 'build/index.html' }
   : { type: 'server', url: 'http://localhost:8080' };
 
 const registerHandler = createHandlerReigstrar(ipcMain);
