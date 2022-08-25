@@ -5,9 +5,4 @@ export class Routes {
   static addIntegration = () => `${Routes.integrations()}/add`;
   static slackIntegrationCallback = () =>
     `${Routes.integrations()}/slack/callback`;
-
-  static href = (source: string, path: string) => {
-    const url = new URL(source);
-    return `${url.origin}#${path}`;
-  };
 }
