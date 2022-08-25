@@ -82,12 +82,10 @@ const SearchResultCard = ({
   return (
     <TappableArea onClick={onClick}>
       <div className={styles.resultCard}>
-        <h3 className={styles.resultCardTitle}>{result.title}</h3>
-        {!!result.description && (
-          <p className={styles.resultCardDescription}>
-            <span>{result.type}</span> &middot; {result.description}
-          </p>
-        )}
+        <h3 className={styles.resultCardTitle}>{result.type}</h3>
+        <p className={styles.resultCardDescription}>
+          <span>{result.type}</span> &middot; {result.type}
+        </p>
       </div>
     </TappableArea>
   );
