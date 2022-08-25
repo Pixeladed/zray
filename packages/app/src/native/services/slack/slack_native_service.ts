@@ -6,8 +6,8 @@ import { NativeIntegration } from '../integration/integration_native_service';
 import { IntegrationProfile } from '../../../interface/intergration';
 import { WebClient } from '@slack/web-api';
 import { Assert, exists } from '@highbeam/utils';
-import { SearchResult } from '../search/search_result';
 import { Path } from '../../../base/path';
+import { SearchResult } from '../../../interface/search';
 
 export class SlackNativeService implements NativeIntegration {
   id = 'com.builtin.slack';

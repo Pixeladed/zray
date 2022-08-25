@@ -1,9 +1,10 @@
 import { Button, TappableArea } from '@highbeam/components';
 import { useEffect, useState, ChangeEvent } from 'react';
 import { IntegrationProfile } from '../../../interface/intergration';
-import { SearchResult } from '../../../native/services/search/search_result';
 import { useDebouncedCallback } from 'use-debounce';
 import styles from './search.module.css';
+import { SearchResult } from '../../../interface/search';
+import { SearchResultCard } from './search_result_card/search_result_card';
 
 export function SearchPage({
   onConnectTool,
@@ -71,22 +72,3 @@ export function SearchPage({
     </div>
   );
 }
-
-const SearchResultCard = ({
-  result,
-  onClick,
-}: {
-  result: SearchResult;
-  onClick: () => void;
-}) => {
-  return (
-    <TappableArea onClick={onClick}>
-      <div className={styles.resultCard}>
-        <h3 className={styles.resultCardTitle}>{result.type}</h3>
-        <p className={styles.resultCardDescription}>
-          <span>{result.type}</span> &middot; {result.type}
-        </p>
-      </div>
-    </TappableArea>
-  );
-};
