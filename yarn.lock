@@ -1241,6 +1241,17 @@
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
 
+"@highbeam/components@file:packages/components":
+  version "0.1.0"
+
+"@highbeam/interface@file:packages/interface":
+  version "0.1.0"
+  dependencies:
+    cross-fetch "^3.1.5"
+
+"@highbeam/utils@file:packages/utils":
+  version "0.1.0"
+
 "@humanwhocodes/config-array@^0.10.4":
   version "0.10.4"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.10.4.tgz#01e7366e57d2ad104feea63e72248f22015c520c"

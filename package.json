@@ -3,7 +3,6 @@
   "private": true,
   "scripts": {
     "format": "prettier -w .",
-    "postinstall": "lerna bootstrap && lerna link",
     "dep": "lerna add",
     "packages": "lerna list --all",
     "exec": "lerna run",
