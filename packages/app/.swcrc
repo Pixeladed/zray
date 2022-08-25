@@ -7,7 +7,8 @@
     "reportWebVitals.ts",
     "setupTests.ts",
     "favicon.ico",
-    "global.css"
+    "global.css",
+    "tools/*"
   ],
   "module": {
     "type": "commonjs"
