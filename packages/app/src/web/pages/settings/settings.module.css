@@ -43,6 +43,6 @@
 }
 
 .sidebarLink.active {
-    background: var(--colorPrimary);
+    color: var(--colorPrimary);
     font-weight: 600;
 }
