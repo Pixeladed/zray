@@ -32,7 +32,7 @@ export abstract class View {
       ...this.options,
       webPreferences: {
         ...this.options.webPreferences,
-        preload: __dirname + '/../preload.js',
+        preload: __dirname + '/preload.js',
       },
     });
     this.browserWindow = win;

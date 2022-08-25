@@ -22,15 +22,13 @@
     "build:web": "react-scripts build",
     "test:web": "react-scripts test",
     "eject:web": "react-scripts eject",
-    "build:app": "swc src -d build --copy-files && spack",
-    "postbuild:app": "cp package.json build/package.json && mv build/native.js build/index.js",
+    "build:app": "spack",
     "start:app": "electron build/index.js",
-    "start:app:watch": "nodemon -e json,js,ts --watch ./src/native --watch ./src/native.ts --watch ./node_modules/@highbeam --exec \"yarn start:app\"",
-    "prestart:app": "yarn build:app",
+    "start:app:watch": "nodemon -e json,js,ts --watch ./src/native --watch ./node_modules/@highbeam --exec \"yarn start:app\"",
     "dev": "cross-env BROWSER=none npm-run-all --parallel start:web start:app:watch",
     "build": "npm-run-all build:web build:app",
-    "bundle": "electron-packager build --out bundle",
-    "prebundle": "yarn build"
+    "prebundle": "cp package.json build/package.json",
+    "bundle": "electron-packager build --out bundle"
   },
   "eslintConfig": {
     "extends": [
