@@ -29,7 +29,7 @@ export abstract class View {
         });
         break;
       case 'server':
-        this.browserWindow.loadURL(`${this.source.url}#/${this.source.hash}`);
+        this.browserWindow.loadURL(`${this.source.url}#${this.source.hash}`);
         break;
       default:
         throw new Error(`Unknown source type ${this.source}`);
