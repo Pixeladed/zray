@@ -28,7 +28,7 @@
     "dev": "cross-env BROWSER=none npm-run-all --parallel start:web start:app:watch",
     "build": "npm-run-all build:web build:app",
     "prebundle": "cp package.json build/package.json",
-    "bundle": "electron-packager build --out bundle"
+    "bundle": "electron-packager build --overwrite --out bundle"
   },
   "eslintConfig": {
     "extends": [
@@ -69,6 +69,9 @@
   },
   "resolutions": {
     "nth-check": "2.0.1",
-    "got": "11.8.5"
+    "got": "11.8.5",
+    "@highbeam/components": "file:../components",
+    "@highbeam/interface": "file:../interface",
+    "@highbeam/utils": "file:../utils"
   }
 }
