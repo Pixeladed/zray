@@ -29,7 +29,8 @@
     "start:app:dev": "wait-on http://localhost:8080 && yarn start:app:watch",
     "dev": "cross-env BROWSER=none npm-run-all --parallel start:web start:app:dev",
     "build": "npm-run-all build:web build:app",
-    "bundle": "electron-builder build -c.extraMetadata.main=build/native/index.js --mac --win portable"
+    "bundle": "electron-builder build -c.extraMetadata.main=build/native/index.js --mac --win portable",
+    "clean": "ts-node src/tools/clean"
   },
   "eslintConfig": {
     "extends": [
