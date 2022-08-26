@@ -11,5 +11,5 @@ export type Events = NewProfileEvent;
 
 export type NewProfileEvent = Event<
   'integration:profile:new',
-  { profile: ProfileInfo }
+  { profile: ProfileInfo; profiles: readonly ProfileInfo[] }
 >;

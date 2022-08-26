@@ -1,5 +1,6 @@
 import { OpenSettingsEndpoint } from '../interface/bridge/endpoints';
-import { Handler } from './base/bridge_handler';
+import { Event, EventData, EventName } from '../interface/bridge/events';
+import { Broadcaster, Handler } from './base/bridge_handler';
 import { SearchView } from './views/search/search_view';
 import { SettingsView } from './views/settings/settings_view';
 import { WindowSource } from './views/view';
@@ -40,5 +41,10 @@ export class App {
     }
 
     return {};
+  };
+
+  broadcast: Broadcaster = (name, data) => {
+    this.searchView?.send(name, data);
+    this.settingsView?.send(name, data);
   };
 }

@@ -1,5 +1,5 @@
 import { Assert } from '@highbeam/utils';
-import { BrowserWindow, IpcMain } from 'electron';
+import { IpcMain } from 'electron';
 import { endpointAllowlist } from '../../interface/bridge/bridge';
 import {
   Endpoint,
@@ -37,3 +37,8 @@ export const createHandlerReigstrar = (
     });
   };
 };
+
+export type Broadcaster = <E extends Event<any, any>>(
+  name: EventName<E>,
+  data: EventData<E>
+) => void;

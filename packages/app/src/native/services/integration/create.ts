@@ -1,3 +1,4 @@
+import { Broadcaster } from '../../base/bridge_handler';
 import {
   IntegrationNativeService,
   NativeIntegration,
@@ -5,10 +6,15 @@ import {
 
 export const createIntegrationNativeService = ({
   integrations,
+  broadcast,
 }: {
   integrations: readonly NativeIntegration[];
+  broadcast: Broadcaster;
 }) => {
-  const integrationNativeService = new IntegrationNativeService(integrations);
+  const integrationNativeService = new IntegrationNativeService(
+    integrations,
+    broadcast
+  );
 
   return { integrationNativeService };
 };

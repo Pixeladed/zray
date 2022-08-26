@@ -13,6 +13,8 @@ const baseSource: WindowSource = app.isPackaged
   ? { type: 'bundled', path: 'build/index.html' }
   : { type: 'server', url: 'http://localhost:8080' };
 
+const instance = new App(baseSource);
+
 const registerHandler = createHandlerReigstrar(ipcMain);
 export const clientFactory = new ClientFactory(config.apiOrigin);
 const { slackNativeService } = createSlackNativeService(clientFactory);
@@ -22,11 +24,11 @@ const integrations = [slackNativeService];
 
 const { integrationNativeService } = createIntegrationNativeService({
   integrations,
+  broadcast: instance.broadcast,
 });
 const { searchNativeService } = createSearchNativeService({
   providers: integrations,
 });
-const instance = new App(baseSource);
 
 registerHandler('integration:connect', integrationNativeService.connect);
 registerHandler('integration:list', integrationNativeService.list);
