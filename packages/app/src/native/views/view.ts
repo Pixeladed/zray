@@ -1,4 +1,5 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
+import { Event, EventData, EventName } from '../../interface/bridge/events';
 
 /**
  * A view is a web page run in a separate window.
@@ -35,6 +36,13 @@ export abstract class View {
         throw new Error(`Unknown source type ${this.source}`);
     }
     this.browserWindow.on('ready-to-show', () => this.browserWindow.show());
+  };
+
+  send = <E extends Event<any, any>>(
+    name: EventName<E>,
+    data: EventData<E>
+  ) => {
+    this.browserWindow.webContents.send(name, data);
   };
 }
 
