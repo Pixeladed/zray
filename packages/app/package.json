@@ -80,7 +80,8 @@
     "files": [
       "build/**/*",
       "node_modules/**/*"
-    ]
+    ],
+    "appId": "comm.highbeam.app"
   },
   "homepage": "./"
 }
