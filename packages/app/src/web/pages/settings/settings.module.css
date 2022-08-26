@@ -1,48 +1,48 @@
 .titleBar {
-    height: env(titlebar-area-height, 40px);
-    top: env(titlebar-area-y, 0);
-    -webkit-app-region: drag;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--colorBackgroundDarker);
+  height: env(titlebar-area-height, 40px);
+  top: env(titlebar-area-y, 0);
+  -webkit-app-region: drag;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--colorBackgroundDarker);
 }
 
 .sidebarAndContent {
-    display: flex;
+  display: flex;
 }
 
 .sidebar {
-    width: calc(var(--baseline) * 24);
-    height: calc(100vh - env(titlebar-area-height));
-    background: var(--colorBackground);
-    border-right: 1px solid var(--colorBorder);
+  width: calc(var(--baseline) * 24);
+  height: calc(100vh - env(titlebar-area-height));
+  background: var(--colorBackground);
+  border-right: 1px solid var(--colorBorder);
 }
 
 .content {
-    flex: 1;
+  flex: 1;
 }
 
 .titleContainer {
-    border-bottom: 1px solid var(--colorBorder);
-    padding: var(--spaceSmall);
-    background: var(--colorBackgroundDarker);
+  border-bottom: 1px solid var(--colorBorder);
+  padding: var(--spaceSmall);
+  background: var(--colorBackgroundDarker);
 }
 
 .title {
-    margin: 0;
-    color: var(--colorForeground)
+  margin: 0;
+  color: var(--colorForeground);
 }
 
 .sidebarLink {
-    display: block;
-    padding: var(--spaceSmall);
-    border-bottom: 1px solid var(--colorBorder);
-    text-decoration: none;
-    color: var(--colorForeground);
+  display: block;
+  padding: var(--spaceSmall);
+  border-bottom: 1px solid var(--colorBorder);
+  text-decoration: none;
+  color: var(--colorForeground);
 }
 
 .sidebarLink.active {
-    color: var(--colorPrimary);
-    font-weight: 600;
+  color: var(--colorPrimary);
+  font-weight: 600;
 }

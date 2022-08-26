@@ -1,41 +1,41 @@
 .resultCard {
-    width: 100%;
-    padding: var(--spacexSmall) var(--spaceMedium);
-    border-bottom: 1px solid var(--colorBorder);
-    color: var(--colorForeground);
-    transition: background 0.15s ease-in-out;
-    text-align: left;
+  width: 100%;
+  padding: var(--spacexSmall) var(--spaceMedium);
+  border-bottom: 1px solid var(--colorBorder);
+  color: var(--colorForeground);
+  transition: background 0.15s ease-in-out;
+  text-align: left;
 }
-  
+
 .resultCard:hover {
-    background: var(--colorBackgroundDarker);
+  background: var(--colorBackgroundDarker);
 }
 
 .resultCard:hover .integration {
-    background: var(--colorBackground);
+  background: var(--colorBackground);
 }
 
 .integration {
-    display: inline-flex;
-    gap: var(--spacexxxSmall);
-    align-items: center;
-    margin-bottom: var(--spacexxSmall);
-    text-transform: capitalize;
-    padding: 0.25em;
-    border-radius: 0.1em;
-    background: var(--colorBackgroundDarker);
+  display: inline-flex;
+  gap: var(--spacexxxSmall);
+  align-items: center;
+  margin-bottom: var(--spacexxSmall);
+  text-transform: capitalize;
+  padding: 0.25em;
+  border-radius: 0.1em;
+  background: var(--colorBackgroundDarker);
 }
 
 .integrationIcon {
-    width: 1em;
-    height: 1em;
+  width: 1em;
+  height: 1em;
 }
 
 .resultCardTitle {
-    margin: var(--spacexxxSmall) 0 var(--spacexxSmall) 0;
+  margin: var(--spacexxxSmall) 0 var(--spacexxSmall) 0;
 }
-  
+
 .resultCardDescription {
-    margin: 0;
-    font-size: 0.8em;
+  margin: 0;
+  font-size: 0.8em;
 }

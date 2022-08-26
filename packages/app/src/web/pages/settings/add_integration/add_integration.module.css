@@ -1,24 +1,24 @@
 .integrationList {
-    display: flex;
-    gap: var(--spacexSmall);
-    padding: var(--spaceSmall);
+  display: flex;
+  gap: var(--spacexSmall);
+  padding: var(--spaceSmall);
 }
 
 .integration {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacexSmall);
-    align-items: center;
-    padding: var(--spacexxSmall) var(--spacexSmall);
-    border-radius: var(--spacexxSmall);
-    border: 1px solid var(--colorBorder);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacexSmall);
+  align-items: center;
+  padding: var(--spacexxSmall) var(--spacexSmall);
+  border-radius: var(--spacexxSmall);
+  border: 1px solid var(--colorBorder);
 }
 
 .integrationIcon {
-    width: var(--spaceLarge);
-    height: var(--spaceLarge);
+  width: var(--spaceLarge);
+  height: var(--spaceLarge);
 }
 
 .integrationLabel {
-    margin: 0;
+  margin: 0;
 }
