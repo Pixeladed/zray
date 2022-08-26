@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "build/index.js",
-  "dependencies": {
+  "peerDependencies": {
     "cross-fetch": "^3.1.5"
   },
   "scripts": {
