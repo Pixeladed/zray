@@ -81,7 +81,10 @@
       "build/**/*",
       "node_modules/**/*"
     ],
-    "appId": "comm.highbeam.app"
+    "appId": "comm.highbeam.app",
+    "directories": {
+      "buildResources": "build"
+    }
   },
   "homepage": "./"
 }
