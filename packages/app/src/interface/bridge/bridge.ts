@@ -5,6 +5,7 @@ import {
   EndpointRes,
   Endpoints,
 } from './endpoints';
+import { Event, EventData, EventName, Events } from './events';
 
 export const endpointAllowlist: EndpointName<Endpoints>[] = [
   'navigation:settings:open',
@@ -15,11 +16,18 @@ export const endpointAllowlist: EndpointName<Endpoints>[] = [
   'search:global',
 ];
 
+export const eventAllowlist: EventName<Events>[] = ['integration:profile:new'];
+
 export type Bridge = {
   request: <E extends Endpoint<any, any, any>>(
     name: EndpointName<E>,
     req: BridgeRequest<E>
   ) => Promise<EndpointRes<E>>;
+
+  on: <E extends Event<any, any>>(
+    name: EventName<E>,
+    callback: (data: EventData<E>) => void
+  ) => void;
 };
 
 export type BridgeRequest<E extends Endpoint<any, any, any>> = {
