@@ -26,12 +26,8 @@ export class IntegrationNativeService {
     }
 
     const profile = await integration.connect();
-    const { profiles } = await this.listProfiles({});
 
-    this.broadcast<NewProfileEvent>('integration:profile:new', {
-      profile,
-      profiles,
-    });
+    this.broadcast<NewProfileEvent>('integration:profile:new', { profile });
 
     return { profile };
   };
