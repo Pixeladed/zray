@@ -13,10 +13,11 @@ export const SettingsPage = ({
   navigationService: NavigationService;
 }) => {
   return (
-    <div>
-      <div className={styles.titleBar} />
-      <div className={styles.titleContainer}>
-        <h2 className={styles.title}>Settings</h2>
+    <div className={styles.container}>
+      <div className={styles.titleBar}>
+        <div className={styles.titleContainer}>
+          <h2 className={styles.title}>Settings</h2>
+        </div>
       </div>
       <div className={styles.sidebarAndContent}>
         <aside className={styles.sidebar}>
