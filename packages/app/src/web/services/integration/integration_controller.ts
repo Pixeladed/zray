@@ -50,7 +50,6 @@ export class IntegrationController {
     this.bridgeClient.on<RemovedProfileEvent>(
       'integration:profile:removed',
       () => {
-        console.log('profile removed');
         this.loadProfiles();
       }
     );

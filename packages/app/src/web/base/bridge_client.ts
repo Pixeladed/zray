@@ -18,7 +18,7 @@ export class BridgeClient {
   ): Promise<EndpointRes<E>> => {
     const bridge = this.getBridge();
     const res = await bridge.request(name, req);
-    console.groupCollapsed(`[BridgeClient] ${name}`);
+    console.groupCollapsed(`[BridgeClient] request ${name}`);
     console.log('Request');
     console.dir(req);
     console.log('Response');
@@ -37,8 +37,12 @@ export class BridgeClient {
     name: EventName<E>,
     callback: (data: EventData<E>) => void
   ) => {
-    console.log('listening on', name);
     const bridge = this.getBridge();
-    return bridge.on(name, callback);
+    return bridge.on(name, data => {
+      console.groupCollapsed(`[BridgeClient] event ${name}`);
+      console.dir(data);
+      console.groupEnd();
+      callback(data);
+    });
   };
 }
