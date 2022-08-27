@@ -19,8 +19,15 @@
   border: 1px solid var(--colorBorder);
   padding: var(--spacexSmall);
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profileInfo {
+  display: flex;
   gap: var(--spacexSmall);
   align-items: center;
+  justify-content: space-between;
 }
 
 .profileIcon {

@@ -1,19 +1,15 @@
-import { NewProfileEvent } from '../../../../../interface/bridge/events';
-import { BridgeClient } from '../../../../base/bridge_client';
+import { IntegrationProfile } from '../../../../../interface/intergration';
 import { IntegrationController } from '../../../../services/integration/integration_controller';
 
 export class IntegrationListController {
-  constructor(
-    private readonly integrationController: IntegrationController,
-    private readonly bridgeClient: BridgeClient
-  ) {}
+  constructor(private readonly integrationController: IntegrationController) {}
 
   init = () => {
     this.integrationController.loadIntegrations();
     this.integrationController.loadProfiles();
+  };
 
-    this.bridgeClient.on<NewProfileEvent>('integration:profile:new', () => {
-      this.integrationController.loadProfiles();
-    });
+  remove = (profile: IntegrationProfile) => {
+    this.integrationController.remove(profile);
   };
 }

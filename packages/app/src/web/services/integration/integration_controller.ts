@@ -4,11 +4,15 @@ import {
   ConnectIntegrationEndpoint,
   ListIntegrationsEndpoint,
   ListProfilesEndpoint,
+  RemoveProfileEndpoint,
 } from '../../../interface/bridge/endpoints';
+import {
+  NewProfileEvent,
+  RemovedProfileEvent,
+} from '../../../interface/bridge/events';
 import {
   IntegrationInfo,
   IntegrationProfile,
-  ProfileInfo,
 } from '../../../interface/intergration';
 import { BridgeClient } from '../../base/bridge_client';
 
@@ -39,7 +43,18 @@ export class IntegrationController {
   constructor(
     private readonly store: IntegrationStore,
     private readonly bridgeClient: BridgeClient
-  ) {}
+  ) {
+    this.bridgeClient.on<NewProfileEvent>('integration:profile:new', () => {
+      this.loadProfiles();
+    });
+    this.bridgeClient.on<RemovedProfileEvent>(
+      'integration:profile:removed',
+      () => {
+        console.log('profile removed');
+        this.loadProfiles();
+      }
+    );
+  }
 
   loadIntegrations = async () => {
     const res = await this.bridgeClient.request<ListIntegrationsEndpoint>(
@@ -69,8 +84,15 @@ export class IntegrationController {
       { id }
     );
   };
+
+  remove = async (profile: IntegrationProfile) => {
+    return await this.bridgeClient.request<RemoveProfileEndpoint>(
+      'integration:profiles:remove',
+      { integrationId: profile.integrationId, profileId: profile.id }
+    );
+  };
 }
 
-export type ProfileWithIntegration = ProfileInfo & {
+export type ProfileWithIntegration = IntegrationProfile & {
   integration: IntegrationInfo;
 };

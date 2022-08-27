@@ -25,7 +25,8 @@ export type NavigationEndpoints = OpenSettingsEndpoint | OpenExternalEndpoint;
 export type IntegrationEndpoints =
   | ListIntegrationsEndpoint
   | ListProfilesEndpoint
-  | ConnectIntegrationEndpoint;
+  | ConnectIntegrationEndpoint
+  | RemoveProfileEndpoint;
 export type SearchEndpoints = GlobalSearchEndpoint;
 
 export type OpenSettingsEndpoint = Endpoint<'navigation:settings:open', {}, {}>;
@@ -52,6 +53,12 @@ export type ListProfilesEndpoint = Endpoint<
   'integration:profiles:list',
   {},
   { profiles: readonly IntegrationProfile[] }
+>;
+
+export type RemoveProfileEndpoint = Endpoint<
+  'integration:profiles:remove',
+  { integrationId: string; profileId: string },
+  {}
 >;
 
 export type GlobalSearchEndpoint = Endpoint<

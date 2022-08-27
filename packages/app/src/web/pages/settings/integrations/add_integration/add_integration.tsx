@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { TappableArea, Button } from '@highbeam/components';
 import { IntegrationInfo } from '../../../../../interface/intergration';
 import styles from './add_integration.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Routes } from '../../../../../routes';
 
 export const AddIntegrationPage = ({
@@ -12,11 +12,18 @@ export const AddIntegrationPage = ({
 }: {
   init: () => void;
   integrations: readonly IntegrationInfo[];
-  onConnect: (id: string) => void;
+  onConnect: (id: string) => Promise<any>;
 }) => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     init();
   }, [init]);
+
+  const handleClick = (integration: IntegrationInfo) => {
+    onConnect(integration.id);
+    navigate(Routes.integrations().absolute);
+  };
 
   return (
     <div className={styles.container}>
@@ -24,7 +31,7 @@ export const AddIntegrationPage = ({
       <div className={styles.integrationList}>
         {integrations.map(integration => (
           <TappableArea
-            onClick={() => onConnect(integration.id)}
+            onClick={() => handleClick(integration)}
             key={integration.name}
           >
             <div className={styles.integration}>

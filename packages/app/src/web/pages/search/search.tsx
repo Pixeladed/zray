@@ -72,7 +72,9 @@ export function SearchPage({
           <p className={styles.emptyLead}>
             Looks like you don&apos;t have any tools connected
           </p>
-          <Button onClick={onConnectTool}>Connect a tool</Button>
+          <Button variant="primary" onClick={onConnectTool}>
+            Connect a tool
+          </Button>
         </div>
       )}
       {results.map(result => (

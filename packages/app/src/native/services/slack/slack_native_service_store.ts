@@ -23,8 +23,7 @@ export class SlackNativeStore {
     return profile;
   };
 
-  removeProfile = (profile: Pick<SlackProfile, 'teamId' | 'userId'>) => {
-    const id = this.getProfileId(profile);
+  removeProfile = (id: string) => {
     const profilesById = this.store.get('profilesById');
     delete profilesById[id];
     this.store.set('profilesById', profilesById);

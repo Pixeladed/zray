@@ -1,9 +1,14 @@
+import { Assert } from '@highbeam/utils';
 import {
   ConnectIntegrationEndpoint,
   ListIntegrationsEndpoint,
   ListProfilesEndpoint,
+  RemoveProfileEndpoint,
 } from '../../../interface/bridge/endpoints';
-import { NewProfileEvent } from '../../../interface/bridge/events';
+import {
+  NewProfileEvent,
+  RemovedProfileEvent,
+} from '../../../interface/bridge/events';
 import {
   IntegrationInfo,
   IntegrationProfile,
@@ -53,9 +58,21 @@ export class IntegrationNativeService {
 
     return { profiles: profiles.flat() };
   };
+
+  remove: Handler<RemoveProfileEndpoint> = async param => {
+    const { integrationId, profileId } = param;
+    const integration = Assert.exists(
+      this.integrations.find(integration => integration.id === integrationId),
+      'expected integration to exist'
+    );
+    integration.removeProfile(profileId);
+    this.broadcast<RemovedProfileEvent>('integration:profile:removed', {});
+    return {};
+  };
 }
 
 export interface NativeIntegration extends IntegrationInfo, SearchProvider {
   connect(): Promise<IntegrationProfile>;
   listProfiles: () => Promise<readonly ProfileInfo[]>;
+  removeProfile: (profileId: string) => Promise<void>;
 }

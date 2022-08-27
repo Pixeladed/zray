@@ -12,13 +12,11 @@ export const createIntegrationsListPage = ({
   const { integrationController, integrationStore } = createIntegrationService({
     bridgeClient,
   });
-  const controller = new IntegrationListController(
-    integrationController,
-    bridgeClient
-  );
+  const controller = new IntegrationListController(integrationController);
   const IntegrationsListPageImpl = observer(() => (
     <IntegrationsListPage
       init={controller.init}
+      onRemove={controller.remove}
       profiles={integrationStore.profilesWithIntegration.get()}
     />
   ));

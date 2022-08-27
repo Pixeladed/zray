@@ -13,10 +13,14 @@ export const endpointAllowlist: EndpointName<Endpoints>[] = [
   'integration:connect',
   'integration:list',
   'integration:profiles:list',
+  'integration:profiles:remove',
   'search:global',
 ];
 
-export const eventAllowlist: EventName<Events>[] = ['integration:profile:new'];
+export const eventAllowlist: EventName<Events>[] = [
+  'integration:profile:new',
+  'integration:profile:removed',
+];
 
 export type Bridge = {
   request: <E extends Endpoint<any, any, any>>(

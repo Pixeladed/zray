@@ -3,7 +3,10 @@ import { SlackOAuthView } from '../../views/slack_oauth/slack_oauth_view';
 import { Slack } from '@highbeam/interface';
 import { SlackNativeStore } from './slack_native_service_store';
 import { NativeIntegration } from '../integration/integration_native_service';
-import { IntegrationProfile } from '../../../interface/intergration';
+import {
+  IntegrationProfile,
+  ProfileInfo,
+} from '../../../interface/intergration';
 import { WebClient } from '@slack/web-api';
 import { Assert, exists } from '@highbeam/utils';
 import { Path } from '../../../base/path';
@@ -139,6 +142,10 @@ export class SlackNativeService implements NativeIntegration {
     });
 
     return results;
+  };
+
+  removeProfile = async (id: string) => {
+    this.store.removeProfile(id);
   };
 
   private isSameOriginAndPath = (urlA: string, urlB: string) => {

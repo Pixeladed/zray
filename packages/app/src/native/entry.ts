@@ -36,6 +36,7 @@ registerHandler(
   'integration:profiles:list',
   integrationNativeService.listProfiles
 );
+registerHandler('integration:profiles:remove', integrationNativeService.remove);
 
 registerHandler('navigation:settings:open', instance.openSettings);
 registerHandler(

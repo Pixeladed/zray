@@ -42,6 +42,7 @@ export abstract class View {
     name: EventName<E>,
     data: EventData<E>
   ) => {
+    console.log('sending', name, data);
     this.browserWindow.webContents.send(name, data);
   };
 }
