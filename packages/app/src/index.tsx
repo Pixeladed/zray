@@ -16,10 +16,7 @@ const context = window;
 const bridgeClient = new BridgeClient(context);
 const navigationService = new NavigationService(context, bridgeClient);
 const { SearchPage } = createSearchPage({ bridgeClient, navigationService });
-const { SettingsPage } = createSettingsPage({
-  bridgeClient,
-  navigationService,
-});
+const { SettingsPage } = createSettingsPage({ bridgeClient });
 
 root.render(
   <React.StrictMode>

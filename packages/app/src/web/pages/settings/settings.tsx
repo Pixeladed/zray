@@ -1,16 +1,18 @@
 import React, { useMemo } from 'react';
-import { Routes as RouterRoutes, Route, Link } from 'react-router-dom';
+import {
+  Routes as RouterRoutes,
+  Route,
+  Link,
+  useLocation,
+} from 'react-router-dom';
 import { Routes } from '../../../routes';
-import { NavigationService } from '../../services/navigation/navigation_service';
 import classNames from 'classnames';
 import styles from './settings.module.css';
 
 export const SettingsPage = ({
   IntegrationsSettings,
-  navigationService,
 }: {
   IntegrationsSettings: React.ComponentType;
-  navigationService: NavigationService;
 }) => {
   return (
     <div className={styles.container}>
@@ -22,8 +24,8 @@ export const SettingsPage = ({
       <div className={styles.sidebarAndContent}>
         <aside className={styles.sidebar}>
           <SidebarLink
-            navigationService={navigationService}
             href={Routes.integrations().absolute}
+            index={Routes.settings().absolute}
             label="Integrations"
           />
         </aside>
@@ -44,15 +46,16 @@ export const SettingsPage = ({
 const SidebarLink = ({
   href,
   label,
-  navigationService,
+  index,
 }: {
   href: string;
   label: string;
-  navigationService: NavigationService;
+  index?: string;
 }) => {
+  const location = useLocation();
   const active = useMemo(
-    () => navigationService.isPathActive(href),
-    [navigationService, href]
+    () => location.pathname.startsWith(href) || location.pathname === index,
+    [location, href, index]
   );
   return (
     <Link
