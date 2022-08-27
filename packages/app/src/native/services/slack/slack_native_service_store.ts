@@ -43,7 +43,7 @@ export class SlackNativeStore {
   asProfileInfo = (profile: SlackProfile): ProfileInfo => {
     return {
       id: this.getProfileId(profile),
-      name: profile.teamId,
+      name: profile.teamName,
     };
   };
 

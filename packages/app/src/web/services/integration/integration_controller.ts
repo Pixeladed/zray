@@ -1,4 +1,5 @@
-import { makeAutoObservable, runInAction } from 'mobx';
+import { Assert } from '@highbeam/utils';
+import { computed, makeAutoObservable, runInAction } from 'mobx';
 import {
   ConnectIntegrationEndpoint,
   ListIntegrationsEndpoint,
@@ -7,12 +8,27 @@ import {
 import {
   IntegrationInfo,
   IntegrationProfile,
+  ProfileInfo,
 } from '../../../interface/intergration';
 import { BridgeClient } from '../../base/bridge_client';
 
 export class IntegrationStore {
   integrations: readonly IntegrationInfo[] = [];
   profiles: readonly IntegrationProfile[] = [];
+
+  profilesWithIntegration = computed(() => {
+    const result: ProfileWithIntegration[] = this.profiles.map(profile => {
+      const integration = Assert.exists(
+        this.integrations.find(
+          integration => integration.id === profile.integrationId
+        ),
+        'expected integration to exist for profile'
+      );
+      return { ...profile, integration };
+    });
+
+    return result;
+  });
 
   constructor() {
     makeAutoObservable(this);
@@ -54,3 +70,7 @@ export class IntegrationController {
     );
   };
 }
+
+export type ProfileWithIntegration = ProfileInfo & {
+  integration: IntegrationInfo;
+};

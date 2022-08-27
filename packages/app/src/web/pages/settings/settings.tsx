@@ -28,6 +28,7 @@ export const SettingsPage = ({
         </aside>
         <div className={styles.content}>
           <RouterRoutes>
+            <Route index={true} element={<IntegrationsSettings />} />
             <Route
               path={Routes.integrations().relativeParent}
               element={<IntegrationsSettings />}

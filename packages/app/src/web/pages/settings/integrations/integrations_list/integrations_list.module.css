@@ -1,0 +1,21 @@
+.container {
+  padding: var(--spaceMedium);
+}
+
+.profileContainer {
+  border: 1px solid var(--colorBorder);
+  padding: var(--spacexSmall);
+  display: flex;
+  gap: var(--spacexSmall);
+  align-items: center;
+}
+
+.profileIcon {
+  width: var(--spaceLarge);
+  height: var(--spaceLarge);
+  object-fit: contain;
+}
+
+.profileName {
+  margin: 0;
+}
