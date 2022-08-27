@@ -2,6 +2,18 @@
   padding: var(--spaceMedium);
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spaceSmall);
+}
+
+.title {
+  font-size: 1em;
+  margin: 0;
+}
+
 .profileContainer {
   border: 1px solid var(--colorBorder);
   padding: var(--spacexSmall);
