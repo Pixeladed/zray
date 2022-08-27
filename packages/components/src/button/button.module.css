@@ -1,15 +1,15 @@
 .button {
   border: none;
   padding: var(--spacexxSmall) var(--spaceSmall);
-  box-shadow: inset 0 0 0 2px var(--colorForeground);
+  box-shadow: inset 0 0 0 1px var(--colorForeground);
   background: var(--colorPrimary);
   cursor: pointer;
-  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: transform 0.15s, box-shadow 0.15s;
 }
 
 .button:hover:not(:active) {
   transform: translateY(calc(-1 * calc(1em / 8)));
-  box-shadow: inset 0 0 0 2px var(--colorForeground),
+  box-shadow: inset 0 0 0 1px var(--colorForeground),
     0 calc(1em / 8) 0 0 var(--colorForeground);
 }
 
