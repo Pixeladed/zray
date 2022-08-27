@@ -1,4 +1,4 @@
-import { BridgeClient } from '../../base/bridge_client';
+import { BridgeClient } from 'web/base/bridge_client';
 import {
   IntegrationController,
   IntegrationStore,

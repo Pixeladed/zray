@@ -1,4 +1,4 @@
-import { Config } from '../../base/config';
+import { Config } from 'base/config';
 import { SlackService } from './slack_service';
 
 export const createSlackService = (config: Config['slack']) => {

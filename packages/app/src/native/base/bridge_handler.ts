@@ -1,14 +1,14 @@
 import { Assert } from '@highbeam/utils';
 import { IpcMain } from 'electron';
-import { endpointAllowlist } from '../../interface/bridge/bridge';
+import { endpointAllowlist } from 'interface/bridge/bridge';
 import {
   Endpoint,
   EndpointName,
   EndpointReq,
   EndpointRes,
   Endpoints,
-} from '../../interface/bridge/endpoints';
-import { Event, EventData, EventName } from '../../interface/bridge/events';
+} from 'interface/bridge/endpoints';
+import { Event, EventData, EventName } from 'interface/bridge/events';
 
 export type Handler<E extends Endpoint<any, any, any>> = (
   req: EndpointReq<E>

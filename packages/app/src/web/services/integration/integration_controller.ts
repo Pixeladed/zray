@@ -5,16 +5,10 @@ import {
   ListIntegrationsEndpoint,
   ListProfilesEndpoint,
   RemoveProfileEndpoint,
-} from '../../../interface/bridge/endpoints';
-import {
-  NewProfileEvent,
-  RemovedProfileEvent,
-} from '../../../interface/bridge/events';
-import {
-  IntegrationInfo,
-  IntegrationProfile,
-} from '../../../interface/intergration';
-import { BridgeClient } from '../../base/bridge_client';
+} from 'interface/bridge/endpoints';
+import { NewProfileEvent, RemovedProfileEvent } from 'interface/bridge/events';
+import { IntegrationInfo, IntegrationProfile } from 'interface/intergration';
+import { BridgeClient } from 'web/base/bridge_client';
 
 export class IntegrationStore {
   integrations: readonly IntegrationInfo[] = [];

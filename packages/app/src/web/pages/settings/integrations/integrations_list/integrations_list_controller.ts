@@ -1,5 +1,5 @@
-import { IntegrationProfile } from '../../../../../interface/intergration';
-import { IntegrationController } from '../../../../services/integration/integration_controller';
+import { IntegrationProfile } from 'interface/intergration';
+import { IntegrationController } from 'web/services/integration/integration_controller';
 
 export class IntegrationListController {
   constructor(private readonly integrationController: IntegrationController) {}

@@ -1,4 +1,4 @@
-import '../styles/globals.css';
+import 'styles/globals.css';
 import '@highbeam/components/build/style.css';
 import type { AppProps } from 'next/app';
 

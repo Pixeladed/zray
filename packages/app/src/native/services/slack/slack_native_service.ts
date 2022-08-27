@@ -1,16 +1,13 @@
-import { Routes } from '../../../routes';
-import { SlackOAuthView } from '../../views/slack_oauth/slack_oauth_view';
+import { Routes } from 'routes';
+import { SlackOAuthView } from 'native/views/slack_oauth/slack_oauth_view';
 import { Slack } from '@highbeam/interface';
 import { SlackNativeStore } from './slack_native_service_store';
-import { NativeIntegration } from '../integration/integration_native_service';
-import {
-  IntegrationProfile,
-  ProfileInfo,
-} from '../../../interface/intergration';
+import { NativeIntegration } from 'native/services/integration/integration_native_service';
+import { IntegrationProfile } from 'interface/intergration';
 import { WebClient } from '@slack/web-api';
 import { Assert, exists } from '@highbeam/utils';
-import { Path } from '../../../base/path';
-import { SearchResult } from '../../../interface/search';
+import { Path } from 'base/path';
+import { SearchResult } from 'interface/search';
 
 export class SlackNativeService implements NativeIntegration {
   id = 'com.builtin.slack';

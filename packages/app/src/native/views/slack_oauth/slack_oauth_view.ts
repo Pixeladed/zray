@@ -1,4 +1,4 @@
-import { View } from '../view';
+import { View } from 'native/views/view';
 
 export class SlackOAuthView extends View {
   constructor(url: string) {

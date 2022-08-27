@@ -15,7 +15,16 @@
     "isolatedModules": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "declarationDir": "build"
+    "incremental": true,
+    "outDir": "build",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*"]
+    },
+    "plugins": [
+      { "transform": "typescript-transform-paths" },
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ]
   },
   "include": ["src"]
 }

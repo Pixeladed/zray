@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Header } from '../../base/header/header';
+import { Header } from 'base/header/header';
 import styles from './landing.module.css';
 
 export const LandingPage: NextPage = () => {

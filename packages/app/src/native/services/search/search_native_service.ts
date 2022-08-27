@@ -1,7 +1,7 @@
 import { exists } from '@highbeam/utils';
-import { GlobalSearchEndpoint } from '../../../interface/bridge/endpoints';
-import { SearchResult } from '../../../interface/search';
-import { Handler } from '../../base/bridge_handler';
+import { GlobalSearchEndpoint } from 'interface/bridge/endpoints';
+import { SearchResult } from 'interface/search';
+import { Handler } from 'native/base/bridge_handler';
 import { SearchRanker } from './search_ranker';
 
 export class SearchNativeService {

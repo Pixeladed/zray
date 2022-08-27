@@ -1,5 +1,5 @@
-import { OpenExternalEndpoint } from '../../../interface/bridge/endpoints';
-import { Handler } from '../../base/bridge_handler';
+import { OpenExternalEndpoint } from 'interface/bridge/endpoints';
+import { Handler } from 'native/base/bridge_handler';
 import { Shell } from 'electron';
 
 export class NavigationNativeService {

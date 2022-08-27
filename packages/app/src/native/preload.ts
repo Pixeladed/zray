@@ -4,8 +4,8 @@ import {
   Bridge,
   endpointAllowlist,
   eventAllowlist,
-} from '../interface/bridge/bridge';
-import { BRIDGE_NAMESPACE } from '../interface/bridge/endpoints';
+} from 'interface/bridge/bridge';
+import { BRIDGE_NAMESPACE } from 'interface/bridge/endpoints';
 
 const bridge: Bridge = {
   request: (name, req) => {

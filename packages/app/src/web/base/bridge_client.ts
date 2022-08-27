@@ -1,13 +1,13 @@
 import { Assert } from '@highbeam/utils';
-import { Bridge } from '../../interface/bridge/bridge';
+import { Bridge } from 'interface/bridge/bridge';
 import {
   BRIDGE_NAMESPACE,
   Endpoint,
   EndpointName,
   EndpointReq,
   EndpointRes,
-} from '../../interface/bridge/endpoints';
-import { Event, EventData, EventName } from '../../interface/bridge/events';
+} from 'interface/bridge/endpoints';
+import { Event, EventData, EventName } from 'interface/bridge/events';
 
 export class BridgeClient {
   constructor(private readonly context: Window) {}

@@ -24,7 +24,7 @@
     "build:web": "react-scripts build",
     "test:web": "react-scripts test",
     "eject:web": "react-scripts eject",
-    "build:app": "spack",
+    "build:app": "swc src -d build",
     "start:app": "electron build/native/index.js",
     "start:app:watch": "nodemon -e json,js,ts --watch ./src/native --watch ./node_modules/@highbeam --exec \"npm-run-all build:app start:app\"",
     "start:app:dev": "wait-on http://localhost:8080 && yarn start:app:watch",

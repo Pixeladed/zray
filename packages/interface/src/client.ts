@@ -1,6 +1,6 @@
-import { EndpointReq, EndpointRes } from './services/base';
+import { EndpointReq, EndpointRes } from 'services/base';
 import fetch from 'cross-fetch';
-import { IServiceMap, IServices, Services } from './services';
+import { IServiceMap, IServices, Services } from 'services';
 
 export class Client<T extends IServices> {
   constructor(

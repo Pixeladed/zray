@@ -1,4 +1,4 @@
-import { ProfileInfo } from '../intergration';
+import { ProfileInfo } from 'interface/intergration';
 
 export type Event<N extends string, D> = {
   name: N;

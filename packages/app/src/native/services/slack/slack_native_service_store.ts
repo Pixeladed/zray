@@ -1,5 +1,5 @@
 import Store from 'electron-store';
-import { ProfileInfo } from '../../../interface/intergration';
+import { ProfileInfo } from 'interface/intergration';
 
 export class SlackNativeStore {
   private store: Store<SlackNativeStoreLayout>;

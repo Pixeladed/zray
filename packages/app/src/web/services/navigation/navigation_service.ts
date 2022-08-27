@@ -1,8 +1,8 @@
 import {
   OpenExternalEndpoint,
   OpenSettingsEndpoint,
-} from '../../../interface/bridge/endpoints';
-import { BridgeClient } from '../../base/bridge_client';
+} from 'interface/bridge/endpoints';
+import { BridgeClient } from 'web/base/bridge_client';
 
 export class NavigationService {
   constructor(

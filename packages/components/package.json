@@ -7,13 +7,16 @@
   "scripts": {
     "build": "npm-run-all --parallel build:source build:declaration",
     "build:source": "vite build",
+    "prebuild:declaration": "ts-patch install -s",
     "build:declaration": "tsc",
     "dev": "nodemon -e ts,tsx,css --watch ./src --exec \"yarn build\""
   },
   "devDependencies": {
     "nodemon": "^2.0.19",
     "npm-run-all": "^4.1.5",
+    "ts-patch": "^2.0.2",
     "typescript": "^4.7.4",
+    "typescript-transform-paths": "^3.3.1",
     "vite": "^3.0.9"
   },
   "peerDependencies": {

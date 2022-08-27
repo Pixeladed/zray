@@ -1,9 +1,8 @@
-import { OpenSettingsEndpoint } from '../interface/bridge/endpoints';
-import { Event, EventData, EventName } from '../interface/bridge/events';
-import { Broadcaster, Handler } from './base/bridge_handler';
-import { SearchView } from './views/search/search_view';
-import { SettingsView } from './views/settings/settings_view';
-import { WindowSource } from './views/view';
+import { OpenSettingsEndpoint } from 'interface/bridge/endpoints';
+import { Broadcaster, Handler } from 'native/base/bridge_handler';
+import { SearchView } from 'native/views/search/search_view';
+import { SettingsView } from 'native/views/settings/settings_view';
+import { WindowSource } from 'native/views/view';
 
 export class App {
   private searchView?: SearchView;

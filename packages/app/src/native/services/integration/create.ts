@@ -1,4 +1,4 @@
-import { Broadcaster } from '../../base/bridge_handler';
+import { Broadcaster } from 'native/base/bridge_handler';
 import {
   IntegrationNativeService,
   NativeIntegration,

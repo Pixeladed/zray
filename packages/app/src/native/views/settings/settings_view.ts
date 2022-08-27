@@ -1,5 +1,5 @@
-import { Routes } from '../../../routes';
-import { View, WindowSource } from '../view';
+import { Routes } from 'routes';
+import { View, WindowSource } from 'native/views/view';
 
 export class SettingsView extends View {
   constructor(baseSource: WindowSource) {

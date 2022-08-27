@@ -1,7 +1,7 @@
 import { InstallProvider } from '@slack/oauth';
 import { WebClient } from '@slack/web-api';
 import { NextApiHandler } from 'next';
-import { Config } from '../../base/config';
+import { Config } from 'base/config';
 import { Assert } from '@highbeam/utils';
 import { Slack } from '@highbeam/interface';
 

@@ -1,3 +1,3 @@
-import { LandingPage } from '../app/landing/landing';
+import { LandingPage } from 'app/landing/landing';
 
 export default LandingPage;

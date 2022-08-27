@@ -1,8 +1,8 @@
 import { makeAutoObservable, action } from 'mobx';
-import { GlobalSearchEndpoint } from '../../../interface/bridge/endpoints';
-import { SearchResult } from '../../../interface/search';
-import { BridgeClient } from '../../base/bridge_client';
-import { IntegrationController } from '../../services/integration/integration_controller';
+import { GlobalSearchEndpoint } from 'interface/bridge/endpoints';
+import { SearchResult } from 'interface/search';
+import { BridgeClient } from 'web/base/bridge_client';
+import { IntegrationController } from 'web/services/integration/integration_controller';
 
 export class SearchStore {
   results: readonly SearchResult[] = [];

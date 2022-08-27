@@ -4,18 +4,15 @@ import {
   ListIntegrationsEndpoint,
   ListProfilesEndpoint,
   RemoveProfileEndpoint,
-} from '../../../interface/bridge/endpoints';
-import {
-  NewProfileEvent,
-  RemovedProfileEvent,
-} from '../../../interface/bridge/events';
+} from 'interface/bridge/endpoints';
+import { NewProfileEvent, RemovedProfileEvent } from 'interface/bridge/events';
 import {
   IntegrationInfo,
   IntegrationProfile,
   ProfileInfo,
-} from '../../../interface/intergration';
-import { Broadcaster, Handler } from '../../base/bridge_handler';
-import { SearchProvider } from '../search/search_native_service';
+} from 'interface/intergration';
+import { Broadcaster, Handler } from 'native/base/bridge_handler';
+import { SearchProvider } from 'native/services/search/search_native_service';
 
 export class IntegrationNativeService {
   constructor(

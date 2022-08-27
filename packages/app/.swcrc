@@ -18,6 +18,6 @@
     "parser": {
       "syntax": "typescript"
     }
-  },
-  "minify": true
+  }
+  // "minify": true
 }

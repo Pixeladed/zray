@@ -1,4 +1,4 @@
-import { SearchResult } from '../../../interface/search';
+import { SearchResult } from 'interface/search';
 
 export class SearchRanker {
   rank = (results: readonly SearchResult[]): readonly SearchResult[] => {

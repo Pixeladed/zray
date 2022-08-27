@@ -1,5 +1,5 @@
-import { IntegrationInfo, IntegrationProfile } from '../intergration';
-import { SearchResult } from '../search';
+import { IntegrationInfo, IntegrationProfile } from 'interface/intergration';
+import { SearchResult } from 'interface/search';
 
 export const BRIDGE_NAMESPACE = 'contextBridge';
 

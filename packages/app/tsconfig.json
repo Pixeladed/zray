@@ -15,7 +15,13 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "incremental": true,
+    "outDir": "build",
+    "baseUrl": "src",
+    "paths": {
+      "*": ["*"]
+    }
   },
   "include": ["src"],
   "ts-node": {

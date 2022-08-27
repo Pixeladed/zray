@@ -15,8 +15,16 @@
     "isolatedModules": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "declarationDir": "build",
-    "jsx": "react-jsx"
+    "incremental": true,
+    "jsx": "react-jsx",
+    "outDir": "build",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*"]
+    },
+    "plugins": [
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ]
   },
   "include": ["src"]
 }

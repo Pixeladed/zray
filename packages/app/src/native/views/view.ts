@@ -1,5 +1,5 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
-import { Event, EventData, EventName } from '../../interface/bridge/events';
+import { Event, EventData, EventName } from 'interface/bridge/events';
 
 /**
  * A view is a web page run in a separate window.
