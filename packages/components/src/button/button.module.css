@@ -1,15 +1,27 @@
 .button {
   border: none;
   padding: var(--spacexxSmall) var(--spaceSmall);
-  background: var(--colorPrimary);
-  color: var(--colorBackground);
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, box-shadow 0.15s;
   border-radius: var(--spaceSmall);
   user-select: none;
 }
 
-.button:hover:not(:active) {
+.button.default {
+  box-shadow: inset 0 0 0 1px var(--colorBorder);
+  background: var(--colorBackground);
+}
+
+.button.default:hover:not(:active) {
+  background: var(--colorBackgroundDark);
+}
+
+.button.primary {
+  background: var(--colorPrimary);
+  color: var(--colorBackground);
+}
+
+.button.primary:hover:not(:active) {
   background: var(--colorPrimaryDark);
 }
 

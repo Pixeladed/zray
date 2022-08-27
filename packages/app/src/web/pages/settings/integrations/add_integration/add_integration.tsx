@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
-import { TappableArea } from '@highbeam/components';
+import { TappableArea, Button } from '@highbeam/components';
 import { IntegrationInfo } from '../../../../../interface/intergration';
 import styles from './add_integration.module.css';
+import { Link } from 'react-router-dom';
+import { Routes } from '../../../../../routes';
 
 export const AddIntegrationPage = ({
   init,
@@ -17,7 +19,8 @@ export const AddIntegrationPage = ({
   }, [init]);
 
   return (
-    <div>
+    <div className={styles.container}>
+      <h3 className={styles.title}>Connect a tool</h3>
       <div className={styles.integrationList}>
         {integrations.map(integration => (
           <TappableArea
@@ -35,6 +38,9 @@ export const AddIntegrationPage = ({
           </TappableArea>
         ))}
       </div>
+      <Link to={Routes.integrations().absolute}>
+        <Button>Cancel</Button>
+      </Link>
     </div>
   );
 };

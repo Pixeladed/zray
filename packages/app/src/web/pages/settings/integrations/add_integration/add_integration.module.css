@@ -1,7 +1,15 @@
+.container {
+  padding: var(--spaceSmall);
+}
+
+.title {
+  margin: 0;
+}
+
 .integrationList {
   display: flex;
   gap: var(--spacexSmall);
-  padding: var(--spaceSmall);
+  margin: var(--spaceMedium) 0 var(--spacexLarge) 0;
 }
 
 .integration {

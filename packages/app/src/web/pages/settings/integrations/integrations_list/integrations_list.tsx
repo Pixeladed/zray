@@ -19,7 +19,7 @@ export const IntegrationsListPage = ({
       <header className={styles.header}>
         <h2 className={styles.title}>{profiles.length} connected tools</h2>
         <Link to={Routes.addIntegration().absolute}>
-          <Button>Connect a tool</Button>
+          <Button variant="primary">Connect a tool</Button>
         </Link>
       </header>
       {profiles.map(profile => (

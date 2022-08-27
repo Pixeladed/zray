@@ -1,14 +1,27 @@
 import * as React from 'react';
 import { PropsWithChildren } from 'react';
+import classNames from 'classnames';
 import styles from './button.module.css';
 
 type ButtonProps = PropsWithChildren<{
   onClick?(): void;
+  variant?: 'default' | 'primary';
 }>;
 
-export const Button = ({ onClick, children }: ButtonProps) => {
+export const Button = ({
+  onClick,
+  children,
+  variant = 'default',
+}: ButtonProps) => {
   return (
-    <button className={styles.button} onClick={onClick}>
+    <button
+      className={classNames(
+        styles.button,
+        variant === 'default' && styles.default,
+        variant === 'primary' && styles.primary
+      )}
+      onClick={onClick}
+    >
       {children}
     </button>
   );
