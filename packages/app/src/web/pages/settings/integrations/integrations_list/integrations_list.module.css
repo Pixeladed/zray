@@ -27,6 +27,7 @@
   width: var(--spaceLarge);
   height: var(--spaceLarge);
   object-fit: contain;
+  user-select: none;
 }
 
 .profileName {

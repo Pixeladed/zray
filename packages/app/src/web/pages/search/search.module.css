@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--colorBackgroundDarker);
+  background: var(--colorBackgroundDark);
 }
 
 .input {
@@ -34,7 +34,7 @@
   padding: var(--spacexSmall) var(--spaceMedium);
   font-size: 0.8em;
   composes: dimText;
-  background: var(--colorBackgroundDarker);
+  background: var(--colorBackgroundDark);
 }
 
 .profilesDescription {

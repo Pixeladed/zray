@@ -7,9 +7,10 @@
 .titleBar {
   padding-top: env(titlebar-area-height, 40px);
   -webkit-app-region: drag;
-  background: var(--colorBackgroundDarker);
+  background: var(--colorBackgroundDark);
   position: sticky;
   top: 0;
+  user-select: none;
 }
 
 .sidebarAndContent {
@@ -22,6 +23,7 @@
   height: 100%;
   background: var(--colorBackground);
   border-right: 1px solid var(--colorBorder);
+  user-select: none;
 }
 
 .content {
@@ -31,7 +33,7 @@
 .titleContainer {
   border-bottom: 1px solid var(--colorBorder);
   padding: var(--spaceSmall);
-  background: var(--colorBackgroundDarker);
+  background: var(--colorBackgroundDark);
 }
 
 .title {
