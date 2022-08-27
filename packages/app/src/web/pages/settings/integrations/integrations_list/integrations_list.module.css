@@ -40,3 +40,16 @@
 .profileName {
   margin: 0;
 }
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 var(--spaceMedium);
+}
+
+.emptyLead {
+  margin-bottom: var(--spaceSmall);
+  text-align: center;
+}

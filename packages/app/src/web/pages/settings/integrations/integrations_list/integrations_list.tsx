@@ -19,12 +19,14 @@ export const IntegrationsListPage = ({
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <h2 className={styles.title}>{profiles.length} connected tools</h2>
-        <Link to={Routes.addIntegration().absolute}>
-          <Button variant="primary">Connect a tool</Button>
-        </Link>
-      </header>
+      {!!profiles.length && (
+        <header className={styles.header}>
+          <h2 className={styles.title}>{profiles.length} connected tools</h2>
+          <Link to={Routes.addIntegration().absolute}>
+            <Button variant="primary">Connect a tool</Button>
+          </Link>
+        </header>
+      )}
       {profiles.map(profile => (
         <div className={styles.profileContainer} key={profile.id}>
           <div className={styles.profileInfo}>
@@ -44,6 +46,16 @@ export const IntegrationsListPage = ({
           <Button onClick={() => onRemove(profile)}>Remove</Button>
         </div>
       ))}
+      {!profiles.length && (
+        <div className={styles.empty}>
+          <p className={styles.emptyLead}>
+            Looks like you don&apos;t have any tools connected
+          </p>
+          <Link to={Routes.addIntegration().absolute}>
+            <Button variant="primary">Connect a tool</Button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
