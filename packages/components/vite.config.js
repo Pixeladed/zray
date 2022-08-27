@@ -7,7 +7,8 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: '@highbeam/components',
-      fileName: 'index.js',
+      fileName: () => 'index.js',
+      formats: ['es'],
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
@@ -22,6 +23,5 @@ export default defineConfig({
       },
     },
     outDir: 'build',
-    minify: false,
   },
 });
