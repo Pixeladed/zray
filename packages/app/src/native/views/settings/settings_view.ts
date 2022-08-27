@@ -4,7 +4,7 @@ import { View, WindowSource } from '../view';
 export class SettingsView extends View {
   constructor(baseSource: WindowSource) {
     super(
-      { ...baseSource, hash: Routes.settings() },
+      { ...baseSource, hash: Routes.settings().absolute },
       {
         width: 800,
         height: 600,

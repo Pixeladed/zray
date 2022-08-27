@@ -6,10 +6,10 @@ import classNames from 'classnames';
 import styles from './settings.module.css';
 
 export const SettingsPage = ({
-  AddIntegrationsPage,
+  IntegrationsSettings,
   navigationService,
 }: {
-  AddIntegrationsPage: React.ComponentType;
+  IntegrationsSettings: React.ComponentType;
   navigationService: NavigationService;
 }) => {
   return (
@@ -22,22 +22,16 @@ export const SettingsPage = ({
         <aside className={styles.sidebar}>
           <SidebarLink
             navigationService={navigationService}
-            href={Routes.addIntegration()}
-            label="Add integration"
-          />
-          <SidebarLink
-            navigationService={navigationService}
-            href={'/'}
-            label="Add integration"
+            href={Routes.integrations().absolute}
+            label="Integrations"
           />
         </aside>
         <div className={styles.content}>
           <RouterRoutes>
             <Route
-              path={Routes.addIntegration()}
-              element={<AddIntegrationsPage />}
+              path={Routes.integrations().relativeParent}
+              element={<IntegrationsSettings />}
             />
-            <Route path="*" element={<AddIntegrationsPage />} />
           </RouterRoutes>
         </div>
       </div>

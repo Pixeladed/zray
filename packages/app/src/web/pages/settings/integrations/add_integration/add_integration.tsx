@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { TappableArea } from '@highbeam/components';
-import { IntegrationInfo } from '../../../../interface/intergration';
+import { IntegrationInfo } from '../../../../../interface/intergration';
 import styles from './add_integration.module.css';
 
 export const AddIntegrationPage = ({

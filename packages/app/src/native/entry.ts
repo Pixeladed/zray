@@ -40,7 +40,7 @@ registerHandler(
 registerHandler('navigation:settings:open', instance.openSettings);
 registerHandler(
   'navigation:openExternal',
-  navigationNativeService.openExterenal
+  navigationNativeService.openExternal
 );
 
 registerHandler('search:global', searchNativeService.search);

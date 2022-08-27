@@ -150,7 +150,7 @@ export class SlackNativeService implements NativeIntegration {
 
   private createRedirectUrl = () => {
     const url = new URL(this.redirectOrigin);
-    url.pathname = Routes.slackIntegrationCallback();
+    url.pathname = Routes.slackIntegrationCallback().absolute;
     url.search = '';
     url.hash = '';
     return url.toString();

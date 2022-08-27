@@ -25,8 +25,12 @@ root.render(
   <React.StrictMode>
     <HashRouter>
       <RouterRoutes>
-        <Route path={Routes.search()} element={<SearchPage />} />
-        <Route path={Routes.settings()} element={<SettingsPage />} />
+        <Route index={true} element={<SearchPage />} />
+        <Route path={Routes.search().relative} element={<SearchPage />} />
+        <Route
+          path={Routes.settings().relativeParent}
+          element={<SettingsPage />}
+        />
       </RouterRoutes>
     </HashRouter>
   </React.StrictMode>

@@ -27,6 +27,7 @@
   border-bottom: 1px solid var(--colorBorder);
   padding: var(--spaceSmall);
   background: var(--colorBackgroundDarker);
+  -webkit-app-region: drag;
 }
 
 .title {

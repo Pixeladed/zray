@@ -6,7 +6,7 @@ export class SearchView extends View {
     super(
       {
         ...baseSource,
-        hash: Routes.search(),
+        hash: Routes.search().absolute,
       },
       {
         width: 800,
