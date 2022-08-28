@@ -5,6 +5,7 @@ import { IntegrationStore } from '../../services/integration/integration_control
 import { NavigationService } from '../../services/navigation/navigation_service';
 import { SearchPage } from './search';
 import { SearchController, SearchStore } from './search_controller';
+import { createSearchResultCard } from './search_result_card/create';
 
 export const createSearchPage = ({
   bridgeClient,
@@ -22,6 +23,8 @@ export const createSearchPage = ({
     navigationService.openExternal(result.url);
   };
 
+  const { SearchResultCard } = createSearchResultCard();
+
   const SearchPageImpl = observer(() => {
     return (
       <SearchPage
@@ -32,6 +35,7 @@ export const createSearchPage = ({
         onConnectTool={navigationService.openSettings}
         openResult={openResult}
         onSearch={controller.search}
+        ResultCard={SearchResultCard}
       />
     );
   });

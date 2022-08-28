@@ -1,5 +1,5 @@
 import { Button, TappableArea } from '@highbeam/components';
-import { useState, ChangeEvent, useMemo } from 'react';
+import { useState, ChangeEvent, useMemo, ComponentType } from 'react';
 import {
   IntegrationInfo,
   IntegrationProfile,
@@ -7,7 +7,7 @@ import {
 import { useDebouncedCallback } from 'use-debounce';
 import styles from './search.module.css';
 import { SearchResult } from '../../../interface/search';
-import { SearchResultCard } from './search_result_card/search_result_card';
+import { ResultProps } from './search_result_card/search_result_card';
 
 export function SearchPage({
   onConnectTool,
@@ -17,6 +17,7 @@ export function SearchPage({
   results,
   integrations,
   profiles,
+  ResultCard,
 }: {
   onConnectTool: () => void;
   openResult: (result: SearchResult) => void;
@@ -25,6 +26,7 @@ export function SearchPage({
   integrations: readonly IntegrationInfo[];
   profiles: readonly IntegrationProfile[];
   results: readonly SearchResult[];
+  ResultCard: ComponentType<ResultProps>;
 }) {
   const [value, setValue] = useState('');
   const triggerSearch = useDebouncedCallback(onSearch, 500);
@@ -74,7 +76,7 @@ export function SearchPage({
         </div>
       )}
       {results.map(result => (
-        <SearchResultCard
+        <ResultCard
           onClick={() => openResult(result)}
           key={result.id}
           integration={integrationsById.get(result.integrationId)!}
