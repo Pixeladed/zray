@@ -5,6 +5,7 @@ export type BaseSearchResult = {
   profileId: string;
   integrationId: string;
   url: string;
+  icon?: string;
 };
 
 export type FileSearchResult = BaseSearchResult & {
