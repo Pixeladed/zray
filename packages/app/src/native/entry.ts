@@ -3,7 +3,9 @@ import { app, ipcMain, shell } from 'electron';
 import { config } from '../base/config';
 import { App } from './app';
 import { createHandlerReigstrar } from './base/bridge_handler';
+import { createGoogleDriveNativeService } from './services/google_drive/create';
 import { createIntegrationNativeService } from './services/integration/create';
+import { NativeIntegration } from './services/integration/integration_native_service';
 import { NavigationNativeService } from './services/navigation/navigation_native_service';
 import { createSearchNativeService } from './services/search/create';
 import { createSlackNativeService } from './services/slack/create';
@@ -18,9 +20,13 @@ const instance = new App(baseSource);
 const registerHandler = createHandlerReigstrar(ipcMain);
 export const clientFactory = new ClientFactory(config.apiOrigin);
 const { slackNativeService } = createSlackNativeService(clientFactory);
+const { googleDriveNativeService } = createGoogleDriveNativeService();
 const navigationNativeService = new NavigationNativeService(shell);
 
-const integrations = [slackNativeService];
+const integrations: readonly NativeIntegration[] = [
+  slackNativeService,
+  googleDriveNativeService,
+];
 
 const { integrationNativeService } = createIntegrationNativeService({
   integrations,
