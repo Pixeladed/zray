@@ -1,18 +1,25 @@
-import { BridgeClient } from '../../../base/bridge_client';
 import { createAddIntegrationPage } from './add_integration/create';
 import { createIntegrationsListPage } from './integrations_list/create';
 import { IntegrationsSettings } from './integrations';
+import {
+  IntegrationController,
+  IntegrationStore,
+} from '../../../services/integration/integration_controller';
 
 export const createIntegrationsSettings = ({
-  bridgeClient,
+  integrationStore,
+  integrationController,
 }: {
-  bridgeClient: BridgeClient;
+  integrationStore: IntegrationStore;
+  integrationController: IntegrationController;
 }) => {
   const { AddIntegrationPage } = createAddIntegrationPage({
-    bridgeClient,
+    integrationStore,
+    integrationController,
   });
   const { IntegrationsListPage } = createIntegrationsListPage({
-    bridgeClient,
+    integrationStore,
+    integrationController,
   });
 
   const IntegrationsSettingsImpl = () => (

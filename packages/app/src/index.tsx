@@ -8,6 +8,7 @@ import { createSearchPage } from './web/pages/search/create';
 import { createSettingsPage } from './web/pages/settings/create';
 import { NavigationService } from './web/services/navigation/navigation_service';
 import { BridgeClient } from './web/base/bridge_client';
+import { createIntegrationService } from './web/services/integration/create';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,8 +16,19 @@ const root = ReactDOM.createRoot(
 const context = window;
 const bridgeClient = new BridgeClient(context);
 const navigationService = new NavigationService(context, bridgeClient);
-const { SearchPage } = createSearchPage({ bridgeClient, navigationService });
-const { SettingsPage } = createSettingsPage({ bridgeClient });
+const { integrationStore, integrationController } = createIntegrationService({
+  bridgeClient,
+});
+const { SearchPage } = createSearchPage({
+  navigationService,
+  bridgeClient,
+  integrationStore,
+  integrationController,
+});
+const { SettingsPage } = createSettingsPage({
+  integrationStore,
+  integrationController,
+});
 
 root.render(
   <React.StrictMode>

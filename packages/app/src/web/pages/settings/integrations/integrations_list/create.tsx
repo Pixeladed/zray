@@ -1,17 +1,18 @@
 import { observer } from 'mobx-react';
-import { BridgeClient } from '../../../../base/bridge_client';
-import { createIntegrationService } from '../../../../services/integration/create';
+import {
+  IntegrationController,
+  IntegrationStore,
+} from '../../../../services/integration/integration_controller';
 import { IntegrationsListPage } from './integrations_list';
 import { IntegrationListController } from './integrations_list_controller';
 
 export const createIntegrationsListPage = ({
-  bridgeClient,
+  integrationStore,
+  integrationController,
 }: {
-  bridgeClient: BridgeClient;
+  integrationStore: IntegrationStore;
+  integrationController: IntegrationController;
 }) => {
-  const { integrationController, integrationStore } = createIntegrationService({
-    bridgeClient,
-  });
   const controller = new IntegrationListController(integrationController);
   const IntegrationsListPageImpl = observer(() => (
     <IntegrationsListPage
