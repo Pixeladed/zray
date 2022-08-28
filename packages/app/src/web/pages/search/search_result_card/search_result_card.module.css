@@ -10,17 +10,31 @@
   align-items: center;
 }
 
-.resultCard:hover {
+.resultCard:hover,
+.resultCard:focus {
   background: var(--colorBackgroundDark);
 }
 
-.resultCard:hover .integration {
-  background: var(--colorBackground);
+.icon {
+  width: var(--spaceLarge);
+  height: var(--spaceLarge);
 }
 
-.icon {
+.combinedIcon {
+  composes: icon;
+  position: relative;
+}
+
+.combinedIconIntegration {
   width: var(--spaceMedium);
   height: var(--spaceMedium);
+  bottom: calc(-1 * var(--spacexxSmall));
+  right: calc(-1 * var(--spacexxSmall));
+  position: absolute;
+  background: var(--colorBackgroundDark);
+  border-radius: 50%;
+  padding: var(--spacexxxSmall);
+  border: 1px solid var(--colorBorder);
 }
 
 .type {

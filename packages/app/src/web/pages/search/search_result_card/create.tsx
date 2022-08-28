@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { SearchResult } from '../../../../interface/search';
 import { FileResult } from './file_result';
 import { MessageResult } from './message_result';
@@ -10,8 +11,8 @@ import {
 export const createSearchResultCard = () => {
   const componentMap: { [key in SearchResult['type']]: ResultComponent<any> } =
     {
-      file: FileResult,
-      message: MessageResult,
+      file: memo(FileResult),
+      message: memo(MessageResult),
     };
 
   const SearchResultCardImpl = (props: ResultProps) => (

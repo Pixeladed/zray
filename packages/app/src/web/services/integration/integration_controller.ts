@@ -34,6 +34,12 @@ export class IntegrationStore {
     return result;
   });
 
+  integrationsById = computed(() => {
+    return new Map<string, IntegrationInfo>(
+      this.integrations.map(integration => [integration.id, integration])
+    );
+  });
+
   constructor() {
     makeAutoObservable(this);
   }

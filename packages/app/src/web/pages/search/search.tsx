@@ -15,7 +15,7 @@ export function SearchPage({
   loading,
   onSearch,
   results,
-  integrations,
+  integrationById,
   profiles,
   ResultCard,
 }: {
@@ -23,7 +23,7 @@ export function SearchPage({
   openResult: (result: SearchResult) => void;
   loading: boolean;
   onSearch: (query: string) => void;
-  integrations: readonly IntegrationInfo[];
+  integrationById: Map<string, IntegrationInfo>;
   profiles: readonly IntegrationProfile[];
   results: readonly SearchResult[];
   ResultCard: ComponentType<ResultProps>;
@@ -35,14 +35,6 @@ export function SearchPage({
     setValue(val);
     triggerSearch(val);
   };
-  const integrationsById = useMemo(
-    () =>
-      integrations.reduce((map, integration) => {
-        map.set(integration.id, integration);
-        return map;
-      }, new Map<string, IntegrationInfo>()),
-    [integrations]
-  );
 
   return (
     <div className={styles.page}>
@@ -79,7 +71,7 @@ export function SearchPage({
         <ResultCard
           onClick={() => openResult(result)}
           key={result.id}
-          integration={integrationsById.get(result.integrationId)!}
+          integration={integrationById.get(result.integrationId)!}
           result={result}
         />
       ))}

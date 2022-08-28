@@ -28,11 +28,22 @@ export const SearchResultCard = ({
   return (
     <TappableArea onClick={onClick}>
       <div className={styles.resultCard}>
-        <img
-          className={styles.icon}
-          alt={`${integration.name} ${result.type}`}
-          src={result.icon || integration.icon}
-        />
+        {!!result.icon ? (
+          <div className={styles.combinedIcon}>
+            <img className={styles.icon} alt={result.type} src={result.icon} />
+            <img
+              className={styles.combinedIconIntegration}
+              alt={integration.name}
+              src={integration.icon}
+            />
+          </div>
+        ) : (
+          <img
+            className={styles.icon}
+            alt={`${integration.name} ${result.type}`}
+            src={integration.icon}
+          />
+        )}
         <Renderer integration={integration} result={result} />
       </div>
     </TappableArea>
