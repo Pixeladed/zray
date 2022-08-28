@@ -6,13 +6,12 @@
 }
 
 .titleBar {
-  height: env(titlebar-area-height, 40px);
-  top: env(titlebar-area-y, 0);
+  padding-top: env(titlebar-area-height, 40px);
   -webkit-app-region: drag;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: var(--colorBackgroundDark);
+  top: 0;
+  position: sticky;
+  border-bottom: 1px solid var(--colorBorder);
 }
 
 .input {
@@ -22,7 +21,6 @@
   padding: var(--spaceSmall) var(--spaceMedium);
   font-size: 1.25em;
   border-bottom: 1px solid var(--colorBorder);
-  border-top: 1px solid var(--colorBorder);
   outline-color: var(--colorPrimary);
 }
 
@@ -57,4 +55,11 @@
 .emptyLead {
   margin-bottom: var(--spaceSmall);
   text-align: center;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spaceMedium);
 }

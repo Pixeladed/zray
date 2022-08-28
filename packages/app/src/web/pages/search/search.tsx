@@ -44,17 +44,18 @@ export function SearchPage({
 
   return (
     <div className={styles.page}>
-      <div className={styles.titleBar} />
-      {!!profiles.length && (
-        <div className={styles.profilesContainer}>
-          <p className={styles.profilesDescription}>
-            Searching {profiles.length} connected tools.{' '}
-            <TappableArea onClick={onConnectTool}>
-              <span className={styles.addMore}>Add another</span>
-            </TappableArea>
-          </p>
-        </div>
-      )}
+      <div className={styles.titleBar}>
+        {!!profiles.length && (
+          <div className={styles.profilesContainer}>
+            <p className={styles.profilesDescription}>
+              Searching {profiles.length} connected tools.{' '}
+              <TappableArea onClick={onConnectTool}>
+                <span className={styles.addMore}>Add another</span>
+              </TappableArea>
+            </p>
+          </div>
+        )}
+      </div>
       <input
         placeholder="What are you looking for?"
         className={styles.input}
@@ -79,7 +80,11 @@ export function SearchPage({
           result={result}
         />
       ))}
-      {loading && <>Loading...</>}
+      {loading && (
+        <div className={styles.loading}>
+          Searching {profiles.length} tools...
+        </div>
+      )}
     </div>
   );
 }
