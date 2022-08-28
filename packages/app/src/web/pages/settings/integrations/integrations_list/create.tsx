@@ -16,7 +16,6 @@ export const createIntegrationsListPage = ({
   const controller = new IntegrationListController(integrationController);
   const IntegrationsListPageImpl = observer(() => (
     <IntegrationsListPage
-      init={controller.init}
       onRemove={controller.remove}
       profiles={integrationStore.profilesWithIntegration.get()}
     />
