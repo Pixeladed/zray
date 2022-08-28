@@ -24,6 +24,10 @@ body,
   box-sizing: border-box;
 }
 
+*:focus {
+  outline-color: var(--colorPrimary);
+}
+
 @font-face {
   font-family: Space Grotesk;
   src: url('../public/fonts/space_grotesk_variable.ttf');

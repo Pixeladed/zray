@@ -107,6 +107,7 @@ export class SlackNativeService implements NativeIntegration {
         integrationId: this.id,
         profileId,
         type: 'message',
+        icon: Path.resource('/integrations/common/message.svg'),
         text: Assert.exists(msg.text, 'expected message text to exist'),
         url: Assert.exists(
           msg.permalink,
@@ -125,6 +126,7 @@ export class SlackNativeService implements NativeIntegration {
         integrationId: this.id,
         profileId,
         type: 'file',
+        icon: Path.resource('/integrations/common/file.svg'),
         title: Assert.exists(file.name, 'exepected file name to exist'),
         url: Assert.exists(
           file.url_private,

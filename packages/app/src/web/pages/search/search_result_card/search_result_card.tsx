@@ -8,34 +8,6 @@ import {
 } from '../../../../interface/search';
 import styles from './search_result_card.module.css';
 
-export const SearchResultCard = ({
-  result,
-  integration,
-  onClick,
-}: {
-  result: SearchResult;
-  integration: IntegrationInfo;
-  onClick: () => void;
-}) => {
-  return (
-    <TappableArea onClick={onClick}>
-      <div className={styles.resultCard}>
-        <img
-          className={styles.icon}
-          alt={integration.name}
-          src={integration.icon}
-        />
-        <div>
-          {result.type === 'file' && <FileResult result={result} />}
-          {result.type === 'message' && <MessageResult result={result} />}
-        </div>
-      </div>
-    </TappableArea>
-  );
-};
-
-type ResultComponent<T extends SearchResult> = ComponentType<{ result: T }>;
-
 const FileResult: ResultComponent<FileSearchResult> = ({ result }) => {
   return (
     <div>
@@ -57,5 +29,39 @@ const MessageResult: ResultComponent<MessageSearchResult> = ({ result }) => {
         {result.channel} by {result.author.name}
       </p>
     </div>
+  );
+};
+
+type ResultComponent<T extends SearchResult> = ComponentType<{
+  result: T;
+  integration: IntegrationInfo;
+}>;
+const componentMap: { [key in SearchResult['type']]: ResultComponent<any> } = {
+  file: FileResult,
+  message: MessageResult,
+};
+
+export const SearchResultCard = ({
+  result,
+  integration,
+  onClick,
+}: {
+  result: SearchResult;
+  integration: IntegrationInfo;
+  onClick: () => void;
+}) => {
+  const Renderer = componentMap[result.type];
+
+  return (
+    <TappableArea onClick={onClick}>
+      <div className={styles.resultCard}>
+        <img
+          className={styles.icon}
+          alt={`${integration.name} ${result.type}`}
+          src={result.icon || integration.icon}
+        />
+        <Renderer integration={integration} result={result} />
+      </div>
+    </TappableArea>
   );
 };

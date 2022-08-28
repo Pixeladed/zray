@@ -11,7 +11,7 @@ export class GoogleDriveNativeService implements NativeIntegration {
   };
 
   listProfiles = async () => {
-    throw new Error('not implemented');
+    return [];
   };
 
   removeProfile = async () => {
