@@ -1,5 +1,5 @@
 import { Button, TappableArea } from '@highbeam/components';
-import { useState, ChangeEvent, useMemo, ComponentType } from 'react';
+import { useState, ChangeEvent, ComponentType } from 'react';
 import {
   IntegrationInfo,
   IntegrationProfile,
