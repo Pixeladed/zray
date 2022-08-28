@@ -4,7 +4,7 @@ import { NativeIntegration } from '../integration/integration_native_service';
 export class GoogleDriveNativeService implements NativeIntegration {
   id = 'com.highbeam.gdrive';
   name = 'Google Drive';
-  icon = Path.resource('/integrations/slack/slack.svg');
+  icon = Path.resource('/integrations/google_drive/google_drive.svg');
 
   connect = async () => {
     throw new Error('not implemented');
