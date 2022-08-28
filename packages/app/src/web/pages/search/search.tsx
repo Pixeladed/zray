@@ -44,7 +44,8 @@ export function SearchPage({
 
   return (
     <div className={styles.page}>
-      <div className={styles.titleBar}>
+      <div className={styles.sticky}>
+        <div className={styles.titleBar} />
         {!!profiles.length && (
           <div className={styles.profilesContainer}>
             <p className={styles.profilesDescription}>
