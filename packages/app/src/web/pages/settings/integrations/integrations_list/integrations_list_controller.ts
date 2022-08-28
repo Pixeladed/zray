@@ -4,11 +4,6 @@ import { IntegrationController } from '../../../../services/integration/integrat
 export class IntegrationListController {
   constructor(private readonly integrationController: IntegrationController) {}
 
-  init = () => {
-    this.integrationController.loadIntegrations();
-    this.integrationController.loadProfiles();
-  };
-
   remove = (profile: IntegrationProfile) => {
     this.integrationController.remove(profile);
   };

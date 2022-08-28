@@ -1,5 +1,5 @@
 import { Button, TappableArea } from '@highbeam/components';
-import { useEffect, useState, ChangeEvent, useMemo } from 'react';
+import { useState, ChangeEvent, useMemo } from 'react';
 import {
   IntegrationInfo,
   IntegrationProfile,
@@ -11,7 +11,6 @@ import { SearchResultCard } from './search_result_card/search_result_card';
 
 export function SearchPage({
   onConnectTool,
-  init,
   openResult,
   loading,
   onSearch,
@@ -20,7 +19,6 @@ export function SearchPage({
   profiles,
 }: {
   onConnectTool: () => void;
-  init: () => void;
   openResult: (result: SearchResult) => void;
   loading: boolean;
   onSearch: (query: string) => void;
@@ -28,10 +26,6 @@ export function SearchPage({
   profiles: readonly IntegrationProfile[];
   results: readonly SearchResult[];
 }) {
-  useEffect(() => {
-    init();
-  }, [init]);
-
   const [value, setValue] = useState('');
   const triggerSearch = useDebouncedCallback(onSearch, 500);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

@@ -1,5 +1,4 @@
 import { Button } from '@highbeam/components';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { IntegrationProfile } from '../../../../../interface/intergration';
 import { Routes } from '../../../../../routes';
@@ -7,16 +6,12 @@ import { ProfileWithIntegration } from '../../../../services/integration/integra
 import styles from './integrations_list.module.css';
 
 export const IntegrationsListPage = ({
-  init,
   onRemove,
   profiles,
 }: {
-  init: () => void;
   onRemove: (id: IntegrationProfile) => void;
   profiles: readonly ProfileWithIntegration[];
 }) => {
-  useEffect(init, [init]);
-
   return (
     <div className={styles.container}>
       {!!profiles.length && (

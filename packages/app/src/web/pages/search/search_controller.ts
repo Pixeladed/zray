@@ -2,7 +2,6 @@ import { makeAutoObservable, action } from 'mobx';
 import { GlobalSearchEndpoint } from '../../../interface/bridge/endpoints';
 import { SearchResult } from '../../../interface/search';
 import { BridgeClient } from '../../base/bridge_client';
-import { IntegrationController } from '../../services/integration/integration_controller';
 
 export class SearchStore {
   results: readonly SearchResult[] = [];
@@ -26,16 +25,8 @@ export class SearchStore {
 export class SearchController {
   constructor(
     private readonly store: SearchStore,
-    private readonly bridgeClient: BridgeClient,
-    private readonly integrationController: IntegrationController
+    private readonly bridgeClient: BridgeClient
   ) {}
-
-  init = async () => {
-    await Promise.all([
-      this.integrationController.loadProfiles(),
-      this.integrationController.loadIntegrations(),
-    ]);
-  };
 
   search = async (query: string) => {
     this.store.setLoading(true);

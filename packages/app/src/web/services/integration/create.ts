@@ -15,5 +15,8 @@ export const createIntegrationService = ({
     bridgeClient
   );
 
+  integrationController.loadIntegrations();
+  integrationController.loadProfiles();
+
   return { integrationStore, integrationController };
 };
