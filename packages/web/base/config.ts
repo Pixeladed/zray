@@ -15,6 +15,16 @@ export const config = {
       'expected SLACK_STATE_SECRET to exist'
     ),
   },
+  google: {
+    clientId: Assert.exists(
+      process.env.GOOGLE_CLIENT_ID,
+      'expected GOOGLE_CLIENT_ID to exist'
+    ),
+    clientSecret: Assert.exists(
+      process.env.GOOGLE_CLIENT_SECRET,
+      'expected GOOGLE_CLIENT_SECRET to exist'
+    ),
+  },
 };
 
 export type Config = typeof config;
