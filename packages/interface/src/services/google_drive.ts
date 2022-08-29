@@ -13,9 +13,19 @@ export interface ExchangeCodeResponse {
   name: string;
 }
 
+export interface RefreshTokenRequest {
+  refreshToken: string;
+}
+export interface RefreshTokenResponse {
+  accessToken: string;
+  refreshToken: string;
+  expiresAt: number;
+}
+
 export interface IGoogleDriveService {
   oauth: Endpoint<OAuthRequest, OAuthResponse>;
   exchangeCode: Endpoint<ExchangeCodeRequest, ExchangeCodeResponse>;
+  refreshToken: Endpoint<RefreshTokenRequest, RefreshTokenResponse>;
 }
 
 export type GoogleDriveClient = IClient<IGoogleDriveService>;

@@ -17,6 +17,8 @@ export class GoogleDriveNativeService implements NativeIntegration {
   name = 'Google Drive';
   icon = Path.resource('/integrations/google_drive/google_drive.svg');
 
+  private refreshTokenOp?: Promise<string> = undefined;
+
   constructor(
     private readonly redirectOrigin: string,
     private readonly googleDriveClient: GoogleDrive.GoogleDriveClient,
@@ -76,23 +78,17 @@ export class GoogleDriveNativeService implements NativeIntegration {
     options: { page: number }
   ) => {
     const drive = google.drive({ version: 'v3' });
-    console.log('searching', query, profile);
-    try {
-      const res = await drive.files.list({
-        q: this.constructQuery(query),
-        fields: 'files(id, name, mimeType, description, webViewLink)',
-        spaces: 'drive',
-        oauth_token: profile.accessToken,
-      });
+    const accessToken = await this.maybeRefreshAccessToken(profile);
+    const res = await drive.files.list({
+      q: this.constructQuery(query),
+      fields: 'files(id, name, mimeType, description, webViewLink)',
+      spaces: 'drive',
+      oauth_token: accessToken,
+    });
 
-      const files = res.data.files || [];
-      console.log('received', res);
-      const result = files.map(file => this.mapFile(file, profile.id));
-      return result;
-    } catch (error) {
-      console.log('failed', error);
-      return [];
-    }
+    const files = res.data.files || [];
+    const result = files.map(file => this.mapFile(file, profile.id));
+    return result;
   };
 
   private constructQuery = (keyword: string) => {
@@ -125,6 +121,36 @@ export class GoogleDriveNativeService implements NativeIntegration {
       url,
       icon: Path.resource('/integrations/common/file.svg'),
     };
+  };
+
+  private maybeRefreshAccessToken = async (
+    profile: GoogleDriveProfile
+  ): Promise<string> => {
+    if (Date.now() < profile.expiresAt) {
+      return profile.accessToken;
+    }
+
+    if (this.refreshTokenOp) {
+      return this.refreshTokenOp;
+    }
+
+    const doRefresh = async () => {
+      const res = await this.googleDriveClient.call('refreshToken', {
+        refreshToken: profile.refreshToken,
+      });
+      this.store.setProfile({
+        ...profile,
+        accessToken: res.accessToken,
+        refreshToken: res.refreshToken,
+        expiresAt: res.expiresAt,
+      });
+
+      return res.accessToken;
+    };
+
+    const op = doRefresh();
+    this.refreshTokenOp = op;
+    return await op;
   };
 
   private createRedirectUrl = () => {

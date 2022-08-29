@@ -76,4 +76,36 @@ export class GoogleDriveService {
       name,
     });
   };
+
+  refreshToken: NextApiHandler<GoogleDrive.RefreshTokenResponse> = async (
+    req,
+    res
+  ) => {
+    const refreshToken: string = req.body.refreshToken;
+    const client = new google.auth.OAuth2({
+      clientId: this.config.clientId,
+      clientSecret: this.config.clientSecret,
+      redirectUri: this.config.redirectUrl,
+    });
+    client.setCredentials({
+      refresh_token: refreshToken,
+    });
+    const refreshResponse = await client.refreshAccessToken();
+
+    const accessToken = Assert.exists(
+      refreshResponse.credentials.access_token,
+      'expected access token to exist'
+    );
+    const newRefreshToken =
+      refreshResponse.credentials.refresh_token || refreshToken;
+    const expiresAt = Assert.exists(
+      refreshResponse.credentials.expiry_date,
+      'expected token expiry date to exist'
+    );
+    return res.json({
+      accessToken,
+      refreshToken: newRefreshToken,
+      expiresAt,
+    });
+  };
 }
