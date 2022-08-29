@@ -1,5 +1,4 @@
 import { OpenSettingsEndpoint } from '../interface/bridge/endpoints';
-import { Event, EventData, EventName } from '../interface/bridge/events';
 import { Broadcaster, Handler } from './base/bridge_handler';
 import { SearchView } from './views/search/search_view';
 import { SettingsView } from './views/settings/settings_view';
@@ -19,14 +18,6 @@ export class App {
       this.searchView = undefined;
     });
     searchView.open();
-  };
-
-  handleFocus = () => {
-    this.searchView?.browserWindow.setOpacity(1);
-  };
-
-  handleBlur = () => {
-    this.searchView?.browserWindow.setOpacity(0.5);
   };
 
   openSettings: Handler<OpenSettingsEndpoint> = async () => {
