@@ -7,7 +7,15 @@ import { IntegrationProfile } from '../../../interface/intergration';
 import { WebClient } from '@slack/web-api';
 import { Assert, exists } from '@highbeam/utils';
 import { Path } from '../../../base/path';
-import { SearchResult } from '../../../interface/search';
+import {
+  FileSearchResult,
+  MessageSearchResult,
+  SearchResult,
+} from '../../../interface/search';
+import {
+  FilesMatch,
+  MessagesMatch,
+} from '@slack/web-api/dist/response/SearchAllResponse';
 
 export class SlackNativeService implements NativeIntegration {
   id = 'com.highbeam.slack';
@@ -88,52 +96,57 @@ export class SlackNativeService implements NativeIntegration {
       });
     }
 
-    const results: SearchResult[] = [];
-
-    res.messages?.matches?.forEach(msg => {
-      results.push({
-        id: Assert.exists(msg.iid, 'expected message iid to exist'),
-        integrationId: this.id,
-        profileId,
-        type: 'message',
-        icon: Path.resource('/integrations/common/message.svg'),
-        text: Assert.exists(msg.text, 'expected message text to exist'),
-        url: Assert.exists(
-          msg.permalink,
-          'expected message permalink to exist'
-        ),
-        author: {
-          name: msg.username ? `@${msg.username}` : 'Unknown',
-        },
-        channel: `#${msg.channel?.name}`,
-      });
-    });
-
-    res.files?.matches?.forEach(file => {
-      results.push({
-        id: Assert.exists(file.id, 'expected file id to exist'),
-        integrationId: this.id,
-        profileId,
-        type: 'file',
-        icon: Path.resource('/integrations/common/file.svg'),
-        title: Assert.exists(file.name, 'exepected file name to exist'),
-        url: Assert.exists(
-          file.url_private,
-          'expected file private url to exist'
-        ),
-        fileType:
-          file.pretty_type ||
-          file.filetype ||
-          file.mimetype ||
-          'Unknown file type',
-      });
-    });
+    const messages = res.messages?.matches || [];
+    const files = res.files?.matches || [];
+    const results: SearchResult[] = [
+      ...messages.map(msg => this.mapMessage(msg, profileId)),
+      ...files.map(file => this.mapFile(file, profileId)),
+    ];
 
     return results;
   };
 
   removeProfile = async (id: string) => {
     this.store.removeProfile(id);
+  };
+
+  private mapMessage = (
+    msg: MessagesMatch,
+    profileId: string
+  ): MessageSearchResult => {
+    return {
+      id: Assert.exists(msg.iid, 'expected message iid to exist'),
+      integrationId: this.id,
+      profileId,
+      type: 'message',
+      icon: Path.resource('/integrations/common/message.svg'),
+      text: Assert.exists(msg.text, 'expected message text to exist'),
+      url: Assert.exists(msg.permalink, 'expected message permalink to exist'),
+      author: {
+        name: msg.username ? `@${msg.username}` : 'Unknown',
+      },
+      channel: `#${msg.channel?.name}`,
+    };
+  };
+
+  private mapFile = (file: FilesMatch, profileId: string): FileSearchResult => {
+    return {
+      id: Assert.exists(file.id, 'expected file id to exist'),
+      integrationId: this.id,
+      profileId,
+      type: 'file',
+      icon: Path.resource('/integrations/common/file.svg'),
+      title: Assert.exists(file.name, 'exepected file name to exist'),
+      url: Assert.exists(
+        file.url_private,
+        'expected file private url to exist'
+      ),
+      fileType:
+        file.pretty_type ||
+        file.filetype ||
+        file.mimetype ||
+        'Unknown file type',
+    };
   };
 
   private createRedirectUrl = () => {
