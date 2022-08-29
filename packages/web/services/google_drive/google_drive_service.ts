@@ -12,6 +12,7 @@ export class GoogleDriveService {
     this.oauth2Client = new google.auth.OAuth2({
       clientId: config.clientId,
       clientSecret: config.clientSecret,
+      redirectUri: config.redirectUrl,
     });
   }
 
