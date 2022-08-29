@@ -23,7 +23,10 @@ export const IntegrationsListPage = ({
         </header>
       )}
       {profiles.map(profile => (
-        <div className={styles.profileContainer} key={profile.id}>
+        <div
+          className={styles.profileContainer}
+          key={`${profile.id}${profile.integrationId}`}
+        >
           <div className={styles.profileInfo}>
             <img
               className={styles.profileIcon}
