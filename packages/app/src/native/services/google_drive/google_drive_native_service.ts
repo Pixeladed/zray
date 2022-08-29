@@ -49,8 +49,8 @@ export class GoogleDriveNativeService implements NativeIntegration {
     return this.store.findProfiles().map(this.store.asProfileInfo);
   };
 
-  removeProfile = async () => {
-    throw new Error('not implemented');
+  removeProfile = async (profileId: string) => {
+    this.store.removeProfile(profileId);
   };
 
   search = async () => {
