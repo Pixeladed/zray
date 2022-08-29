@@ -3,9 +3,9 @@ import { ISlackService } from './slack';
 export * as Slack from './slack';
 export * as GoogleDrive from './google_drive';
 
-export type Services = 'slack' | 'googleDrive';
+export type Services = 'slack' | 'google_drive';
 export type IServices = ISlackService | IGoogleDriveService;
 export type IServiceMap = {
   slack: ISlackService;
-  googleDrive: IGoogleDriveService;
+  google_drive: IGoogleDriveService;
 };

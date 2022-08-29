@@ -1,5 +1,5 @@
 import { Routes } from '../../../routes';
-import { SlackOAuthView } from '../../views/slack_oauth/slack_oauth_view';
+import { OAuthView } from '../../views/oauth/oauth_view';
 import { Slack } from '@highbeam/interface';
 import { SlackNativeStore } from './slack_native_service_store';
 import { NativeIntegration } from '../integration/integration_native_service';
@@ -24,37 +24,26 @@ export class SlackNativeService implements NativeIntegration {
     const redirectUrl = this.createRedirectUrl();
     const oAuthUrl = this.slackClient.url('oauth');
     oAuthUrl.searchParams.set('redirectUrl', redirectUrl);
-    const view = new SlackOAuthView(oAuthUrl.toString());
-    view.open();
 
     let finish: (profile: IntegrationProfile) => void;
     const promise = new Promise<IntegrationProfile>(resolve => {
       finish = resolve;
     });
 
-    view.browserWindow?.webContents.on(
-      'will-redirect',
-      async (event, newUrl) => {
-        if (!this.isSameOriginAndPath(redirectUrl, newUrl)) {
-          return;
-        }
-
-        event.preventDefault();
-        view.browserWindow?.close();
-
-        const url = new URL(newUrl);
-        const code = url.searchParams.get('code');
-
+    const view = new OAuthView({
+      url: oAuthUrl.toString(),
+      redirectUrl,
+      name: this.name,
+      onSuccess: async code => {
         const res = await this.slackClient.call('exchangeCode', { code });
         const profile = this.store.setProfile(res);
         finish({
           ...this.store.asProfileInfo(profile),
           integrationId: this.id,
         });
-      }
-    );
-
-    view.browserWindow?.on('close', () => {});
+      },
+    });
+    view.open();
 
     return promise;
   };
@@ -145,13 +134,6 @@ export class SlackNativeService implements NativeIntegration {
 
   removeProfile = async (id: string) => {
     this.store.removeProfile(id);
-  };
-
-  private isSameOriginAndPath = (urlA: string, urlB: string) => {
-    const a = new URL(urlA);
-    const b = new URL(urlB);
-
-    return a.origin === b.origin && a.pathname === b.pathname;
   };
 
   private createRedirectUrl = () => {
