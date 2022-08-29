@@ -4,7 +4,13 @@ import { NativeIntegration } from '../integration/integration_native_service';
 import { GoogleDrive } from '@highbeam/interface';
 import { IntegrationProfile } from '../../../interface/intergration';
 import { OAuthView } from '../../views/oauth/oauth_view';
-import { GoogleDriveNativeStore } from './google_drive_native_store';
+import {
+  GoogleDriveNativeStore,
+  GoogleDriveProfile,
+} from './google_drive_native_store';
+import { drive_v3, google } from 'googleapis';
+import { Assert, exists } from '@highbeam/utils';
+import { FileSearchResult } from '../../../interface/search';
 
 export class GoogleDriveNativeService implements NativeIntegration {
   id = 'com.highbeam.gdrive';
@@ -53,8 +59,72 @@ export class GoogleDriveNativeService implements NativeIntegration {
     this.store.removeProfile(profileId);
   };
 
-  search = async () => {
-    throw new Error('not implemented');
+  search = async (query: string, options: { page: number }) => {
+    const profiles = this.store.findProfiles();
+    const ops = await Promise.allSettled(
+      profiles.map(profile => this.searchInProfile(profile, query, options))
+    );
+    const results = ops
+      .flatMap(op => (op.status === 'fulfilled' ? op.value : undefined))
+      .filter(exists);
+    return results;
+  };
+
+  private searchInProfile = async (
+    profile: GoogleDriveProfile,
+    query: string,
+    options: { page: number }
+  ) => {
+    const drive = google.drive({ version: 'v3' });
+    console.log('searching', query, profile);
+    try {
+      const res = await drive.files.list({
+        q: this.constructQuery(query),
+        fields: 'files(id, name, mimeType, description, webViewLink)',
+        spaces: 'drive',
+        oauth_token: profile.accessToken,
+      });
+
+      const files = res.data.files || [];
+      console.log('received', res);
+      const result = files.map(file => this.mapFile(file, profile.id));
+      return result;
+    } catch (error) {
+      console.log('failed', error);
+      return [];
+    }
+  };
+
+  private constructQuery = (keyword: string) => {
+    const cleaned = keyword.replace(/'/g, "\\'");
+    return `fullText contains '${cleaned}' or name contains '${cleaned}'`;
+  };
+
+  private mapFile = (
+    file: drive_v3.Schema$File,
+    profileId: string
+  ): FileSearchResult => {
+    const id = Assert.exists(file.id, 'expected id to exist');
+    const fileType = Assert.exists(
+      file.mimeType,
+      'expected mime type to exist'
+    );
+    const title = Assert.exists(file.name, 'expected name to exist');
+    const url = Assert.exists(
+      file.webViewLink,
+      'expected web view link to exist'
+    );
+
+    return {
+      id,
+      fileType,
+      integrationId: this.id,
+      profileId,
+      title,
+      type: 'file',
+      url,
+      icon: Path.resource('/integrations/common/file.svg'),
+    };
   };
 
   private createRedirectUrl = () => {

@@ -1,7 +1,7 @@
 import { Routes } from '../../../routes';
 import { OAuthView } from '../../views/oauth/oauth_view';
 import { Slack } from '@highbeam/interface';
-import { SlackNativeStore } from './slack_native_store';
+import { SlackNativeStore, SlackProfile } from './slack_native_store';
 import { NativeIntegration } from '../integration/integration_native_service';
 import { IntegrationProfile } from '../../../interface/intergration';
 import { WebClient } from '@slack/web-api';
@@ -57,9 +57,9 @@ export class SlackNativeService implements NativeIntegration {
   };
 
   search = async (query: string, options: { page: number }) => {
-    const profiles = await this.listProfiles();
+    const profiles = this.store.findProfiles();
     const ops = await Promise.allSettled(
-      profiles.map(profile => this.searchInProfile(profile.id, query, options))
+      profiles.map(profile => this.searchInProfile(profile, query, options))
     );
     const results = ops
       .flatMap(op => (op.status === 'fulfilled' ? op.value : undefined))
@@ -72,15 +72,11 @@ export class SlackNativeService implements NativeIntegration {
   };
 
   private searchInProfile = async (
-    profileId: string,
+    profile: SlackProfile,
     query: string,
     options: { page: number }
   ): Promise<SearchResult[]> => {
-    const { accessToken } = Assert.exists(
-      this.store.getProfile(profileId),
-      'expected profile to exist'
-    );
-
+    const { accessToken } = profile;
     const client = new WebClient(accessToken);
     const res = await client.search.all({
       query,
@@ -99,8 +95,8 @@ export class SlackNativeService implements NativeIntegration {
     const messages = res.messages?.matches || [];
     const files = res.files?.matches || [];
     const results: SearchResult[] = [
-      ...messages.map(msg => this.mapMessage(msg, profileId)),
-      ...files.map(file => this.mapFile(file, profileId)),
+      ...messages.map(msg => this.mapMessage(msg, profile.id)),
+      ...files.map(file => this.mapFile(file, profile.id)),
     ];
 
     return results;
