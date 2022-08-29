@@ -18,6 +18,7 @@ export class OAuthView extends View {
         width: 500,
         height: 700,
         title: `Connecting to ${name}`,
+        autoHideMenuBar: true,
         webPreferences: {
           contextIsolation: true,
           nodeIntegration: false,
