@@ -4,15 +4,22 @@ import styles from './search_result_card.module.css';
 
 export const MessageResult: ResultComponent<MessageSearchResult> = ({
   result,
-  integration,
 }) => {
   return (
     <div>
       <h3 className={styles.resultCardTitle}>{result.text}</h3>
       <p className={styles.resultCardDescription}>
-        {integration.name} &middot;{' '}
-        <span className={styles.type}>{result.type}</span> &middot; in{' '}
-        {result.channel} by {result.author.name}
+        {!!result.icon && (
+          <>
+            <img
+              src={result.icon}
+              className={styles.inlineIcon}
+              alt={result.text}
+            />
+            <span className={styles.type}>{result.type}</span>
+          </>
+        )}
+        &nbsp;in {result.channel} by {result.author.name}
       </p>
     </div>
   );

@@ -20,21 +20,10 @@
   height: var(--spaceLarge);
 }
 
-.combinedIcon {
-  composes: icon;
-  position: relative;
-}
-
-.combinedIconIntegration {
-  width: var(--spaceMedium);
-  height: var(--spaceMedium);
-  bottom: calc(-1 * var(--spacexxSmall));
-  right: calc(-1 * var(--spacexxSmall));
-  position: absolute;
-  background: var(--colorBackgroundDark);
-  border-radius: 50%;
-  padding: var(--spacexxxSmall);
-  border: 1px solid var(--colorBorder);
+.inlineIcon {
+  width: var(--spacexSmall);
+  height: var(--spacexSmall);
+  margin-right: var(--spacexxxSmall);
 }
 
 .type {
@@ -48,4 +37,6 @@
 .resultCardDescription {
   margin: 0;
   font-size: 0.8em;
+  display: flex;
+  align-items: center;
 }
