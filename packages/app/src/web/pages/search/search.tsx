@@ -50,13 +50,13 @@ export function SearchPage({
             </p>
           </div>
         )}
+        <input
+          placeholder="What are you looking for?"
+          className={styles.input}
+          value={value}
+          onChange={handleChange}
+        />
       </div>
-      <input
-        placeholder="What are you looking for?"
-        className={styles.input}
-        value={value}
-        onChange={handleChange}
-      />
       {!profiles.length && (
         <div className={styles.empty}>
           <p className={styles.emptyLead}>
