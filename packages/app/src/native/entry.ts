@@ -11,16 +11,23 @@ import { createSearchNativeService } from './services/search/create';
 import { createSlackNativeService } from './services/slack/create';
 import { WindowSource } from './views/view';
 
-const baseSource: WindowSource = app.isPackaged
+const { apiOrigin, redirectOrigin } = config;
+const BASE_SOURCE: WindowSource = app.isPackaged
   ? { type: 'bundled', path: 'build/index.html' }
   : { type: 'server', url: 'http://localhost:8080' };
 
-const instance = new App(baseSource);
+const instance = new App(BASE_SOURCE);
 
 const registerHandler = createHandlerReigstrar(ipcMain);
-export const clientFactory = new ClientFactory(config.apiOrigin);
-const { slackNativeService } = createSlackNativeService(clientFactory);
-const { googleDriveNativeService } = createGoogleDriveNativeService();
+export const clientFactory = new ClientFactory(apiOrigin);
+const { slackNativeService } = createSlackNativeService({
+  redirectOrigin,
+  clientFactory,
+});
+const { googleDriveNativeService } = createGoogleDriveNativeService({
+  redirectOrigin,
+  clientFactory,
+});
 const navigationNativeService = new NavigationNativeService(shell);
 
 const integrations: readonly NativeIntegration[] = [

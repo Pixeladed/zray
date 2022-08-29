@@ -1,7 +1,7 @@
 import { Routes } from '../../../routes';
 import { OAuthView } from '../../views/oauth/oauth_view';
 import { Slack } from '@highbeam/interface';
-import { SlackNativeStore } from './slack_native_service_store';
+import { SlackNativeStore } from './slack_native_store';
 import { NativeIntegration } from '../integration/integration_native_service';
 import { IntegrationProfile } from '../../../interface/intergration';
 import { WebClient } from '@slack/web-api';
@@ -151,7 +151,7 @@ export class SlackNativeService implements NativeIntegration {
 
   private createRedirectUrl = () => {
     const url = new URL(this.redirectOrigin);
-    url.pathname = Routes.slackIntegrationCallback().absolute;
+    url.pathname = Routes.slackOAuthCallback().absolute;
     url.search = '';
     url.hash = '';
     return url.toString();

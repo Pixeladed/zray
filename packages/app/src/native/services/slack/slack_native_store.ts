@@ -15,12 +15,13 @@ export class SlackNativeStore {
     });
   }
 
-  setProfile = (profile: SlackProfile) => {
+  setProfile = (profile: Omit<SlackProfile, 'id'>) => {
     const id = this.getProfileId(profile);
     const profilesById = this.store.get('profilesById');
-    profilesById[id] = profile;
+    const record = { ...profile, id };
+    profilesById[id] = record;
     this.store.set('profilesById', profilesById);
-    return profile;
+    return record;
   };
 
   removeProfile = (id: string) => {
@@ -41,7 +42,7 @@ export class SlackNativeStore {
 
   asProfileInfo = (profile: SlackProfile): ProfileInfo => {
     return {
-      id: this.getProfileId(profile),
+      id: profile.id,
       name: profile.teamName,
     };
   };
@@ -56,6 +57,7 @@ type SlackNativeStoreLayout = {
 };
 
 export type SlackProfile = {
+  id: string;
   userId: string;
   accessToken: string;
   teamName: string;

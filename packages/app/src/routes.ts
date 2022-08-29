@@ -4,8 +4,10 @@ export class Routes {
   static settings = () => new Route('/settings');
   static integrations = () => new Route('/integrations', Routes.settings());
   static addIntegration = () => new Route('/add', Routes.integrations());
-  static slackIntegrationCallback = () =>
+  static slackOAuthCallback = () =>
     new Route('/slack/callback', Routes.integrations());
+  static googleDriveOAuthCallback = () =>
+    new Route('/google_drive/callback', Routes.integrations());
 }
 
 export class Route {
