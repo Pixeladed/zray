@@ -29,6 +29,16 @@ export const config = {
       'expected GOOGLE_CLIENT_SECRET to exist'
     ),
   },
+  auth0: {
+    audience: Assert.exists(
+      process.env.AUTH0_AUDIENCE,
+      'expected AUTH0_AUDIENCE to exist'
+    ),
+    domain: Assert.exists(
+      process.env.AUTH0_DOMAIN,
+      'expected AUTH0_DOMAIN to exist'
+    ),
+  },
 };
 
 export type Config = typeof config;
