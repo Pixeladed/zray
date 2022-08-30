@@ -16,7 +16,7 @@ export class SlackService {
     });
   }
 
-  authorize: NextApiHandler = async (req, res) => {
+  oauth: NextApiHandler = async (req, res) => {
     const redirectUrl = req.query.redirectUrl;
 
     if (typeof redirectUrl !== 'string') {

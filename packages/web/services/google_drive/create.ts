@@ -1,14 +1,9 @@
-import { Config } from '../../base/config';
+import { GoogleOAuthConfig } from '../../base/config';
 import { GoogleService } from '../google/google_service';
 
-export const createGoogleDriveService = (config: Config['google']) => {
+export const createGoogleDriveService = (config: GoogleOAuthConfig) => {
   const scopes = ['https://www.googleapis.com/auth/drive.readonly'];
-  const googleDriveService = new GoogleService(
-    config.clientId,
-    config.clientSecret,
-    config.redirectUrl,
-    scopes
-  );
+  const googleDriveService = new GoogleService(config, scopes);
 
   return { googleDriveService };
 };

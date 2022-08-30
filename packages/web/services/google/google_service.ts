@@ -3,24 +3,23 @@ import { google } from 'googleapis';
 import { NextApiHandler } from 'next';
 import { GoogleDrive } from '@highbeam/interface';
 import { Assert } from '@highbeam/utils';
+import { GoogleOAuthConfig } from '../../base/config';
 
 export class GoogleService {
   private oauth2Client: OAuth2Client;
 
   constructor(
-    private readonly clientId: string,
-    private readonly clientSecret: string,
-    private readonly redirectUrl: string,
+    private readonly config: GoogleOAuthConfig,
     private readonly scopes: readonly string[]
   ) {
     this.oauth2Client = new google.auth.OAuth2({
-      clientId: clientId,
-      clientSecret: clientSecret,
-      redirectUri: redirectUrl,
+      clientId: config.clientId,
+      clientSecret: config.clientSecret,
+      redirectUri: config.redirectUrl,
     });
   }
 
-  authorize: NextApiHandler = async (req, res) => {
+  oauth: NextApiHandler = async (req, res) => {
     const redirectUrl = req.query.redirectUrl;
 
     if (typeof redirectUrl !== 'string') {
@@ -49,7 +48,7 @@ export class GoogleService {
     );
     const idTicket = await this.oauth2Client.verifyIdToken({
       idToken,
-      audience: this.clientId,
+      audience: this.config.clientId,
     });
     const profile = idTicket.getPayload();
 
@@ -83,9 +82,9 @@ export class GoogleService {
   ) => {
     const refreshToken: string = req.body.refreshToken;
     const client = new google.auth.OAuth2({
-      clientId: this.clientId,
-      clientSecret: this.clientSecret,
-      redirectUri: this.redirectUrl,
+      clientId: this.config.clientId,
+      clientSecret: this.config.clientSecret,
+      redirectUri: this.config.redirectUrl,
     });
     client.setCredentials({
       refresh_token: refreshToken,

@@ -1,6 +1,6 @@
 import { Assert } from '@highbeam/utils';
 
-export const config = {
+export const config: Config = {
   slack: {
     clientId: Assert.exists(
       process.env.SLACK_CLIENT_ID,
@@ -15,18 +15,32 @@ export const config = {
       'expected SLACK_STATE_SECRET to exist'
     ),
   },
-  google: {
+  googleDrive: {
     clientId: Assert.exists(
-      process.env.GOOGLE_CLIENT_ID,
-      'expected GOOGLE_CLIENT_ID to exist'
+      process.env.GOOGLE_DRIVE_CLIENT_ID,
+      'expected GOOGLE_DRIVE_CLIENT_ID to exist'
     ),
     clientSecret: Assert.exists(
-      process.env.GOOGLE_CLIENT_SECRET,
-      'expected GOOGLE_CLIENT_SECRET to exist'
+      process.env.GOOGLE_DRIVE_CLIENT_SECRET,
+      'expected GOOGLE_DRIVE_CLIENT_SECRET to exist'
     ),
     redirectUrl: Assert.exists(
-      process.env.GOOGLE_REDIRECT_URL,
-      'expected GOOGLE_CLIENT_SECRET to exist'
+      process.env.GOOGLE_DRIVE_CLIENT_SECRET,
+      'expected GOOGLE_DRIVE_CLIENT_SECRET to exist'
+    ),
+  },
+  gmail: {
+    clientId: Assert.exists(
+      process.env.GMAIL_CLIENT_ID,
+      'expected GMAIL_CLIENT_ID to exist'
+    ),
+    clientSecret: Assert.exists(
+      process.env.GMAIL_CLIENT_SECRET,
+      'expected GMAIL_CLIENT_SECRET to exist'
+    ),
+    redirectUrl: Assert.exists(
+      process.env.GMAIL_REDIRECT_URL,
+      'expected GMAIL_REDIRECT_URL to exist'
     ),
   },
   auth0: {
@@ -41,4 +55,24 @@ export const config = {
   },
 };
 
-export type Config = typeof config;
+export type Config = {
+  slack: SlackOAuthConfig;
+  googleDrive: GoogleOAuthConfig;
+  gmail: GoogleOAuthConfig;
+  auth0: {
+    audience: string;
+    domain: string;
+  };
+};
+
+export type SlackOAuthConfig = {
+  clientId: string;
+  clientSecret: string;
+  stateSecret: string;
+};
+
+export type GoogleOAuthConfig = {
+  clientId: string;
+  clientSecret: string;
+  redirectUrl: string;
+};
