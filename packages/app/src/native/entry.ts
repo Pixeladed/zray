@@ -3,6 +3,7 @@ import { app, ipcMain, shell } from 'electron';
 import { config } from '../base/config';
 import { App } from './app';
 import { createHandlerReigstrar } from './base/bridge_handler';
+import { createGmailNativeService } from './services/gmail/create';
 import { createGoogleDriveNativeService } from './services/google_drive/create';
 import { createIntegrationNativeService } from './services/integration/create';
 import { NativeIntegration } from './services/integration/integration_native_service';
@@ -28,11 +29,16 @@ const { googleDriveNativeService } = createGoogleDriveNativeService({
   redirectOrigin,
   clientFactory,
 });
+const { gmailNativeService } = createGmailNativeService({
+  redirectOrigin,
+  clientFactory,
+});
 const navigationNativeService = new NavigationNativeService(shell);
 
 const integrations: readonly NativeIntegration[] = [
   slackNativeService,
   googleDriveNativeService,
+  gmailNativeService,
 ];
 
 const { integrationNativeService } = createIntegrationNativeService({

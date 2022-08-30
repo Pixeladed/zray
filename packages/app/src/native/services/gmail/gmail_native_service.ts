@@ -1,33 +1,29 @@
 import { Path } from '../../../base/path';
 import { Routes } from '../../../routes';
 import { NativeIntegration } from '../integration/integration_native_service';
-import { GoogleDrive } from '@highbeam/interface';
+import { Gmail } from '@highbeam/interface';
 import { IntegrationProfile } from '../../../interface/intergration';
 import { OAuthView } from '../../views/oauth/oauth_view';
-import {
-  GoogleDriveNativeStore,
-  GoogleDriveProfile,
-} from './google_drive_native_store';
-import { drive_v3, google } from 'googleapis';
-import { Assert, exists } from '@highbeam/utils';
-import { FileSearchResult } from '../../../interface/search';
+import { GmailNativeStore, GmailProfile } from './gmail_native_store';
+import { google } from 'googleapis';
+import { exists } from '@highbeam/utils';
 import { RefreshTokenUtil } from '../../base/refresh_token_util';
 
-export class GoogleDriveNativeService implements NativeIntegration {
-  id = 'com.highbeam.gdrive';
-  name = 'Google Drive';
+export class GmailNativeService implements NativeIntegration {
+  id = 'com.highbeam.gmail';
+  name = 'Gmail';
   icon = Path.resource('/integrations/google_drive/google_drive.svg');
 
   constructor(
     private readonly redirectOrigin: string,
-    private readonly googleDriveClient: GoogleDrive.GoogleDriveClient,
-    private readonly store: GoogleDriveNativeStore,
+    private readonly gmailClient: Gmail.GmailClient,
+    private readonly store: GmailNativeStore,
     private readonly refreshUtil: RefreshTokenUtil
   ) {}
 
   connect = async () => {
     const redirectUrl = this.createRedirectUrl();
-    const oAuthUrl = this.googleDriveClient.url('oauth');
+    const oAuthUrl = this.gmailClient.url('oauth');
     oAuthUrl.searchParams.set('redirectUrl', redirectUrl);
 
     let finish: (profile: IntegrationProfile) => void;
@@ -40,7 +36,7 @@ export class GoogleDriveNativeService implements NativeIntegration {
       redirectUrl,
       name: this.name,
       onSuccess: async code => {
-        const res = await this.googleDriveClient.call('exchangeCode', { code });
+        const res = await this.gmailClient.call('exchangeCode', { code });
         const profile = this.store.setProfile(res);
         finish({
           ...this.store.asProfileInfo(profile),
@@ -73,63 +69,22 @@ export class GoogleDriveNativeService implements NativeIntegration {
   };
 
   private searchInProfile = async (
-    profile: GoogleDriveProfile,
+    profile: GmailProfile,
     query: string,
     options: { page: number }
   ) => {
-    const drive = google.drive('v3');
+    const gmail = google.gmail('v1');
 
     const refreshedProfile = await this.refreshUtil.maybeRefreshAccessToken(
       profile
     );
     const accessToken = refreshedProfile.accessToken;
-    const res = await drive.files.list({
-      q: this.constructQuery(query),
-      fields: 'files(id, name, mimeType, description, webViewLink)',
-      spaces: 'drive',
-      oauth_token: accessToken,
-    });
-
-    const files = res.data.files || [];
-    const result = files.map(file => this.mapFile(file, profile.id));
-    return result;
-  };
-
-  private constructQuery = (keyword: string) => {
-    const cleaned = keyword.replace(/'/g, "\\'");
-    return `fullText contains '${cleaned}' or name contains '${cleaned}'`;
-  };
-
-  private mapFile = (
-    file: drive_v3.Schema$File,
-    profileId: string
-  ): FileSearchResult => {
-    const id = Assert.exists(file.id, 'expected id to exist');
-    const fileType = Assert.exists(
-      file.mimeType,
-      'expected mime type to exist'
-    );
-    const title = Assert.exists(file.name, 'expected name to exist');
-    const url = Assert.exists(
-      file.webViewLink,
-      'expected web view link to exist'
-    );
-
-    return {
-      id,
-      fileType,
-      integrationId: this.id,
-      profileId,
-      title,
-      type: 'file',
-      url,
-      icon: Path.resource('/integrations/common/file.svg'),
-    };
+    return [] as any[];
   };
 
   private createRedirectUrl = () => {
     const url = new URL(this.redirectOrigin);
-    url.pathname = Routes.googleDriveOAuthCallback().absolute;
+    url.pathname = Routes.gmailOAuthCallback().absolute;
     url.search = '';
     url.hash = '';
     return url.toString();
