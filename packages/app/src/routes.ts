@@ -8,6 +8,8 @@ export class Routes {
     new Route('/slack/callback', Routes.integrations());
   static googleDriveOAuthCallback = () =>
     new Route('/google_drive/callback', Routes.integrations());
+  static gmailOAuthCallback = () =>
+    new Route('/gmail/callback', Routes.integrations());
 }
 
 export class Route {
