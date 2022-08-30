@@ -1,18 +1,22 @@
 import { OAuth2Client } from 'google-auth-library';
 import { google } from 'googleapis';
 import { NextApiHandler } from 'next';
-import { Config } from '../../base/config';
 import { GoogleDrive } from '@highbeam/interface';
 import { Assert } from '@highbeam/utils';
 
-export class GoogleDriveService {
+export class GoogleService {
   private oauth2Client: OAuth2Client;
 
-  constructor(private readonly config: Config['google']) {
+  constructor(
+    private readonly clientId: string,
+    private readonly clientSecret: string,
+    private readonly redirectUrl: string,
+    private readonly scopes: readonly string[]
+  ) {
     this.oauth2Client = new google.auth.OAuth2({
-      clientId: config.clientId,
-      clientSecret: config.clientSecret,
-      redirectUri: config.redirectUrl,
+      clientId: clientId,
+      clientSecret: clientSecret,
+      redirectUri: redirectUrl,
     });
   }
 
@@ -26,11 +30,7 @@ export class GoogleDriveService {
     const installUrl = this.oauth2Client.generateAuthUrl({
       access_type: 'offline',
       redirect_uri: redirectUrl,
-      scope: [
-        'https://www.googleapis.com/auth/drive.readonly',
-        'profile',
-        'email',
-      ],
+      scope: [...this.scopes, 'profile', 'email'],
     });
 
     return res.redirect(installUrl);
@@ -49,7 +49,7 @@ export class GoogleDriveService {
     );
     const idTicket = await this.oauth2Client.verifyIdToken({
       idToken,
-      audience: this.config.clientId,
+      audience: this.clientId,
     });
     const profile = idTicket.getPayload();
 
@@ -83,9 +83,9 @@ export class GoogleDriveService {
   ) => {
     const refreshToken: string = req.body.refreshToken;
     const client = new google.auth.OAuth2({
-      clientId: this.config.clientId,
-      clientSecret: this.config.clientSecret,
-      redirectUri: this.config.redirectUrl,
+      clientId: this.clientId,
+      clientSecret: this.clientSecret,
+      redirectUri: this.redirectUrl,
     });
     client.setCredentials({
       refresh_token: refreshToken,
