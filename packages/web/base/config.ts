@@ -25,8 +25,8 @@ export const config: Config = {
       'expected GOOGLE_DRIVE_CLIENT_SECRET to exist'
     ),
     redirectUrl: Assert.exists(
-      process.env.GOOGLE_DRIVE_CLIENT_SECRET,
-      'expected GOOGLE_DRIVE_CLIENT_SECRET to exist'
+      process.env.GOOGLE_DRIVE_REDIRECT_URL,
+      'expected GOOGLE_DRIVE_REDIRECT_URL to exist'
     ),
   },
   gmail: {
