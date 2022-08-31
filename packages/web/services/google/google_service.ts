@@ -1,7 +1,7 @@
 import { OAuth2Client } from 'google-auth-library';
 import { google } from 'googleapis';
 import { NextApiHandler } from 'next';
-import { GoogleDrive } from '@highbeam/interface';
+import { Google } from '@highbeam/interface';
 import { Assert } from '@highbeam/utils';
 import { GoogleOAuthConfig } from '../../base/config';
 
@@ -35,7 +35,7 @@ export class GoogleService {
     return res.redirect(installUrl);
   };
 
-  exchangeCode: NextApiHandler<GoogleDrive.ExchangeCodeResponse> = async (
+  exchangeCode: NextApiHandler<Google.ExchangeCodeResponse> = async (
     req,
     res
   ) => {
@@ -76,7 +76,7 @@ export class GoogleService {
     });
   };
 
-  refreshToken: NextApiHandler<GoogleDrive.RefreshTokenResponse> = async (
+  refreshToken: NextApiHandler<Google.RefreshTokenResponse> = async (
     req,
     res
   ) => {
