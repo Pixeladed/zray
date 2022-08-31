@@ -12,7 +12,7 @@ import { RefreshTokenUtil } from '../../base/refresh_token_util';
 export class GmailNativeService implements NativeIntegration {
   id = 'com.highbeam.gmail';
   name = 'Gmail';
-  icon = Path.resource('/integrations/google_drive/google_drive.svg');
+  icon = Path.resource('/integrations/gmail/gmail.svg');
 
   constructor(
     private readonly redirectOrigin: string,
