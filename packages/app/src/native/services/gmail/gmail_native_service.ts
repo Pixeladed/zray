@@ -5,9 +5,10 @@ import { Gmail } from '@highbeam/interface';
 import { IntegrationProfile } from '../../../interface/intergration';
 import { OAuthView } from '../../views/oauth/oauth_view';
 import { GmailNativeStore, GmailProfile } from './gmail_native_store';
-import { google } from 'googleapis';
+import { gmail_v1, google } from 'googleapis';
 import { exists } from '@highbeam/utils';
 import { RefreshTokenUtil } from '../../base/refresh_token_util';
+import { MessageSearchResult } from '../../../interface/search';
 
 export class GmailNativeService implements NativeIntegration {
   id = 'com.highbeam.gmail';
@@ -79,7 +80,34 @@ export class GmailNativeService implements NativeIntegration {
       profile
     );
     const accessToken = refreshedProfile.accessToken;
-    return [] as any[];
+    const res = await gmail.users.messages.list({
+      q: query,
+      access_token: accessToken,
+    });
+
+    const messages = res.data.messages || [];
+    console.log('received', messages);
+    const results = messages.map(msg => this.mapMessage(msg, profile.id));
+    return results;
+  };
+
+  private mapMessage = (
+    msg: gmail_v1.Schema$Message,
+    profileId: string
+  ): MessageSearchResult => {
+    return {
+      author: {
+        name: 'Unknown',
+      },
+      channel: 'Inbox',
+      id: msg.id!,
+      integrationId: this.id,
+      profileId,
+      text: msg.snippet!,
+      type: 'message',
+      url: '',
+      icon: Path.resource('/integrations/common/message.svg'),
+    };
   };
 
   private createRedirectUrl = () => {
