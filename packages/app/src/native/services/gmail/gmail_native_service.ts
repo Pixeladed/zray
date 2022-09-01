@@ -83,10 +83,10 @@ export class GmailNativeService implements NativeIntegration {
     const res = await gmail.users.messages.list({
       q: query,
       access_token: accessToken,
+      userId: 'me',
     });
 
     const messages = res.data.messages || [];
-    console.log('received', messages);
     const results = messages.map(msg => this.mapMessage(msg, profile.id));
     return results;
   };
