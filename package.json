@@ -7,12 +7,13 @@
     "packages": "lerna list --all",
     "exec": "lerna run",
     "dev": "lerna run dev --stream --parallel",
-    "build": "lerna run build --stream",
+    "build": "turbo run build",
     "test": "lerna run test --stream"
   },
   "devDependencies": {
     "lerna": "^5.1.8",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "turbo": "^1.4.3"
   },
   "workspaces": [
     "packages/*"
