@@ -5,10 +5,9 @@
     "format": "prettier -w .",
     "dep": "lerna add",
     "packages": "lerna list --all",
-    "exec": "lerna run",
     "dev": "lerna run dev --stream --parallel",
-    "build": "turbo run build",
-    "test": "lerna run test --stream"
+    "bundle": "turbo run bundle",
+    "build": "turbo run build"
   },
   "devDependencies": {
     "lerna": "^5.1.8",
