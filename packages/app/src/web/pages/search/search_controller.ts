@@ -29,8 +29,9 @@ export class SearchController {
   ) {}
 
   search = async (query: string) => {
+    this.store.setResults([]);
+
     if (!query) {
-      this.store.setResults([]);
       return;
     }
 
