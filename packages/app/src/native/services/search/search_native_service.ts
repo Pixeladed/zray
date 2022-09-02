@@ -16,6 +16,14 @@ export class SearchNativeService {
         provider.search(query, { page: page || 0 })
       )
     );
+
+    const failed = operations
+      .map(op => (op.status === 'rejected' ? op.reason : undefined))
+      .filter(exists);
+    if (failed.length) {
+      console.debug('failed search tasks', failed);
+    }
+
     const providerResults = operations
       .flatMap(op => (op.status === 'fulfilled' ? op.value : undefined))
       .filter(exists);

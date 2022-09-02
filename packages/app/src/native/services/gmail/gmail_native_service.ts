@@ -6,7 +6,7 @@ import { IntegrationProfile } from '../../../interface/intergration';
 import { OAuthView } from '../../views/oauth/oauth_view';
 import { GmailNativeStore, GmailProfile } from './gmail_native_store';
 import { gmail_v1, google } from 'googleapis';
-import { exists } from '@highbeam/utils';
+import { Assert, exists } from '@highbeam/utils';
 import { RefreshTokenUtil } from '../../base/refresh_token_util';
 import { MessageSearchResult } from '../../../interface/search';
 
@@ -89,13 +89,13 @@ export class GmailNativeService implements NativeIntegration {
 
     const foundMessages = res.data.messages || [];
     const messages = await Promise.all(
-      foundMessages.map(async ({ id: messageID }) => {
-        // messageID should never be empty but the type definition is
-        const stubedMessageId: string = messageID || 'emptyMessageID';
+      foundMessages.map(async ({ id }) => {
+        const messageId = Assert.exists(id, 'expected id to exist');
         const msg = await gmail.users.messages.get({
           userId: 'me',
-          id: stubedMessageId,
+          id: messageId,
           format: 'full',
+          access_token: accessToken,
         });
 
         return msg.data;
