@@ -67,6 +67,11 @@ export function SearchPage({
           </Button>
         </div>
       )}
+      {loading && (
+        <div className={styles.loading}>
+          Searching {profiles.length} tools...
+        </div>
+      )}
       {results.map(result => (
         <ResultCard
           onClick={() => openResult(result)}
@@ -75,11 +80,6 @@ export function SearchPage({
           result={result}
         />
       ))}
-      {loading && (
-        <div className={styles.loading}>
-          Searching {profiles.length} tools...
-        </div>
-      )}
     </div>
   );
 }
