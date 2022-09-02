@@ -84,10 +84,26 @@ export class GmailNativeService implements NativeIntegration {
       q: query,
       access_token: accessToken,
       userId: 'me',
+      maxResults: 20,
     });
 
-    const messages = res.data.messages || [];
+    const foundMessages = res.data.messages || [];
+    const messages = await Promise.all(
+      foundMessages.map(async ({ id: messageID }) => {
+        // messageID should never be empty but the type definition is
+        const stubedMessageId: string = messageID || 'emptyMessageID';
+        const msg = await gmail.users.messages.get({
+          userId: 'me',
+          id: stubedMessageId,
+          format: 'full',
+        });
+
+        return msg.data;
+      })
+    );
+
     const results = messages.map(msg => this.mapMessage(msg, profile.id));
+
     return results;
   };
 
@@ -95,17 +111,24 @@ export class GmailNativeService implements NativeIntegration {
     msg: gmail_v1.Schema$Message,
     profileId: string
   ): MessageSearchResult => {
+    const subject =
+      msg.payload?.headers?.find(h => h.name === 'Subject')?.value || 'Unknown';
+    const from =
+      msg.payload?.headers?.find(h_1 => h_1.name === 'From')?.value ||
+      'Unknown';
+    const url = `https://mail.google.com/mail/?authuser=${userProfile.data.emailAddress}#all/${threadId}`;
+
     return {
       author: {
-        name: 'Unknown',
+        name: from,
       },
       channel: 'Inbox',
       id: msg.id!,
       integrationId: this.id,
       profileId,
-      text: msg.snippet!,
+      text: subject,
       type: 'message',
-      url: '',
+      url,
       icon: Path.resource('/integrations/common/message.svg'),
     };
   };
