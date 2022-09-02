@@ -4,8 +4,10 @@ import { NextApiHandler } from 'next';
 import { Google } from '@highbeam/interface';
 import { Assert } from '@highbeam/utils';
 import { GoogleOAuthConfig } from '../../base/config';
+import { ServiceImpl } from '../../base/service';
+import { IGoogleService } from '@highbeam/interface/build/services/google';
 
-export class GoogleService {
+export class GoogleService implements ServiceImpl<IGoogleService> {
   private oauth2Client: OAuth2Client;
 
   constructor(

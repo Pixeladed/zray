@@ -6,6 +6,7 @@ export * as Slack from './slack';
 export * as GoogleDrive from './google_drive';
 export * as Gmail from './gmail';
 export * as Google from './google';
+export * from './base';
 
 export type IServiceMap = {
   slack: ISlackService;

@@ -4,8 +4,10 @@ import { NextApiHandler } from 'next';
 import { Config } from '../../base/config';
 import { Assert } from '@highbeam/utils';
 import { Slack } from '@highbeam/interface';
+import { ServiceImpl } from '../../base/service';
+import { ISlackService } from '@highbeam/interface/build/services/slack';
 
-export class SlackService {
+export class SlackService implements ServiceImpl<ISlackService> {
   private installProvider: InstallProvider;
 
   constructor(private readonly config: Config['slack']) {
