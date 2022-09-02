@@ -116,6 +116,7 @@ export class GmailNativeService implements NativeIntegration {
     const from =
       msg.payload?.headers?.find(h_1 => h_1.name === 'From')?.value ||
       'Unknown';
+    const threadId = msg.threadId;
     const url = `https://mail.google.com/mail/?authuser=${profile.email}#all/${threadId}`;
 
     return {
