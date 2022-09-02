@@ -1,10 +1,11 @@
 import Store from 'electron-store';
 import { ProfileInfo } from '../../../interface/intergration';
+import { Safe } from '../../base/safe';
 
 export class GoogleDriveNativeStore {
   private store: Store<GoogleDriveNativeStoreLayout>;
 
-  constructor(name: string) {
+  constructor(name: string, private readonly safe: Safe) {
     this.store = new Store<GoogleDriveNativeStoreLayout>({
       name,
       migrations: {
@@ -18,7 +19,7 @@ export class GoogleDriveNativeStore {
   setProfile = (profile: Omit<GoogleDriveProfile, 'id'>) => {
     const id = this.getProfileId(profile);
     const profilesById = this.store.get('profilesById');
-    const record = { ...profile, id };
+    const record = this.maskProfile({ ...profile, id });
     profilesById[id] = record;
     this.store.set('profilesById', profilesById);
     return record;
@@ -32,12 +33,12 @@ export class GoogleDriveNativeStore {
 
   getProfile = (id: string): GoogleDriveProfile | undefined => {
     const profilesById = this.store.get('profilesById');
-    return profilesById[id];
+    return this.unmaskProfile(profilesById[id]);
   };
 
   findProfiles = () => {
     const profilesById = this.store.get('profilesById');
-    return Object.values(profilesById);
+    return Object.values(profilesById).map(this.unmaskProfile);
   };
 
   asProfileInfo = (profile: GoogleDriveProfile): ProfileInfo => {
@@ -49,6 +50,26 @@ export class GoogleDriveNativeStore {
 
   private getProfileId = (profile: Pick<GoogleDriveProfile, 'email'>) => {
     return profile.email;
+  };
+
+  private maskProfile = (profile: GoogleDriveProfile): GoogleDriveProfile => {
+    const accessToken = this.safe.encrypt(profile.accessToken);
+    const refreshToken = this.safe.encrypt(profile.refreshToken);
+    return {
+      ...profile,
+      accessToken,
+      refreshToken,
+    };
+  };
+
+  private unmaskProfile = (profile: GoogleDriveProfile): GoogleDriveProfile => {
+    const accessToken = this.safe.decrypt(profile.accessToken);
+    const refreshToken = this.safe.decrypt(profile.refreshToken);
+    return {
+      ...profile,
+      accessToken,
+      refreshToken,
+    };
   };
 }
 

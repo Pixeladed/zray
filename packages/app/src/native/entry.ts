@@ -1,8 +1,9 @@
 import { ClientFactory } from '@highbeam/interface';
-import { app, ipcMain, shell } from 'electron';
+import { app, ipcMain, safeStorage, shell } from 'electron';
 import { config } from '../base/config';
 import { App } from './app';
 import { createHandlerReigstrar } from './base/bridge_handler';
+import { KeychainSafe } from './base/safe';
 import { createGmailNativeService } from './services/gmail/create';
 import { createGoogleDriveNativeService } from './services/google_drive/create';
 import { createIntegrationNativeService } from './services/integration/create';
@@ -20,14 +21,17 @@ const BASE_SOURCE: WindowSource = app.isPackaged
 const instance = new App(BASE_SOURCE);
 
 const registerHandler = createHandlerReigstrar(ipcMain);
-export const clientFactory = new ClientFactory(apiOrigin);
+const clientFactory = new ClientFactory(apiOrigin);
+const safe = new KeychainSafe(safeStorage);
 const { slackNativeService } = createSlackNativeService({
   redirectOrigin,
   clientFactory,
+  safe,
 });
 const { googleDriveNativeService } = createGoogleDriveNativeService({
   redirectOrigin,
   clientFactory,
+  safe,
 });
 const { gmailNativeService } = createGmailNativeService({
   redirectOrigin,
