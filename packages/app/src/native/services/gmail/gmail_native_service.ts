@@ -102,21 +102,21 @@ export class GmailNativeService implements NativeIntegration {
       })
     );
 
-    const results = messages.map(msg => this.mapMessage(msg, profile.id));
+    const results = messages.map(msg => this.mapMessage(msg, profile));
 
     return results;
   };
 
   private mapMessage = (
     msg: gmail_v1.Schema$Message,
-    profileId: string
+    profile: GmailProfile
   ): MessageSearchResult => {
     const subject =
       msg.payload?.headers?.find(h => h.name === 'Subject')?.value || 'Unknown';
     const from =
       msg.payload?.headers?.find(h_1 => h_1.name === 'From')?.value ||
       'Unknown';
-    const url = `https://mail.google.com/mail/?authuser=${userProfile.data.emailAddress}#all/${threadId}`;
+    const url = `https://mail.google.com/mail/?authuser=${profile.email}#all/${threadId}`;
 
     return {
       author: {
@@ -125,7 +125,7 @@ export class GmailNativeService implements NativeIntegration {
       channel: 'Inbox',
       id: msg.id!,
       integrationId: this.id,
-      profileId,
+      profileId: profile.id,
       text: subject,
       type: 'message',
       url,
