@@ -29,6 +29,11 @@ export class SearchController {
   ) {}
 
   search = async (query: string) => {
+    if (!query) {
+      this.store.setResults([]);
+      return;
+    }
+
     this.store.setLoading(true);
     try {
       const res = await this.bridgeClient.request<GlobalSearchEndpoint>(
