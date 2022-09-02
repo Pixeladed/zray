@@ -123,7 +123,7 @@ export class GmailNativeService implements NativeIntegration {
       author: {
         name: from,
       },
-      channel: 'Inbox',
+      channel: profile.email,
       id: msg.id!,
       integrationId: this.id,
       profileId: profile.id,
