@@ -1,10 +1,11 @@
 import Store from 'electron-store';
 import { ProfileInfo } from '../../../interface/intergration';
+import { Safe } from '../../base/safe';
 
 export class GmailNativeStore {
   private store: Store<GmailNativeStoreLayout>;
 
-  constructor(name: string) {
+  constructor(name: string, private readonly safe: Safe) {
     this.store = new Store<GmailNativeStoreLayout>({
       name,
       migrations: {
@@ -18,7 +19,7 @@ export class GmailNativeStore {
   setProfile = (profile: Omit<GmailProfile, 'id'>) => {
     const id = this.getProfileId(profile);
     const profilesById = this.store.get('profilesById');
-    const record = { ...profile, id };
+    const record = this.maskProfile({ ...profile, id });
     profilesById[id] = record;
     this.store.set('profilesById', profilesById);
     return record;
@@ -32,12 +33,12 @@ export class GmailNativeStore {
 
   getProfile = (id: string): GmailProfile | undefined => {
     const profilesById = this.store.get('profilesById');
-    return profilesById[id];
+    return this.unmaskProfile(profilesById[id]);
   };
 
   findProfiles = () => {
     const profilesById = this.store.get('profilesById');
-    return Object.values(profilesById);
+    return Object.values(profilesById).map(this.unmaskProfile);
   };
 
   asProfileInfo = (profile: GmailProfile): ProfileInfo => {
@@ -49,6 +50,26 @@ export class GmailNativeStore {
 
   private getProfileId = (profile: Pick<GmailProfile, 'email'>) => {
     return profile.email;
+  };
+
+  private maskProfile = (profile: GmailProfile): GmailProfile => {
+    const accessToken = this.safe.encrypt(profile.accessToken);
+    const refreshToken = this.safe.encrypt(profile.refreshToken);
+    return {
+      ...profile,
+      accessToken,
+      refreshToken,
+    };
+  };
+
+  private unmaskProfile = (profile: GmailProfile): GmailProfile => {
+    const accessToken = this.safe.decrypt(profile.accessToken);
+    const refreshToken = this.safe.decrypt(profile.refreshToken);
+    return {
+      ...profile,
+      accessToken,
+      refreshToken,
+    };
   };
 }
 

@@ -36,6 +36,7 @@ const { googleDriveNativeService } = createGoogleDriveNativeService({
 const { gmailNativeService } = createGmailNativeService({
   redirectOrigin,
   clientFactory,
+  safe,
 });
 const navigationNativeService = new NavigationNativeService(shell);
 
