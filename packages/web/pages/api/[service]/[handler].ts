@@ -1,5 +1,7 @@
+import { IServiceMap, Services } from '@highbeam/interface';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { config } from '../../../base/config';
+import { ServiceImpl } from '../../../base/service';
 import { createGmailService } from '../../../services/gmail/create';
 import { createGoogleDriveService } from '../../../services/google_drive/create';
 import { createSlackService } from '../../../services/slack/create';
@@ -8,7 +10,7 @@ const { gmailService } = createGmailService(config.gmail);
 const { googleDriveService } = createGoogleDriveService(config.googleDrive);
 const { slackService } = createSlackService(config.slack);
 
-const routeMap = {
+const services: { [key in Services]: ServiceImpl<IServiceMap[key]> } = {
   gmail: gmailService,
   google_drive: googleDriveService,
   slack: slackService,
@@ -32,8 +34,8 @@ export default async function handler(
   }
 
   const service =
-    serviceName in routeMap
-      ? routeMap[serviceName as keyof typeof routeMap]
+    serviceName in services
+      ? services[serviceName as keyof typeof services]
       : undefined;
 
   if (!service) {
