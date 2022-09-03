@@ -8,6 +8,11 @@
     "bundle": {
       "dependsOn": ["build"],
       "outputs": ["dist/**", ".next/**"]
+    },
+    "//#prettier": {
+      "dependsOn": [],
+      "outputs": ["packages/**"],
+      "inputs": ["packages/**", ".prettierrc", ".prettierignore"]
     }
   }
 }
