@@ -80,7 +80,7 @@
       "build/**/*",
       "node_modules/**/*"
     ],
-    "appId": "comm.highbeam.app",
+    "appId": "com.highbeam.app",
     "directories": {
       "buildResources": "build"
     }
