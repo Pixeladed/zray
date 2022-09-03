@@ -1,26 +1,8 @@
 {
   "name": "@highbeam/app",
-  "productName": "Highbeam",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@auth0/auth0-react": "^1.10.2",
-    "@highbeam/components": "^0.1.0",
-    "@highbeam/interface": "^0.1.0",
-    "@highbeam/utils": "^0.1.0",
-    "@slack/web-api": "^6.7.2",
-    "classnames": "^2.3.1",
-    "cross-fetch": "^3.1.5",
-    "dotenv": "^16.0.1",
-    "electron-store": "^8.1.0",
-    "googleapis": "^107.0.0",
-    "mobx": "^6.6.1",
-    "mobx-react": "^7.5.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.3.0",
-    "use-debounce": "^8.0.3"
-  },
+  "homepage": "./",
   "scripts": {
     "start:web": "cross-env PORT=8080 react-scripts start",
     "build:web": "react-scripts build",
@@ -35,12 +17,6 @@
     "bundle": "electron-builder build -c.extraMetadata.main=build/native/index.js --mac --win portable",
     "clean": "ts-node src/tools/clean"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -53,7 +29,25 @@
       "last 1 safari version"
     ]
   },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "dependencies": {
+    "@slack/web-api": "^6.7.2",
+    "cross-fetch": "^3.1.5",
+    "dotenv": "^16.0.1",
+    "electron-store": "^8.1.0",
+    "google-auth-library": "^8.5.1",
+    "googleapis": "^107.0.0"
+  },
   "devDependencies": {
+    "@auth0/auth0-react": "^1.10.2",
+    "@highbeam/components": "^0.1.0",
+    "@highbeam/interface": "^0.1.0",
+    "@highbeam/utils": "^0.1.0",
     "@swc/cli": "^0.1.57",
     "@swc/core": "^1.2.224",
     "@testing-library/jest-dom": "^5.16.5",
@@ -63,14 +57,21 @@
     "@types/node": "^16.11.47",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "classnames": "^2.3.1",
     "cross-env": "^7.0.3",
     "electron": "20.0.1",
     "electron-builder": "^23.3.3",
+    "mobx": "^6.6.1",
+    "mobx-react": "^7.5.2",
     "nodemon": "^2.0.19",
     "npm-run-all": "^4.1.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4",
+    "use-debounce": "^8.0.3",
     "wait-on": "^6.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -84,5 +85,5 @@
       "buildResources": "build"
     }
   },
-  "homepage": "./"
+  "productName": "Highbeam"
 }

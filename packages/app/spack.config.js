@@ -1,10 +1,7 @@
 const { config } = require('@swc/core/spack');
 const { dependencies } = require('./package.json');
 
-const externalModules = [
-  ...Object.keys(dependencies).filter(pkg => !pkg.startsWith('@highbeam')),
-  'electron',
-];
+const externalModules = [...Object.keys(dependencies), 'electron'];
 console.log('[spack]: external modules:', externalModules);
 
 module.exports = config({
