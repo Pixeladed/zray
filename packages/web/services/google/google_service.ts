@@ -29,6 +29,8 @@ export class GoogleService implements ServiceImpl<IGoogleService> {
     }
 
     const installUrl = this.oauth2Client.generateAuthUrl({
+      // show consent prompt with offline access to receive refresh token
+      prompt: 'consent',
       access_type: 'offline',
       redirect_uri: redirectUrl,
       scope: [...this.scopes, 'profile', 'email'],
