@@ -6,10 +6,18 @@ loadDotEnv();
 export const config = {
   apiOrigin: 'http://localhost:3000',
   redirectOrigin: 'https://usehighbeamapp.com',
-  google: {
+  auth0: {
+    audience: Assert.exists(
+      process.env.AUTH0_AUDIENCE,
+      'expected auth0 audience to exist'
+    ),
+    domain: Assert.exists(
+      process.env.AUTH0_DOMAIN,
+      'expected auth0 domain to exist'
+    ),
     clientId: Assert.exists(
-      process.env.GOOGLE_CLIENT_ID,
-      'expected google client id to exist'
+      process.env.AUTH0_CLIENT_ID,
+      'expected auth0 client id to exist'
     ),
   },
 };

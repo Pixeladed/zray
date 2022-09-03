@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@auth0/auth0-react": "^1.10.2",
     "@highbeam/components": "^0.1.0",
     "@highbeam/interface": "^0.1.0",
     "@highbeam/utils": "^0.1.0",
