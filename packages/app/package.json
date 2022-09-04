@@ -36,6 +36,7 @@
     ]
   },
   "dependencies": {
+    "@auth0/auth0-spa-js": "^1.22.3",
     "@slack/web-api": "^6.7.2",
     "cross-fetch": "^3.1.5",
     "dotenv": "^16.0.1",

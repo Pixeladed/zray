@@ -1,6 +1,6 @@
 import { ClientFactory } from '@highbeam/interface';
 import { app, ipcMain, safeStorage, shell } from 'electron';
-import { config } from '../base/config';
+import { nativeConfig } from './base/config';
 import { App } from './app';
 import { createHandlerReigstrar } from './base/bridge_handler';
 import { KeychainSafe } from './base/safe';
@@ -13,7 +13,7 @@ import { createSearchNativeService } from './services/search/create';
 import { createSlackNativeService } from './services/slack/create';
 import { WindowSource } from './views/view';
 
-const { apiOrigin, redirectOrigin } = config;
+const { apiOrigin, redirectOrigin } = nativeConfig;
 const BASE_SOURCE: WindowSource = app.isPackaged
   ? { type: 'bundled', path: 'build/index.html' }
   : { type: 'server', url: 'http://localhost:8080' };

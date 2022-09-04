@@ -10,7 +10,7 @@ export class SearchNativeService {
     private readonly ranker: SearchRanker
   ) {}
 
-  search: Handler<GlobalSearchEndpoint> = async ({ query, page }) => {
+  search: Handler<GlobalSearchEndpoint> = async ({ data: { query, page } }) => {
     const operations = await Promise.allSettled(
       this.providers.map(provider =>
         provider.search(query, { page: page || 0 })

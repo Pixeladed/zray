@@ -1,8 +1,8 @@
 import { Auth0Provider, useAuth0 } from '@auth0/auth0-react';
 import { PropsWithChildren, useEffect } from 'react';
-import { Auth0Config } from '../config';
+import { Auth0Config } from '../../web/base/config';
 import { Routes } from '../../routes';
-import { Button } from '@highbeam/components';
+import { Auth0Client } from '@auth0/auth0-spa-js';
 
 export const createAuth = ({
   config,
@@ -13,6 +13,12 @@ export const createAuth = ({
 }) => {
   const redirectUrl = new URL(redirectOrigin);
   redirectUrl.hash = Routes.loginCallback().absolute;
+  const authClient = new Auth0Client({
+    client_id: config.clientId,
+    domain: config.domain,
+    audience: config.audience,
+    redirect_uri: redirectUrl.toString(),
+  });
 
   const AuthProvider = ({ children }: PropsWithChildren) => (
     <Auth0Provider
@@ -24,36 +30,21 @@ export const createAuth = ({
     />
   );
 
-  const LoginButton = () => {
-    const auth0 = useAuth0();
-    return (
-      <Button variant="primary" onClick={auth0.loginWithRedirect}>
-        Login
-      </Button>
-    );
-  };
-
-  const LogoutButton = () => {
-    const auth0 = useAuth0();
-    return <Button onClick={auth0.logout}>Logout</Button>;
-  };
-
   const AuthGate = ({ children }: PropsWithChildren) => {
     const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
 
-    useEffect(() => {
-      if (!isLoading && !isAuthenticated) {
-        loginWithRedirect();
-      }
-    }, [isAuthenticated, isLoading, loginWithRedirect]);
+    // useEffect(() => {
+    //   if (!isLoading && !isAuthenticated) {
+    //     loginWithRedirect();
+    //   }
+    // }, [isAuthenticated, isLoading, loginWithRedirect]);
 
     return <>{children}</>;
   };
 
   return {
     AuthProvider,
-    LoginButton,
-    LogoutButton,
+    authClient,
     AuthGate,
   };
 };

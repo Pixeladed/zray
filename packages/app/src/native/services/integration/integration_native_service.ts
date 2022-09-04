@@ -23,7 +23,7 @@ export class IntegrationNativeService {
     private readonly broadcast: Broadcaster
   ) {}
 
-  connect: Handler<ConnectIntegrationEndpoint> = async param => {
+  connect: Handler<ConnectIntegrationEndpoint> = async ({ data: param }) => {
     const integration = this.integrations.find(({ id }) => id === param.id);
 
     if (!integration) {
@@ -59,7 +59,7 @@ export class IntegrationNativeService {
     return { profiles: profiles.flat() };
   };
 
-  remove: Handler<RemoveProfileEndpoint> = async param => {
+  remove: Handler<RemoveProfileEndpoint> = async ({ data: param }) => {
     const { integrationId, profileId } = param;
     const integration = Assert.exists(
       this.integrations.find(integration => integration.id === integrationId),

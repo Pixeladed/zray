@@ -35,11 +35,10 @@ export type Bridge = {
 };
 
 export type BridgeRequest<E extends Endpoint<any, any, any>> = {
-  reqId: string;
+  accessToken: string;
   data: EndpointReq<E>;
 };
 
 export type BridgeResponse<E extends Endpoint<any, any, any>> = {
-  reqId: string;
   data: EndpointRes<E>;
 };

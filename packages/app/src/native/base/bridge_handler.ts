@@ -1,17 +1,20 @@
 import { Assert } from '@highbeam/utils';
 import { IpcMain } from 'electron';
-import { endpointAllowlist } from '../../interface/bridge/bridge';
+import {
+  BridgeRequest,
+  BridgeResponse,
+  endpointAllowlist,
+} from '../../interface/bridge/bridge';
 import {
   Endpoint,
   EndpointName,
-  EndpointReq,
   EndpointRes,
   Endpoints,
 } from '../../interface/bridge/endpoints';
 import { Event, EventData, EventName } from '../../interface/bridge/events';
 
 export type Handler<E extends Endpoint<any, any, any>> = (
-  req: EndpointReq<E>
+  req: BridgeRequest<E>
 ) => Promise<EndpointRes<E>>;
 export type HandlerRegistrar = <E extends Endpoints>(
   name: EndpointName<E>,
@@ -31,9 +34,11 @@ export const createHandlerReigstrar = (
     );
     ipcMain.removeHandler(name);
     ipcMain.handle(name, async (event, req) => {
+      console.log('handling', event, req);
       const result = await handler(req);
-      const response = JSON.parse(JSON.stringify(result));
-      return response;
+      const data = JSON.parse(JSON.stringify(result));
+      const res: BridgeResponse<any> = { data };
+      return res;
     });
   };
 };

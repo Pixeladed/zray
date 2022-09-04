@@ -10,19 +10,18 @@ import { NavigationService } from './web/services/navigation/navigation_service'
 import { BridgeClient } from './web/base/bridge_client';
 import { createIntegrationService } from './web/services/integration/create';
 import { createAuth } from './base/auth/create';
-import { config } from './base/config';
+import { webConfig } from './web/base/config';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 const context = window;
-const bridgeClient = new BridgeClient(context);
-const navigationService = new NavigationService(context, bridgeClient);
-
-const { AuthProvider, AuthGate } = createAuth({
-  config: config.auth0,
-  redirectOrigin: config.redirectOrigin,
+const { AuthProvider, AuthGate, authClient } = createAuth({
+  config: webConfig.auth0,
+  redirectOrigin: webConfig.redirectOrigin,
 });
+const bridgeClient = new BridgeClient(context, authClient);
+const navigationService = new NavigationService(context, bridgeClient);
 
 const { integrationStore, integrationController } = createIntegrationService({
   bridgeClient,
