@@ -19,7 +19,7 @@ const context = window;
 const bridgeClient = new BridgeClient(context);
 const navigationService = new NavigationService(context, bridgeClient);
 
-const { AuthProvider } = createAuth({
+const { AuthProvider, AuthGate } = createAuth({
   config: config.auth0,
   redirectOrigin: config.redirectOrigin,
 });
@@ -40,16 +40,18 @@ const { SettingsPage } = createSettingsPage({
 root.render(
   <React.StrictMode>
     <AuthProvider>
-      <HashRouter>
-        <RouterRoutes>
-          <Route index={true} element={<SearchPage />} />
-          <Route path={Routes.search().relative} element={<SearchPage />} />
-          <Route
-            path={Routes.settings().relativeParent}
-            element={<SettingsPage />}
-          />
-        </RouterRoutes>
-      </HashRouter>
+      <AuthGate>
+        <HashRouter>
+          <RouterRoutes>
+            <Route index={true} element={<SearchPage />} />
+            <Route path={Routes.search().relative} element={<SearchPage />} />
+            <Route
+              path={Routes.settings().relativeParent}
+              element={<SettingsPage />}
+            />
+          </RouterRoutes>
+        </HashRouter>
+      </AuthGate>
     </AuthProvider>
   </React.StrictMode>
 );
