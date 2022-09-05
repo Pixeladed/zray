@@ -16,11 +16,11 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 const context = window;
-const { AuthProvider, AuthGate, authClient } = createAuth({
+const { AuthProvider, AuthGate } = createAuth({
   config: webConfig.auth0,
   redirectOrigin: webConfig.redirectOrigin,
 });
-const bridgeClient = new BridgeClient(context, authClient);
+const bridgeClient = new BridgeClient(context);
 const navigationService = new NavigationService(context, bridgeClient);
 
 const { integrationStore, integrationController } = createIntegrationService({

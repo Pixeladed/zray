@@ -12,24 +12,16 @@ import {
   EndpointRes,
 } from '../../interface/bridge/endpoints';
 import { Event, EventData, EventName } from '../../interface/bridge/events';
-import { Auth0Client } from '@auth0/auth0-spa-js';
 
 export class BridgeClient {
-  constructor(
-    private readonly context: Window,
-    private readonly authClient: Auth0Client
-  ) {}
+  constructor(private readonly context: Window) {}
 
   request = async <E extends Endpoint<any, any, any>>(
     name: EndpointName<E>,
     data: EndpointReq<E>
   ): Promise<EndpointRes<E>> => {
     const bridge = this.getBridge();
-    const accessToken = await this.authClient.getTokenSilently();
-    const req: BridgeRequest<EndpointReq<E>> = {
-      accessToken,
-      data,
-    };
+    const req: BridgeRequest<EndpointReq<E>> = { data };
     console.log('requesting', name, req);
     const res: BridgeResponse<EndpointRes<E>> = await bridge.request(name, req);
     console.groupCollapsed(`[BridgeClient] request ${name}`);
