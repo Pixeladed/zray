@@ -2,8 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "format": "turbo run prettier",
-    "prettier": "prettier -w .",
+    "format": "prettier -w .",
     "dep": "lerna add",
     "packages": "lerna list --all",
     "dev": "lerna run dev --stream --parallel",

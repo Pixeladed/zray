@@ -1,5 +1,5 @@
-import { Auth0Provider, useAuth0 } from '@auth0/auth0-react';
-import { PropsWithChildren, useEffect } from 'react';
+import { Auth0Provider } from '@auth0/auth0-react';
+import { PropsWithChildren } from 'react';
 import { Auth0Config } from '../../web/base/config';
 import { Routes } from '../../routes';
 import { Auth0Client } from '@auth0/auth0-spa-js';
@@ -31,7 +31,7 @@ export const createAuth = ({
   );
 
   const AuthGate = ({ children }: PropsWithChildren) => {
-    const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
+    // const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
 
     // useEffect(() => {
     //   if (!isLoading && !isAuthenticated) {

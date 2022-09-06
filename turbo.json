@@ -5,14 +5,11 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "build/**"]
     },
+    "bundle:mac": {},
+    "bundle:win": {},
     "bundle": {
-      "dependsOn": ["build"],
+      "dependsOn": ["bundle:mac", "bundle:win"],
       "outputs": ["dist/**", ".next/**"]
-    },
-    "//#prettier": {
-      "dependsOn": [],
-      "outputs": ["packages/**"],
-      "inputs": ["packages/**", ".prettierrc", ".prettierignore"]
     }
   }
 }
