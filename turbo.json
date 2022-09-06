@@ -5,11 +5,16 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "build/**"]
     },
-    "bundle:mac": {},
-    "bundle:win": {},
-    "bundle": {
-      "dependsOn": ["bundle:mac", "bundle:win"],
+    "bundle:mac": {
+      "dependsOn": ["build"],
       "outputs": ["dist/**", ".next/**"]
+    },
+    "bundle:win": {
+      "dependsOn": ["build"],
+      "outputs": ["dist/**", ".next/**"]
+    },
+    "bundle": {
+      "dependsOn": ["bundle:mac", "bundle:win"]
     }
   }
 }

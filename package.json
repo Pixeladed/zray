@@ -7,7 +7,9 @@
     "packages": "lerna list --all",
     "dev": "lerna run dev --stream --parallel",
     "bundle": "turbo run bundle",
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "bundle:mac": "turbo run bundle:mac",
+    "bundle:win": "turbo run bundle:win"
   },
   "devDependencies": {
     "lerna": "^5.1.8",

@@ -80,7 +80,8 @@
   "build": {
     "files": [
       "build/**/*",
-      "node_modules/**/*"
+      "node_modules/**/*",
+      ".env.bundle"
     ],
     "appId": "com.highbeam.app",
     "directories": {
