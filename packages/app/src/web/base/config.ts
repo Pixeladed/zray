@@ -1,7 +1,6 @@
-import { Assert } from '@highbeam/utils';
+import { env } from '../../base/env';
 
 export type WebConfig = {
-  redirectOrigin: string;
   auth0: Auth0Config;
 };
 
@@ -12,19 +11,9 @@ export type Auth0Config = {
 };
 
 export const webConfig: WebConfig = {
-  redirectOrigin: 'http://localhost:3000',
   auth0: {
-    audience: Assert.exists(
-      process.env.REACT_APP_AUTH0_AUDIENCE,
-      'expected auth0 audience to exist'
-    ),
-    domain: Assert.exists(
-      process.env.REACT_APP_AUTH0_DOMAIN,
-      'expected auth0 domain to exist'
-    ),
-    clientId: Assert.exists(
-      process.env.REACT_APP_AUTH0_CLIENT_ID,
-      'expected auth0 client id to exist'
-    ),
+    audience: env('REACT_APP_AUTH0_AUDIENCE'),
+    domain: env('REACT_APP_AUTH0_DOMAIN'),
+    clientId: env('REACT_APP_AUTH0_CLIENT_ID'),
   },
 };

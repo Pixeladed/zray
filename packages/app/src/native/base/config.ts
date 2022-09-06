@@ -1,5 +1,5 @@
-import { Assert } from '@highbeam/utils';
 import { config as loadDotEnv } from 'dotenv';
+import { env } from '../../base/env';
 
 loadDotEnv();
 
@@ -16,20 +16,11 @@ export type Auth0Config = {
 };
 
 export const nativeConfig: NativeConfig = {
-  apiOrigin: 'http://localhost:3000',
-  redirectOrigin: 'https://usehighbeamapp.com',
+  apiOrigin: env('API_ORIGIN'),
+  redirectOrigin: env('REDIRECT_ORIGIN'),
   auth0: {
-    audience: Assert.exists(
-      process.env.AUTH0_AUDIENCE,
-      'expected native auth0 audience to exist'
-    ),
-    domain: Assert.exists(
-      process.env.AUTH0_DOMAIN,
-      'expected native auth0 domain to exist'
-    ),
-    clientId: Assert.exists(
-      process.env.AUTH0_CLIENT_ID,
-      'expected native auth0 client id to exist'
-    ),
+    audience: env('AUTH0_AUDIENCE'),
+    domain: env('AUTH0_DOMAIN'),
+    clientId: env('AUTH0_CLIENT_ID'),
   },
 };
