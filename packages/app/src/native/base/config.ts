@@ -1,7 +1,10 @@
-import { config as loadDotEnv } from 'dotenv';
-import { env } from '../../base/env';
+import content from '../../config.json';
+import { Assert } from '@highbeam/utils';
 
-loadDotEnv();
+export const env = (label: string) => {
+  const val = content[label as keyof typeof content];
+  return Assert.exists(val, `expected config ${label} to exist`);
+};
 
 export type NativeConfig = {
   apiOrigin: string;

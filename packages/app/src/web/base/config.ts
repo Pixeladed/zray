@@ -1,4 +1,9 @@
-import { env } from '../../base/env';
+import { Assert } from '@highbeam/utils';
+
+export const env = (label: string) => {
+  const val = process.env[label];
+  return Assert.exists(val, `expected config ${label} to exist`);
+};
 
 export type WebConfig = {
   redirectOrigin: string;

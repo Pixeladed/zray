@@ -22,7 +22,6 @@ export class BridgeClient {
   ): Promise<EndpointRes<E>> => {
     const bridge = this.getBridge();
     const req: BridgeRequest<EndpointReq<E>> = { data };
-    console.log('requesting', name, req);
     const res: BridgeResponse<EndpointRes<E>> = await bridge.request(name, req);
     console.groupCollapsed(`[BridgeClient] request ${name}`);
     console.log('Request');
