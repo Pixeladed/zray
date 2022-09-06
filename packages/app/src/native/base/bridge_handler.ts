@@ -34,7 +34,6 @@ export const createHandlerReigstrar = (
     );
     ipcMain.removeHandler(name);
     ipcMain.handle(name, async (event, req) => {
-      console.log('handling', event, req);
       const result = await handler(req);
       const data = JSON.parse(JSON.stringify(result));
       const res: BridgeResponse<any> = { data };
