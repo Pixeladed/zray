@@ -1,17 +1,12 @@
 import { Auth0Provider } from '@auth0/auth0-react';
-import { PropsWithChildren } from 'react';
 import { Auth0Config } from '../../web/base/config';
 import { Routes } from '../../routes';
 import { Auth0Client } from '@auth0/auth0-spa-js';
+import { AuthGate } from './auth_gate';
+import { Button } from '@highbeam/components';
 
-export const createAuth = ({
-  config,
-  redirectOrigin,
-}: {
-  config: Auth0Config;
-  redirectOrigin: string;
-}) => {
-  const redirectUrl = new URL(redirectOrigin);
+export const createAuth = ({ config }: { config: Auth0Config }) => {
+  const redirectUrl = new URL(window.location.origin);
   redirectUrl.hash = Routes.loginCallback().absolute;
   const authClient = new Auth0Client({
     client_id: config.clientId,
@@ -20,7 +15,7 @@ export const createAuth = ({
     redirect_uri: redirectUrl.toString(),
   });
 
-  const AuthProvider = ({ children }: PropsWithChildren) => (
+  const AuthProvider = ({ children }: React.PropsWithChildren) => (
     <Auth0Provider
       clientId={config.clientId}
       domain={config.domain}
@@ -30,21 +25,20 @@ export const createAuth = ({
     />
   );
 
-  const AuthGate = ({ children }: PropsWithChildren) => {
-    // const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
+  const login = () => authClient.loginWithRedirect();
+  const LoginButton = () => (
+    <Button variant="primary" onClick={login}>
+      Login
+    </Button>
+  );
 
-    // useEffect(() => {
-    //   if (!isLoading && !isAuthenticated) {
-    //     loginWithRedirect();
-    //   }
-    // }, [isAuthenticated, isLoading, loginWithRedirect]);
-
-    return <>{children}</>;
-  };
+  const AuthGateImpl = ({ children }: React.PropsWithChildren) => (
+    <AuthGate LoginButton={LoginButton}>{children}</AuthGate>
+  );
 
   return {
     AuthProvider,
     authClient,
-    AuthGate,
+    AuthGate: AuthGateImpl,
   };
 };

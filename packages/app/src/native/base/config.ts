@@ -2,7 +2,7 @@ import content from '../../config.json';
 import { Assert } from '@highbeam/utils';
 
 export const env = (label: string) => {
-  const val = content[label as keyof typeof content];
+  const val = (content as any)[label as any] as string | undefined;
   return Assert.exists(val, `expected config ${label} to exist`);
 };
 
