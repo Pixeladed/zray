@@ -5,8 +5,14 @@ import { Auth0Client } from '@auth0/auth0-spa-js';
 import { AuthGate } from './auth_gate';
 import { Button } from '@highbeam/components';
 
-export const createAuth = ({ config }: { config: Auth0Config }) => {
-  const redirectUrl = new URL(window.location.origin);
+export const createAuth = ({
+  config,
+  redirectOrigin,
+}: {
+  config: Auth0Config;
+  redirectOrigin: string;
+}) => {
+  const redirectUrl = new URL(redirectOrigin);
   redirectUrl.hash = Routes.loginCallback().absolute;
   const authClient = new Auth0Client({
     client_id: config.clientId,

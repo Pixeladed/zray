@@ -18,6 +18,7 @@ const root = ReactDOM.createRoot(
 const context = window;
 const { AuthProvider, AuthGate } = createAuth({
   config: webConfig.auth0,
+  redirectOrigin: webConfig.redirectOrigin,
 });
 const bridgeClient = new BridgeClient(context);
 const navigationService = new NavigationService(context, bridgeClient);
