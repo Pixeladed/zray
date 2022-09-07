@@ -8,10 +8,14 @@ export class App {
   private searchView?: SearchView;
   private settingsView?: SettingsView;
 
-  constructor(private readonly source: WindowSource) {}
+  constructor(
+    private readonly source: WindowSource,
+    private readonly redirectOrigin: string
+  ) {}
 
   handleActivate = () => {
-    const searchView = this.searchView || new SearchView(this.source);
+    const searchView =
+      this.searchView || new SearchView(this.source, this.redirectOrigin);
     this.searchView = searchView;
 
     searchView.browserWindow.on('close', () => {

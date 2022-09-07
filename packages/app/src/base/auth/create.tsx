@@ -13,7 +13,7 @@ export const createAuth = ({
   redirectOrigin: string;
 }) => {
   const redirectUrl = new URL(redirectOrigin);
-  redirectUrl.hash = Routes.loginCallback().absolute;
+  redirectUrl.pathname = Routes.loginCallback().absolute;
   const authClient = new Auth0Client({
     client_id: config.clientId,
     domain: config.domain,
@@ -31,7 +31,9 @@ export const createAuth = ({
     />
   );
 
-  const login = () => authClient.loginWithRedirect();
+  const login = () => {
+    authClient.loginWithRedirect();
+  };
   const LoginButton = () => (
     <Button variant="primary" onClick={login}>
       Login
@@ -42,9 +44,15 @@ export const createAuth = ({
     <AuthGate LoginButton={LoginButton}>{children}</AuthGate>
   );
 
+  const handleCallback = async (url: string) => {
+    await authClient.handleRedirectCallback(url);
+    window.location.reload();
+  };
+
   return {
     AuthProvider,
     authClient,
     AuthGate: AuthGateImpl,
+    handleCallback,
   };
 };
