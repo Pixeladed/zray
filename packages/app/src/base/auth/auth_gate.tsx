@@ -6,10 +6,15 @@ export const AuthGate = ({
   children,
   LoginButton,
 }: React.PropsWithChildren<{ LoginButton: ComponentType }>) => {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading, user } = useAuth0();
+  console.table({
+    isAuthenticated,
+    isLoading,
+  });
+  console.log('user', user);
 
   if (isLoading) {
-    return <>Loading...</>;
+    return <div className={styles.container}>Loading...</div>;
   }
 
   if (!isAuthenticated) {

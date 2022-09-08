@@ -28,24 +28,25 @@ export const createAuth = ({
       audience={config.audience}
       redirectUri={redirectUrl.toString()}
       children={children}
+      cacheLocation="localstorage"
+      useRefreshTokens={true}
     />
   );
 
   const login = () => {
     authClient.loginWithRedirect();
   };
-  const LoginButton = () => (
-    <Button variant="primary" onClick={login}>
-      Login
-    </Button>
-  );
+  const LoginButton = () => <Button onClick={login}>Login</Button>;
 
   const AuthGateImpl = ({ children }: React.PropsWithChildren) => (
     <AuthGate LoginButton={LoginButton}>{children}</AuthGate>
   );
 
   const handleCallback = async (url: string) => {
-    await authClient.handleRedirectCallback(url);
+    const creds = await authClient.handleRedirectCallback(url);
+    console.log('authenticated', creds);
+    console.log('token?', await authClient.getUser());
+    console.log('token?', await authClient.getTokenSilently());
     window.location.reload();
   };
 
