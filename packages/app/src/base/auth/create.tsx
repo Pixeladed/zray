@@ -21,6 +21,8 @@ export const createAuth = ({
     redirect_uri: redirectUrl.toString(),
   });
 
+  authClient.checkSession();
+
   const AuthProvider = ({ children }: React.PropsWithChildren) => (
     <Auth0Provider
       clientId={config.clientId}
