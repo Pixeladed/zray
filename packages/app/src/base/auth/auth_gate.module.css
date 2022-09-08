@@ -6,4 +6,6 @@
     justify-content: center;
     background: var(--colorPrimary);
     color: var(--colorBackground);
+    -webkit-region: drag;
+    user-select: none;
 }
