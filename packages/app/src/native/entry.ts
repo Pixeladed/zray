@@ -12,6 +12,7 @@ import { NavigationNativeService } from './services/navigation/navigation_native
 import { createSearchNativeService } from './services/search/create';
 import { createSlackNativeService } from './services/slack/create';
 import { WindowSource } from './views/view';
+import { createAuthNativeService } from './services/auth/create';
 
 const { apiOrigin, redirectOrigin } = nativeConfig;
 const BASE_SOURCE: WindowSource = app.isPackaged
@@ -23,6 +24,8 @@ const instance = new App(BASE_SOURCE, globalShortcut);
 const registerHandler = createHandlerReigstrar(ipcMain);
 const clientFactory = new ClientFactory(apiOrigin);
 const safe = new KeychainSafe(safeStorage);
+
+const { authNativeService } = createAuthNativeService(nativeConfig.auth0);
 const { slackNativeService } = createSlackNativeService({
   redirectOrigin,
   clientFactory,
