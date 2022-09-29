@@ -24,7 +24,9 @@ export class AuthNativeService {
   getToken = () => this.backend.getToken();
 
   check: Handler<AuthCheckEndpoint> = async () => {
+    console.log('checking');
     const authenticated = await this.backend.isLoggedIn();
+    console.log('checked', authenticated);
     return { authenticated };
   };
 

@@ -1,0 +1,8 @@
+.container {
+    background: var(--colorPrimary);
+    color: var(--colorBackground);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

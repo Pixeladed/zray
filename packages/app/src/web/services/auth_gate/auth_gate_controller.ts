@@ -11,7 +11,7 @@ export class AuthGateStore {
   }
 
   isLoggedIn: boolean = false;
-  loading: boolean = true;
+  isLoading: boolean = true;
 }
 
 export class AuthGateController {
@@ -22,7 +22,7 @@ export class AuthGateController {
 
   init = async () => {
     runInAction(() => {
-      this.store.loading = true;
+      this.store.isLoading = true;
     });
     try {
       const res = await this.bridgeClient.request<AuthCheckEndpoint>(
@@ -31,11 +31,11 @@ export class AuthGateController {
       );
       runInAction(() => {
         this.store.isLoggedIn = res.authenticated;
-        this.store.loading = false;
+        this.store.isLoading = false;
       });
     } catch (error) {
       runInAction(() => {
-        this.store.loading = false;
+        this.store.isLoading = false;
       });
     }
   };

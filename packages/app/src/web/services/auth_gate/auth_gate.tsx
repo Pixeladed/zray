@@ -1,4 +1,5 @@
 import { ComponentType, PropsWithChildren } from 'react';
+import styles from './auth_gate.module.css';
 
 export const AuthGate = ({
   isLoggedIn,
@@ -11,7 +12,7 @@ export const AuthGate = ({
   LoginButton: ComponentType;
 }>) => {
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className={styles.container}>Loading...</div>;
   }
 
   if (isLoggedIn) {
@@ -19,7 +20,7 @@ export const AuthGate = ({
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <LoginButton />
     </div>
   );
