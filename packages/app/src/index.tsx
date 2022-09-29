@@ -9,9 +9,6 @@ import { createSettingsPage } from './web/pages/settings/create';
 import { NavigationService } from './web/services/navigation/navigation_service';
 import { BridgeClient } from './web/base/bridge_client';
 import { createIntegrationService } from './web/services/integration/create';
-import { createAuth } from './base/auth/create';
-import { webConfig } from './web/base/config';
-import { AuthCallbackEvent } from './interface/bridge/events';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,14 +16,6 @@ const root = ReactDOM.createRoot(
 const context = window;
 const bridgeClient = new BridgeClient(context);
 const navigationService = new NavigationService(context, bridgeClient);
-
-const { AuthProvider, AuthGate, handleCallback } = createAuth({
-  config: webConfig.auth0,
-  redirectOrigin: webConfig.redirectOrigin,
-});
-bridgeClient.on<AuthCallbackEvent>('auth:callback', ({ url }) => {
-  handleCallback(url);
-});
 
 const { integrationStore, integrationController } = createIntegrationService({
   bridgeClient,
@@ -43,19 +32,15 @@ const { SettingsPage } = createSettingsPage({
 
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <AuthGate>
-        <HashRouter>
-          <RouterRoutes>
-            <Route index={true} element={<SearchPage />} />
-            <Route path={Routes.search().relative} element={<SearchPage />} />
-            <Route
-              path={Routes.settings().relativeParent}
-              element={<SettingsPage />}
-            />
-          </RouterRoutes>
-        </HashRouter>
-      </AuthGate>
-    </AuthProvider>
+    <HashRouter>
+      <RouterRoutes>
+        <Route index={true} element={<SearchPage />} />
+        <Route path={Routes.search().relative} element={<SearchPage />} />
+        <Route
+          path={Routes.settings().relativeParent}
+          element={<SettingsPage />}
+        />
+      </RouterRoutes>
+    </HashRouter>
   </React.StrictMode>
 );

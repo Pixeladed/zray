@@ -18,7 +18,7 @@ const BASE_SOURCE: WindowSource = app.isPackaged
   ? { type: 'bundled', path: 'build/index.html' }
   : { type: 'server', url: 'http://localhost:8080' };
 
-const instance = new App(BASE_SOURCE, redirectOrigin, globalShortcut);
+const instance = new App(BASE_SOURCE, globalShortcut);
 
 const registerHandler = createHandlerReigstrar(ipcMain);
 const clientFactory = new ClientFactory(apiOrigin);

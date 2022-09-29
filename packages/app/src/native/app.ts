@@ -11,13 +11,11 @@ export class App {
 
   constructor(
     private readonly source: WindowSource,
-    private readonly redirectOrigin: string,
     private readonly globalShortcut: GlobalShortcut
   ) {}
 
   createMainWindow = () => {
-    const searchView =
-      this.searchView || new SearchView(this.source, this.redirectOrigin);
+    const searchView = this.searchView || new SearchView(this.source);
     this.searchView = searchView;
 
     searchView.browserWindow.on('close', () => {
