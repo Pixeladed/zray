@@ -21,8 +21,8 @@ export class AuthNativeService {
       },
       login: {
         windowConfig: {
-          width: 300,
-          height: 500,
+          width: 400,
+          height: 600,
         },
       },
       refreshTokens: {
@@ -35,9 +35,7 @@ export class AuthNativeService {
   getToken = () => this.backend.getToken();
 
   check: Handler<AuthCheckEndpoint> = async () => {
-    console.log('checking');
     const authenticated = await this.backend.isLoggedIn();
-    console.log('checked', authenticated);
     return { authenticated };
   };
 
