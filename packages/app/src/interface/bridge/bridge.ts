@@ -15,6 +15,9 @@ export const endpointAllowlist: EndpointName<Endpoints>[] = [
   'integration:profiles:list',
   'integration:profiles:remove',
   'search:global',
+  'auth:login',
+  'auth:logout',
+  'auth:check',
 ];
 
 export const eventAllowlist: EventName<Events>[] = [

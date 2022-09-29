@@ -1,4 +1,10 @@
 import { auth0Login } from 'electron-auth0-login';
+import {
+  AuthCheckEndpoint,
+  AuthLogInEndpoint,
+  AuthLogOutEndpoint,
+} from '../../../interface/bridge/endpoints';
+import { Handler } from '../../base/bridge_handler';
 import { Auth0Config } from '../../base/config';
 
 export class AuthNativeService {
@@ -17,9 +23,18 @@ export class AuthNativeService {
 
   getToken = () => this.backend.getToken();
 
-  isLoggedIn = () => this.backend.isLoggedIn();
+  check: Handler<AuthCheckEndpoint> = async () => {
+    const authenticated = await this.backend.isLoggedIn();
+    return { authenticated };
+  };
 
-  login = () => this.backend.login();
+  login: Handler<AuthLogInEndpoint> = async () => {
+    await this.backend.login();
+    return {};
+  };
 
-  logout = () => this.backend.logout();
+  logout: Handler<AuthLogOutEndpoint> = async () => {
+    await this.backend.logout();
+    return {};
+  };
 }

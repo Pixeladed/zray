@@ -19,7 +19,8 @@ export type EndpointRes<T> = T extends Endpoint<any, any, infer Res>
 export type Endpoints =
   | NavigationEndpoints
   | IntegrationEndpoints
-  | SearchEndpoints;
+  | SearchEndpoints
+  | AuthEndpoints;
 
 export type NavigationEndpoints = OpenSettingsEndpoint | OpenExternalEndpoint;
 export type IntegrationEndpoints =
@@ -28,6 +29,10 @@ export type IntegrationEndpoints =
   | ConnectIntegrationEndpoint
   | RemoveProfileEndpoint;
 export type SearchEndpoints = GlobalSearchEndpoint;
+export type AuthEndpoints =
+  | AuthCheckEndpoint
+  | AuthLogInEndpoint
+  | AuthLogOutEndpoint;
 
 export type OpenSettingsEndpoint = Endpoint<'navigation:settings:open', {}, {}>;
 
@@ -66,3 +71,13 @@ export type GlobalSearchEndpoint = Endpoint<
   { query: string; page?: number },
   { results: readonly SearchResult[] }
 >;
+
+export type AuthCheckEndpoint = Endpoint<
+  'auth:check',
+  {},
+  { authenticated: boolean }
+>;
+
+export type AuthLogInEndpoint = Endpoint<'auth:login', {}, {}>;
+
+export type AuthLogOutEndpoint = Endpoint<'auth:logout', {}, {}>;

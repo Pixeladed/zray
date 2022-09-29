@@ -73,6 +73,10 @@ registerHandler(
 
 registerHandler('search:global', searchNativeService.search);
 
+registerHandler('auth:check', authNativeService.check);
+registerHandler('auth:login', authNativeService.login);
+registerHandler('auth:logout', authNativeService.logout);
+
 app.on('activate', instance.createMainWindow);
 app.on('ready', instance.handleReady);
 app.on('will-quit', instance.handleQuit);
