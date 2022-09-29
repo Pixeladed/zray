@@ -10,9 +10,6 @@ export class Routes {
     new Route('/google_drive/callback', Routes.integrations());
   static gmailOAuthCallback = () =>
     new Route('/gmail/callback', Routes.integrations());
-
-  static auth = () => new Route('/auth');
-  static loginCallback = () => new Route('/callback', Routes.auth());
 }
 
 export class Route {
