@@ -9,6 +9,7 @@ import { createSettingsPage } from './web/pages/settings/create';
 import { NavigationService } from './web/services/navigation/navigation_service';
 import { BridgeClient } from './web/base/bridge_client';
 import { createIntegrationService } from './web/services/integration/create';
+import { createAuthGate } from './web/services/auth_gate/create';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,6 +18,7 @@ const context = window;
 const bridgeClient = new BridgeClient(context);
 const navigationService = new NavigationService(context, bridgeClient);
 
+const { AuthGate } = createAuthGate({ bridgeClient });
 const { integrationStore, integrationController } = createIntegrationService({
   bridgeClient,
 });
@@ -32,15 +34,17 @@ const { SettingsPage } = createSettingsPage({
 
 root.render(
   <React.StrictMode>
-    <HashRouter>
-      <RouterRoutes>
-        <Route index={true} element={<SearchPage />} />
-        <Route path={Routes.search().relative} element={<SearchPage />} />
-        <Route
-          path={Routes.settings().relativeParent}
-          element={<SettingsPage />}
-        />
-      </RouterRoutes>
-    </HashRouter>
+    <AuthGate>
+      <HashRouter>
+        <RouterRoutes>
+          <Route index={true} element={<SearchPage />} />
+          <Route path={Routes.search().relative} element={<SearchPage />} />
+          <Route
+            path={Routes.settings().relativeParent}
+            element={<SettingsPage />}
+          />
+        </RouterRoutes>
+      </HashRouter>
+    </AuthGate>
   </React.StrictMode>
 );
