@@ -16,6 +16,7 @@ export type Auth0Config = {
   audience: string;
   domain: string;
   clientId: string;
+  keytarName: string;
 };
 
 export const nativeConfig: NativeConfig = {
@@ -25,5 +26,6 @@ export const nativeConfig: NativeConfig = {
     audience: env('AUTH0_AUDIENCE'),
     domain: env('AUTH0_DOMAIN'),
     clientId: env('AUTH0_CLIENT_ID'),
+    keytarName: 'com.highbeam.app',
   },
 };
