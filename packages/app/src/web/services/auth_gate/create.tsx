@@ -13,7 +13,7 @@ export const createAuthGate = ({
   const store = new AuthGateStore();
   const controller = new AuthGateController(store, bridgeClient);
 
-  controller.init();
+  controller.getAuthStatus();
 
   const LoginButton = () => (
     <Button onClick={() => controller.login()}>Login</Button>

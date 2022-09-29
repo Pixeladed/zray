@@ -20,7 +20,7 @@ export class AuthGateController {
     private readonly bridgeClient: BridgeClient
   ) {}
 
-  init = async () => {
+  getAuthStatus = async () => {
     runInAction(() => {
       this.store.isLoading = true;
     });
@@ -40,7 +40,12 @@ export class AuthGateController {
     }
   };
 
-  login = () => {
-    return this.bridgeClient.request<AuthLogInEndpoint>('auth:login', {});
+  login = async () => {
+    try {
+      await this.bridgeClient.request<AuthLogInEndpoint>('auth:login', {});
+      this.getAuthStatus();
+    } catch (error) {
+      console.log('login failed', error);
+    }
   };
 }
