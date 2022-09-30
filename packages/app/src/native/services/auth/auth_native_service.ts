@@ -36,6 +36,7 @@ export class AuthNativeService {
   getToken = () => this.backend.getToken();
 
   check: Handler<AuthCheckEndpoint> = async () => {
+    await this.backend.getToken();
     const authenticated = await this.backend.isLoggedIn();
     return { authenticated };
   };
