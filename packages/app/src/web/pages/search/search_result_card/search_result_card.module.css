@@ -26,10 +26,6 @@
   margin-right: var(--spacexxxSmall);
 }
 
-.type {
-  text-transform: capitalize;
-}
-
 .resultCardTitle {
   margin: 0 0 var(--spacexxxSmall) 0;
 }

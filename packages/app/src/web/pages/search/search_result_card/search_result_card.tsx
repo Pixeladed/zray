@@ -18,22 +18,30 @@ export type ResultProps = {
 export const SearchResultCard = ({
   result,
   integration,
-  componentMap,
   onClick,
-}: ResultProps & {
-  componentMap: { [key in SearchResult['type']]: ResultComponent<any> };
-}) => {
-  const Renderer = componentMap[result.type];
-
+}: ResultProps) => {
   return (
     <TappableArea onClick={onClick}>
       <div className={styles.resultCard}>
         <img
           className={styles.icon}
-          alt={`${integration.name} ${result.type}`}
+          alt={`${integration.name} search result`}
           src={integration.icon}
         />
-        <Renderer integration={integration} result={result} />
+
+        <div>
+          <h3 className={styles.resultCardTitle}>{result.title}</h3>
+          <p className={styles.resultCardDescription}>
+            {!!result.icon && (
+              <img
+                src={result.icon}
+                className={styles.inlineIcon}
+                alt={result.title}
+              />
+            )}{' '}
+            {result.preview}
+          </p>
+        </div>
       </div>
     </TappableArea>
   );
