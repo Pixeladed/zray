@@ -1,13 +1,18 @@
 import { SearchResult } from '../../../interface/search';
-import Flexsearch from 'flexsearch';
+import { Sifter } from '@orchidjs/sifter';
 
 export class SearchRanker {
-  rank = (
+  rank = async (
     query: string,
     results: readonly SearchResult[]
   ): Promise<readonly SearchResult[]> => {
-    const index = Flexsearch.create<SearchResult>();
-    results.forEach(result => index.add(result));
-    return index.search(query);
+    const index = new Sifter(results, {} as any);
+    const fields: (keyof SearchResult)[] = ['title', 'preview'];
+    const op = index.search(query, {
+      fields,
+      filter: false,
+    } as any);
+    const rankedResults = op.items.map(item => results[item.id as number]);
+    return rankedResults;
   };
 }

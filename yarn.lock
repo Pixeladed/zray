@@ -2656,6 +2656,18 @@
   dependencies:
     "@octokit/openapi-types" "^12.11.0"
 
+"@orchidjs/sifter@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@orchidjs/sifter/-/sifter-1.0.1.tgz#9a401546d80e3592f78f0640290d51b82f89ca64"
+  integrity sha512-gciY+iuk2hBAyzsPBMCvGJa+JVrssWOit6Pveke4KqkY/6JTinvztAESmPDM0UJBPNmc1m1tC15VVKrZ3v8nrw==
+  dependencies:
+    "@orchidjs/unicode-variants" "^1.0.2"
+
+"@orchidjs/unicode-variants@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@orchidjs/unicode-variants/-/unicode-variants-1.0.2.tgz#3d4355fe9796ed00ca9709e6bd85caf4f6da8c53"
+  integrity sha512-Q0DDoAwywdCE3dOBl8PlMWci8OwEwZG22WxLB48xfLPpM1hC+gQRnUAKMEUBZqPN/Rk/FrdAcem4VQe8qfuPHQ==
+
 "@pmmmwh/react-refresh-webpack-plugin@^0.5.3":
   version "0.5.7"
   resolved "https://registry.npmjs.org/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.7.tgz"
@@ -7039,11 +7051,6 @@ flatted@^3.1.0:
   version "3.2.7"
   resolved "https://registry.npmjs.org/flatted/-/flatted-3.2.7.tgz"
   integrity sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==
-
-flexsearch@^0.7.31:
-  version "0.7.31"
-  resolved "https://registry.yarnpkg.com/flexsearch/-/flexsearch-0.7.31.tgz#065d4110b95083110b9b6c762a71a77cc52e4702"
-  integrity sha512-XGozTsMPYkm+6b5QL3Z9wQcJjNYxp0CYn3U1gO7dwD6PAqU1SVWZxI9CCg3z+ml3YfqdPnrBehaBrnH2AGKbNA==
 
 follow-redirects@^1.0.0, follow-redirects@^1.14.7, follow-redirects@^1.14.9:
   version "1.15.1"
