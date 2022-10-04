@@ -28,7 +28,7 @@ export class SearchNativeService {
       .flatMap(op => (op.status === 'fulfilled' ? op.value : undefined))
       .filter(exists);
 
-    const rankedResults = this.ranker.rank(providerResults);
+    const rankedResults = await this.ranker.rank(query, providerResults);
     return { results: rankedResults };
   };
 }

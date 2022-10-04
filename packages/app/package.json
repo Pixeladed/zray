@@ -63,6 +63,7 @@
     "cross-env": "^7.0.3",
     "electron": "20.0.1",
     "electron-builder": "^23.3.3",
+    "flexsearch": "^0.7.31",
     "mobx": "^6.6.1",
     "mobx-react": "^7.5.2",
     "nodemon": "^2.0.19",
