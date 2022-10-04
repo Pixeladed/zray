@@ -10,8 +10,8 @@ import {
 } from './google_drive_native_store';
 import { drive_v3, google } from 'googleapis';
 import { Assert, exists } from '@highbeam/utils';
-import { FileSearchResult } from '../../../interface/search';
 import { RefreshTokenUtil } from '../../base/refresh_token_util';
+import { SearchResult } from '../../../interface/search';
 
 export class GoogleDriveNativeService implements NativeIntegration {
   id = 'com.highbeam.gdrive';
@@ -103,7 +103,7 @@ export class GoogleDriveNativeService implements NativeIntegration {
   private mapFile = (
     file: drive_v3.Schema$File,
     profileId: string
-  ): FileSearchResult => {
+  ): SearchResult => {
     const id = Assert.exists(file.id, 'expected id to exist');
     const fileType = Assert.exists(
       file.mimeType,
@@ -117,13 +117,12 @@ export class GoogleDriveNativeService implements NativeIntegration {
 
     return {
       id,
-      fileType,
       integrationId: this.id,
       profileId,
       title,
-      type: 'file',
       url,
       icon: Path.resource('/integrations/common/file.svg'),
+      preview: fileType,
     };
   };
 

@@ -8,7 +8,7 @@ import { GmailNativeStore, GmailProfile } from './gmail_native_store';
 import { gmail_v1, google } from 'googleapis';
 import { Assert, exists } from '@highbeam/utils';
 import { RefreshTokenUtil } from '../../base/refresh_token_util';
-import { MessageSearchResult } from '../../../interface/search';
+import { SearchResult } from '../../../interface/search';
 
 export class GmailNativeService implements NativeIntegration {
   id = 'com.highbeam.gmail';
@@ -110,7 +110,7 @@ export class GmailNativeService implements NativeIntegration {
   private mapMessage = (
     msg: gmail_v1.Schema$Message,
     profile: GmailProfile
-  ): MessageSearchResult => {
+  ): SearchResult => {
     const subject =
       msg.payload?.headers?.find(h => h.name === 'Subject')?.value || 'Unknown';
     const from =
@@ -120,17 +120,13 @@ export class GmailNativeService implements NativeIntegration {
     const url = `https://mail.google.com/mail/?authuser=${profile.email}#all/${threadId}`;
 
     return {
-      author: {
-        name: from,
-      },
-      channel: profile.email,
       id: msg.id!,
       integrationId: this.id,
       profileId: profile.id,
-      text: subject,
-      type: 'message',
-      url,
+      preview: `from ${from}`,
+      title: subject,
       icon: Path.resource('/integrations/common/message.svg'),
+      url,
     };
   };
 

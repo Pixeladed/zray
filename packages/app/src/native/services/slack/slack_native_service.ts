@@ -7,11 +7,7 @@ import { IntegrationProfile } from '../../../interface/intergration';
 import { WebClient } from '@slack/web-api';
 import { Assert, exists } from '@highbeam/utils';
 import { Path } from '../../../base/path';
-import {
-  FileSearchResult,
-  MessageSearchResult,
-  SearchResult,
-} from '../../../interface/search';
+import { SearchResult } from '../../../interface/search';
 import {
   FilesMatch,
   MessagesMatch,
@@ -109,35 +105,30 @@ export class SlackNativeService implements NativeIntegration {
   private mapMessage = (
     msg: MessagesMatch,
     profileId: string
-  ): MessageSearchResult => {
+  ): SearchResult => {
     return {
       id: Assert.exists(msg.iid, 'expected message iid to exist'),
       integrationId: this.id,
       profileId,
-      type: 'message',
       icon: Path.resource('/integrations/common/message.svg'),
-      text: Assert.exists(msg.text, 'expected message text to exist'),
+      title: Assert.exists(msg.text, 'expected message text to exist'),
       url: Assert.exists(msg.permalink, 'expected message permalink to exist'),
-      author: {
-        name: msg.username ? `@${msg.username}` : 'Unknown',
-      },
-      channel: `#${msg.channel?.name}`,
+      preview: `From @${msg.username} in #${msg.channel?.name}`,
     };
   };
 
-  private mapFile = (file: FilesMatch, profileId: string): FileSearchResult => {
+  private mapFile = (file: FilesMatch, profileId: string): SearchResult => {
     return {
       id: Assert.exists(file.id, 'expected file id to exist'),
       integrationId: this.id,
       profileId,
-      type: 'file',
       icon: Path.resource('/integrations/common/file.svg'),
       title: Assert.exists(file.name, 'exepected file name to exist'),
       url: Assert.exists(
         file.url_private,
         'expected file private url to exist'
       ),
-      fileType:
+      preview:
         file.pretty_type ||
         file.filetype ||
         file.mimetype ||
