@@ -25,6 +25,16 @@
   background: var(--colorPrimaryDark);
 }
 
+.button.danger {
+  background: var(--colorBackground);
+  box-shadow: inset 0 0 0 1px var(--colorDanger);
+}
+
+.button.danger:hover:not(:active) {
+  background: var(--colorDanger);
+  color: var(--colorBackground)
+}
+
 .tappableArea {
   border: 0;
   padding: 0;

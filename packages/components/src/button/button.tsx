@@ -5,7 +5,7 @@ import styles from './button.module.css';
 
 type ButtonProps = PropsWithChildren<{
   onClick?(): void;
-  variant?: 'default' | 'primary';
+  variant?: 'default' | 'primary' | 'danger';
 }>;
 
 export const Button = ({
@@ -18,7 +18,8 @@ export const Button = ({
       className={classNames(
         styles.button,
         variant === 'default' && styles.default,
-        variant === 'primary' && styles.primary
+        variant === 'primary' && styles.primary,
+        variant === 'danger' && styles.danger
       )}
       onClick={onClick}
     >
