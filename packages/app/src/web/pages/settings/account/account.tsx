@@ -2,7 +2,13 @@ import { Button } from '@highbeam/components';
 import { ExternalLink } from 'react-feather';
 import styles from './account.module.css';
 
-export const AccountSettings = ({ onLogout }: { onLogout: () => void }) => {
+export const AccountSettings = ({
+  onLogout,
+  onBillingPortalOpen,
+}: {
+  onLogout: () => void;
+  onBillingPortalOpen: () => void;
+}) => {
   return (
     <div className={styles.container}>
       <h3 className={styles.heading}>Billing</h3>
@@ -10,7 +16,7 @@ export const AccountSettings = ({ onLogout }: { onLogout: () => void }) => {
         Highbeam partners with Stripe to manage billing and payments. You can
         use the billing portal to manage your payment method and switch plans.
       </p>
-      <Button>
+      <Button onClick={onBillingPortalOpen}>
         Billing portal&nbsp;&nbsp;
         <ExternalLink size="1em" />
       </Button>

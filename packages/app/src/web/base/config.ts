@@ -8,6 +8,7 @@ export const env = (label: string) => {
 export type WebConfig = {
   redirectOrigin: string;
   auth0: Auth0Config;
+  billingPortalUrl: string;
 };
 
 export type Auth0Config = {
@@ -23,4 +24,5 @@ export const webConfig: WebConfig = {
     domain: env('REACT_APP_AUTH0_DOMAIN'),
     clientId: env('REACT_APP_AUTH0_CLIENT_ID'),
   },
+  billingPortalUrl: env('REACT_APP_BILLING_PORTAL_URL'),
 };

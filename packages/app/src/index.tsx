@@ -10,6 +10,7 @@ import { NavigationService } from './web/services/navigation/navigation_service'
 import { BridgeClient } from './web/base/bridge_client';
 import { createIntegrationService } from './web/services/integration/create';
 import { createAuthGate } from './web/services/auth_gate/create';
+import { webConfig } from './web/base/config';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -31,6 +32,8 @@ const { SettingsPage } = createSettingsPage({
   integrationStore,
   integrationController,
   bridgeClient,
+  navigationService,
+  billingPortalUrl: webConfig.billingPortalUrl,
 });
 
 root.render(
