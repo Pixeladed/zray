@@ -11,12 +11,12 @@ type PathInput = `/${string}`;
 export type PathGenerator = (path: PathInput) => MintedPath;
 
 export class Resources {
-  static gmailIcon = Path.resource('/integrations/gmail/gmail.svg');
-  static gdriveIcon = Path.resource(
+  static GMAIL_ICON = Path.resource('/integrations/gmail/gmail.svg');
+  static GDRIVE_ICON = Path.resource(
     '/integrations/google_drive/google_drive.svg'
   );
-  static slackIcon = Path.resource('/integrations/slack/slack.svg');
+  static SLACK_ICON = Path.resource('/integrations/slack/slack.svg');
 
-  static messageIcon = Path.resource('/integrations/common/message.svg');
-  static fileIcon = Path.resource('/integrations/common/file.svg');
+  static MESSAGE_ICON = Path.resource('/integrations/common/message.svg');
+  static FILE_ICON = Path.resource('/integrations/common/file.svg');
 }

@@ -16,7 +16,7 @@ import { Resources } from '../../../base/path';
 export class GoogleDriveNativeService implements NativeIntegration {
   id = 'com.highbeam.gdrive';
   name = 'Google Drive';
-  icon = Resources.gdriveIcon;
+  icon = Resources.GDRIVE_ICON;
 
   constructor(
     private readonly redirectOrigin: string,
@@ -121,7 +121,7 @@ export class GoogleDriveNativeService implements NativeIntegration {
       profileId,
       title,
       url,
-      icon: Resources.fileIcon,
+      icon: Resources.FILE_ICON,
       preview: fileType,
     };
   };

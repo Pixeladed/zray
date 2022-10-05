@@ -16,7 +16,7 @@ import { Resources } from '../../../base/path';
 export class SlackNativeService implements NativeIntegration {
   id = 'com.highbeam.slack';
   name = 'Slack';
-  icon = Resources.slackIcon;
+  icon = Resources.SLACK_ICON;
 
   constructor(
     private readonly redirectOrigin: string,
@@ -110,7 +110,7 @@ export class SlackNativeService implements NativeIntegration {
       id: Assert.exists(msg.iid, 'expected message iid to exist'),
       integrationId: this.id,
       profileId,
-      icon: Resources.messageIcon,
+      icon: Resources.MESSAGE_ICON,
       title: Assert.exists(msg.text, 'expected message text to exist'),
       url: Assert.exists(msg.permalink, 'expected message permalink to exist'),
       preview: `From @${msg.username} in #${msg.channel?.name}`,
@@ -122,7 +122,7 @@ export class SlackNativeService implements NativeIntegration {
       id: Assert.exists(file.id, 'expected file id to exist'),
       integrationId: this.id,
       profileId,
-      icon: Resources.fileIcon,
+      icon: Resources.FILE_ICON,
       title: Assert.exists(file.name, 'exepected file name to exist'),
       url: Assert.exists(
         file.url_private,

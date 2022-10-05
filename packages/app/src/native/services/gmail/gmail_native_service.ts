@@ -13,7 +13,7 @@ import { SearchResult } from '../../../interface/search';
 export class GmailNativeService implements NativeIntegration {
   id = 'com.highbeam.gmail';
   name = 'Gmail';
-  icon = Resources.gmailIcon;
+  icon = Resources.GMAIL_ICON;
 
   constructor(
     private readonly redirectOrigin: string,
@@ -125,7 +125,7 @@ export class GmailNativeService implements NativeIntegration {
       profileId: profile.id,
       preview: `from ${from}`,
       title: subject,
-      icon: Resources.messageIcon,
+      icon: Resources.MESSAGE_ICON,
       url,
     };
   };
