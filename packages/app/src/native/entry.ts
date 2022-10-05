@@ -25,7 +25,10 @@ const registerHandler = createHandlerReigstrar(ipcMain);
 const clientFactory = new ClientFactory(apiOrigin);
 const safe = new KeychainSafe(safeStorage);
 
-const { authNativeService } = createAuthNativeService(nativeConfig.auth0);
+const { authNativeService } = createAuthNativeService(
+  nativeConfig.auth0,
+  instance.broadcast
+);
 const { slackNativeService } = createSlackNativeService({
   redirectOrigin,
   clientFactory,

@@ -4,14 +4,18 @@ import {
   AuthLogInEndpoint,
   AuthLogOutEndpoint,
 } from '../../../interface/bridge/endpoints';
-import { Handler } from '../../base/bridge_handler';
+import { Broadcaster, Handler } from '../../base/bridge_handler';
 import { Auth0Config } from '../../base/config';
 import keytar from 'keytar';
+import { AuthChangedEvent } from '../../../interface/bridge/events';
 
 export class AuthNativeService {
   private backend: ReturnType<typeof auth0Login>;
 
-  constructor(private readonly config: Auth0Config) {
+  constructor(
+    private readonly config: Auth0Config,
+    private readonly broadcast: Broadcaster
+  ) {
     this.backend = auth0Login({
       auth0: {
         audience: this.config.audience,
@@ -36,18 +40,24 @@ export class AuthNativeService {
   getToken = () => this.backend.getToken();
 
   check: Handler<AuthCheckEndpoint> = async () => {
-    await this.backend.getToken();
-    const authenticated = await this.backend.isLoggedIn();
-    return { authenticated };
+    try {
+      await this.backend.getToken();
+      const authenticated = await this.backend.isLoggedIn();
+      return { authenticated };
+    } catch (error) {
+      return { authenticated: false };
+    }
   };
 
   login: Handler<AuthLogInEndpoint> = async () => {
     await this.backend.login();
+    this.broadcast<AuthChangedEvent>('auth:changed', {});
     return {};
   };
 
   logout: Handler<AuthLogOutEndpoint> = async () => {
     await this.backend.logout();
+    this.broadcast<AuthChangedEvent>('auth:changed', {});
     return {};
   };
 }

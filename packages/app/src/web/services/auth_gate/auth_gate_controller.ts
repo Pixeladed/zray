@@ -3,6 +3,7 @@ import {
   AuthCheckEndpoint,
   AuthLogInEndpoint,
 } from '../../../interface/bridge/endpoints';
+import { AuthChangedEvent } from '../../../interface/bridge/events';
 import { BridgeClient } from '../../base/bridge_client';
 
 export class AuthGateStore {
@@ -18,7 +19,11 @@ export class AuthGateController {
   constructor(
     private readonly store: AuthGateStore,
     private readonly bridgeClient: BridgeClient
-  ) {}
+  ) {
+    this.bridgeClient.on<AuthChangedEvent>('auth:changed', () => {
+      this.getAuthStatus();
+    });
+  }
 
   getAuthStatus = async () => {
     runInAction(() => {

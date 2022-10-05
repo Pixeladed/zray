@@ -23,6 +23,7 @@ export const endpointAllowlist: EndpointName<Endpoints>[] = [
 export const eventAllowlist: EventName<Events>[] = [
   'integration:profile:new',
   'integration:profile:removed',
+  'auth:changed',
 ];
 
 export type Bridge = {

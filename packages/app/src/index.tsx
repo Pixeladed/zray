@@ -30,6 +30,7 @@ const { SearchPage } = createSearchPage({
 const { SettingsPage } = createSettingsPage({
   integrationStore,
   integrationController,
+  bridgeClient,
 });
 
 root.render(
