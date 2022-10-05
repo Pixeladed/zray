@@ -37,6 +37,8 @@
   font-size: 0.8em;
   composes: dimText;
   background: var(--colorBackgroundDark);
+  display: flex;
+  justify-content: space-between;
 }
 
 .profilesDescription {

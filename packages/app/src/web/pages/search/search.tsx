@@ -8,9 +8,11 @@ import { useDebouncedCallback } from 'use-debounce';
 import styles from './search.module.css';
 import { SearchResult } from '../../../interface/search';
 import { ResultProps } from './search_result_card/search_result_card';
+import { Settings as CogIcon } from 'react-feather';
 
 export function SearchPage({
   onConnectTool,
+  onOpenSettings,
   openResult,
   loading,
   onSearch,
@@ -20,6 +22,7 @@ export function SearchPage({
   ResultCard,
 }: {
   onConnectTool: () => void;
+  onOpenSettings: () => void;
   openResult: (result: SearchResult) => void;
   loading: boolean;
   onSearch: (query: string) => void;
@@ -48,6 +51,9 @@ export function SearchPage({
                 <span className={styles.addMore}>Add another</span>
               </TappableArea>
             </p>
+            <TappableArea onClick={onOpenSettings}>
+              <CogIcon size="1em" color="#777" />
+            </TappableArea>
           </div>
         )}
         <input

@@ -33,6 +33,7 @@ export const createSearchPage = ({
         integrationById={integrationStore.integrationsById.get()}
         profiles={integrationStore.profiles}
         onConnectTool={navigationService.openSettings}
+        onOpenSettings={navigationService.openSettings}
         openResult={openResult}
         onSearch={controller.search}
         ResultCard={SearchResultCard}
