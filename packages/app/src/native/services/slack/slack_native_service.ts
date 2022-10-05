@@ -6,17 +6,17 @@ import { NativeIntegration } from '../integration/integration_native_service';
 import { IntegrationProfile } from '../../../interface/intergration';
 import { WebClient } from '@slack/web-api';
 import { Assert, exists } from '@highbeam/utils';
-import { Path } from '../../../base/path';
 import { SearchResult } from '../../../interface/search';
 import {
   FilesMatch,
   MessagesMatch,
 } from '@slack/web-api/dist/response/SearchAllResponse';
+import { Resources } from '../../../base/path';
 
 export class SlackNativeService implements NativeIntegration {
   id = 'com.highbeam.slack';
   name = 'Slack';
-  icon = Path.resource('/integrations/slack/slack.svg');
+  icon = Resources.slackIcon;
 
   constructor(
     private readonly redirectOrigin: string,
@@ -110,7 +110,7 @@ export class SlackNativeService implements NativeIntegration {
       id: Assert.exists(msg.iid, 'expected message iid to exist'),
       integrationId: this.id,
       profileId,
-      icon: Path.resource('/integrations/common/message.svg'),
+      icon: Resources.messageIcon,
       title: Assert.exists(msg.text, 'expected message text to exist'),
       url: Assert.exists(msg.permalink, 'expected message permalink to exist'),
       preview: `From @${msg.username} in #${msg.channel?.name}`,
@@ -122,7 +122,7 @@ export class SlackNativeService implements NativeIntegration {
       id: Assert.exists(file.id, 'expected file id to exist'),
       integrationId: this.id,
       profileId,
-      icon: Path.resource('/integrations/common/file.svg'),
+      icon: Resources.fileIcon,
       title: Assert.exists(file.name, 'exepected file name to exist'),
       url: Assert.exists(
         file.url_private,

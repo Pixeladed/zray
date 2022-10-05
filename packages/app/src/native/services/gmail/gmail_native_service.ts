@@ -1,4 +1,4 @@
-import { Path } from '../../../base/path';
+import { Resources } from '../../../base/path';
 import { Routes } from '../../../routes';
 import { NativeIntegration } from '../integration/integration_native_service';
 import { Gmail } from '@highbeam/interface';
@@ -13,7 +13,7 @@ import { SearchResult } from '../../../interface/search';
 export class GmailNativeService implements NativeIntegration {
   id = 'com.highbeam.gmail';
   name = 'Gmail';
-  icon = Path.resource('/integrations/gmail/gmail.svg');
+  icon = Resources.gmailIcon;
 
   constructor(
     private readonly redirectOrigin: string,
@@ -125,7 +125,7 @@ export class GmailNativeService implements NativeIntegration {
       profileId: profile.id,
       preview: `from ${from}`,
       title: subject,
-      icon: Path.resource('/integrations/common/message.svg'),
+      icon: Resources.messageIcon,
       url,
     };
   };

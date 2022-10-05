@@ -1,4 +1,3 @@
-import { Path } from '../../../base/path';
 import { Routes } from '../../../routes';
 import { NativeIntegration } from '../integration/integration_native_service';
 import { GoogleDrive } from '@highbeam/interface';
@@ -12,11 +11,12 @@ import { drive_v3, google } from 'googleapis';
 import { Assert, exists } from '@highbeam/utils';
 import { RefreshTokenUtil } from '../../base/refresh_token_util';
 import { SearchResult } from '../../../interface/search';
+import { Resources } from '../../../base/path';
 
 export class GoogleDriveNativeService implements NativeIntegration {
   id = 'com.highbeam.gdrive';
   name = 'Google Drive';
-  icon = Path.resource('/integrations/google_drive/google_drive.svg');
+  icon = Resources.gdriveIcon;
 
   constructor(
     private readonly redirectOrigin: string,
@@ -121,7 +121,7 @@ export class GoogleDriveNativeService implements NativeIntegration {
       profileId,
       title,
       url,
-      icon: Path.resource('/integrations/common/file.svg'),
+      icon: Resources.fileIcon,
       preview: fileType,
     };
   };
