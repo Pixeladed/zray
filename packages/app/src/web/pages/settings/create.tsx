@@ -3,6 +3,7 @@ import {
   IntegrationStore,
 } from '../../services/integration/integration_controller';
 import { createIntegrationsSettings } from './integrations/create';
+import { createAccountSettings } from './account/create';
 import { SettingsPage } from './settings';
 
 export const createSettingsPage = ({
@@ -17,8 +18,13 @@ export const createSettingsPage = ({
     integrationController,
   });
 
+  const { AccountSettings } = createAccountSettings();
+
   const SettingsPageImpl = () => (
-    <SettingsPage IntegrationsSettings={IntegrationsSettings} />
+    <SettingsPage
+      IntegrationsSettings={IntegrationsSettings}
+      AccountSettings={AccountSettings}
+    />
   );
 
   return { SettingsPage: SettingsPageImpl };

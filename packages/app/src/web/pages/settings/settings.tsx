@@ -11,8 +11,10 @@ import styles from './settings.module.css';
 
 export const SettingsPage = ({
   IntegrationsSettings,
+  AccountSettings,
 }: {
   IntegrationsSettings: React.ComponentType;
+  AccountSettings: React.ComponentType;
 }) => {
   return (
     <div className={styles.container}>
@@ -28,6 +30,7 @@ export const SettingsPage = ({
             index={Routes.settings().absolute}
             label="Integrations"
           />
+          <SidebarLink href={Routes.account().absolute} label="Account" />
         </aside>
         <div className={styles.content}>
           <RouterRoutes>
@@ -35,6 +38,10 @@ export const SettingsPage = ({
             <Route
               path={Routes.integrations().relativeParent}
               element={<IntegrationsSettings />}
+            />
+            <Route
+              path={Routes.account().relativeParent}
+              element={<AccountSettings />}
             />
           </RouterRoutes>
         </div>
