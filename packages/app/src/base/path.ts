@@ -19,4 +19,6 @@ export class Resources {
 
   static MESSAGE_ICON = Path.resource('/integrations/common/message.svg');
   static FILE_ICON = Path.resource('/integrations/common/file.svg');
+  static FOLDER_ICON = Path.resource('/integrations/common/folder.svg');
+  static EMAIL_ICON = Path.resource('/integrations/common/email.svg');
 }

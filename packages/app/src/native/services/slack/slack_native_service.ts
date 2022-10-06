@@ -110,7 +110,6 @@ export class SlackNativeService implements NativeIntegration {
       id: Assert.exists(msg.iid, 'expected message iid to exist'),
       integrationId: this.id,
       profileId,
-      icon: Resources.MESSAGE_ICON,
       title: Assert.exists(msg.text, 'expected message text to exist'),
       url: Assert.exists(msg.permalink, 'expected message permalink to exist'),
       preview: `From @${msg.username} in #${msg.channel?.name}`,

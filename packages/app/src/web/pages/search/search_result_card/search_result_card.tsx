@@ -23,24 +23,24 @@ export const SearchResultCard = ({
   return (
     <TappableArea onClick={onClick}>
       <div className={styles.resultCard}>
-        <img
-          className={styles.icon}
-          alt={`${integration.name} search result`}
-          src={integration.icon}
-        />
+        <div className={styles.iconGroup}>
+          <img
+            className={styles.icon}
+            alt={`${integration.name} search result`}
+            src={integration.icon}
+          />
+          {!!result.icon && (
+            <img
+              className={styles.secondaryIcon}
+              src={result.icon}
+              alt={result.title}
+            />
+          )}
+        </div>
 
         <div>
           <h3 className={styles.resultCardTitle}>{result.title}</h3>
-          <p className={styles.resultCardDescription}>
-            {!!result.icon && (
-              <img
-                src={result.icon}
-                className={styles.inlineIcon}
-                alt={result.title}
-              />
-            )}{' '}
-            {result.preview}
-          </p>
+          <p className={styles.resultCardDescription}>{result.preview}</p>
         </div>
       </div>
     </TappableArea>

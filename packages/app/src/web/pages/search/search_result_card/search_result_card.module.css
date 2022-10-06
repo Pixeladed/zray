@@ -15,15 +15,23 @@
   background: var(--colorBackgroundDark);
 }
 
+.iconGroup {
+  position: relative;
+}
+
 .icon {
   width: var(--spaceLarge);
   height: var(--spaceLarge);
 }
 
-.inlineIcon {
-  width: var(--spacexSmall);
-  height: var(--spacexSmall);
-  margin-right: var(--spacexxxSmall);
+.secondaryIcon {
+  width: var(--spaceSmall);
+  height: var(--spaceSmall);
+  position: absolute;
+  bottom: 0;
+  right: calc(-0.25 * var(--spaceSmall));
+  background: var(--colorBackgroundDark);
+  border-radius: var(--spacexxxSmall);
 }
 
 .resultCardTitle {

@@ -85,7 +85,7 @@ export class GoogleDriveNativeService implements NativeIntegration {
     const accessToken = refreshedProfile.accessToken;
     const res = await drive.files.list({
       q: this.constructQuery(query),
-      fields: 'files(id, name, mimeType, description, webViewLink)',
+      fields: 'files(id, name, mimeType, description, webViewLink, iconLink)',
       spaces: 'drive',
       oauth_token: accessToken,
     });
@@ -121,8 +121,8 @@ export class GoogleDriveNativeService implements NativeIntegration {
       profileId,
       title,
       url,
-      icon: Resources.FILE_ICON,
-      preview: fileType,
+      icon: file.iconLink || Resources.FILE_ICON,
+      preview: file.description || fileType,
     };
   };
 

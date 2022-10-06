@@ -125,7 +125,6 @@ export class GmailNativeService implements NativeIntegration {
       profileId: profile.id,
       preview: `from ${from}`,
       title: subject,
-      icon: Resources.MESSAGE_ICON,
       url,
     };
   };
