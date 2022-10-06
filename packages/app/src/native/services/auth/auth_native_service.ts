@@ -23,7 +23,6 @@ export class AuthNativeService {
         domain: this.config.domain,
         scopes: 'openid profile email offline_access',
       },
-      debug: true,
       login: {
         windowConfig: {
           width: 400,
