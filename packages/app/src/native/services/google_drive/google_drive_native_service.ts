@@ -12,6 +12,7 @@ import { Assert, exists } from '@highbeam/utils';
 import { RefreshTokenUtil } from '../../base/refresh_token_util';
 import { SearchResult } from '../../../interface/search';
 import { Resources } from '../../../base/path';
+import { MimetypeMapper } from './mimetype_mapper';
 
 export class GoogleDriveNativeService implements NativeIntegration {
   id = 'com.highbeam.gdrive';
@@ -22,7 +23,8 @@ export class GoogleDriveNativeService implements NativeIntegration {
     private readonly redirectOrigin: string,
     private readonly googleDriveClient: GoogleDrive.GoogleDriveClient,
     private readonly store: GoogleDriveNativeStore,
-    private readonly refreshUtil: RefreshTokenUtil
+    private readonly refreshUtil: RefreshTokenUtil,
+    private readonly mimetypeMapper: MimetypeMapper
   ) {}
 
   connect = async () => {
@@ -122,7 +124,7 @@ export class GoogleDriveNativeService implements NativeIntegration {
       title,
       url,
       icon: file.iconLink || Resources.FILE_ICON,
-      preview: file.description || fileType,
+      preview: file.description || this.mimetypeMapper.map(fileType),
     };
   };
 
