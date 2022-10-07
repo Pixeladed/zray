@@ -1,3 +1,4 @@
+import { Assert } from '@highbeam/utils';
 import { IncomingHttpHeaders } from 'http';
 import { createRemoteJWKSet, jwtVerify } from 'jose';
 import {
@@ -39,5 +40,10 @@ export class AuthService {
     });
 
     return payload;
+  };
+
+  userIdFromHeader = async (header: IncomingHttpHeaders) => {
+    const payload = await this.verifyHeaders(header);
+    return Assert.exists(payload.sub, 'expect jwt payload to have a sub field');
   };
 }

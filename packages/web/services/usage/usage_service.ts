@@ -9,10 +9,7 @@ export class UsageService {
     req,
     res
   ) => {
-    const payload = await this.authService.verifyHeaders(req.headers);
-
-    console.log('getting current plan with payload', payload);
-
+    const userId = await this.authService.userIdFromHeader(req.headers);
     return res.json({ plan: 'free' });
   };
 }
