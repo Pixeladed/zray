@@ -10,13 +10,15 @@ export class Client<T extends IServices> {
 
   call = async <K extends keyof T>(
     methodName: K,
-    data: EndpointReq<T[K]>
+    data: EndpointReq<T[K]>,
+    token?: string
   ): Promise<EndpointRes<T[K]>> => {
     const url = this.url(methodName);
     const res = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
     });
