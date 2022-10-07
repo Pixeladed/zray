@@ -1,3 +1,4 @@
+import { IncomingHttpHeaders } from 'http';
 import { createRemoteJWKSet, jwtVerify } from 'jose';
 import {
   FlattenedJWSInput,
@@ -16,6 +17,21 @@ export class AuthService {
       new URL(`https://${this.auth0Domain}/.well-known/jwks.json`)
     );
   }
+
+  verifyHeaders = async (header: IncomingHttpHeaders) => {
+    const authorization = header.authorization;
+    if (!authorization) {
+      throw new Error('No authorization provided');
+    }
+
+    const match = authorization.match(/^Bearer (.+)$/);
+    const token = match ? match[1] : undefined;
+    if (!token) {
+      throw new Error('Malformed authorization');
+    }
+
+    return this.verify(token);
+  };
 
   verify = async (token: string) => {
     const { payload } = await jwtVerify(token, this.jwks, {
