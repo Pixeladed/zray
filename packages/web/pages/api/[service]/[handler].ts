@@ -12,7 +12,10 @@ const { authService } = createAuthService(config.auth0);
 const { gmailService } = createGmailService(config.gmail);
 const { googleDriveService } = createGoogleDriveService(config.googleDrive);
 const { slackService } = createSlackService(config.slack);
-const { usageService } = createUsageService({ authService });
+const { usageService } = createUsageService({
+  authService,
+  config: config.stripe,
+});
 
 const services: { [key in Services]: ServiceImpl<IServiceMap[key]> } = {
   gmail: gmailService,

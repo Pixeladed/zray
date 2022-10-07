@@ -53,6 +53,12 @@ export const config: Config = {
       'expected AUTH0_DOMAIN to exist'
     ),
   },
+  stripe: {
+    apiKey: Assert.exists(
+      process.env.STRIPE_API_KEY,
+      'expected stripe api key to exist'
+    ),
+  },
 };
 
 export type Config = {
@@ -63,6 +69,11 @@ export type Config = {
     audience: string;
     domain: string;
   };
+  stripe: StripeConfig;
+};
+
+export type StripeConfig = {
+  apiKey: string;
 };
 
 export type SlackOAuthConfig = {
