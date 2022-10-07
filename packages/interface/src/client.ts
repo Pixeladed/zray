@@ -8,6 +8,14 @@ export class Client<T extends IServices> {
     private readonly serviceName: string
   ) {}
 
+  callAuthenticated = async <K extends keyof T>(
+    methodName: K,
+    data: EndpointReq<T[K]>,
+    token: string
+  ): Promise<EndpointRes<T[K]>> => {
+    return this.call(methodName, data, token);
+  };
+
   call = async <K extends keyof T>(
     methodName: K,
     data: EndpointReq<T[K]>,
@@ -38,6 +46,11 @@ export class Client<T extends IServices> {
 }
 
 export interface IClient<T extends IServices> {
+  callAuthenticated: <K extends keyof T>(
+    methodName: K,
+    data: EndpointReq<T[K]>,
+    token: string
+  ) => Promise<EndpointRes<T[K]>>;
   call: <K extends keyof T>(
     methodName: K,
     data: EndpointReq<T[K]>

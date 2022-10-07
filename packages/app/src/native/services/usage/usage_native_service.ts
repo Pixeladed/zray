@@ -1,9 +1,11 @@
 import { Usage } from '@highbeam/interface';
 import { ProfileInfo } from '../../../interface/intergration';
+import { AuthNativeService } from '../auth/auth_native_service';
 
 export class UsageNativeService {
   constructor(
     private readonly usageClient: Usage.UsageClient,
+    private readonly authService: AuthNativeService,
     private readonly freePlanProfileLimit: number
   ) {}
 
@@ -21,7 +23,13 @@ export class UsageNativeService {
   };
 
   getCurrentPlan = async () => {
-    const res = await this.usageClient.call('getCurrentPlan', {});
+    const token = await this.authService.getToken();
+    const res = await this.usageClient.callAuthenticated(
+      'getCurrentPlan',
+      {},
+      token
+    );
+
     switch (res.plan) {
       case 'free':
         return Plan.FREE;
