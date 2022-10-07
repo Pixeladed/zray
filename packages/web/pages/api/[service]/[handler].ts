@@ -2,15 +2,17 @@ import { IServiceMap, Services } from '@highbeam/interface';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { config } from '../../../base/config';
 import { ServiceImpl } from '../../../base/service';
+import { createAuthService } from '../../../services/auth/create';
 import { createGmailService } from '../../../services/gmail/create';
 import { createGoogleDriveService } from '../../../services/google_drive/create';
 import { createSlackService } from '../../../services/slack/create';
 import { createUsageService } from '../../../services/usage/create';
 
+const { authService } = createAuthService(config.auth0);
 const { gmailService } = createGmailService(config.gmail);
 const { googleDriveService } = createGoogleDriveService(config.googleDrive);
 const { slackService } = createSlackService(config.slack);
-const { usageService } = createUsageService();
+const { usageService } = createUsageService({ authService });
 
 const services: { [key in Services]: ServiceImpl<IServiceMap[key]> } = {
   gmail: gmailService,
