@@ -5,15 +5,18 @@ import { ServiceImpl } from '../../../base/service';
 import { createGmailService } from '../../../services/gmail/create';
 import { createGoogleDriveService } from '../../../services/google_drive/create';
 import { createSlackService } from '../../../services/slack/create';
+import { createUsageService } from '../../../services/usage/create';
 
 const { gmailService } = createGmailService(config.gmail);
 const { googleDriveService } = createGoogleDriveService(config.googleDrive);
 const { slackService } = createSlackService(config.slack);
+const { usageService } = createUsageService();
 
 const services: { [key in Services]: ServiceImpl<IServiceMap[key]> } = {
   gmail: gmailService,
   google_drive: googleDriveService,
   slack: slackService,
+  usage: usageService,
 };
 
 export default async function handler(
