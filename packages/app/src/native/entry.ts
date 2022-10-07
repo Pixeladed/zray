@@ -46,7 +46,7 @@ const { gmailNativeService } = createGmailNativeService({
   safe,
 });
 const navigationNativeService = new NavigationNativeService(shell);
-const { usageNativeService } = createUsageNativeService();
+const { usageNativeService } = createUsageNativeService({ clientFactory });
 
 const integrations: readonly NativeIntegration[] = [
   slackNativeService,
