@@ -13,6 +13,7 @@ import { createSearchNativeService } from './services/search/create';
 import { createSlackNativeService } from './services/slack/create';
 import { WindowSource } from './views/view';
 import { createAuthNativeService } from './services/auth/create';
+import { createUsageNativeService } from './services/usage/create';
 
 const { apiOrigin, redirectOrigin } = nativeConfig;
 const BASE_SOURCE: WindowSource = app.isPackaged
@@ -45,6 +46,7 @@ const { gmailNativeService } = createGmailNativeService({
   safe,
 });
 const navigationNativeService = new NavigationNativeService(shell);
+const { usageNativeService } = createUsageNativeService();
 
 const integrations: readonly NativeIntegration[] = [
   slackNativeService,
@@ -55,6 +57,7 @@ const integrations: readonly NativeIntegration[] = [
 const { integrationNativeService } = createIntegrationNativeService({
   integrations,
   broadcast: instance.broadcast,
+  usageNativeService,
 });
 const { searchNativeService } = createSearchNativeService({
   providers: integrations,
