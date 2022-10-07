@@ -16,14 +16,25 @@ import {
 } from '../../../interface/intergration';
 import { Broadcaster, Handler } from '../../base/bridge_handler';
 import { SearchProvider } from '../search/search_native_service';
+import { UsageNativeService } from '../usage/usage_native_service';
 
 export class IntegrationNativeService {
   constructor(
     private readonly integrations: readonly NativeIntegration[],
-    private readonly broadcast: Broadcaster
+    private readonly broadcast: Broadcaster,
+    private readonly usageService: UsageNativeService
   ) {}
 
   connect: Handler<ConnectIntegrationEndpoint> = async ({ data: param }) => {
+    const existingProfiles = await this.listProfiles({ data: {} });
+    const canConnect = await this.usageService.checkAddNewIntegration(
+      existingProfiles.profiles
+    );
+
+    if (!canConnect) {
+      throw new Error('This plan does not allow more integrations');
+    }
+
     const integration = this.integrations.find(({ id }) => id === param.id);
 
     if (!integration) {

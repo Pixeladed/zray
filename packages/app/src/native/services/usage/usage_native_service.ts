@@ -3,10 +3,9 @@ import { ProfileInfo } from '../../../interface/intergration';
 export class UsageNativeService {
   constructor(private readonly freePlanProfileLimit: number) {}
 
-  checkAddNewIntegration = (
-    plan: Plan,
-    existingProfiles: readonly ProfileInfo[]
-  ) => {
+  checkAddNewIntegration = async (existingProfiles: readonly ProfileInfo[]) => {
+    const plan = await this.getCurrentPlan();
+
     switch (plan) {
       case Plan.PRO:
         return true;
@@ -15,6 +14,10 @@ export class UsageNativeService {
       default:
         throw new Error(`Unknown plan ${plan}`);
     }
+  };
+
+  getCurrentPlan = async () => {
+    return Plan.FREE;
   };
 }
 
