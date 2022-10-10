@@ -1,12 +1,12 @@
 import { Assert } from '@highbeam/utils';
-import { SafeStorage, safeStorage } from 'electron';
+import { SafeStorage } from 'electron';
 
-export interface Safe {
+export interface Crypt {
   encrypt(rawValue: string): string;
   decrypt(encryptedValue: string): string;
 }
 
-export class KeychainSafe implements Safe {
+export class OSCrypt implements Crypt {
   private encoding: BufferEncoding = 'hex';
 
   constructor(

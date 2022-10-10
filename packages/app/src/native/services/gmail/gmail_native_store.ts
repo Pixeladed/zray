@@ -1,11 +1,11 @@
 import Store from 'electron-store';
 import { ProfileInfo } from '../../../interface/intergration';
-import { Safe } from '../../base/safe';
+import { Crypt } from '../../base/crypt';
 
 export class GmailNativeStore {
   private store: Store<GmailNativeStoreLayout>;
 
-  constructor(name: string, private readonly safe: Safe) {
+  constructor(name: string, private readonly crypt: Crypt) {
     this.store = new Store<GmailNativeStoreLayout>({
       name,
       migrations: {
@@ -53,8 +53,8 @@ export class GmailNativeStore {
   };
 
   private maskProfile = (profile: GmailProfile): GmailProfile => {
-    const accessToken = this.safe.encrypt(profile.accessToken);
-    const refreshToken = this.safe.encrypt(profile.refreshToken);
+    const accessToken = this.crypt.encrypt(profile.accessToken);
+    const refreshToken = this.crypt.encrypt(profile.refreshToken);
     return {
       ...profile,
       accessToken,
@@ -63,8 +63,8 @@ export class GmailNativeStore {
   };
 
   private unmaskProfile = (profile: GmailProfile): GmailProfile => {
-    const accessToken = this.safe.decrypt(profile.accessToken);
-    const refreshToken = this.safe.decrypt(profile.refreshToken);
+    const accessToken = this.crypt.decrypt(profile.accessToken);
+    const refreshToken = this.crypt.decrypt(profile.refreshToken);
     return {
       ...profile,
       accessToken,

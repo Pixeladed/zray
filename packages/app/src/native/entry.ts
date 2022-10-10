@@ -3,7 +3,7 @@ import { app, globalShortcut, ipcMain, safeStorage, shell } from 'electron';
 import { nativeConfig } from './base/config';
 import { App } from './app';
 import { createHandlerReigstrar } from './base/bridge_handler';
-import { KeychainSafe } from './base/safe';
+import { OSCrypt } from './base/crypt';
 import { createGmailNativeService } from './services/gmail/create';
 import { createGoogleDriveNativeService } from './services/google_drive/create';
 import { createIntegrationNativeService } from './services/integration/create';
@@ -24,7 +24,7 @@ const instance = new App(BASE_SOURCE, globalShortcut);
 
 const registerHandler = createHandlerReigstrar(ipcMain);
 const clientFactory = new ClientFactory(apiOrigin);
-const safe = new KeychainSafe(safeStorage);
+const safe = new OSCrypt(safeStorage);
 
 const { authNativeService } = createAuthNativeService(
   nativeConfig.auth0,

@@ -1,6 +1,6 @@
 import { ClientFactory } from '@highbeam/interface';
 import { RefreshTokenUtil } from '../../base/refresh_token_util';
-import { Safe } from '../../base/safe';
+import { Crypt } from '../../base/crypt';
 import { GmailNativeService } from './gmail_native_service';
 import { GmailNativeStore } from './gmail_native_store';
 
@@ -13,7 +13,7 @@ export const createGmailNativeService = ({
 }: {
   redirectOrigin: string;
   clientFactory: ClientFactory;
-  safe: Safe;
+  safe: Crypt;
 }) => {
   const store = new GmailNativeStore(STORE_NAME, safe);
   const gmailClient = clientFactory.for('gmail');

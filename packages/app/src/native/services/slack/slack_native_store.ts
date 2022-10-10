@@ -1,11 +1,11 @@
 import Store from 'electron-store';
 import { ProfileInfo } from '../../../interface/intergration';
-import { Safe } from '../../base/safe';
+import { Crypt } from '../../base/crypt';
 
 export class SlackNativeStore {
   private store: Store<SlackNativeStoreLayout>;
 
-  constructor(name: string, private readonly safe: Safe) {
+  constructor(name: string, private readonly crypt: Crypt) {
     this.store = new Store<SlackNativeStoreLayout>({
       name,
       migrations: {
@@ -53,7 +53,7 @@ export class SlackNativeStore {
   };
 
   private maskProfile = (profile: SlackProfile): SlackProfile => {
-    const accessToken = this.safe.encrypt(profile.accessToken);
+    const accessToken = this.crypt.encrypt(profile.accessToken);
     return {
       ...profile,
       accessToken,
@@ -61,7 +61,7 @@ export class SlackNativeStore {
   };
 
   private unmaskProfile = (profile: SlackProfile): SlackProfile => {
-    const accessToken = this.safe.decrypt(profile.accessToken);
+    const accessToken = this.crypt.decrypt(profile.accessToken);
     return {
       ...profile,
       accessToken,

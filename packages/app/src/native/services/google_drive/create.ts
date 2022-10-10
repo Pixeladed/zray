@@ -1,6 +1,6 @@
 import { ClientFactory } from '@highbeam/interface';
 import { RefreshTokenUtil } from '../../base/refresh_token_util';
-import { Safe } from '../../base/safe';
+import { Crypt } from '../../base/crypt';
 import { GoogleDriveNativeService } from './google_drive_native_service';
 import { GoogleDriveNativeStore } from './google_drive_native_store';
 import { MimetypeMapper } from './mimetype_mapper';
@@ -14,7 +14,7 @@ export const createGoogleDriveNativeService = ({
 }: {
   redirectOrigin: string;
   clientFactory: ClientFactory;
-  safe: Safe;
+  safe: Crypt;
 }) => {
   const store = new GoogleDriveNativeStore(STORE_NAME, safe);
   const googleDriveClient = clientFactory.for('google_drive');

@@ -1,5 +1,5 @@
 import { ClientFactory } from '@highbeam/interface';
-import { Safe } from '../../base/safe';
+import { Crypt } from '../../base/crypt';
 import { SlackNativeService } from './slack_native_service';
 import { SlackNativeStore } from './slack_native_store';
 
@@ -12,7 +12,7 @@ export const createSlackNativeService = ({
 }: {
   redirectOrigin: string;
   clientFactory: ClientFactory;
-  safe: Safe;
+  safe: Crypt;
 }) => {
   const slackClient = clientFactory.for('slack');
   const slackNativeStore = new SlackNativeStore(STORE_NAME, safe);
