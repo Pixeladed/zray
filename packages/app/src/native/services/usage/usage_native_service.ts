@@ -5,21 +5,16 @@ import { AuthNativeService } from '../auth/auth_native_service';
 export class UsageNativeService {
   constructor(
     private readonly usageClient: Usage.UsageClient,
-    private readonly authService: AuthNativeService,
-    private readonly freePlanProfileLimit: number
+    private readonly authService: AuthNativeService
   ) {}
 
   checkAddNewIntegration = async (existingProfiles: readonly ProfileInfo[]) => {
     const plan = await this.getCurrentPlan();
-
-    switch (plan) {
-      case Plan.PRO:
-        return true;
-      case Plan.FREE:
-        return existingProfiles.length < this.freePlanProfileLimit;
-      default:
-        throw new Error(`Unknown plan ${plan}`);
+    if (!plan.integrationLimit) {
+      return;
     }
+
+    return existingProfiles.length >= plan.integrationLimit;
   };
 
   getCurrentPlan = async () => {
@@ -30,14 +25,7 @@ export class UsageNativeService {
       token
     );
 
-    switch (res.plan) {
-      case 'free':
-        return Plan.FREE;
-      case 'pro':
-        return Plan.PRO;
-      default:
-        throw new Error(`Unknown plan ${res.plan}`);
-    }
+    return res;
   };
 }
 
