@@ -5,11 +5,12 @@
 }
 
 .heroTitle {
-  margin: 0;
-  font-size: 3.5em;
+  margin: var(--spaceLarge) 0 var(--spaceSmall) 0;
+  font-size: 3em;
   font-weight: normal;
 }
 
 .heroLead {
   font-size: 1.5em;
+  margin: 0 0 var(--spacexLarge) 0;
 }

@@ -1,7 +1,7 @@
 import { Button } from '@highbeam/components';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Header } from '../../base/header/header';
+import Image from 'next/image';
 import styles from './landing.module.css';
 
 export const LandingPage: NextPage = () => {
@@ -18,9 +18,9 @@ export const LandingPage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
       <main>
         <section className={styles.hero}>
+          <Image src="/icon.png" width={96} height={96} />
           <h1 className={styles.heroTitle}>
             Find anything, anywhere, all at once
           </h1>
@@ -28,7 +28,7 @@ export const LandingPage: NextPage = () => {
             Search for any files, messages, tasks or events
           </p>
           <Button variant="primary">
-            <span className={styles.heroCta}>Download for Mac</span>
+            <span className={styles.heroCta}>Download Highbeam for Mac</span>
           </Button>
         </section>
       </main>
