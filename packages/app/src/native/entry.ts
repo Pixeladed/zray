@@ -86,6 +86,8 @@ registerHandler('auth:check', authNativeService.check);
 registerHandler('auth:login', authNativeService.login);
 registerHandler('auth:logout', authNativeService.logout);
 
+registerHandler('usage:getCurrentPlan', usageNativeService.getCurrentPlan);
+
 app.on('activate', instance.createMainWindow);
 app.on('ready', instance.handleReady);
 app.on('will-quit', instance.handleQuit);

@@ -18,6 +18,7 @@ export const endpointAllowlist: EndpointName<Endpoints>[] = [
   'auth:login',
   'auth:logout',
   'auth:check',
+  'usage:getCurrentPlan',
 ];
 
 export const eventAllowlist: EventName<Events>[] = [

@@ -20,7 +20,8 @@ export type Endpoints =
   | NavigationEndpoints
   | IntegrationEndpoints
   | SearchEndpoints
-  | AuthEndpoints;
+  | AuthEndpoints
+  | UsageEndpoints;
 
 export type NavigationEndpoints = OpenSettingsEndpoint | OpenExternalEndpoint;
 export type IntegrationEndpoints =
@@ -33,6 +34,7 @@ export type AuthEndpoints =
   | AuthCheckEndpoint
   | AuthLogInEndpoint
   | AuthLogOutEndpoint;
+export type UsageEndpoints = GetCurrentPlanEndpoint;
 
 export type OpenSettingsEndpoint = Endpoint<'navigation:settings:open', {}, {}>;
 
@@ -81,3 +83,9 @@ export type AuthCheckEndpoint = Endpoint<
 export type AuthLogInEndpoint = Endpoint<'auth:login', {}, {}>;
 
 export type AuthLogOutEndpoint = Endpoint<'auth:logout', {}, {}>;
+
+export type GetCurrentPlanEndpoint = Endpoint<
+  'usage:getCurrentPlan',
+  {},
+  { name: string; integrationLimit: number | null }
+>;
