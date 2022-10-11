@@ -2,6 +2,7 @@ import { runInAction } from 'mobx';
 import {
   AuthLogOutEndpoint,
   GetCurrentPlanEndpoint,
+  ResetIntegrationsEndpoint,
 } from '../../../../interface/bridge/endpoints';
 import { BridgeClient } from '../../../base/bridge_client';
 import { NavigationService } from '../../../services/navigation/navigation_service';
@@ -15,8 +16,12 @@ export class AccountController {
     private readonly billingPortalUrl: string
   ) {}
 
-  logout = () => {
-    this.bridgeClient.request<AuthLogOutEndpoint>('auth:logout', {});
+  logout = async () => {
+    await this.bridgeClient.request<ResetIntegrationsEndpoint>(
+      'integration:reset',
+      {}
+    );
+    await this.bridgeClient.request<AuthLogOutEndpoint>('auth:logout', {});
     window.close();
   };
 
