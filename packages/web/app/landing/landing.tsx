@@ -1,3 +1,4 @@
+import { Button } from '@highbeam/components';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Header } from '../../base/header/header';
@@ -5,10 +6,10 @@ import styles from './landing.module.css';
 
 export const LandingPage: NextPage = () => {
   return (
-    <div>
+    <div className={styles.container}>
       <Head>
         <title>
-          Z-Ray | Search for anything across all of your apps and tools
+          Highbeam App | Search for anything across all of your apps and tools
         </title>
         <meta
           name="description"
@@ -20,76 +21,17 @@ export const LandingPage: NextPage = () => {
       <Header />
       <main>
         <section className={styles.hero}>
-          <h1 className={styles.heroTitle}>Global search for all your tools</h1>
+          <h1 className={styles.heroTitle}>
+            Find anything, anywhere, all at once
+          </h1>
           <p className={styles.heroLead}>
-            Find anything across all of your apps and tools
+            Search for any files, messages, tasks or events
           </p>
-          <img
-            src="https://via.placeholder.com/800x400"
-            alt="Z-Ray product screenshot"
-            width={800}
-            height={400}
-            className={styles.heroImage}
-          />
-        </section>
-        <ul className={styles.marquee}>
-          {integrations.map((integration, index) => (
-            <li key={index} className={styles.marqueeItem}>
-              <div className={styles.integration}>
-                <img
-                  src={integration.icon}
-                  alt={integration.name}
-                  width={64}
-                  height={64}
-                  className={styles.integrationIcon}
-                />
-                <h4 className={styles.integrationName}>{integration.name}</h4>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <section className={styles.featureGroup}>
-          <div className={styles.feature}>
-            <h2 className={styles.featureTitle}>See everything, all at once</h2>
-            <p className={styles.featureLead}>
-              Never lose that document, message or email that you sent ever
-              again. Search multiple accounts instantly.
-            </p>
-            <img
-              src="https://via.placeholder.com/400x200"
-              alt="Z-Ray product screenshot"
-              width={400}
-              height={200}
-              className={styles.featureImage}
-            />
-          </div>
-          <div className={styles.feature}>
-            <h2 className={styles.featureTitle}>Your data is your data</h2>
-            <p className={styles.featureLead}>
-              Z-Ray runs everything locally on your device, your account
-              credentials or your data are never sent to our servers.
-            </p>
-            <img
-              src="https://via.placeholder.com/400x200"
-              alt="Z-Ray product screenshot"
-              width={400}
-              height={200}
-              className={styles.featureImage}
-            />
-          </div>
+          <Button variant="primary">
+            <span className={styles.heroCta}>Download for Mac</span>
+          </Button>
         </section>
       </main>
     </div>
   );
 };
-
-const integrations = [
-  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
-  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
-  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
-  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
-  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
-  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
-  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
-  { icon: 'https://via.placeholder.com/64x64', name: 'Google Drive' },
-];

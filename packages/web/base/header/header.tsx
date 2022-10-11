@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { Button } from '@highbeam/components';
 import styles from './header.module.css';
 
 export const Header = () => {
@@ -7,9 +6,8 @@ export const Header = () => {
     <header className={styles.header}>
       <div className={styles.brandBlock}>
         <Image src="/logo.svg" width={32} height={32} />
-        <h3 className={styles.brandTitle}>Z-Ray</h3>
+        <h3 className={styles.brandTitle}>Highbeam</h3>
       </div>
-      <Button>Get beta access</Button>
     </header>
   );
 };

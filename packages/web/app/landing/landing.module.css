@@ -1,109 +1,15 @@
 .hero {
-  padding: calc(var(--base) * 6) calc(var(--base) * 6) 0 calc(var(--base) * 6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  padding: calc(var(--base) * 16) calc(var(--base) * 6);
+  background: var(--colorBackground);
+  text-align: center;
 }
 
 .heroTitle {
-  margin-bottom: 0;
-  font-size: 3em;
-  text-align: center;
+  margin: 0;
+  font-size: 3.5em;
+  font-weight: normal;
 }
 
 .heroLead {
-  margin-bottom: calc(var(--base) * 12);
-  font-size: 1.25em;
-  text-align: center;
-}
-
-.heroImage {
-  border-radius: var(--base) var(--base) 0 0;
-  box-shadow: 0 0 calc(var(--base) * 2) var(--color-border);
-  max-width: 80%;
-  object-fit: cover;
-}
-
-.marquee {
-  list-style: none;
-  display: flex;
-  gap: calc(var(--base) * 2);
-}
-
-.marqueeItem {
-  display: inline-block;
-  animation: marquee-horizontal 2s linear infinite;
-}
-
-.integration {
-  background: lightblue;
-  display: flex;
-  gap: calc(var(--base));
-}
-
-.integrationIcon {
-  border-radius: 100%;
-}
-
-.integrationName {
-  font-weight: normal;
-  font-size: 1em;
-}
-
-.featureGroup {
-  display: flex;
-  flex-direction: row;
-  gap: calc(var(--base) * 6);
-  padding: calc(var(--base) * 32) calc(var(--base) * 6);
-}
-
-.feature {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  border-radius: calc(var(--base) * 0.5);
-  border: 1px solid black;
-  padding: calc(var(--base) * 4);
-}
-
-.featureTitle {
-  margin: 0 0 calc(var(--base) * 1.5) 0;
-  font-size: 2em;
-}
-
-.featureLead {
-  font-size: 1.1em;
-  margin: 0 auto calc(var(--base) * 6) auto;
-}
-
-.featureImage {
-  width: 100%;
-  height: 100%;
-  border-radius: calc(var(--base) * 0.5);
-}
-
-@media screen and (max-width: 800px) {
-  .featureGroup {
-    flex-direction: column;
-  }
-
-  .hero {
-    padding: calc(var(--base) * 2) calc(var(--base) * 2) 0 calc(var(--base) * 2);
-  }
-
-  .heroImage {
-    max-width: 100%;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .feature {
-    padding: calc(var(--base) * 2);
-  }
-
-  .featureGroup {
-    padding: calc(var(--base) * 12) calc(var(--base) * 2);
-  }
+  font-size: 1.5em;
 }
