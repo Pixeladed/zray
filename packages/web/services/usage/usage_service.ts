@@ -22,8 +22,11 @@ export class UsageService {
     res
   ) => {
     const userId = await this.authService.userIdFromHeader(req.headers);
+
+    // The following steps are also done in Auth0 actions
     const customer = await this.getOrCreateStripeCustomer(userId);
     const product = await this.getOrCreateSubscribedProduct(customer);
+
     const integrationLimit = this.getIntegrationLimit(product);
 
     return res.json({
