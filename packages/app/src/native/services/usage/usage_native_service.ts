@@ -14,7 +14,7 @@ export class UsageNativeService {
       return;
     }
 
-    return existingProfiles.length >= plan.integrationLimit;
+    return existingProfiles.length < plan.integrationLimit;
   };
 
   getCurrentPlan = async () => {
