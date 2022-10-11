@@ -5,6 +5,7 @@ import { AuthService } from '../auth/auth_service';
 
 const STRIPE_METADATA_INTEGRATION_LIMIT_FIELD = 'integration_limit';
 const STRIPE_METADATA_INTEGRATION_LIMIT_UNLIMITED = -1;
+const STRIPE_METADATA_AUTH0_USER_ID_FIELD = 'auth0_user_id';
 
 export class UsageService {
   stripe: Stripe;
@@ -37,7 +38,7 @@ export class UsageService {
 
   private getOrCreateStripeCustomer = async (userId: string) => {
     const existing = await this.stripe.customers.search({
-      query: `metadata["auth0_user_id"]:"${userId}"`,
+      query: `metadata["${STRIPE_METADATA_AUTH0_USER_ID_FIELD}"]:"${userId}"`,
       expand: ['data.subscriptions'],
     });
 
@@ -51,7 +52,7 @@ export class UsageService {
 
     const customer = await this.stripe.customers.create({
       metadata: {
-        auth0_user_id: userId,
+        [STRIPE_METADATA_AUTH0_USER_ID_FIELD]: userId,
       },
     });
 
