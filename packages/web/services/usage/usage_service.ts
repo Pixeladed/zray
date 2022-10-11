@@ -11,7 +11,8 @@ export class UsageService {
 
   constructor(
     private readonly authService: AuthService,
-    readonly stripeApiKey: string
+    stripeApiKey: string,
+    private readonly defaultPriceId: string
   ) {
     this.stripe = new Stripe(stripeApiKey, { apiVersion: '2022-08-01' });
   }
@@ -23,19 +24,29 @@ export class UsageService {
     const userId = await this.authService.userIdFromHeader(req.headers);
     const customer = await this.getOrCreateStripeCustomer(userId);
 
-    if (!customer.subscriptions) {
-      throw new Error('Customer does not have any subscription');
+    let subscriptions = customer.subscriptions?.data || [];
+    if (!subscriptions.length) {
+      // customer has no subscription, automatically subscribe them to the free plan
+      const record = await this.stripe.subscriptions.create({
+        customer: customer.id,
+        items: [
+          {
+            price: this.defaultPriceId,
+          },
+        ],
+      });
+      subscriptions = [record];
     }
 
-    const products = customer.subscriptions.data.flatMap(subscription =>
-      subscription.items.data.map(item => item.plan.product as Stripe.Product)
+    const productIds = subscriptions.flatMap(subscription =>
+      subscription.items.data.map(item => item.plan.product as string)
     );
 
-    if (products.length > 1) {
+    if (productIds.length > 1) {
       throw new Error('Customer is subscribed to multiple products');
     }
 
-    const product = products[0];
+    const product = await this.stripe.products.retrieve(productIds[0]);
     const recordedLimit = parseInt(
       product.metadata[STRIPE_METADATA_INTEGRATION_LIMIT_FIELD]
     );
@@ -58,7 +69,7 @@ export class UsageService {
   private getOrCreateStripeCustomer = async (userId: string) => {
     const existing = await this.stripe.customers.search({
       query: `metadata["auth0Id"]:"${userId}"`,
-      expand: ['subscriptions.items.plan.product'],
+      expand: ['data.subscriptions'],
     });
 
     if (existing.data.length > 1) {

@@ -58,6 +58,10 @@ export const config: Config = {
       process.env.STRIPE_API_KEY,
       'expected stripe api key to exist'
     ),
+    defaultPriceId: Assert.exists(
+      process.env.STRIPE_DEFAULT_PRICE_ID,
+      'expected stripe default price id to exist'
+    ),
   },
 };
 
@@ -74,6 +78,7 @@ export type Config = {
 
 export type StripeConfig = {
   apiKey: string;
+  defaultPriceId: string;
 };
 
 export type SlackOAuthConfig = {

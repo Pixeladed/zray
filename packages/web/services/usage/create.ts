@@ -9,6 +9,10 @@ export const createUsageService = ({
   authService: AuthService;
   config: StripeConfig;
 }) => {
-  const usageService = new UsageService(authService, config.apiKey);
+  const usageService = new UsageService(
+    authService,
+    config.apiKey,
+    config.defaultPriceId
+  );
   return { usageService };
 };
