@@ -23,42 +23,8 @@ export class UsageService {
   ) => {
     const userId = await this.authService.userIdFromHeader(req.headers);
     const customer = await this.getOrCreateStripeCustomer(userId);
-
-    let subscriptions = customer.subscriptions?.data || [];
-    if (!subscriptions.length) {
-      // customer has no subscription, automatically subscribe them to the free plan
-      const record = await this.stripe.subscriptions.create({
-        customer: customer.id,
-        items: [
-          {
-            price: this.defaultPriceId,
-          },
-        ],
-      });
-      subscriptions = [record];
-    }
-
-    const productIds = subscriptions.flatMap(subscription =>
-      subscription.items.data.map(item => item.plan.product as string)
-    );
-
-    if (productIds.length > 1) {
-      throw new Error('Customer is subscribed to multiple products');
-    }
-
-    const product = await this.stripe.products.retrieve(productIds[0]);
-    const recordedLimit = parseInt(
-      product.metadata[STRIPE_METADATA_INTEGRATION_LIMIT_FIELD]
-    );
-
-    if (Number.isNaN(recordedLimit)) {
-      throw new Error('Product integration limit is not a number');
-    }
-
-    const integrationLimit =
-      recordedLimit === STRIPE_METADATA_INTEGRATION_LIMIT_UNLIMITED
-        ? null
-        : recordedLimit;
+    const product = await this.getOrCreateSubscribedProduct(customer);
+    const integrationLimit = this.getIntegrationLimit(product);
 
     return res.json({
       name: product.name,
@@ -87,5 +53,50 @@ export class UsageService {
     });
 
     return customer;
+  };
+
+  private getOrCreateSubscribedProduct = async (customer: Stripe.Customer) => {
+    let subscriptions = customer.subscriptions?.data || [];
+    if (!subscriptions.length) {
+      // customer has no subscription, automatically subscribe them to the free plan
+      const record = await this.stripe.subscriptions.create({
+        customer: customer.id,
+        items: [
+          {
+            price: this.defaultPriceId,
+          },
+        ],
+      });
+      subscriptions = [record];
+    }
+
+    const productIds = subscriptions.flatMap(subscription =>
+      subscription.items.data.map(item => item.plan.product as string)
+    );
+
+    if (productIds.length > 1) {
+      throw new Error('Customer is subscribed to multiple products');
+    }
+
+    const product = await this.stripe.products.retrieve(productIds[0]);
+
+    return product;
+  };
+
+  private getIntegrationLimit = (product: Stripe.Product) => {
+    const recordedLimit = parseInt(
+      product.metadata[STRIPE_METADATA_INTEGRATION_LIMIT_FIELD]
+    );
+
+    if (Number.isNaN(recordedLimit)) {
+      throw new Error('Product integration limit is not a number');
+    }
+
+    const integrationLimit =
+      recordedLimit === STRIPE_METADATA_INTEGRATION_LIMIT_UNLIMITED
+        ? null
+        : recordedLimit;
+
+    return integrationLimit;
   };
 }
