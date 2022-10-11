@@ -48,6 +48,10 @@ export class SlackNativeStore {
     };
   };
 
+  reset = () => {
+    this.store.set('profilesById', {});
+  };
+
   private getProfileId = (profile: Pick<SlackProfile, 'teamId' | 'userId'>) => {
     return `${profile.userId}@${profile.teamId}`;
   };

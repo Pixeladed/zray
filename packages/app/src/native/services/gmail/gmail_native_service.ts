@@ -58,6 +58,10 @@ export class GmailNativeService implements NativeIntegration {
     this.store.removeProfile(profileId);
   };
 
+  reset = async () => {
+    return this.store.reset();
+  };
+
   search = async (query: string, options: { page: number }) => {
     const profiles = this.store.findProfiles();
     const ops = await Promise.allSettled(

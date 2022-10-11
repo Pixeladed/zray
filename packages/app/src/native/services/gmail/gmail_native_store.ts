@@ -48,6 +48,10 @@ export class GmailNativeStore {
     };
   };
 
+  reset = () => {
+    this.store.set('profilesById', {});
+  };
+
   private getProfileId = (profile: Pick<GmailProfile, 'email'>) => {
     return profile.email;
   };

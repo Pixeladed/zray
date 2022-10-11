@@ -74,6 +74,10 @@ export class GoogleDriveNativeService implements NativeIntegration {
     return results;
   };
 
+  reset = async () => {
+    return this.store.reset();
+  };
+
   private searchInProfile = async (
     profile: GoogleDriveProfile,
     query: string,

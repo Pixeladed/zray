@@ -14,6 +14,7 @@ export const endpointAllowlist: EndpointName<Endpoints>[] = [
   'integration:list',
   'integration:profiles:list',
   'integration:profiles:remove',
+  'integration:reset',
   'search:global',
   'auth:login',
   'auth:logout',

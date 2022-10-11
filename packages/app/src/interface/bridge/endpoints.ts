@@ -28,7 +28,8 @@ export type IntegrationEndpoints =
   | ListIntegrationsEndpoint
   | ListProfilesEndpoint
   | ConnectIntegrationEndpoint
-  | RemoveProfileEndpoint;
+  | RemoveProfileEndpoint
+  | ResetIntegrationsEndpoint;
 export type SearchEndpoints = GlobalSearchEndpoint;
 export type AuthEndpoints =
   | AuthCheckEndpoint
@@ -67,6 +68,8 @@ export type RemoveProfileEndpoint = Endpoint<
   { integrationId: string; profileId: string },
   {}
 >;
+
+export type ResetIntegrationsEndpoint = Endpoint<'integration:reset', {}, {}>;
 
 export type GlobalSearchEndpoint = Endpoint<
   'search:global',

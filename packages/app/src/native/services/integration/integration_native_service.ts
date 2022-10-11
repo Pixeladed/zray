@@ -4,6 +4,7 @@ import {
   ListIntegrationsEndpoint,
   ListProfilesEndpoint,
   RemoveProfileEndpoint,
+  ResetIntegrationsEndpoint,
 } from '../../../interface/bridge/endpoints';
 import {
   NewProfileEvent,
@@ -80,10 +81,16 @@ export class IntegrationNativeService {
     this.broadcast<RemovedProfileEvent>('integration:profile:removed', {});
     return {};
   };
+
+  reset: Handler<ResetIntegrationsEndpoint> = async () => {
+    const ops = this.integrations.map(integration => integration.reset());
+    return await Promise.all(ops);
+  };
 }
 
 export interface NativeIntegration extends IntegrationInfo, SearchProvider {
   connect(): Promise<IntegrationProfile>;
   listProfiles: () => Promise<readonly ProfileInfo[]>;
   removeProfile: (profileId: string) => Promise<void>;
+  reset: () => Promise<void>;
 }

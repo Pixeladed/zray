@@ -48,6 +48,10 @@ export class GoogleDriveNativeStore {
     };
   };
 
+  reset = () => {
+    this.store.set('profilesById', {});
+  };
+
   private getProfileId = (profile: Pick<GoogleDriveProfile, 'email'>) => {
     return profile.email;
   };

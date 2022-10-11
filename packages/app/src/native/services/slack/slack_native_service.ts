@@ -67,6 +67,10 @@ export class SlackNativeService implements NativeIntegration {
     return this.store.findProfiles().map(this.store.asProfileInfo);
   };
 
+  reset = async () => {
+    return this.store.reset();
+  };
+
   private searchInProfile = async (
     profile: SlackProfile,
     query: string,
