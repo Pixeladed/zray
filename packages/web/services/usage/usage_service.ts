@@ -34,7 +34,7 @@ export class UsageService {
 
   private getOrCreateStripeCustomer = async (userId: string) => {
     const existing = await this.stripe.customers.search({
-      query: `metadata["auth0Id"]:"${userId}"`,
+      query: `metadata["auth0_user_id"]:"${userId}"`,
       expand: ['data.subscriptions'],
     });
 
@@ -48,7 +48,7 @@ export class UsageService {
 
     const customer = await this.stripe.customers.create({
       metadata: {
-        auth0Id: userId,
+        auth0_user_id: userId,
       },
     });
 
