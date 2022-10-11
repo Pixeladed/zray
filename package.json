@@ -9,7 +9,9 @@
     "bundle": "turbo run bundle",
     "build": "turbo run build",
     "bundle:mac": "turbo run bundle:mac",
-    "bundle:win": "turbo run bundle:win"
+    "bundle:win": "turbo run bundle:win",
+    "build:web": "turbo run build --filter=@highbeam/web",
+    "build:app": "turbo run build --filter=@highbeam/app"
   },
   "devDependencies": {
     "lerna": "^5.1.8",

@@ -1,5 +1,5 @@
 import { IServiceMap, Services } from '@highbeam/interface';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 import { config } from '../../../base/config';
 import { ServiceImpl } from '../../../base/service';
 import { createAuthService } from '../../../services/auth/create';
@@ -50,10 +50,9 @@ export default async function handler(
     throw new Error('invalid service');
   }
 
-  const handler =
-    handlerName in service
-      ? service[handlerName as keyof typeof service]
-      : undefined;
+  const handler = service[
+    handlerName as keyof typeof service
+  ] as NextApiHandler;
 
   if (!handler) {
     throw new Error('invalid handler');
