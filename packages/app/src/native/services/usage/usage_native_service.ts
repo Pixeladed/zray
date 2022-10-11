@@ -28,8 +28,3 @@ export class UsageNativeService {
     return res;
   };
 }
-
-export enum Plan {
-  FREE = 1,
-  PRO,
-}
