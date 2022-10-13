@@ -26,11 +26,8 @@
   margin-left: var(--spacexxSmall);
 }
 
-.content {
-  padding: var(--spacexxxLarge);
-}
-
 .hero {
+  padding: calc(var(--baseline) * 24) var(--spacexxLarge);
   text-align: center;
   display: flex;
   align-items: center;
@@ -48,4 +45,10 @@
   font-size: 1.5em;
   margin: 0;
   margin: 0 0 var(--spacexLarge) 0;
+}
+
+.comparison {
+  padding: var(--spacexxLarge);
+  background: var(--colorPrimary);
+  color: var(--colorBackground);
 }

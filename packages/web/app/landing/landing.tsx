@@ -37,7 +37,7 @@ export const LandingPage: NextPage = () => {
         </div>
         <Button variant="primary">Download for Mac</Button>
       </header>
-      <main className={styles.content}>
+      <main>
         <section className={styles.hero}>
           <h2 className={styles.heroTitle}>
             Find anything
@@ -50,6 +50,7 @@ export const LandingPage: NextPage = () => {
           </p>
           <Button variant="primary">Download for Mac</Button>
         </section>
+        <section className={styles.comparison}></section>
       </main>
     </div>
   );
