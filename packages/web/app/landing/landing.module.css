@@ -1,16 +1,51 @@
+.header {
+  padding: var(--spacexSmall) var(--spacexxxLarge);
+  border-top: 1px solid var(--colorForeground);
+  border-bottom: 1px solid var(--colorForeground);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--spaceLarge);
+}
+
+.brandBlock {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  gap: var(--spaceLarge)
+}
+
+.headerTitle {
+  font-size: 1.25em;
+  font-weight: normal;
+  margin: 0;
+  display: inline-block;
+  margin-left: var(--spacexxSmall);
+}
+
+.content {
+  padding: var(--spacexxxLarge);
+}
+
 .hero {
-  padding: calc(var(--base) * 16) calc(var(--base) * 6);
-  background: var(--colorBackground);
   text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .heroTitle {
-  margin: var(--spaceLarge) 0 var(--spaceSmall) 0;
-  font-size: 3em;
   font-weight: normal;
+  font-size: 4.5em;
+  line-height: 100%;
+  margin: 0 0 var(--spaceMedium) 0;
 }
 
-.heroLead {
+.lead {
   font-size: 1.5em;
+  margin: 0;
   margin: 0 0 var(--spacexLarge) 0;
 }
