@@ -47,8 +47,42 @@
   margin: 0 0 var(--spacexLarge) 0;
 }
 
-.comparison {
+.integrations {
   padding: var(--spacexxLarge);
   background: var(--colorPrimary);
+}
+
+.integrationsTitle {
   color: var(--colorBackground);
+  font-size: 1.5em;
+  font-weight: normal;
+  text-align: center;
+  margin: 0 0 var(--spacexxLarge) 0;
+}
+
+.integrationsList {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spaceLarge);
+}
+
+.integrationCard {
+  background: var(--colorBackground);
+  padding: var(--spaceLarge);
+  border-radius: var(--spacexxSmall);
+  box-shadow: 0 var(--spacexxSmall) var(--spaceSmall) var(--colorPrimaryDark);
+  width: calc(calc(100% - calc(var(--spaceLarge) * 3)) / 4);
+}
+
+.integrationIcon {
+  background: var(--colorBorder);
+}
+
+.integrationName {
+  margin: var(--spaceLarge) 0 var(--spacexSmall) 0;
+}
+
+.integrationDescription {
+  margin: 0;
 }

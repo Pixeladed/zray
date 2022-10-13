@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ComponentProps } from 'react';
 import styles from './landing.module.css';
 
 export const LandingPage: NextPage = () => {
@@ -50,8 +51,91 @@ export const LandingPage: NextPage = () => {
           </p>
           <Button variant="primary">Download for Mac</Button>
         </section>
-        <section className={styles.comparison}></section>
+        <section className={styles.integrations}>
+          <h3 className={styles.integrationsTitle}>
+            Connect your favorite tools
+          </h3>
+          <div className={styles.integrationsList}>
+            {integrations.map(integration => (
+              <IntegrationCard
+                key={integration.name}
+                icon={integration.icon}
+                name={integration.name}
+                description={integration.description}
+              />
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );
 };
+
+const IntegrationCard = ({
+  icon,
+  name,
+  description,
+}: {
+  icon: string;
+  name: string;
+  description: string;
+}) => {
+  return (
+    <div className={styles.integrationCard}>
+      <Image
+        src={icon}
+        width={64}
+        height={64}
+        className={styles.integrationIcon}
+      />
+      <h4 className={styles.integrationName}>{name}</h4>
+      <p className={styles.integrationDescription}>{description}</p>
+    </div>
+  );
+};
+
+const integrations: ComponentProps<typeof IntegrationCard>[] = [
+  {
+    icon: '',
+    name: 'Google Drive',
+    description:
+      'Search for anything uploaded to your Google Drive, including docs, sheets and slides',
+  },
+  {
+    icon: '',
+    name: 'Gmail',
+    description: 'Find any sent or received emails in your inbox',
+  },
+  {
+    icon: '',
+    name: 'Slack',
+    description: 'Find messages and files in workspaces that you connect to',
+  },
+  {
+    icon: '',
+    name: 'Google Calendar',
+    description: 'Find upcoming events and past calendar invites',
+  },
+  {
+    icon: '',
+    name: 'Notion',
+    description: 'Search across your spaces and pages',
+  },
+  {
+    icon: '',
+    name: 'Confluence',
+    description:
+      'Find documentation and pages that you wrote or have access to on Confluence Cloud',
+  },
+  {
+    icon: '',
+    name: 'GitHub',
+    description: 'Look for a user, repository, issue or file on GitHub',
+  },
+  {
+    icon: '',
+    name: 'Jira',
+    description:
+      'Find issues, epics, stories or any other tickets on Jira Cloud',
+  },
+];
