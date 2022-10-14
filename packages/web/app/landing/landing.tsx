@@ -52,9 +52,6 @@ export const LandingPage: NextPage = () => {
           <Button variant="primary">Download for Mac</Button>
         </section>
         <section className={styles.integrations}>
-          <h3 className={styles.integrationsTitle}>
-            Connect your favorite tools
-          </h3>
           <div className={styles.integrationsList}>
             {integrations.map(integration => (
               <IntegrationCard
@@ -65,6 +62,11 @@ export const LandingPage: NextPage = () => {
               />
             ))}
           </div>
+          <Button>Explore all integrations</Button>
+        </section>
+        <section className={styles.features}>
+          <div className={styles.feature}>a</div>
+          <div className={styles.feature}>b</div>
         </section>
       </main>
     </div>

@@ -48,16 +48,11 @@
 }
 
 .integrations {
-  padding: var(--spacexxLarge);
+  padding: calc(var(--baseline) * 12) var(--spacexxLarge);
   background: var(--colorPrimary);
-}
-
-.integrationsTitle {
-  color: var(--colorBackground);
-  font-size: 1.5em;
-  font-weight: normal;
-  text-align: center;
-  margin: 0 0 var(--spacexxLarge) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .integrationsList {
@@ -65,6 +60,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--spaceLarge);
+  margin-bottom: var(--spacexLarge);
 }
 
 .integrationCard {
@@ -92,4 +88,18 @@
 .integrationDescription {
   margin: 0;
   user-select: none;
+}
+
+.features {
+  display: flex;
+  padding: calc(var(--baseline) * 12) var(--spacexxLarge);
+  background: var(--colorBackground);
+  gap: var(--spaceLarge);
+}
+
+.feature {
+  flex: 1;
+  border-radius: var(--spacexxSmall);
+  border: 1px solid var(--colorBorder);
+  padding: var(--spaceLarge);
 }
