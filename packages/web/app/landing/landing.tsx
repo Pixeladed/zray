@@ -22,7 +22,7 @@ export const LandingPage: NextPage = () => {
 
       <header className={styles.header}>
         <div className={styles.brandBlock}>
-          <Image src="/icon.png" width={32} height={32} />
+          <Image src="/icon.png" width={32} height={32} alt="Highbeam logo" />
           <h1 className={styles.headerTitle}>Highbeam</h1>
         </div>
         <div className={styles.menu}>
@@ -65,8 +65,37 @@ export const LandingPage: NextPage = () => {
           <Button>Explore all integrations</Button>
         </section>
         <section className={styles.features}>
-          <div className={styles.feature}>a</div>
-          <div className={styles.feature}>b</div>
+          <div className={styles.feature}>
+            <div className={styles.featureInfo}>
+              <h4 className={styles.featureTitle}>Productivity+</h4>
+              <p className={styles.featureDescription}>
+                An average person use tens of different digital tools from
+                emails to cloud storage, task management and more. In this
+                modern age, it&apos;s easier than ever to get lost.
+                <br />
+                <br />
+                Find that email, message, task or document, no matter where you
+                put it on the web. Highbeam makes you more productive by combing
+                through your tools to find exactly where something is without
+                you manually opening each app individually.
+              </p>
+            </div>
+            <img src="" alt="" className={styles.featureImage} />
+          </div>
+          <div className={styles.feature}>
+            <div className={styles.featureInfo}>
+              <h4 className={styles.featureTitle}>Privacy first</h4>
+              <p className={styles.featureDescription}>
+                With our privacy-preserving search architecture, no credentials,
+                files or personal information from your accounts are sent to our
+                servers. Everything happen locally on your device. <br />
+                <br />
+                We make money through revenue from our app subscription, adding
+                new integrations and improving your search experience.
+              </p>
+            </div>
+            <img src="" alt="" className={styles.featureImage} />
+          </div>
         </section>
       </main>
     </div>
@@ -88,6 +117,7 @@ const IntegrationCard = ({
         src={icon}
         width={64}
         height={64}
+        alt={`${name} icon`}
         className={styles.integrationIcon}
       />
       <h4 className={styles.integrationName}>{name}</h4>

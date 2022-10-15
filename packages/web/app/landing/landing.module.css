@@ -15,7 +15,7 @@
 
 .menu {
   display: flex;
-  gap: var(--spaceLarge)
+  gap: var(--spaceLarge);
 }
 
 .headerTitle {
@@ -92,6 +92,7 @@
 
 .features {
   display: flex;
+  flex-direction: column;
   padding: calc(var(--baseline) * 12) var(--spacexxLarge);
   background: var(--colorBackground);
   gap: var(--spaceLarge);
@@ -101,5 +102,37 @@
   flex: 1;
   border-radius: var(--spacexxSmall);
   border: 1px solid var(--colorBorder);
-  padding: var(--spaceLarge);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spaceLarge);
+  min-height: calc(var(--baseline) * 40);
+}
+
+.feature:nth-child(2) {
+  background: #ffc73c;
+  border: none;
+}
+
+.featureTitle {
+  font-size: 2em;
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: var(--spaceMedium);
+}
+
+.featureDescription {
+  margin: 0;
+}
+
+.featureInfo {
+  flex: 1;
+  padding: var(--spacexLarge);
+}
+
+.featureImage {
+  border-radius: var(--spacexxSmall);
+  width: 100%;
+  height: auto;
+  flex: 1;
+  display: block;
 }
