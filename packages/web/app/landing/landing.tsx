@@ -36,7 +36,7 @@ export const LandingPage: NextPage = () => {
             <a>Pricing</a>
           </Link>
         </div>
-        <Button variant="primary">Download for Mac</Button>
+        <DownloadButton variant="primary" />
       </header>
       <main>
         <section className={styles.hero}>
@@ -49,7 +49,7 @@ export const LandingPage: NextPage = () => {
             Connect your favorite apps and use Highbeam
             <br /> to look for anything with one single search
           </p>
-          <Button variant="primary">Download for Mac</Button>
+          <DownloadButton variant="primary" />
         </section>
         <section className={styles.integrations}>
           <div className={styles.integrationsList}>
@@ -97,8 +97,59 @@ export const LandingPage: NextPage = () => {
             <img src="" alt="" className={styles.featureImage} />
           </div>
         </section>
+        <section className={styles.pricing}>
+          <h3 className={styles.pricingTitle}>
+            It&apos;s time to close your tabs, try Highbeam
+          </h3>
+          <div className={styles.plans}>
+            <div className={styles.plan}>
+              <h4 className={styles.planName}>Free</h4>
+              <p className={styles.planPrice}>
+                $0 <span className={styles.planFrequency}>/ month</span>{' '}
+              </p>
+              <p className={styles.planDescription}>
+                Get started with the free plan:
+                <ul>
+                  <li>Connect up to 3 tools</li>
+                  <li>Search across all connected tools</li>
+                  <li>Privacy-preserving search</li>
+                </ul>
+              </p>
+              <DownloadButton showName={true} />
+            </div>
+            <div className={styles.plan}>
+              <h4 className={styles.planName}>Pro</h4>
+              <p className={styles.planPrice}>
+                $4.99 <span className={styles.planFrequency}>/ month</span>
+              </p>
+              <p className={styles.planDescription}>
+                Everything you need to be a pro:
+                <ul>
+                  <li>Connect unlimited integrations</li>
+                  <li>Search across all connected tools</li>
+                  <li>Privacy preserving search</li>
+                </ul>
+              </p>
+              <DownloadButton showName={true} />
+            </div>
+          </div>
+        </section>
       </main>
     </div>
+  );
+};
+
+const DownloadButton = ({
+  variant = 'default',
+  showName = false,
+}: {
+  variant?: 'default' | 'primary';
+  showName?: boolean;
+}) => {
+  return (
+    <Button variant={variant}>
+      Download{showName ? ' Highbeam' : ''} for Mac
+    </Button>
   );
 };
 
