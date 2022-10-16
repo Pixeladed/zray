@@ -26,7 +26,7 @@ export const LandingPage: NextPage = () => {
           <Image src="/icon.png" width={32} height={32} alt="Highbeam logo" />
           <h1 className={styles.headerTitle}>Highbeam</h1>
         </div>
-        <div className={styles.menu}>
+        {/* <div className={styles.menu}>
           <Link passHref={true} href="/product">
             <a>Product</a>
           </Link>
@@ -36,7 +36,7 @@ export const LandingPage: NextPage = () => {
           <Link passHref={true} href="/pricing">
             <a>Pricing</a>
           </Link>
-        </div>
+        </div> */}
         <div className={styles.cta}>
           <DownloadButton variant="primary" />
         </div>
@@ -49,8 +49,8 @@ export const LandingPage: NextPage = () => {
             with one search
           </h2>
           <p className={styles.lead}>
-            Connect your favorite apps and use Highbeam
-            <br /> to look for anything with one single search
+            Connect your favorite apps and use Highbeam to look for anything
+            with one single search
           </p>
           <DownloadButton variant="primary" />
         </section>

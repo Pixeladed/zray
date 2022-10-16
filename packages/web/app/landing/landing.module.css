@@ -91,7 +91,6 @@
 
 .features {
   display: flex;
-  flex-direction: column;
   padding: calc(var(--baseline) * 12) var(--spacexxLarge);
   background: var(--colorBackground);
   gap: var(--spaceLarge);
@@ -210,6 +209,10 @@
 
   .integrationCard {
     width: calc(calc(100% - var(--spaceLarge)) / 2);
+  }
+
+  .features {
+    flex-direction: column;
   }
 }
 
