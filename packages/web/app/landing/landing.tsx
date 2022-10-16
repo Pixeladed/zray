@@ -37,7 +37,9 @@ export const LandingPage: NextPage = () => {
             <a>Pricing</a>
           </Link>
         </div>
-        <DownloadButton variant="primary" />
+        <div className={styles.cta}>
+          <DownloadButton variant="primary" />
+        </div>
       </header>
       <main>
         <section className={styles.hero}>
@@ -81,7 +83,7 @@ export const LandingPage: NextPage = () => {
                 you manually opening each app individually.
               </p>
             </div>
-            <img src="" alt="" className={styles.featureImage} />
+            {/* <img src="" alt="" className={styles.featureImage} /> */}
           </div>
           <div className={styles.feature}>
             <div className={styles.featureInfo}>
@@ -95,7 +97,7 @@ export const LandingPage: NextPage = () => {
                 new integrations and improving your search experience.
               </p>
             </div>
-            <img src="" alt="" className={styles.featureImage} />
+            {/* <img src="" alt="" className={styles.featureImage} /> */}
           </div>
         </section>
         <section className={styles.pricing}>
@@ -116,7 +118,7 @@ export const LandingPage: NextPage = () => {
                 <li>Search across all connected tools</li>
                 <li>Privacy-preserving search</li>
               </ul>
-              <DownloadButton showName={true} />
+              <DownloadButton />
             </div>
             <div className={classNames(styles.plan, styles.pro)}>
               <h4 className={styles.planName}>Pro</h4>
@@ -131,7 +133,7 @@ export const LandingPage: NextPage = () => {
                 <li>Search across all connected tools</li>
                 <li>Privacy preserving search</li>
               </ul>
-              <DownloadButton showName={true} />
+              <DownloadButton />
             </div>
           </div>
         </section>
@@ -142,16 +144,10 @@ export const LandingPage: NextPage = () => {
 
 const DownloadButton = ({
   variant = 'default',
-  showName = false,
 }: {
   variant?: 'default' | 'primary';
-  showName?: boolean;
 }) => {
-  return (
-    <Button variant={variant}>
-      Download{showName ? ' Highbeam' : ''} for Mac
-    </Button>
-  );
+  return <Button variant={variant}>Download Highbeam</Button>;
 };
 
 const IntegrationCard = ({

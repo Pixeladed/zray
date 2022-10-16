@@ -220,6 +220,10 @@
     justify-content: center;
   }
 
+  .header .cta {
+    display: none;
+  }
+
   .hero {
     padding: var(--spacexxLarge) var(--spaceMedium);
   }
