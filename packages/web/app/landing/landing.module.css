@@ -213,3 +213,59 @@
     width: calc(calc(100% - var(--spaceLarge)) / 2);
   }
 }
+
+@media screen and (max-width: 640px) {
+  .header {
+    flex-wrap: wrap;
+    gap: var(--spaceMedium);
+    justify-content: center;
+  }
+
+  .hero {
+    padding: var(--spacexxLarge) var(--spaceMedium);
+  }
+
+  .heroTitle {
+    font-size: 2.25em;
+  }
+
+  .lead {
+    font-size: 1.25em;
+  }
+
+  .integrations {
+    padding: var(--spaceMedium);
+  }
+
+  .integrationCard {
+    width: 100%;
+  }
+
+  .features {
+    padding: var(--spacexLarge) var(--spaceMedium);
+  }
+
+  .feature {
+    flex-direction: column;
+  }
+
+  .featureInfo {
+    padding: var(--spaceMedium);
+  }
+
+  .pricing {
+    padding: var(--spacexLarge) var(--spaceMedium);
+  }
+
+  .pricingTitle {
+    font-size: 1.5em;
+  }
+
+  .plans {
+    flex-direction: column;
+  }
+
+  .plan {
+    padding: var(--spaceMedium);
+  }
+}
