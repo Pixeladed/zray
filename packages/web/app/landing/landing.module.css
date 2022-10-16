@@ -199,3 +199,17 @@
 .planFeatures {
   margin: var(--spacexxSmall) 0 var(--spaceLarge) 0;
 }
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: var(--spacexSmall) var(--spaceLarge);
+  }
+
+  .integrations {
+    padding: var(--spacexLarge) var(--spaceLarge);
+  }
+
+  .integrationCard {
+    width: calc(calc(100% - var(--spaceLarge)) / 2);
+  }
+}
