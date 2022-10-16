@@ -1,4 +1,5 @@
 import { Button } from '@highbeam/components';
+import classNames from 'classnames';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -102,34 +103,34 @@ export const LandingPage: NextPage = () => {
             It&apos;s time to close your tabs, try Highbeam
           </h3>
           <div className={styles.plans}>
-            <div className={styles.plan}>
+            <div className={classNames(styles.plan, styles.free)}>
               <h4 className={styles.planName}>Free</h4>
               <p className={styles.planPrice}>
                 $0 <span className={styles.planFrequency}>/ month</span>{' '}
               </p>
               <p className={styles.planDescription}>
                 Get started with the free plan:
-                <ul>
-                  <li>Connect up to 3 tools</li>
-                  <li>Search across all connected tools</li>
-                  <li>Privacy-preserving search</li>
-                </ul>
               </p>
+              <ul className={styles.planFeatures}>
+                <li>Connect up to 3 tools</li>
+                <li>Search across all connected tools</li>
+                <li>Privacy-preserving search</li>
+              </ul>
               <DownloadButton showName={true} />
             </div>
-            <div className={styles.plan}>
+            <div className={classNames(styles.plan, styles.pro)}>
               <h4 className={styles.planName}>Pro</h4>
               <p className={styles.planPrice}>
                 $4.99 <span className={styles.planFrequency}>/ month</span>
               </p>
               <p className={styles.planDescription}>
                 Everything you need to be a pro:
-                <ul>
-                  <li>Connect unlimited integrations</li>
-                  <li>Search across all connected tools</li>
-                  <li>Privacy preserving search</li>
-                </ul>
               </p>
+              <ul className={styles.planFeatures}>
+                <li>Connect unlimited integrations</li>
+                <li>Search across all connected tools</li>
+                <li>Privacy preserving search</li>
+              </ul>
               <DownloadButton showName={true} />
             </div>
           </div>

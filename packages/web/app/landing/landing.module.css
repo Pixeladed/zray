@@ -162,17 +162,17 @@
   border-radius: var(--spacexSmall);
 }
 
-.plan:first-child {
+.plan.free {
   border-top: var(--baseline) solid #fc7557;
 }
-.plan:first-child .planPrice {
+.plan.free .planPrice {
   color: #fc7557;
 }
 
-.plan:nth-child(2) {
+.plan.pro {
   border-top: var(--baseline) solid var(--colorPrimary);
 }
-.plan:nth-child(2) .planPrice {
+.plan.pro .planPrice {
   color: var(--colorPrimary);
 }
 
@@ -193,5 +193,9 @@
 }
 
 .planDescription {
-  margin: 0 0 var(--spaceLarge) 0;
+  margin: 0;
+}
+
+.planFeatures {
+  margin: var(--spacexxSmall) 0 var(--spaceLarge) 0;
 }
