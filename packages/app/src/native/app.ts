@@ -1,6 +1,7 @@
-import { GlobalShortcut } from 'electron';
+import { GlobalShortcut, AutoUpdater, Dialog } from 'electron';
 import { OpenSettingsEndpoint } from '../interface/bridge/endpoints';
 import { Broadcaster, Handler } from './base/bridge_handler';
+import { UpdateConfig } from './base/config';
 import { SearchView } from './views/search/search_view';
 import { SettingsView } from './views/settings/settings_view';
 import { WindowSource } from './views/view';
@@ -11,7 +12,11 @@ export class App {
 
   constructor(
     private readonly source: WindowSource,
-    private readonly globalShortcut: GlobalShortcut
+    private readonly globalShortcut: GlobalShortcut,
+    private readonly autoUpdater: AutoUpdater,
+    private readonly updateConfig: UpdateConfig,
+    private readonly getVersion: () => string,
+    private readonly dialog: Dialog
   ) {}
 
   createMainWindow = () => {
@@ -46,9 +51,37 @@ export class App {
   handleReady = () => {
     this.globalShortcut.register('Shift+Space', this.createMainWindow);
     this.createMainWindow();
+    this.setupUpdater();
   };
 
   handleQuit = () => {
     this.globalShortcut.unregisterAll();
+  };
+
+  private setupUpdater = () => {
+    const { platform, url: base } = this.updateConfig;
+    const version = this.getVersion();
+    const url = `${base}/update/${platform}/${version}`;
+    this.autoUpdater.setFeedURL({ url });
+    this.autoUpdater.checkForUpdates();
+    this.autoUpdater.on(
+      'update-downloaded',
+      (event, releaseNotes, releaseName) => {
+        const dialogOpts = {
+          type: 'info',
+          buttons: ['Restart', 'Later'],
+          title: 'Application Update',
+          message: process.platform === 'win32' ? releaseNotes : releaseName,
+          detail:
+            'A new version has been downloaded. Restart the application to apply the updates.',
+        };
+
+        this.dialog.showMessageBox(dialogOpts).then(returnValue => {
+          if (returnValue.response === 0) {
+            this.autoUpdater.quitAndInstall();
+          }
+        });
+      }
+    );
   };
 }

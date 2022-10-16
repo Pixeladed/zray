@@ -1,5 +1,13 @@
 import { ClientFactory } from '@highbeam/interface';
-import { app, globalShortcut, ipcMain, safeStorage, shell } from 'electron';
+import {
+  app,
+  autoUpdater,
+  dialog,
+  globalShortcut,
+  ipcMain,
+  safeStorage,
+  shell,
+} from 'electron';
 import { nativeConfig } from './base/config';
 import { App } from './app';
 import { createHandlerReigstrar } from './base/bridge_handler';
@@ -20,7 +28,13 @@ const BASE_SOURCE: WindowSource = app.isPackaged
   ? { type: 'bundled', path: 'build/index.html' }
   : { type: 'server', url: 'http://localhost:8080' };
 
-const instance = new App(BASE_SOURCE, globalShortcut);
+const instance = new App(
+  BASE_SOURCE,
+  globalShortcut,
+  autoUpdater,
+  nativeConfig.update,
+  dialog
+);
 
 const registerHandler = createHandlerReigstrar(ipcMain);
 const clientFactory = new ClientFactory(apiOrigin);

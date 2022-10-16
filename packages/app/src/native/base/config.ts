@@ -10,6 +10,7 @@ export type NativeConfig = {
   apiOrigin: string;
   redirectOrigin: string;
   auth0: Auth0Config;
+  update: UpdateConfig;
 };
 
 export type Auth0Config = {
@@ -17,6 +18,11 @@ export type Auth0Config = {
   domain: string;
   clientId: string;
   keytarName: string;
+};
+
+export type UpdateConfig = {
+  url: string;
+  platform: NodeJS.Platform;
 };
 
 export const nativeConfig: NativeConfig = {
@@ -27,5 +33,9 @@ export const nativeConfig: NativeConfig = {
     domain: env('AUTH0_DOMAIN'),
     clientId: env('AUTH0_CLIENT_ID'),
     keytarName: 'com.highbeam.app',
+  },
+  update: {
+    url: env('UPDATE_URL'),
+    platform: process.platform,
   },
 };
