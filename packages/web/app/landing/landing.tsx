@@ -167,8 +167,8 @@ const IntegrationCard = ({
     <div className={styles.integrationCard}>
       <Image
         src={icon}
-        width={64}
-        height={64}
+        width={48}
+        height={48}
         alt={`${name} icon`}
         className={styles.integrationIcon}
       />
@@ -180,44 +180,44 @@ const IntegrationCard = ({
 
 const integrations: ComponentProps<typeof IntegrationCard>[] = [
   {
-    icon: '',
+    icon: '/integrations/google_drive.svg',
     name: 'Google Drive',
     description:
       'Search for anything uploaded to your Google Drive, including docs, sheets and slides',
   },
   {
-    icon: '',
+    icon: '/integrations/gmail.svg',
     name: 'Gmail',
     description: 'Find any sent or received emails in your inbox',
   },
   {
-    icon: '',
+    icon: '/integrations/slack.svg',
     name: 'Slack',
     description: 'Find messages and files in workspaces that you connect to',
   },
   {
-    icon: '',
+    icon: '/integrations/google_calendar.svg',
     name: 'Google Calendar',
     description: 'Find upcoming events and past calendar invites',
   },
   {
-    icon: '',
+    icon: '/integrations/notion.svg',
     name: 'Notion',
     description: 'Search across your spaces and pages',
   },
   {
-    icon: '',
+    icon: '/integrations/confluence.svg',
     name: 'Confluence',
     description:
       'Find documentation and pages that you wrote or have access to on Confluence Cloud',
   },
   {
-    icon: '',
+    icon: '/integrations/github.svg',
     name: 'GitHub',
     description: 'Look for a user, repository, issue or file on GitHub',
   },
   {
-    icon: '',
+    icon: '/integrations/jira.svg',
     name: 'Jira',
     description:
       'Find issues, epics, stories or any other tickets on Jira Cloud',
