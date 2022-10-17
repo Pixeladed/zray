@@ -33,6 +33,7 @@ const instance = new App(
   globalShortcut,
   autoUpdater,
   nativeConfig.update,
+  () => app.getVersion(),
   dialog
 );
 
