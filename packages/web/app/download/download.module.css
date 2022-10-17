@@ -39,6 +39,7 @@
   display: flex;
   justify-content: center;
   gap: var(--spaceLarge);
+  flex-wrap: wrap;
 }
 
 .option {
