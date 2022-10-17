@@ -24,6 +24,9 @@ jobs:
           API_ORIGIN: ${{ secrets.API_ORIGIN }}
           REDIRECT_ORIGIN: ${{ secrets.REDIRECT_ORIGIN }}
           UPDATE_URL: ${{ secrets.UPDATE_URL }}
+      - uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install
       - name: Build app
         run: yarn run bundle
       - name: Upload Win artifact
