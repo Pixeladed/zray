@@ -148,7 +148,13 @@ const DownloadButton = ({
 }: {
   variant?: 'default' | 'primary';
 }) => {
-  return <Button variant={variant}>Download Highbeam</Button>;
+  return (
+    <Link passHref={true} href="/download">
+      <a>
+        <Button variant={variant}>Download Highbeam</Button>
+      </a>
+    </Link>
+  );
 };
 
 const IntegrationCard = ({
