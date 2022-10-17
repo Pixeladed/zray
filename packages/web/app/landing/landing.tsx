@@ -62,10 +62,11 @@ export const LandingPage: NextPage = () => {
                 icon={integration.icon}
                 name={integration.name}
                 description={integration.description}
+                comingSoon={integration.comingSoon}
               />
             ))}
           </div>
-          <Button>Explore all integrations</Button>
+          {/* <Button>Explore all integrations</Button> */}
         </section>
         <section className={styles.features}>
           <div className={styles.feature}>
@@ -154,10 +155,12 @@ const IntegrationCard = ({
   icon,
   name,
   description,
+  comingSoon = false,
 }: {
   icon: string;
   name: string;
   description: string;
+  comingSoon?: boolean;
 }) => {
   return (
     <div className={styles.integrationCard}>
@@ -168,7 +171,12 @@ const IntegrationCard = ({
         alt={`${name} icon`}
         className={styles.integrationIcon}
       />
-      <h4 className={styles.integrationName}>{name}</h4>
+      <h4 className={styles.integrationName}>
+        {name}{' '}
+        {comingSoon && (
+          <span className={styles.comingSoonBadge}>coming soon</span>
+        )}
+      </h4>
       <p className={styles.integrationDescription}>{description}</p>
     </div>
   );
@@ -195,27 +203,32 @@ const integrations: ComponentProps<typeof IntegrationCard>[] = [
     icon: '/integrations/google_calendar.svg',
     name: 'Google Calendar',
     description: 'Find upcoming events and past calendar invites',
+    comingSoon: true,
   },
   {
     icon: '/integrations/notion.svg',
     name: 'Notion',
     description: 'Search across your spaces and pages',
+    comingSoon: true,
   },
   {
     icon: '/integrations/confluence.svg',
     name: 'Confluence',
     description:
       'Find documentation and pages that you wrote or have access to on Confluence Cloud',
+    comingSoon: true,
   },
   {
     icon: '/integrations/github.svg',
     name: 'GitHub',
     description: 'Look for a user, repository, issue or file on GitHub',
+    comingSoon: true,
   },
   {
     icon: '/integrations/jira.svg',
     name: 'Jira',
     description:
       'Find issues, epics, stories or any other tickets on Jira Cloud',
+    comingSoon: true,
   },
 ];

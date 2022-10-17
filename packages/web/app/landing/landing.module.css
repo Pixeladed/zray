@@ -76,12 +76,24 @@
   transform: translateY(calc(-1 * var(--spacexSmall)));
 }
 
+.comingSoonBadge {
+  padding: var(--spacexxxSmall) var(--spacexxSmall);
+  background: var(--colorBorder);
+  border-radius: var(--spaceMedium);
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 0.6em;
+  margin-left: var(--spacexxSmall);
+}
+
 .integrationIcon {
 }
 
 .integrationName {
   margin: var(--spaceLarge) 0 var(--spacexSmall) 0;
   user-select: none;
+  display: flex;
+  align-items: center;
 }
 
 .integrationDescription {
