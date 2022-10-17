@@ -23,7 +23,7 @@ export const LandingPage: NextPage = () => {
 
       <header className={styles.header}>
         <div className={styles.brandBlock}>
-          <Image src="/icon.png" width={32} height={32} alt="Highbeam logo" />
+          <Image src="/icon.svg" width={32} height={32} alt="Highbeam logo" />
           <h1 className={styles.headerTitle}>Highbeam</h1>
         </div>
         {/* <div className={styles.menu}>

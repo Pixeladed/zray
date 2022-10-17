@@ -23,7 +23,7 @@ export const DownloadPage = () => {
           <a>
             <div className={styles.brandBlock}>
               <Image
-                src="/icon.png"
+                src="/icon.svg"
                 width={32}
                 height={32}
                 alt="Highbeam logo"
@@ -35,7 +35,7 @@ export const DownloadPage = () => {
       </header>
       <main>
         <div className={styles.hero}>
-          <Image src="/icon.png" width={64} height={64} alt="Highbeam logo" />
+          <Image src="/icon.svg" width={128} height={128} alt="Highbeam logo" />
           <h1 className={styles.heroTitle}>Download Highbeam</h1>
         </div>
         <div className={styles.options}>
