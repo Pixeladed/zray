@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { config } from '../../base/config';
 import styles from './download.module.css';
 
-const MAC_DOWNLOAD_URL = config.updateServerUrl + '/download/darwin';
-const WINDOWS_DOWNLOAD_URL = config.updateServerUrl + '/download/win32';
+const UPDATE_SERVER_URL = 'https://highbeam-update.vercel.app';
+const MAC_DOWNLOAD_URL = UPDATE_SERVER_URL + '/download/darwin';
+const WINDOWS_DOWNLOAD_URL = UPDATE_SERVER_URL + '/download/win32';
 
 export const DownloadPage = () => {
   return (
