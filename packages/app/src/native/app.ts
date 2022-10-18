@@ -1,4 +1,4 @@
-import { GlobalShortcut, AutoUpdater, Dialog } from 'electron';
+import { GlobalShortcut, AutoUpdater, Dialog, Event } from 'electron';
 import { OpenSettingsEndpoint } from '../interface/bridge/endpoints';
 import { Broadcaster, Handler } from './base/bridge_handler';
 import { UpdateConfig } from './base/config';
@@ -56,6 +56,11 @@ export class App {
 
   handleQuit = () => {
     this.globalShortcut.unregisterAll();
+  };
+
+  handleWindowAllClosed = (event: Event) => {
+    // prevent the app from quiting as we have a global shortcut
+    event.preventDefault();
   };
 
   private setupUpdater = () => {

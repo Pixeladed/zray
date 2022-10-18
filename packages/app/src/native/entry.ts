@@ -107,3 +107,4 @@ registerHandler('usage:getCurrentPlan', usageNativeService.getCurrentPlan);
 app.on('activate', instance.createMainWindow);
 app.on('ready', instance.handleReady);
 app.on('will-quit', instance.handleQuit);
+app.on('window-all-closed', instance.handleWindowAllClosed);
