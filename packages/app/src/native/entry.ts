@@ -76,6 +76,7 @@ const { integrationNativeService } = createIntegrationNativeService({
   integrations,
   broadcast: instance.broadcast,
   usageNativeService,
+  dialog,
 });
 const { searchNativeService } = createSearchNativeService({
   providers: integrations,

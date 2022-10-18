@@ -1,3 +1,4 @@
+import { Dialog } from 'electron';
 import { Broadcaster } from '../../base/bridge_handler';
 import { UsageNativeService } from '../usage/usage_native_service';
 import {
@@ -9,15 +10,18 @@ export const createIntegrationNativeService = ({
   integrations,
   broadcast,
   usageNativeService,
+  dialog,
 }: {
   integrations: readonly NativeIntegration[];
   broadcast: Broadcaster;
   usageNativeService: UsageNativeService;
+  dialog: Dialog;
 }) => {
   const integrationNativeService = new IntegrationNativeService(
     integrations,
     broadcast,
-    usageNativeService
+    usageNativeService,
+    dialog
   );
 
   return { integrationNativeService };

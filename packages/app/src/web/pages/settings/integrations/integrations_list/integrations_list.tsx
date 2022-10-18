@@ -8,18 +8,25 @@ import styles from './integrations_list.module.css';
 export const IntegrationsListPage = ({
   onRemove,
   profiles,
+  integrationLimit,
 }: {
   onRemove: (id: IntegrationProfile) => void;
   profiles: readonly ProfileWithIntegration[];
+  integrationLimit: number | null;
 }) => {
+  const canAddMoreIntegrations =
+    integrationLimit == null || profiles.length < integrationLimit;
+
   return (
     <div className={styles.container}>
       {!!profiles.length && (
         <header className={styles.header}>
           <h2 className={styles.title}>{profiles.length} connected tools</h2>
-          <Link to={Routes.addIntegration().absolute}>
-            <Button variant="primary">Connect a tool</Button>
-          </Link>
+          {canAddMoreIntegrations && (
+            <Link to={Routes.addIntegration().absolute}>
+              <Button variant="primary">Connect a tool</Button>
+            </Link>
+          )}
         </header>
       )}
       {profiles.map(profile => (
@@ -44,6 +51,12 @@ export const IntegrationsListPage = ({
           <Button onClick={() => onRemove(profile)}>Remove</Button>
         </div>
       ))}
+      {!canAddMoreIntegrations && (
+        <p>
+          <Link to={Routes.account().absolute}>Upgrade to pro</Link> to add more
+          integrations
+        </p>
+      )}
       {!profiles.length && (
         <div className={styles.empty}>
           <p className={styles.emptyLead}>

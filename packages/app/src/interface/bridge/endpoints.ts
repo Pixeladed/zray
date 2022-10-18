@@ -48,7 +48,7 @@ export type OpenExternalEndpoint = Endpoint<
 export type ConnectIntegrationEndpoint = Endpoint<
   'integration:connect',
   { id: string },
-  { profile: IntegrationProfile }
+  {}
 >;
 
 export type ListIntegrationsEndpoint = Endpoint<

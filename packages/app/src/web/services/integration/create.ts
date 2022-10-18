@@ -17,6 +17,7 @@ export const createIntegrationService = ({
 
   integrationController.loadIntegrations();
   integrationController.loadProfiles();
+  integrationController.loadIntegrationLimit();
 
   return { integrationStore, integrationController };
 };

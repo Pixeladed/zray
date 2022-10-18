@@ -2,6 +2,7 @@ import { Assert } from '@highbeam/utils';
 import { computed, makeAutoObservable, runInAction } from 'mobx';
 import {
   ConnectIntegrationEndpoint,
+  GetCurrentPlanEndpoint,
   ListIntegrationsEndpoint,
   ListProfilesEndpoint,
   RemoveProfileEndpoint,
@@ -39,6 +40,8 @@ export class IntegrationStore {
       this.integrations.map(integration => [integration.id, integration])
     );
   });
+
+  integrationLimit: number | null = 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -95,6 +98,14 @@ export class IntegrationController {
       'integration:profiles:remove',
       { integrationId: profile.integrationId, profileId: profile.id }
     );
+  };
+
+  loadIntegrationLimit = async () => {
+    const res = await this.bridgeClient.request<GetCurrentPlanEndpoint>(
+      'usage:getCurrentPlan',
+      {}
+    );
+    runInAction(() => (this.store.integrationLimit = res.integrationLimit));
   };
 }
 

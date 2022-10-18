@@ -18,6 +18,7 @@ export const createIntegrationsListPage = ({
     <IntegrationsListPage
       onRemove={controller.remove}
       profiles={integrationStore.profilesWithIntegration.get()}
+      integrationLimit={integrationStore.integrationLimit}
     />
   ));
 

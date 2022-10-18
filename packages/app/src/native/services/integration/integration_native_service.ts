@@ -1,4 +1,5 @@
 import { Assert } from '@highbeam/utils';
+import { Dialog } from 'electron';
 import {
   ConnectIntegrationEndpoint,
   ListIntegrationsEndpoint,
@@ -23,7 +24,8 @@ export class IntegrationNativeService {
   constructor(
     private readonly integrations: readonly NativeIntegration[],
     private readonly broadcast: Broadcaster,
-    private readonly usageService: UsageNativeService
+    private readonly usageService: UsageNativeService,
+    private readonly dialog: Dialog
   ) {}
 
   connect: Handler<ConnectIntegrationEndpoint> = async ({ data: param }) => {
@@ -33,7 +35,11 @@ export class IntegrationNativeService {
     );
 
     if (!canConnect) {
-      throw new Error('This plan does not allow more integrations');
+      this.dialog.showErrorBox(
+        'You have reached the integration limit for the current plan',
+        'Upgrade to Pro to connect more integrations!'
+      );
+      return {};
     }
 
     const integration = this.integrations.find(({ id }) => id === param.id);
