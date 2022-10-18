@@ -1,6 +1,9 @@
 {
   "name": "@highbeam/app",
   "version": "0.1.0",
+  "author": {
+    "name": "Highbeam team"
+  },
   "private": true,
   "homepage": "./",
   "scripts": {
