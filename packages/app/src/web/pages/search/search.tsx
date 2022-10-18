@@ -61,6 +61,7 @@ export function SearchPage({
           className={styles.input}
           value={value}
           onChange={handleChange}
+          autoFocus={true}
         />
       </div>
       {!profiles.length && (
