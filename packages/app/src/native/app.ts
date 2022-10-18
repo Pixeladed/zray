@@ -20,7 +20,10 @@ export class App {
   ) {}
 
   createMainWindow = () => {
-    const searchView = this.searchView || new SearchView(this.source);
+    const searchView =
+      this.searchView && !this.searchView?.browserWindow.isDestroyed
+        ? this.searchView
+        : new SearchView(this.source);
     this.searchView = searchView;
 
     searchView.browserWindow.on('close', () => {
@@ -30,7 +33,7 @@ export class App {
   };
 
   openSettings: Handler<OpenSettingsEndpoint> = async () => {
-    if (this.settingsView) {
+    if (this.settingsView && !this.settingsView.browserWindow.isDestroyed) {
       this.settingsView.browserWindow.focus();
     } else {
       this.settingsView = new SettingsView(this.source);
