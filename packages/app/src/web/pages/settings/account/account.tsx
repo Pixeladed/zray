@@ -29,7 +29,7 @@ export const AccountSettings = ({
         </span>
         <br />
         <span className={styles.heading}>
-          <strong>Integrations</strong>: {integrationLimit || 'Unlimited'}
+          <strong>Integrations</strong>: {integrationLimit || 'Unknown'}
         </span>
         <p>
           Highbeam partners with Stripe to manage billing and payments. You can
