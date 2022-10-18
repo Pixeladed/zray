@@ -16,7 +16,8 @@
     "build": "npm-run-all build:web build:app",
     "bundle:mac": "electron-builder build -c.extraMetadata.main=build/native/index.js --mac",
     "bundle:win": "electron-builder build -c.extraMetadata.main=build/native/index.js --win portable",
-    "clean": "ts-node src/tools/clean"
+    "clean": "ts-node src/tools/clean",
+    "afterSign": "scripts/notarize.js"
   },
   "browserslist": {
     "production": [
@@ -63,8 +64,10 @@
     "@types/react-dom": "^18.0.6",
     "classnames": "^2.3.1",
     "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
     "electron": "20.0.1",
     "electron-builder": "^23.3.3",
+    "electron-notarize": "^1.2.1",
     "mobx": "^6.6.1",
     "mobx-react": "^7.5.2",
     "nodemon": "^2.0.19",
@@ -84,11 +87,17 @@
     "files": [
       "build/**/*",
       "node_modules/**/*",
-      ".env.bundle"
+      "entitlements.mac.plist"
     ],
     "appId": "com.highbeam.app",
     "directories": {
       "buildResources": "build"
+    },
+    "mac": {
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "entitlements.mac.plist",
+      "entitlementsInherit": "entitlements.mac.plist"
     }
   },
   "productName": "Highbeam"
