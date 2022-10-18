@@ -63,6 +63,10 @@ export const config: Config = {
       'expected stripe default price id to exist'
     ),
   },
+  updateServerUrl: Assert.exists(
+    process.env.NEXT_PUBLIC_UPDATE_SERVER_URL,
+    'expected next public update server url to exist'
+  ),
 };
 
 export type Config = {
@@ -74,6 +78,7 @@ export type Config = {
     domain: string;
   };
   stripe: StripeConfig;
+  updateServerUrl: string;
 };
 
 export type StripeConfig = {
