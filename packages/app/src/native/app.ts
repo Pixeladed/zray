@@ -13,6 +13,7 @@ export class App {
   constructor(
     private readonly source: WindowSource,
     private readonly globalShortcut: GlobalShortcut,
+    private readonly enableOTAUpdate: boolean,
     private readonly autoUpdater: AutoUpdater,
     private readonly updateConfig: UpdateConfig,
     private readonly getVersion: () => string,
@@ -64,6 +65,11 @@ export class App {
   };
 
   private setupUpdater = () => {
+    if (!this.enableOTAUpdate) {
+      // over the air update is disabled
+      return;
+    }
+
     const { platform, url: base } = this.updateConfig;
     const version = this.getVersion();
     const url = `${base}/update/${platform}/${version}`;

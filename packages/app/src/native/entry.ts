@@ -31,6 +31,7 @@ const BASE_SOURCE: WindowSource = app.isPackaged
 const instance = new App(
   BASE_SOURCE,
   globalShortcut,
+  app.isPackaged,
   autoUpdater,
   nativeConfig.update,
   () => app.getVersion(),
