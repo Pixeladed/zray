@@ -65,4 +65,21 @@ export class AuthNativeService {
   private refreshAccessToken = async (refreshToken: string) => {
     // TODO: implement refresh token
   };
+
+  private getAuthenticationURL = () => {
+    return (
+      'https://' +
+      this.config.domain +
+      '/authorize?' +
+      'scope=' +
+      SCOPES +
+      '&' +
+      'response_type=code&' +
+      'client_id=' +
+      this.config.clientId +
+      '&' +
+      'redirect_uri=' +
+      this.redirectUrl
+    );
+  };
 }
