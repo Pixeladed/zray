@@ -8,6 +8,7 @@ import { Auth0Config } from '../../base/config';
 import { AuthChangedEvent } from '../../../interface/bridge/events';
 import { AuthNativeStore } from './auth_native_store';
 import { Clock } from '../../../base/clock';
+import { BrowserWindow } from 'electron';
 
 const SCOPES = 'openid profile email offline_access';
 
@@ -57,8 +58,15 @@ export class AuthNativeService {
   };
 
   logout: Handler<AuthLogOutEndpoint> = async () => {
-    // TODO: implement logout
-    this.broadcast<AuthChangedEvent>('auth:changed', {});
+    const logoutWindow = new BrowserWindow({ show: false });
+
+    logoutWindow.loadURL(this.getLogOutUrl());
+
+    logoutWindow.on('ready-to-show', async () => {
+      this.store.clear();
+      logoutWindow.close();
+      this.broadcast<AuthChangedEvent>('auth:changed', {});
+    });
     return {};
   };
 
