@@ -66,6 +66,7 @@
     "cross-env": "^7.0.3",
     "electron": "20.0.1",
     "electron-builder": "^23.3.3",
+    "electron-builder-squirrel-windows": "^23.6.0",
     "mobx": "^6.6.1",
     "mobx-react": "^7.5.2",
     "nodemon": "^2.0.19",
@@ -90,6 +91,9 @@
     "appId": "com.highbeam.app",
     "directories": {
       "buildResources": "build"
+    },
+    "win": {
+      "target": "squirrel"
     }
   },
   "productName": "Highbeam"
