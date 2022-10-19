@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import {
   Routes as RouterRoutes,
   Route,
@@ -12,10 +12,16 @@ import styles from './settings.module.css';
 export const SettingsPage = ({
   IntegrationsSettings,
   AccountSettings,
+  init,
 }: {
   IntegrationsSettings: React.ComponentType;
   AccountSettings: React.ComponentType;
+  init: () => void;
 }) => {
+  useEffect(() => {
+    init();
+  }, [init]);
+
   return (
     <div className={styles.container}>
       <div className={styles.titleBar}>

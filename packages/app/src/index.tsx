@@ -27,6 +27,7 @@ const { SearchPage } = createSearchPage({
   navigationService,
   bridgeClient,
   integrationStore,
+  integrationController,
 });
 const { SettingsPage } = createSettingsPage({
   integrationStore,

@@ -36,6 +36,7 @@ export const createSettingsPage = ({
     <SettingsPage
       IntegrationsSettings={IntegrationsSettings}
       AccountSettings={AccountSettings}
+      init={integrationController.init}
     />
   );
 

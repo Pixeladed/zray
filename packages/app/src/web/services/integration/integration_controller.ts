@@ -64,6 +64,14 @@ export class IntegrationController {
     );
   }
 
+  init = () => {
+    return Promise.all([
+      this.loadIntegrations(),
+      this.loadProfiles(),
+      this.loadIntegrationLimit(),
+    ]);
+  };
+
   loadIntegrations = async () => {
     const res = await this.bridgeClient.request<ListIntegrationsEndpoint>(
       'integration:list',

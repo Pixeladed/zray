@@ -8,14 +8,14 @@ import {
   GoogleCalendarNativeStore,
   GoogleCalendarProfile,
 } from './google_calendar_native_store';
-import { calendar_v3, gmail_v1, google } from 'googleapis';
+import { calendar_v3, google } from 'googleapis';
 import { Assert, exists } from '@highbeam/utils';
 import { RefreshTokenUtil } from '../../base/refresh_token_util';
 import { SearchResult } from '../../../interface/search';
 
 export class GoogleCalendarNativeService implements NativeIntegration {
   id = 'com.highbeam.google_calendar';
-  name = 'GoogleCalendar';
+  name = 'Google Calendar';
   icon = Resources.GCAL_CON;
 
   constructor(
@@ -130,7 +130,7 @@ export class GoogleCalendarNativeService implements NativeIntegration {
 
   private createRedirectUrl = () => {
     const url = new URL(this.redirectOrigin);
-    url.pathname = Routes.gmailOAuthCallback().absolute;
+    url.pathname = Routes.googleCalendarCallback().absolute;
     url.search = '';
     url.hash = '';
     return url.toString();
