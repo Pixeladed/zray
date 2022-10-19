@@ -15,7 +15,9 @@ export const IntegrationsListPage = ({
   integrationLimit: number | null;
 }) => {
   const canAddMoreIntegrations =
-    integrationLimit == null || profiles.length < integrationLimit;
+    integrationLimit == null ||
+    profiles.length < integrationLimit ||
+    !profiles.length;
 
   return (
     <div className={styles.container}>

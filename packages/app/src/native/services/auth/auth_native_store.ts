@@ -7,13 +7,6 @@ export class AuthNativeStore {
   constructor(name: string, private readonly crypt: Crypt) {
     this.store = new Store<StoreLayout>({
       name,
-      migrations: {
-        '0.1.0': store => {
-          store.set('refreshToken', undefined);
-          store.set('accessToken', undefined);
-          store.set('accessTokenExpiresAt', undefined);
-        },
-      },
     });
   }
 
@@ -47,10 +40,10 @@ export class AuthNativeStore {
     this.store.set('accessTokenExpiresAt', expirationDate);
   };
 
-  clear = () => {
-    this.store.set('accessToken', undefined);
-    this.store.set('accessTokenExpiresAt', undefined);
-    this.store.set('refreshToken', undefined);
+  reset = () => {
+    this.store.delete('accessToken');
+    this.store.delete('accessTokenExpiresAt');
+    this.store.delete('refreshToken');
   };
 }
 

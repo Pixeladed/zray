@@ -9,6 +9,7 @@ import { AuthChangedEvent } from '../../../interface/bridge/events';
 import { AuthNativeStore } from './auth_native_store';
 import { Clock } from '../../../base/clock';
 import { BrowserWindow } from 'electron';
+import fetch from 'cross-fetch';
 
 const SCOPES = 'openid profile email offline_access';
 
@@ -33,11 +34,13 @@ export class AuthNativeService {
     if (!refreshToken) {
       // login
       await this.login({ data: {} });
-      return this.getToken();
+      return 'logged in, get token';
+      // return this.getToken();
     }
 
     await this.refreshAccessToken(refreshToken);
-    return this.getToken();
+    return 'refresh access token, get token';
+    // return this.getToken();
   };
 
   check: Handler<AuthCheckEndpoint> = async () => {
@@ -62,6 +65,7 @@ export class AuthNativeService {
     });
 
     win.loadURL(this.getAuthenticationURL());
+    win.focus();
 
     const {
       session: { webRequest },
@@ -86,7 +90,7 @@ export class AuthNativeService {
     logoutWindow.loadURL(this.getLogOutUrl());
 
     logoutWindow.on('ready-to-show', async () => {
-      this.store.clear();
+      this.store.reset();
       logoutWindow.close();
       this.broadcast<AuthChangedEvent>('auth:changed', {});
     });
@@ -171,7 +175,8 @@ export class AuthNativeService {
       this.store.setAccessToken(data.access_token, expiresAt);
       this.store.setRefreshToken(data.refresh_token);
     } catch (error) {
-      this.store.clear();
+      this.store.reset();
+      console.log('errored', error);
       throw error;
     }
   };
