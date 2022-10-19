@@ -108,6 +108,10 @@ export class AuthNativeService {
       this.redirectUrl
     );
   };
+
+  private getLogOutUrl = () => {
+    return `https://${this.config.domain}/v2/logout`;
+  };
 }
 
 type RefreshAccessTokenResponse = {
