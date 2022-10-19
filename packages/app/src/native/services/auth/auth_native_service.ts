@@ -52,8 +52,31 @@ export class AuthNativeService {
   };
 
   login: Handler<AuthLogInEndpoint> = async () => {
-    // TODO: implement login
-    this.broadcast<AuthChangedEvent>('auth:changed', {});
+    const win = new BrowserWindow({
+      width: 400,
+      height: 600,
+      webPreferences: {
+        nodeIntegration: false,
+        contextIsolation: true,
+      },
+    });
+
+    win.loadURL(this.getAuthenticationURL());
+
+    const {
+      session: { webRequest },
+    } = win.webContents;
+
+    const filter = {
+      urls: [`${this.redirectUrl}*`],
+    };
+
+    webRequest.onBeforeRequest(filter, async ({ url }) => {
+      await this.handleLoginCallback(url);
+      this.broadcast<AuthChangedEvent>('auth:changed', {});
+      win.close();
+    });
+
     return {};
   };
 
