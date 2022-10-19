@@ -209,7 +209,6 @@ const integrations: ComponentProps<typeof IntegrationCard>[] = [
     icon: '/integrations/google_calendar.svg',
     name: 'Google Calendar',
     description: 'Find upcoming events and past calendar invites',
-    comingSoon: true,
   },
   {
     icon: '/integrations/notion.svg',
