@@ -11,7 +11,6 @@ import { ResultProps } from './search_result_card/search_result_card';
 import { Settings as CogIcon } from 'react-feather';
 
 export function SearchPage({
-  init,
   onConnectTool,
   onOpenSettings,
   openResult,
@@ -22,7 +21,6 @@ export function SearchPage({
   profiles,
   ResultCard,
 }: {
-  init: () => void;
   onConnectTool: () => void;
   onOpenSettings: () => void;
   openResult: (result: SearchResult) => void;
@@ -40,9 +38,6 @@ export function SearchPage({
     setValue(val);
     triggerSearch(val);
   };
-  useEffect(() => {
-    init();
-  }, [init]);
 
   return (
     <div className={styles.page}>

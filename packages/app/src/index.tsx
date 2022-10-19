@@ -27,7 +27,6 @@ const { SearchPage } = createSearchPage({
   navigationService,
   bridgeClient,
   integrationStore,
-  integrationController,
 });
 const { SettingsPage } = createSettingsPage({
   integrationStore,
@@ -36,6 +35,8 @@ const { SettingsPage } = createSettingsPage({
   navigationService,
   billingPortalUrl: webConfig.billingPortalUrl,
 });
+
+integrationController.init();
 
 root.render(
   <React.StrictMode>
