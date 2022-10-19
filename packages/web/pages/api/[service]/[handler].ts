@@ -4,6 +4,7 @@ import { config } from '../../../base/config';
 import { ServiceImpl } from '../../../base/service';
 import { createAuthService } from '../../../services/auth/create';
 import { createGmailService } from '../../../services/gmail/create';
+import { createGoogleCalendarService } from '../../../services/google_calendar/create';
 import { createGoogleDriveService } from '../../../services/google_drive/create';
 import { createSlackService } from '../../../services/slack/create';
 import { createUsageService } from '../../../services/usage/create';
@@ -12,6 +13,9 @@ const { authService } = createAuthService(config.auth0);
 const { gmailService } = createGmailService(config.gmail);
 const { googleDriveService } = createGoogleDriveService(config.googleDrive);
 const { slackService } = createSlackService(config.slack);
+const { googleCalendarService } = createGoogleCalendarService(
+  config.googleCalendar
+);
 const { usageService } = createUsageService({
   authService,
   config: config.stripe,
@@ -22,6 +26,7 @@ const services: { [key in Services]: ServiceImpl<IServiceMap[key]> } = {
   google_drive: googleDriveService,
   slack: slackService,
   usage: usageService,
+  google_calendar: googleCalendarService,
 };
 
 export default async function handler(

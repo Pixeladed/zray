@@ -43,6 +43,20 @@ export const config: Config = {
       'expected GMAIL_REDIRECT_URL to exist'
     ),
   },
+  googleCalendar: {
+    clientId: Assert.exists(
+      process.env.GOOGLE_CALENDAR_CLIENT_ID,
+      'expected GOOGLE_CALENDAR_CLIENT_ID to exist'
+    ),
+    clientSecret: Assert.exists(
+      process.env.GOOGLE_CALENDAR_CLIENT_SECRET,
+      'expected GOOGLE_CALENDAR_CLIENT_SECRET to exist'
+    ),
+    redirectUrl: Assert.exists(
+      process.env.GOOGLE_CALENDAR_REDIRECT_URL,
+      'expected GOOGLE_CALENDAR_REDIRECT_URL to exist'
+    ),
+  },
   auth0: {
     audience: Assert.exists(
       process.env.AUTH0_AUDIENCE,
@@ -69,6 +83,7 @@ export type Config = {
   slack: SlackOAuthConfig;
   googleDrive: GoogleOAuthConfig;
   gmail: GoogleOAuthConfig;
+  googleCalendar: GoogleOAuthConfig;
   auth0: {
     audience: string;
     domain: string;
