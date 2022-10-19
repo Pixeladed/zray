@@ -63,7 +63,30 @@ export class AuthNativeService {
   };
 
   private refreshAccessToken = async (refreshToken: string) => {
-    // TODO: implement refresh token
+    const url = `https://${this.config.domain}/oauth/token`;
+
+    try {
+      const now = this.clock.now();
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          grant_type: 'refresh_token',
+          client_id: this.config.clientId,
+          refresh_token: refreshToken,
+        }),
+      });
+
+      const data: RefreshAccessTokenResponse = await response.json();
+      const expiresAt = now + data.expires_in;
+      this.store.setRefreshToken(data.access_token, expiresAt);
+    } catch (error) {
+      await this.logout({ data: {} });
+
+      throw error;
+    }
   };
 
   private getAuthenticationURL = () => {
@@ -78,8 +101,16 @@ export class AuthNativeService {
       'client_id=' +
       this.config.clientId +
       '&' +
+      'audience=' +
+      this.config.audience +
+      '&' +
       'redirect_uri=' +
       this.redirectUrl
     );
   };
 }
+
+type RefreshAccessTokenResponse = {
+  access_token: string;
+  expires_in: number;
+};
