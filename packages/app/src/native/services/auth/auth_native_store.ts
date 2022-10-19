@@ -27,10 +27,9 @@ export class AuthNativeStore {
     return this.crypt.decrypt(encryptedToken);
   };
 
-  setRefreshToken = (refreshToken: string, expirationDate: number) => {
+  setRefreshToken = (refreshToken: string) => {
     const encryptedToken = this.crypt.encrypt(refreshToken);
     this.store.set('refreshToken', encryptedToken);
-    this.store.set('accessTokenExpiresAt', expirationDate);
   };
 
   getAccessToken = () => {
@@ -42,9 +41,16 @@ export class AuthNativeStore {
     return { accessToken, expiresAt };
   };
 
-  setAccessToken = (accessToken: string) => {
+  setAccessToken = (accessToken: string, expirationDate: number) => {
     const encryptedToken = this.crypt.encrypt(accessToken);
     this.store.set('accessToken', encryptedToken);
+    this.store.set('accessTokenExpiresAt', expirationDate);
+  };
+
+  clear = () => {
+    this.store.set('accessToken', undefined);
+    this.store.set('accessTokenExpiresAt', undefined);
+    this.store.set('refreshToken', undefined);
   };
 }
 

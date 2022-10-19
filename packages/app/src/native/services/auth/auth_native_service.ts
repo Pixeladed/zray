@@ -81,7 +81,7 @@ export class AuthNativeService {
 
       const data: RefreshAccessTokenResponse = await response.json();
       const expiresAt = now + data.expires_in;
-      this.store.setRefreshToken(data.access_token, expiresAt);
+      this.store.setAccessToken(data.access_token, expiresAt);
     } catch (error) {
       await this.logout({ data: {} });
 
@@ -112,9 +112,47 @@ export class AuthNativeService {
   private getLogOutUrl = () => {
     return `https://${this.config.domain}/v2/logout`;
   };
+
+  private handleLoginCallback = async (callbackURL: string) => {
+    const urlParts = new URL(callbackURL);
+    const query = urlParts.searchParams;
+
+    const exchangeOptions = {
+      grant_type: 'authorization_code',
+      client_id: this.config.clientId,
+      code: query.get('code'),
+      redirect_uri: this.redirectUrl,
+    };
+
+    try {
+      const url = `https://${this.config.domain}/oauth/token`;
+      const now = this.clock.now();
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(exchangeOptions),
+      });
+
+      const data: ExchangeCodeResponse = await response.json();
+      const expiresAt = now + data.expires_in;
+      this.store.setAccessToken(data.access_token, expiresAt);
+      this.store.setRefreshToken(data.refresh_token);
+    } catch (error) {
+      this.store.clear();
+      throw error;
+    }
+  };
 }
 
 type RefreshAccessTokenResponse = {
   access_token: string;
+  expires_in: number;
+};
+
+type ExchangeCodeResponse = {
+  access_token: string;
+  refresh_token: string;
   expires_in: number;
 };
