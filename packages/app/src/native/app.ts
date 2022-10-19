@@ -28,10 +28,13 @@ export class App {
       this.searchView = undefined;
     });
     searchView.open();
+    searchView.browserWindow.on('close', () => {
+      this.searchView = undefined;
+    });
   };
 
   openSettings: Handler<OpenSettingsEndpoint> = async () => {
-    if (this.settingsView && !this.settingsView.browserWindow.isDestroyed) {
+    if (this.settingsView) {
       this.settingsView.browserWindow.focus();
     } else {
       this.settingsView = new SettingsView(this.source);
