@@ -44,9 +44,10 @@ export class AuthNativeService {
   check: Handler<AuthCheckEndpoint> = async () => {
     try {
       const { accessToken, expiresAt } = this.store.getAccessToken();
-      const authenticated =
+      const refreshToken = this.store.getRefreshToken();
+      const hasValidAccessToken =
         !!accessToken && !!expiresAt && expiresAt > this.clock.now();
-      return { authenticated };
+      return { authenticated: hasValidAccessToken || !!refreshToken };
     } catch (error) {
       return { authenticated: false };
     }

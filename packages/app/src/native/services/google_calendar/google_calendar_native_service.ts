@@ -87,7 +87,9 @@ export class GoogleCalendarNativeService implements NativeIntegration {
       profile
     );
     const accessToken = refreshedProfile.accessToken;
-    const calendarRes = await gcal.calendarList.list();
+    const calendarRes = await gcal.calendarList.list({
+      oauth_token: accessToken,
+    });
     const calendars = calendarRes.data.items || [];
     const byCalendarOps = calendars.map(cal =>
       gcal.events.list({
@@ -100,7 +102,7 @@ export class GoogleCalendarNativeService implements NativeIntegration {
       })
     );
     const eventRes = await Promise.all(byCalendarOps);
-    const events = eventRes.flatMap(res => res.data);
+    const events = eventRes.flatMap(res => res.data.items).filter(exists);
 
     const results = events.map(event => this.mapEvent(event, profile));
 
@@ -123,7 +125,7 @@ export class GoogleCalendarNativeService implements NativeIntegration {
       integrationId: this.id,
       profileId: profile.id,
       title,
-      preview: `${startTime?.toLocaleTimeString() || ''} | ${blurb}`,
+      preview: `${startTime?.toLocaleString() || ''} | ${blurb}`,
       url,
     };
   };
