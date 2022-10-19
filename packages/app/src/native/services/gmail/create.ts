@@ -9,13 +9,13 @@ const STORE_NAME = 'gmail_native_store';
 export const createGmailNativeService = ({
   clientFactory,
   redirectOrigin,
-  safe,
+  crypt,
 }: {
   redirectOrigin: string;
   clientFactory: ClientFactory;
-  safe: Crypt;
+  crypt: Crypt;
 }) => {
-  const store = new GmailNativeStore(STORE_NAME, safe);
+  const store = new GmailNativeStore(STORE_NAME, crypt);
   const gmailClient = clientFactory.for('gmail');
   const refreshUtil = new RefreshTokenUtil(refreshToken =>
     gmailClient.call('refreshToken', { refreshToken })

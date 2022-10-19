@@ -40,26 +40,28 @@ const instance = new App(
 
 const registerHandler = createHandlerReigstrar(ipcMain);
 const clientFactory = new ClientFactory(apiOrigin);
-const safe = new OSCrypt(safeStorage);
+const crypt = new OSCrypt(safeStorage);
 
 const { authNativeService } = createAuthNativeService(
   nativeConfig.auth0,
-  instance.broadcast
+  instance.broadcast,
+  crypt,
+  nativeConfig.redirectOrigin
 );
 const { slackNativeService } = createSlackNativeService({
   redirectOrigin,
   clientFactory,
-  safe,
+  crypt,
 });
 const { googleDriveNativeService } = createGoogleDriveNativeService({
   redirectOrigin,
   clientFactory,
-  safe,
+  crypt,
 });
 const { gmailNativeService } = createGmailNativeService({
   redirectOrigin,
   clientFactory,
-  safe,
+  crypt,
 });
 const navigationNativeService = new NavigationNativeService(shell);
 const { usageNativeService } = createUsageNativeService({

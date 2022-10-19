@@ -8,14 +8,14 @@ const STORE_NAME = 'slack_native_store';
 export const createSlackNativeService = ({
   redirectOrigin,
   clientFactory,
-  safe,
+  crypt,
 }: {
   redirectOrigin: string;
   clientFactory: ClientFactory;
-  safe: Crypt;
+  crypt: Crypt;
 }) => {
   const slackClient = clientFactory.for('slack');
-  const slackNativeStore = new SlackNativeStore(STORE_NAME, safe);
+  const slackNativeStore = new SlackNativeStore(STORE_NAME, crypt);
   const slackNativeService = new SlackNativeService(
     redirectOrigin,
     slackClient,
