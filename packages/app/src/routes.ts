@@ -16,6 +16,8 @@ export class Routes {
     new Route('/google_drive/callback', Routes.integrations());
   static gmailOAuthCallback = () =>
     new Route('/gmail/callback', Routes.integrations());
+  static googleCalendarCallback = () =>
+    new Route('/google_calendar/callback', Routes.integrations());
 }
 
 export class Route {
