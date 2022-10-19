@@ -12,6 +12,9 @@ export type PathGenerator = (path: PathInput) => MintedPath;
 
 export class Resources {
   static GMAIL_ICON = Path.resource('/integrations/gmail/gmail.svg');
+  static GCAL_CON = Path.resource(
+    '/integrations/google_calendar/google_calendar.svg'
+  );
   static GDRIVE_ICON = Path.resource(
     '/integrations/google_drive/google_drive.svg'
   );

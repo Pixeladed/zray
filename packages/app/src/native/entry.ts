@@ -22,6 +22,7 @@ import { createSlackNativeService } from './services/slack/create';
 import { WindowSource } from './views/view';
 import { createAuthNativeService } from './services/auth/create';
 import { createUsageNativeService } from './services/usage/create';
+import { createGoogleCalendarNativeService } from './services/google_calendar/create';
 
 const { apiOrigin, redirectOrigin } = nativeConfig;
 const BASE_SOURCE: WindowSource = app.isPackaged
@@ -63,6 +64,11 @@ const { gmailNativeService } = createGmailNativeService({
   clientFactory,
   crypt,
 });
+const { googleCalendarNativeService } = createGoogleCalendarNativeService({
+  clientFactory,
+  crypt,
+  redirectOrigin,
+});
 const navigationNativeService = new NavigationNativeService(shell);
 const { usageNativeService } = createUsageNativeService({
   clientFactory,
@@ -73,6 +79,7 @@ const integrations: readonly NativeIntegration[] = [
   slackNativeService,
   googleDriveNativeService,
   gmailNativeService,
+  googleCalendarNativeService,
 ];
 
 const { integrationNativeService } = createIntegrationNativeService({
