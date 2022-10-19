@@ -34,13 +34,11 @@ export class AuthNativeService {
     if (!refreshToken) {
       // login
       await this.login({ data: {} });
-      return 'logged in, get token';
-      // return this.getToken();
+      return this.getToken();
     }
 
     await this.refreshAccessToken(refreshToken);
-    return 'refresh access token, get token';
-    // return this.getToken();
+    return this.getToken();
   };
 
   check: Handler<AuthCheckEndpoint> = async () => {
