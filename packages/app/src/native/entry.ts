@@ -46,8 +46,7 @@ const crypt = new OSCrypt(safeStorage);
 
 const { analyticsNativeService } = createAnalyticsNativeService({
   amplitudeApiKey: nativeConfig.amplitudeApiKey,
-  isPackaged: true,
-  platform: process.platform,
+  isPackaged: app.isPackaged,
   version: app.getVersion(),
 });
 const { authNativeService } = createAuthNativeService(

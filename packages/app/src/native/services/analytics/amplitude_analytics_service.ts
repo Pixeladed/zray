@@ -8,11 +8,7 @@ export class AmplitudeAnalyticsService implements AnalyticsNativeService {
   private userId: string | undefined = undefined;
   private deviceId: string | undefined = undefined;
 
-  constructor(
-    amplitudeApiKey: string,
-    private readonly version: string,
-    private readonly platform: string
-  ) {
+  constructor(amplitudeApiKey: string, private readonly version: string) {
     Amplitude.init(amplitudeApiKey);
     this.deviceId = machineIdSync();
   }
@@ -21,7 +17,7 @@ export class AmplitudeAnalyticsService implements AnalyticsNativeService {
     const props = {
       ...data.properties,
       version: this.version,
-      platform: this.platform,
+      platform: process.platform,
     };
     Amplitude.track(data.name, props, {
       device_id: this.deviceId,
@@ -36,8 +32,23 @@ export class AmplitudeAnalyticsService implements AnalyticsNativeService {
     Amplitude.identify(identifier, {
       user_id: id,
       device_id: this.deviceId,
-      platform: this.platform,
+      platform: process.platform,
       app_version: this.version,
+      os_name: process.platform,
+      os_version: process.getSystemVersion(),
+    });
+  };
+
+  addContext = (context: Partial<{ planName: string }>) => {
+    const identifier = new Amplitude.Identify();
+    Amplitude.identify(identifier, {
+      user_id: this.userId,
+      device_id: this.deviceId,
+      platform: process.platform,
+      app_version: this.version,
+      os_name: process.platform,
+      os_version: process.getSystemVersion(),
+      extra: context,
     });
   };
 }

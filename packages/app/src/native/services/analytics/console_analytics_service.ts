@@ -13,4 +13,8 @@ export class ConsoleAnalyticsService implements AnalyticsNativeService {
   identify = (id: string | undefined) => {
     console.log(`[ConsoleAnalytics] identify ${id}`);
   };
+
+  addContext = (context: Partial<{ planName: string }>) => {
+    console.log(`[ConsoleAnalytics] addContext ${context}`);
+  };
 }

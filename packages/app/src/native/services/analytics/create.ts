@@ -7,12 +7,10 @@ export const createAnalyticsNativeService = ({
   isPackaged,
   amplitudeApiKey,
   version,
-  platform,
 }: {
   isPackaged: boolean;
   amplitudeApiKey: string | undefined;
   version: string;
-  platform: string;
 }) => {
   let analyticsNativeService: AnalyticsNativeService;
 
@@ -21,11 +19,7 @@ export const createAnalyticsNativeService = ({
       amplitudeApiKey,
       'amplitude api key is required for packaged app'
     );
-    analyticsNativeService = new AmplitudeAnalyticsService(
-      key,
-      version,
-      platform
-    );
+    analyticsNativeService = new AmplitudeAnalyticsService(key, version);
   } else {
     analyticsNativeService = new ConsoleAnalyticsService();
   }
