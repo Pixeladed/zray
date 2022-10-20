@@ -22,3 +22,13 @@ export type SearchResultClickedEvent = Event<
   'search_result_clicked',
   { searchId: string; integrationId: string }
 >;
+
+export type IntegrationAddedEvent = Event<
+  'integration_added',
+  { integrationId: string }
+>;
+
+export type IntegrationRemovedEvent = Event<
+  'integration_removed',
+  { integrationId: string }
+>;
