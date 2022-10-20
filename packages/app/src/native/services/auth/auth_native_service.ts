@@ -11,6 +11,7 @@ import { Clock } from '../../../base/clock';
 import { BrowserWindow } from 'electron';
 import fetch from 'cross-fetch';
 import { Assert } from '@highbeam/utils';
+import { AnalyticsNativeService } from '../analytics/analytics_native_service';
 
 const SCOPES = 'openid profile email offline_access';
 
@@ -20,7 +21,8 @@ export class AuthNativeService {
     private readonly broadcast: Broadcaster,
     private readonly redirectUrl: string,
     private readonly store: AuthNativeStore,
-    private readonly clock: Clock
+    private readonly clock: Clock,
+    private readonly analyticsService: AnalyticsNativeService
   ) {}
 
   getToken = async () => {

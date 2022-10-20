@@ -9,4 +9,8 @@ export class ConsoleAnalyticsService implements AnalyticsNativeService {
     console.groupEnd();
     return {};
   };
+
+  identify = (id: string) => {
+    console.log(`[ConsoleAnalytics] identify ${id}`);
+  };
 }
