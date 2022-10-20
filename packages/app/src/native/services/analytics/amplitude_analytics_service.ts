@@ -31,6 +31,7 @@ export class AmplitudeAnalyticsService implements AnalyticsNativeService {
   };
 
   identify = (id: string | undefined) => {
+    this.userId = id;
     const identifier = new Amplitude.Identify();
     Amplitude.identify(identifier, {
       user_id: id,
