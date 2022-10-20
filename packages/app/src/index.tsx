@@ -11,6 +11,7 @@ import { BridgeClient } from './web/base/bridge_client';
 import { createIntegrationService } from './web/services/integration/create';
 import { createAuthGate } from './web/services/auth_gate/create';
 import { webConfig } from './web/base/config';
+import { ConsoleAnalyticsService } from './web/services/analytics/console_analytics_service';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,9 +20,11 @@ const context = window;
 const bridgeClient = new BridgeClient(context);
 const navigationService = new NavigationService(context, bridgeClient);
 
+const analyticsService = new ConsoleAnalyticsService();
 const { AuthGate } = createAuthGate({ bridgeClient });
 const { integrationStore, integrationController } = createIntegrationService({
   bridgeClient,
+  analyticsService,
 });
 const { SearchPage } = createSearchPage({
   navigationService,

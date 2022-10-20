@@ -1,3 +1,7 @@
+import {
+  IntegrationAddedEvent,
+  IntegrationRemovedEvent,
+} from '@highbeam/interface';
 import { Assert } from '@highbeam/utils';
 import { computed, makeAutoObservable, runInAction } from 'mobx';
 import {
@@ -16,6 +20,7 @@ import {
   IntegrationProfile,
 } from '../../../interface/intergration';
 import { BridgeClient } from '../../base/bridge_client';
+import { AnalyticsService } from '../analytics/analytics_service';
 
 export class IntegrationStore {
   integrations: readonly IntegrationInfo[] = [];
@@ -51,7 +56,8 @@ export class IntegrationStore {
 export class IntegrationController {
   constructor(
     private readonly store: IntegrationStore,
-    private readonly bridgeClient: BridgeClient
+    private readonly bridgeClient: BridgeClient,
+    private readonly analyticsService: AnalyticsService
   ) {
     this.bridgeClient.on<NewProfileEvent>('integration:profile:new', () => {
       this.loadProfiles();
@@ -95,16 +101,25 @@ export class IntegrationController {
   };
 
   connect = async (id: string) => {
-    return await this.bridgeClient.request<ConnectIntegrationEndpoint>(
+    await this.bridgeClient.request<ConnectIntegrationEndpoint>(
       'integration:connect',
       { id }
     );
+    this.analyticsService.track<IntegrationAddedEvent>('integration_added', {
+      integrationId: id,
+    });
   };
 
   remove = async (profile: IntegrationProfile) => {
-    return await this.bridgeClient.request<RemoveProfileEndpoint>(
+    await this.bridgeClient.request<RemoveProfileEndpoint>(
       'integration:profiles:remove',
       { integrationId: profile.integrationId, profileId: profile.id }
+    );
+    this.analyticsService.track<IntegrationRemovedEvent>(
+      'integration_removed',
+      {
+        integrationId: profile.integrationId,
+      }
     );
   };
 
