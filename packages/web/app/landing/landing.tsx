@@ -149,7 +149,7 @@ const DownloadButton = ({
   variant?: 'default' | 'primary';
 }) => {
   return (
-    <Link passHref={true} href="https://highbeam-update.vercel.app/download">
+    <Link passHref={true} href="https://releases.usehighbeamapp.com/download">
       <a>
         <Button variant={variant}>Download Highbeam</Button>
       </a>
