@@ -44,13 +44,14 @@ const registerHandler = createHandlerReigstrar(ipcMain);
 const clientFactory = new ClientFactory(apiOrigin);
 const crypt = new OSCrypt(safeStorage);
 
+const { analyticsNativeService } = createAnalyticsNativeService();
 const { authNativeService } = createAuthNativeService(
   nativeConfig.auth0,
   instance.broadcast,
   crypt,
-  nativeConfig.redirectOrigin
+  nativeConfig.redirectOrigin,
+  analyticsNativeService
 );
-const { analyticsNativeService } = createAnalyticsNativeService();
 const { slackNativeService } = createSlackNativeService({
   redirectOrigin,
   clientFactory,

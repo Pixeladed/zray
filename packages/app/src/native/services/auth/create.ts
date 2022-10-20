@@ -2,6 +2,7 @@ import { systemClock } from '../../../base/clock';
 import { Broadcaster } from '../../base/bridge_handler';
 import { Auth0Config } from '../../base/config';
 import { Crypt } from '../../base/crypt';
+import { AnalyticsNativeService } from '../analytics/analytics_native_service';
 import { AuthNativeService } from './auth_native_service';
 import { AuthNativeStore } from './auth_native_store';
 
@@ -11,7 +12,8 @@ export const createAuthNativeService = (
   config: Auth0Config,
   broadcast: Broadcaster,
   crypt: Crypt,
-  redirectOrigin: string
+  redirectOrigin: string,
+  analyticsService: AnalyticsNativeService
 ) => {
   const redirectUrl = `${redirectOrigin}/login/callback`;
   const store = new AuthNativeStore(STORE_NAME, crypt);
@@ -20,7 +22,8 @@ export const createAuthNativeService = (
     broadcast,
     redirectUrl,
     store,
-    systemClock
+    systemClock,
+    analyticsService
   );
   return { authNativeService };
 };

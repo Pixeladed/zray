@@ -53,6 +53,12 @@ export class AuthNativeService {
       const refreshToken = this.store.getRefreshToken();
       const hasValidAccessToken =
         !!accessToken && !!expiresAt && expiresAt > this.clock.now();
+
+      if (hasValidAccessToken) {
+        this.getUserInfo(accessToken).then(info => {
+          this.analyticsService.identify(info.sub);
+        });
+      }
       return { authenticated: hasValidAccessToken || !!refreshToken };
     } catch (error) {
       return { authenticated: false };
@@ -85,10 +91,12 @@ export class AuthNativeService {
     };
 
     webRequest.onBeforeRequest(filter, async ({ url }) => {
-      await this.handleLoginCallback(url);
+      const accessToken = await this.handleLoginCallback(url);
       this.broadcast<AuthChangedEvent>('auth:changed', {});
       win.close();
       resolver({});
+      const userInfo = await this.getUserInfo(accessToken);
+      this.analyticsService.identify(userInfo.sub);
     });
 
     return promise;
@@ -103,6 +111,7 @@ export class AuthNativeService {
       this.store.reset();
       logoutWindow.close();
       this.broadcast<AuthChangedEvent>('auth:changed', {});
+      this.analyticsService.identify(undefined);
     });
     return {};
   };
@@ -185,11 +194,25 @@ export class AuthNativeService {
       const expiresAt = now + data.expires_in;
       this.store.setAccessToken(data.access_token, expiresAt);
       this.store.setRefreshToken(data.refresh_token);
+      return data.access_token;
     } catch (error) {
       this.store.reset();
       console.log('errored', error);
       throw error;
     }
+  };
+
+  private getUserInfo = async (accessToken: string) => {
+    const url = `https://${this.config.domain}/userinfo`;
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const data: GetUserInfoResponse = await response.json();
+    return data;
   };
 }
 
@@ -202,4 +225,8 @@ type ExchangeCodeResponse = {
   access_token: string;
   refresh_token: string;
   expires_in: number;
+};
+
+type GetUserInfoResponse = {
+  sub: string;
 };

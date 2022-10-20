@@ -22,10 +22,12 @@ export class AmplitudeAnalyticsService implements AnalyticsNativeService {
     return {};
   };
 
-  identify = (id: string) => {
+  identify = (id: string | undefined) => {
     const identifier = new Amplitude.Identify();
     Amplitude.identify(identifier, {
       user_id: id,
+      platform: this.platform,
+      app_version: this.version,
     });
   };
 }
