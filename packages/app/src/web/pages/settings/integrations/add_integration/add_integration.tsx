@@ -20,8 +20,8 @@ export const AddIntegrationPage = ({
     init();
   }, [init]);
 
-  const handleClick = (integration: IntegrationInfo) => {
-    onConnect(integration.id);
+  const handleClick = async (integration: IntegrationInfo) => {
+    await onConnect(integration.id);
     navigate(Routes.integrations().absolute);
   };
 

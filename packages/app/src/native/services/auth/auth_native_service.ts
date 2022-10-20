@@ -10,6 +10,7 @@ import { AuthNativeStore } from './auth_native_store';
 import { Clock } from '../../../base/clock';
 import { BrowserWindow } from 'electron';
 import fetch from 'cross-fetch';
+import { Assert } from '@highbeam/utils';
 
 const SCOPES = 'openid profile email offline_access';
 
@@ -22,7 +23,7 @@ export class AuthNativeService {
     private readonly clock: Clock
   ) {}
 
-  getToken = async (): Promise<string> => {
+  getToken = async () => {
     const { accessToken, expiresAt } = this.store.getAccessToken();
 
     if (accessToken && expiresAt && expiresAt > this.clock.now()) {
@@ -32,13 +33,16 @@ export class AuthNativeService {
     const refreshToken = this.store.getRefreshToken();
 
     if (!refreshToken) {
-      // login
       await this.login({ data: {} });
-      return this.getToken();
+      const { accessToken: newAccessToken } = this.store.getAccessToken();
+      return Assert.exists(
+        newAccessToken,
+        'expected new access token to exist after login'
+      );
     }
 
-    await this.refreshAccessToken(refreshToken);
-    return this.getToken();
+    const newAccessTolen = await this.refreshAccessToken(refreshToken);
+    return newAccessTolen;
   };
 
   check: Handler<AuthCheckEndpoint> = async () => {
@@ -54,6 +58,10 @@ export class AuthNativeService {
   };
 
   login: Handler<AuthLogInEndpoint> = async () => {
+    let resolver: (res: {}) => void = () => {};
+    const promise = new Promise<{}>(resolve => {
+      resolver = resolve;
+    });
     const win = new BrowserWindow({
       width: 400,
       height: 600,
@@ -78,9 +86,10 @@ export class AuthNativeService {
       await this.handleLoginCallback(url);
       this.broadcast<AuthChangedEvent>('auth:changed', {});
       win.close();
+      resolver({});
     });
 
-    return {};
+    return promise;
   };
 
   logout: Handler<AuthLogOutEndpoint> = async () => {
@@ -116,6 +125,7 @@ export class AuthNativeService {
       const data: RefreshAccessTokenResponse = await response.json();
       const expiresAt = now + data.expires_in;
       this.store.setAccessToken(data.access_token, expiresAt);
+      return data.access_token;
     } catch (error) {
       await this.logout({ data: {} });
 
