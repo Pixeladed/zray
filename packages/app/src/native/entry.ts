@@ -80,6 +80,7 @@ const navigationNativeService = new NavigationNativeService(shell);
 const { usageNativeService } = createUsageNativeService({
   clientFactory,
   authNativeService,
+  analyticsService: analyticsNativeService,
 });
 
 const integrations: readonly NativeIntegration[] = [
