@@ -2,8 +2,13 @@ import content from '../../config.json';
 import { Assert } from '@highbeam/utils';
 
 export const env = (label: string) => {
-  const val = (content as any)[label as any] as string | undefined;
+  const val = maybeEnv(label);
   return Assert.exists(val, `expected config ${label} to exist`);
+};
+
+export const maybeEnv = (label: string) => {
+  const val = (content as any)[label as any] as string | undefined;
+  return val;
 };
 
 export type NativeConfig = {
@@ -11,6 +16,7 @@ export type NativeConfig = {
   redirectOrigin: string;
   auth0: Auth0Config;
   update: UpdateConfig;
+  amplitudeApiKey?: string;
 };
 
 export type Auth0Config = {
@@ -38,4 +44,5 @@ export const nativeConfig: NativeConfig = {
     url: env('UPDATE_URL'),
     platform: process.platform,
   },
+  amplitudeApiKey: maybeEnv('AMPLITUDE_API_KEY'),
 };

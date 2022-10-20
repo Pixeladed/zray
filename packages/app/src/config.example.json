@@ -5,5 +5,6 @@
 
   "API_ORIGIN": "",
   "REDIRECT_ORIGIN": "",
-  "UPDATE_URL": ""
+  "UPDATE_URL": "",
+  "AMPLITUDE_API_KEY": ""
 }

@@ -44,7 +44,12 @@ const registerHandler = createHandlerReigstrar(ipcMain);
 const clientFactory = new ClientFactory(apiOrigin);
 const crypt = new OSCrypt(safeStorage);
 
-const { analyticsNativeService } = createAnalyticsNativeService();
+const { analyticsNativeService } = createAnalyticsNativeService({
+  amplitudeApiKey: nativeConfig.amplitudeApiKey,
+  isPackaged: app.isPackaged,
+  platform: process.platform,
+  version: app.getVersion(),
+});
 const { authNativeService } = createAuthNativeService(
   nativeConfig.auth0,
   instance.broadcast,

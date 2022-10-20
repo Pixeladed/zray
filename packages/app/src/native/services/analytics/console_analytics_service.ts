@@ -10,7 +10,7 @@ export class ConsoleAnalyticsService implements AnalyticsNativeService {
     return {};
   };
 
-  identify = (id: string) => {
+  identify = (id: string | undefined) => {
     console.log(`[ConsoleAnalytics] identify ${id}`);
   };
 }
