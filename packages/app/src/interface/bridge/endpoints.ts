@@ -1,5 +1,7 @@
+import { Event, EventProp } from '@highbeam/interface';
 import { IntegrationInfo, IntegrationProfile } from '../intergration';
 import { SearchResult } from '../search';
+import { EventName } from './events';
 
 export const BRIDGE_NAMESPACE = 'contextBridge';
 
@@ -21,7 +23,8 @@ export type Endpoints =
   | IntegrationEndpoints
   | SearchEndpoints
   | AuthEndpoints
-  | UsageEndpoints;
+  | UsageEndpoints
+  | AnalyticsEndpoints;
 
 export type NavigationEndpoints = OpenSettingsEndpoint | OpenExternalEndpoint;
 export type IntegrationEndpoints =
@@ -36,6 +39,7 @@ export type AuthEndpoints =
   | AuthLogInEndpoint
   | AuthLogOutEndpoint;
 export type UsageEndpoints = GetCurrentPlanEndpoint;
+export type AnalyticsEndpoints = AnalyticsTrackEndpoint;
 
 export type OpenSettingsEndpoint = Endpoint<'navigation:settings:open', {}, {}>;
 
@@ -91,4 +95,10 @@ export type GetCurrentPlanEndpoint = Endpoint<
   'usage:getCurrentPlan',
   {},
   { name: string; integrationLimit: number | null }
+>;
+
+export type AnalyticsTrackEndpoint<T extends Event = Event> = Endpoint<
+  'analytics:track',
+  { name: EventName<T>; properties: EventProp<T> },
+  {}
 >;

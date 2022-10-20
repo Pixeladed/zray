@@ -23,6 +23,7 @@ import { WindowSource } from './views/view';
 import { createAuthNativeService } from './services/auth/create';
 import { createUsageNativeService } from './services/usage/create';
 import { createGoogleCalendarNativeService } from './services/google_calendar/create';
+import { createAnalyticsNativeService } from './services/analytics/create';
 
 const { apiOrigin, redirectOrigin } = nativeConfig;
 const BASE_SOURCE: WindowSource = app.isPackaged
@@ -49,6 +50,7 @@ const { authNativeService } = createAuthNativeService(
   crypt,
   nativeConfig.redirectOrigin
 );
+const { analyticsNativeService } = createAnalyticsNativeService();
 const { slackNativeService } = createSlackNativeService({
   redirectOrigin,
   clientFactory,
@@ -114,6 +116,8 @@ registerHandler('auth:login', authNativeService.login);
 registerHandler('auth:logout', authNativeService.logout);
 
 registerHandler('usage:getCurrentPlan', usageNativeService.getCurrentPlan);
+
+registerHandler('analytics:track', analyticsNativeService.track);
 
 app.on('activate', instance.createMainWindow);
 app.on('ready', instance.handleReady);

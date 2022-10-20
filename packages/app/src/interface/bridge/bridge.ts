@@ -20,6 +20,7 @@ export const endpointAllowlist: EndpointName<Endpoints>[] = [
   'auth:logout',
   'auth:check',
   'usage:getCurrentPlan',
+  'analytics:track',
 ];
 
 export const eventAllowlist: EventName<Events>[] = [
