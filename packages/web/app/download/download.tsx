@@ -57,9 +57,7 @@ export const DownloadPage = () => {
                 />
                 <div>
                   <h3 className={styles.optionTitle}>Download for Mac OSX</h3>
-                  <p className={styles.optionDescription}>
-                    Highbeam.app v0.1.0
-                  </p>
+                  <p className={styles.optionDescription}>Highbeam.app</p>
                 </div>
               </div>
             </a>
@@ -77,9 +75,7 @@ export const DownloadPage = () => {
                 />
                 <div>
                   <h3 className={styles.optionTitle}>Download for Windows</h3>
-                  <p className={styles.optionDescription}>
-                    Highbeam.exe v0.1.0
-                  </p>
+                  <p className={styles.optionDescription}>Highbeam.exe</p>
                 </div>
               </div>
             </a>
