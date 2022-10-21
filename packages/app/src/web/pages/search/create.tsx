@@ -17,9 +17,14 @@ export const createSearchPage = ({
   integrationStore: IntegrationStore;
 }) => {
   const store = new SearchStore();
-  const controller = new SearchController(store, bridgeClient);
+  const controller = new SearchController(
+    store,
+    bridgeClient,
+    integrationStore
+  );
 
   const openResult = (result: SearchResult) => {
+    controller.trackClick(result);
     navigationService.openExternal(result.url);
   };
 
