@@ -26,6 +26,10 @@
   margin-left: var(--spacexxSmall);
 }
 
+.container {
+  padding: calc(var(--baseline) * 12) 20%;
+}
+
 .hero {
   padding: calc(var(--baseline) * 24) var(--spacexxLarge) 0 var(--spacexxLarge);
   text-align: center;
@@ -53,7 +57,6 @@
 }
 
 .integrations {
-  padding: calc(var(--baseline) * 12) var(--spacexxLarge);
   background: var(--colorPrimary);
   display: flex;
   flex-direction: column;
@@ -108,7 +111,6 @@
 
 .features {
   display: flex;
-  padding: calc(var(--baseline) * 12) var(--spacexxLarge);
   background: var(--colorBackground);
   gap: var(--spaceLarge);
 }
@@ -154,7 +156,6 @@
 
 .pricing {
   background: var(--colorForeground);
-  padding: calc(var(--baseline) * 12);
 }
 
 .pricingTitle {
@@ -215,6 +216,16 @@
   margin: var(--spacexxSmall) 0 var(--spaceLarge) 0;
 }
 
+@media screen and (max-width: 1400px) {
+  .integrationCard {
+    width: calc(calc(100% - var(--spaceLarge)) / 2);
+  }
+
+  .container {
+    padding: var(--spacexLarge) 10%;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .header {
     padding: var(--spacexSmall) var(--spaceLarge);
@@ -222,10 +233,6 @@
 
   .integrations {
     padding: var(--spacexLarge) var(--spaceLarge);
-  }
-
-  .integrationCard {
-    width: calc(calc(100% - var(--spaceLarge)) / 2);
   }
 
   .features {
@@ -256,16 +263,12 @@
     font-size: 1.25em;
   }
 
-  .integrations {
-    padding: var(--spaceMedium);
+  .container {
+    padding: var(--spacexLarge) var(--spaceMedium);
   }
 
   .integrationCard {
     width: 100%;
-  }
-
-  .features {
-    padding: var(--spacexLarge) var(--spaceMedium);
   }
 
   .feature {
@@ -274,10 +277,6 @@
 
   .featureInfo {
     padding: var(--spaceMedium);
-  }
-
-  .pricing {
-    padding: var(--spacexLarge) var(--spaceMedium);
   }
 
   .pricingTitle {

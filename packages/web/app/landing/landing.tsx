@@ -9,7 +9,7 @@ import styles from './landing.module.css';
 
 export const LandingPage: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <div className={styles.page}>
       <Head>
         <title>
           Highbeam App | Search for anything across all of your apps and tools
@@ -62,7 +62,7 @@ export const LandingPage: NextPage = () => {
             />
           </div>
         </section>
-        <section className={styles.integrations}>
+        <section className={classNames(styles.integrations, styles.container)}>
           <div className={styles.integrationsList}>
             {integrations.map(integration => (
               <IntegrationCard
@@ -76,7 +76,7 @@ export const LandingPage: NextPage = () => {
           </div>
           {/* <Button>Explore all integrations</Button> */}
         </section>
-        <section className={styles.features}>
+        <section className={classNames(styles.features, styles.container)}>
           <div className={styles.feature}>
             <div className={styles.featureInfo}>
               <h4 className={styles.featureTitle}>Productivity+</h4>
@@ -109,7 +109,7 @@ export const LandingPage: NextPage = () => {
             {/* <img src="" alt="" className={styles.featureImage} /> */}
           </div>
         </section>
-        <section className={styles.pricing}>
+        <section className={classNames(styles.pricing, styles.container)}>
           <h3 className={styles.pricingTitle}>
             It&apos;s time to close your tabs, try Highbeam
           </h3>
