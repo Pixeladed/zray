@@ -53,6 +53,14 @@ export const LandingPage: NextPage = () => {
             with one single search
           </p>
           <DownloadButton variant="primary" />
+          <div className={styles.productScreenshot}>
+            <Image
+              src="/product_screenshot.png"
+              width={912}
+              height={512}
+              alt="product screenshot"
+            />
+          </div>
         </section>
         <section className={styles.integrations}>
           <div className={styles.integrationsList}>
