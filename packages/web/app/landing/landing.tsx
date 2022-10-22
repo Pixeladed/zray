@@ -151,13 +151,25 @@ export const LandingPage: NextPage = () => {
   );
 };
 
+const trackDownload = () => {
+  try {
+    // @ts-ignore
+    gtag('event', 'app_downloaded', {
+      screen_name: 'landing_page',
+    });
+  } catch (e) {}
+};
 const DownloadButton = ({
   variant = 'default',
 }: {
   variant?: 'default' | 'primary';
 }) => {
   return (
-    <Link passHref={true} href="https://releases.usehighbeamapp.com/download">
+    <Link
+      onClick={trackDownload}
+      passHref={true}
+      href="https://releases.usehighbeamapp.com/download"
+    >
       <a>
         <Button variant={variant}>Download Highbeam</Button>
       </a>
